@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>People</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        .nav-tabs {
+            background: #f8f9fa;
+            padding: 0;
+            margin: 0 0 20px 0;
+            border-bottom: 1px solid #dee2e6;
+            display: flex;
+            list-style: none;
+        }
+        .nav-tabs li {
+            margin: 0;
+            padding: 0;
+        }
+        .nav-tabs a {
+            display: block;
+            padding: 10px 20px;
+            color: #495057;
+            text-decoration: none;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-tabs a:hover {
+            color: #007bff;
+            border-bottom: 2px solid #007bff;
+            text-decoration: none;
+        }
+        .nav-tabs a.active {
+            color: #007bff;
+            border-bottom: 2px solid #007bff;
+            font-weight: 500;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+        }
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .team-member {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        .team-member:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .team-member img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+            object-fit: cover;
+        }
+        .team-member h3 {
+            color: #2c3e50;
+            margin: 10px 0;
+        }
+        .team-member p {
+            color: #333;
+            margin: 5px 0;
+        }
+        .team-member .role {
+            color: #007bff;
+            font-weight: 500;
+        }
+        .team-member .bio {
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+        .social-links {
+            margin-top: 15px;
+        }
+        .social-links a {
+            color: #495057;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+        .social-links a:hover {
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <ul class="nav-tabs">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="resources.html">Previous Works</a></li>
+        <li><a href="people.html" class="active">People</a></li>
+    </ul>
+
+    <div class="content">
+        <h1>Our Team</h1>
+        
+        <div class="team-grid">
+            <div class="team-member">
+                <img src="assets/images/erica.jpeg" alt="Erica Shimomoto">
+                <h3>Erica Shimomoto</h3>
+                <p class="role">Researcher, AIST Japan</p>
+                <p class="bio">Researcher at the Artificial Intelligence Research Center (AIRC), AIST. Specializes in natural language processing, computer vision, and pattern recognition. PhD in Engineering from University of Tsukuba.</p>
+                <div class="social-links">
+                    <a href="https://ericashimomoto.github.io/" title="Website">Website</a>
+                    <a href="https://www.linkedin.com/in/erica-shimomoto/" title="LinkedIn">LinkedIn</a>
+                </div>
+            </div>
+
+            <div class="team-member">
+                <img src="assets/images/dipesh.png" alt="Dipesh Satav">
+                <h3>Dipesh Satav</h3>
+                <p class="role">AI Engineer & Researcher</p>
+                <p class="bio">AI engineer and researcher with experience in modern web technologies and artificial intelligence. Passionate about advancing AI and helping others learn.</p>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/dipesh-satav-75208b145/" title="LinkedIn">LinkedIn</a>
+                </div>
+            </div>
+
+            <div class="team-member">
+                <img src="assets/images/bojan.jpeg" alt="Bojan Batalo">
+                <h3>Bojan Batalo</h3>
+                <p class="role">Researcher, AIST Japan</p>
+                <p class="bio">Postdoctoral researcher at AIST, specializing in biomedical language and hype detection. Co-author on multiple publications in the field. PhD in Engineering from University of Tsukuba.</p>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/bojan-batalo-7a49b6159/?originalSubdomain=jp" title="LinkedIn">LinkedIn</a>
+                </div>
+            </div>
+
+            <div class="team-member">
+                <img src="assets/images/neil.jpeg" alt="Neil Millar">
+                <h3>Neil Millar</h3>
+                <p class="role">Project Lead</p>
+                <p class="bio">Corpus linguist and applied linguistics researcher. Expert in biomedical discourse and promotional language.</p>
+                <div class="social-links">
+                    <a href="http://corpuslinguist.com/index.html" title="Website">Website</a>
+                </div>
+            </div>
+
+            <div class="team-member">
+                <img src="assets/images/budgell.jpeg" alt="Brian Budgell">
+                <h3>Brian Budgell</h3>
+                <p class="role">Professor, CMCC</p>
+                <p class="bio">Professor at the Canadian Memorial Chiropractic College. Researcher in clinical research reporting and biomedical language.</p>
+                <div class="social-links">
+                    <a href="https://www.cmcc.ca/cmcc-directory/brian-budgell" title="CMCC Profile">CMCC Profile</a>
+                </div>
+            </div>
+
+            <div class="team-member">
+                <img src="assets/images/ryosuke.jpg" alt="Ryosuke L. Ohniwa">
+                <h3>Ryosuke L. Ohniwa</h3>
+                <p class="role">Professor, University of Tsukuba</p>
+                <p class="bio">Professor at the Faculty of Medicine, University of Tsukuba. His research focuses on Integrated Studies on Health Information, including molecular biology and bioinformatics.</p>
+                <div class="social-links">
+                    <a href="https://www.md.tsukuba.ac.jp/basic-med/integrated-study/members_en.html" title="Website">Website</a>
+                    <a href="https://trios.tsukuba.ac.jp/en/researcher/0000001682" title="University Profile">Profile</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 
