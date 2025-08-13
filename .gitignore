@@ -1,5 +1,5 @@
 # Ignore sensitive configuration files
-# config.js  # Temporarily allowing config.js for GitHub Pages
+config.js
 
 # GitHub Actions will generate this, don't commit manually
 config.generated.js
