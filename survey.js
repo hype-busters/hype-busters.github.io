@@ -370,6 +370,9 @@ async function saveToGoogleSheets() {
 
         console.log('📊 Sending data to Google Sheets:', surveyData);
         console.log('🔗 Using URL:', GOOGLE_APPS_SCRIPT_URL);
+        console.log('📋 Participant data:', participantData);
+        console.log('📝 Responses data:', responses);
+        console.log('📊 Survey data structure:', JSON.stringify(surveyData, null, 2));
 
         // Try different methods to avoid CORS issues
         
