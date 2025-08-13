@@ -1,8 +1,3 @@
-// Word Intensity Survey - JavaScript Module
-// Professional survey implementation with Google Sheets integration
-
-// Survey Configuration will be loaded from config.js
-// This file is not committed to version control for security
 let SURVEY_CONFIG = null;
 
 // Survey Data
