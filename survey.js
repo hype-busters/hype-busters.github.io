@@ -84,6 +84,7 @@ function initializeGoogleAPI() {
 }
 
 function initGoogleAuth() {
+    console.log('Initializing Google API with config:', SURVEY_CONFIG.google);
     gapi.client.init({
         apiKey: SURVEY_CONFIG.google.apiKey,
         clientId: SURVEY_CONFIG.google.clientId,
@@ -93,7 +94,7 @@ function initGoogleAuth() {
         isGoogleApiLoaded = true;
         const authInstance = gapi.auth2.getAuthInstance();
         isGoogleSignedIn = authInstance.isSignedIn.get();
-        console.log('Google API initialized. Signed in:', isGoogleSignedIn);
+        console.log('✅ Google API initialized successfully! Signed in:', isGoogleSignedIn);
     }).catch((error) => {
         console.error('Error initializing Google API:', error);
     });
