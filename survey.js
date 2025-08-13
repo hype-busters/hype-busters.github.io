@@ -3,7 +3,6 @@
 
 // Survey Configuration will be loaded from config.js
 // This file is not committed to version control for security
-let SURVEY_CONFIG = null;
 
 // Survey Data
 const wordSets = [
@@ -49,12 +48,11 @@ function initializeSurvey() {
 function loadConfiguration() {
     // Check if config is already loaded from config.js
     if (window.SURVEY_CONFIG) {
-        SURVEY_CONFIG = window.SURVEY_CONFIG;
         console.log('Configuration loaded successfully');
     } else {
         console.warn('Configuration not found. Please ensure config.js is loaded and contains valid configuration.');
         // Fallback configuration for development
-        SURVEY_CONFIG = {
+        window.SURVEY_CONFIG = {
             google: {
                 apiKey: '',
                 clientId: '',
@@ -84,12 +82,12 @@ function initializeGoogleAPI() {
 }
 
 function initGoogleAuth() {
-    console.log('Initializing Google API with config:', SURVEY_CONFIG.google);
+    console.log('Initializing Google API with config:', window.SURVEY_CONFIG.google);
     gapi.client.init({
-        apiKey: SURVEY_CONFIG.google.apiKey,
-        clientId: SURVEY_CONFIG.google.clientId,
-        discoveryDocs: SURVEY_CONFIG.google.discoveryDocs,
-        scope: SURVEY_CONFIG.google.scope
+        apiKey: window.SURVEY_CONFIG.google.apiKey,
+        clientId: window.SURVEY_CONFIG.google.clientId,
+        discoveryDocs: window.SURVEY_CONFIG.google.discoveryDocs,
+        scope: window.SURVEY_CONFIG.google.scope
     }).then(() => {
         isGoogleApiLoaded = true;
         const authInstance = gapi.auth2.getAuthInstance();
@@ -377,6 +375,7 @@ async function completeSurvey() {
 
 // Data Export Functions
 async function saveToGoogleSheets() {
+
     // Check if signed in, if not, sign in first
     if (!isGoogleSignedIn) {
         await signIntoGoogle();
@@ -406,7 +405,7 @@ async function saveToGoogleSheets() {
 
     // Append to spreadsheet
     const response = await gapi.client.sheets.spreadsheets.values.append({
-        spreadsheetId: SURVEY_CONFIG.google.spreadsheetId,
+        spreadsheetId: window.SURVEY_CONFIG.google.spreadsheetId,
         range: 'Sheet1!A:J',
         valueInputOption: 'RAW',
         resource: {
