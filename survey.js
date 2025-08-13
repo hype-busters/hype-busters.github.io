@@ -90,12 +90,8 @@ function showDemographicsForm() {
 function showQuestionContainer() {
     hideAllContainers();
     document.getElementById('questionContainer').style.display = 'block';
+    // Removed animated example from survey questions - only show the intensity labels
     document.getElementById('intensityPanel').style.display = 'block';
-    
-    // Start the example animation
-    setTimeout(() => {
-        startExampleAnimation();
-    }, 500);
 }
 
 function showCompletionScreen() {
@@ -471,13 +467,13 @@ async function saveToGoogleSheets() {
             
             // Add timeout to prevent hanging
             const timeoutId = setTimeout(() => {
-                console.log('⏰ Submission timeout after 10 seconds');
+                console.log('⏰ Submission timeout after 20 seconds');
                 try {
                     document.body.removeChild(iframe);
                     document.body.removeChild(form);
                 } catch (e) {}
                 reject(new Error('Submission timeout - please check your Google Apps Script deployment'));
-            }, 10000); // 10 second timeout
+            }, 20000); // 20 second timeout
             
             // Handle response
             iframe.onload = function() {
