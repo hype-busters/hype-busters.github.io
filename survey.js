@@ -413,13 +413,34 @@ async function saveToGoogleSheets() {
         console.log('📊 Sending data to Google Sheets:', surveyData);
         console.log('🔗 Using URL:', GOOGLE_APPS_SCRIPT_URL);
 
-        // Send to Google Apps Script
+        // Try different methods to avoid CORS issues
+        
+        // Method 1: Try regular fetch
+        try {
+            const response = await fetch(GOOGLE_APPS_SCRIPT_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(surveyData)
+            });
+            
+            if (response.ok) {
+                const result = await response.text();
+                console.log('✅ Method 1 success:', result);
+                return true;
+            }
+        } catch (fetchError) {
+            console.log('🔄 Method 1 failed, trying Method 2...');
+        }
+        
+        // Method 2: Use form submission to bypass CORS
+        const formData = new FormData();
+        formData.append('data', JSON.stringify(surveyData));
+        
         const response = await fetch(GOOGLE_APPS_SCRIPT_URL, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(surveyData)
+            body: formData
         });
 
         console.log('📡 Response status:', response.status, response.statusText);
