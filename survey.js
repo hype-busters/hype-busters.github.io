@@ -335,7 +335,8 @@ async function completeSurvey() {
 
 // Data Export Functions
 async function saveToGoogleSheets() {
-    const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwmPGv7BNcRvOhhhy8NY8Gcr7i3s_E2Y4oavseBaAb4zFjk9lD2gc4NRbxSGWomjuR0DQ/exec';
+    // UPDATE THIS URL with your current Google Apps Script deployment URL
+    const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzWEacy_zklziuIhalsLdieyQjWUyxyPX5OoQpBScQRW30uiGeu6KG8-hf3uNmayMADlg/exec';
     
     try {
         // Prepare data in the exact format you want in the spreadsheet
@@ -368,6 +369,8 @@ async function saveToGoogleSheets() {
         });
 
         console.log('📊 Submitting to Google Sheets via form method...');
+        console.log('🔍 Survey data being sent:', JSON.stringify(surveyData, null, 2));
+        console.log('🔗 Target URL:', GOOGLE_APPS_SCRIPT_URL);
 
         // CORS-free method: Create a hidden form and submit it
         return new Promise((resolve, reject) => {
@@ -636,6 +639,96 @@ function resetSurvey() {
         updateProgress();
     }
 }
+
+// Debugging function to test Google Apps Script connection
+async function testGoogleAppsScriptConnection() {
+    const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzWEacy_zklziuIhalsLdieyQjWUyxyPX5OoQpBScQRW30uiGeu6KG8-hf3uNmayMADlg/exec';
+    
+    console.log('🧪 Testing Google Apps Script connection...');
+    
+    const testData = {
+        timestamp: new Date().toISOString(),
+        participant: {
+            name: 'Test User',
+            age: '25',
+            gender: 'Test',
+            country: 'Test Country',
+            firstLanguage: 'English'
+        },
+        responses: [{
+            questionNumber: 1,
+            meaning: 'test meaning',
+            mostIntense: 'very',
+            leastIntense: 'slightly',
+            words: ['slightly', 'somewhat', 'very', 'extremely']
+        }]
+    };
+    
+    try {
+        // Test with fetch first (may be blocked by CORS)
+        console.log('🔍 Trying fetch method...');
+        const response = await fetch(GOOGLE_APPS_SCRIPT_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(testData)
+        });
+        
+        const result = await response.text();
+        console.log('✅ Fetch response:', result);
+        
+    } catch (fetchError) {
+        console.log('❌ Fetch failed (expected due to CORS):', fetchError.message);
+        
+        // Try form method
+        console.log('🔍 Trying form method...');
+        
+        return new Promise((resolve, reject) => {
+            const iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            iframe.name = 'testFrame';
+            document.body.appendChild(iframe);
+            
+            const form = document.createElement('form');
+            form.target = 'testFrame';
+            form.method = 'POST';
+            form.action = GOOGLE_APPS_SCRIPT_URL;
+            
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'data';
+            input.value = JSON.stringify(testData);
+            form.appendChild(input);
+            
+            iframe.onload = function() {
+                setTimeout(() => {
+                    try {
+                        const iframeContent = iframe.contentDocument || iframe.contentWindow.document;
+                        const responseText = iframeContent.body.textContent;
+                        console.log('✅ Form submission response:', responseText);
+                        
+                        document.body.removeChild(iframe);
+                        document.body.removeChild(form);
+                        resolve(responseText);
+                    } catch (e) {
+                        console.log('⚠️ Could not read iframe response (normal for cross-origin)');
+                        document.body.removeChild(iframe);
+                        document.body.removeChild(form);
+                        resolve('Form submitted - check Apps Script logs');
+                    }
+                }, 2000);
+            };
+            
+            document.body.appendChild(form);
+            form.submit();
+            console.log('📤 Test form submitted');
+        });
+    }
+}
+
+// Add to window for console access
+window.testGoogleAppsScriptConnection = testGoogleAppsScriptConnection;
 
 // Initialize when page loads
 document.addEventListener('DOMContentLoaded', initializeSurvey);
