@@ -267,7 +267,6 @@
                                 <option value="">Select gender</option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
-                                <option value="Non-binary">Non-binary</option>
                                 <option value="Prefer not to say">Prefer not to say</option>
                                 <option value="Other">Other</option>
                             </select>
@@ -312,23 +311,43 @@
                 </div>
             </div>
 
-            <!-- Survey Completion Screen -->
+            <!-- Survey Ready to Submit Screen -->
             <div id="completionContainer" style="display: none;">
                 <div class="question-card">
                     <div style="text-align: center; padding: 40px;">
-                        <h2 style="color: #2c2c2c; margin-bottom: 20px; font-size: 2.5em;">🎉 Survey Completed!</h2>
+                        <h2 style="color: #2c2c2c; margin-bottom: 20px; font-size: 2.5em;">📝 Ready to Submit</h2>
                         <p style="font-size: 1.2em; margin-bottom: 20px; color: #666;">
-                            Thank you for participating in our Word Intensity Survey. Your responses have been recorded successfully.
+                            You have completed all survey questions! Click the button below to submit your responses.
                         </p>
                         <p style="font-size: 1em; margin-bottom: 30px; color: #888; font-style: italic;">
-                            📁 Note: Your data will be automatically saved to Google Sheets when you click the button below.
+                            📁 Your data will be securely saved to Google Sheets.
                         </p>
-                        <button class="btn" onclick="completeSurvey()" style="font-size: 1.2em; padding: 15px 40px; background: linear-gradient(135deg, #4a4a4a 0%, #2c2c2c 100%); border: none; border-radius: 25px; color: white; cursor: pointer; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);">
-                            Survey Completed
+                        <button class="btn" id="completeSurveyBtn" onclick="completeSurvey()" style="font-size: 1.2em; padding: 15px 40px; background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%); border: none; border-radius: 25px; color: white; cursor: pointer; box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);">
+                            Complete Survey
                         </button>
                         <div style="margin-top: 20px;">
                             <button class="btn" onclick="backToSurvey()" style="background: transparent; color: #2c2c2c; border: 2px solid #2c2c2c;">
                                 Return to Survey
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Survey Successfully Completed Screen -->
+            <div id="successContainer" style="display: none;">
+                <div class="question-card">
+                    <div style="text-align: center; padding: 40px;">
+                        <h2 style="color: #2c2c2c; margin-bottom: 20px; font-size: 2.5em;">🎉 Survey Completed!</h2>
+                        <p style="font-size: 1.2em; margin-bottom: 20px; color: #666;">
+                            Thank you for participating in our Word Intensity Survey. Your responses have been successfully saved!
+                        </p>
+                        <div style="margin-top: 30px; padding: 20px; background: #e8f5e8; border-radius: 10px; border-left: 4px solid #4CAF50;">
+                            <p style="color: #2e7d32; margin: 0; font-weight: bold;">✅ Data saved successfully</p>
+                        </div>
+                        <div style="margin-top: 30px;">
+                            <button class="btn" onclick="startNewSurvey()" style="font-size: 1.1em; padding: 12px 30px; background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%); border: none; border-radius: 25px; color: white; cursor: pointer; box-shadow: 0 5px 15px rgba(33, 150, 243, 0.3);">
+                                Start New Survey
                             </button>
                         </div>
                     </div>

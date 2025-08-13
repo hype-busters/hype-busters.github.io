@@ -95,6 +95,11 @@ function showCompletionScreen() {
     document.getElementById('completionContainer').style.display = 'block';
 }
 
+function showSuccessScreen() {
+    hideAllContainers();
+    document.getElementById('successContainer').style.display = 'block';
+}
+
 function showResultsContainer() {
     hideAllContainers();
     document.getElementById('resultsContainer').style.display = 'block';
@@ -105,6 +110,7 @@ function hideAllContainers() {
         'demographicsContainer',
         'questionContainer', 
         'completionContainer',
+        'successContainer',
         'instructionsContainer',
         'resultsContainer',
         'adminPanel'
@@ -319,18 +325,53 @@ function updateProgress() {
 
 // Survey Completion
 async function completeSurvey() {
+    const completeBtn = document.getElementById('completeSurveyBtn');
+    const originalText = completeBtn.textContent;
+    
     try {
+        // Show loading state
+        completeBtn.disabled = true;
+        completeBtn.textContent = 'Submitting...';
+        completeBtn.style.background = 'linear-gradient(135deg, #888 0%, #666 100%)';
+        
+        console.log('🚀 Starting survey submission...');
+        
         // Try to save to Google Sheets first
         await saveToGoogleSheets();
-        alert('Thank you for completing the survey! Your responses have been saved to Google Sheets.');
+        
+        console.log('✅ Survey submitted successfully!');
+        
+        // Show success screen only after successful submission
+        showSuccessScreen();
+        
     } catch (error) {
-        console.error('Failed to save to Google Sheets:', error);
-        // Fallback to Excel export
-        exportToExcel();
-        alert('Thank you for completing the survey! Your Excel file has been downloaded to your Downloads folder. (Google Sheets save failed)');
+        console.error('❌ Failed to save to Google Sheets:', error);
+        
+        // Reset button state
+        completeBtn.disabled = false;
+        completeBtn.textContent = originalText;
+        completeBtn.style.background = 'linear-gradient(135deg, #4CAF50 0%, #45a049 100%)';
+        
+        // Show error message and fallback options
+        const userChoice = confirm(
+            'Unable to save to Google Sheets. Would you like to:\n\n' +
+            '✓ OK - Download Excel backup and try again later\n' +
+            '✗ Cancel - Stay on this page and retry submission'
+        );
+        
+        if (userChoice) {
+            try {
+                // Fallback to Excel export
+                exportToExcel();
+                alert('Excel backup downloaded! Please contact the researcher to ensure your data is recorded.');
+                showSuccessScreen(); // Show success even with fallback
+            } catch (excelError) {
+                console.error('Excel export also failed:', excelError);
+                alert('Both Google Sheets and Excel export failed. Please contact the researcher immediately.');
+            }
+        }
+        // If they chose Cancel, stay on the completion screen for retry
     }
-    // Show instructions page for next participant
-    showInstructionsPage();
 }
 
 // Data Export Functions
