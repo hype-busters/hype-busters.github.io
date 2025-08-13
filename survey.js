@@ -32,14 +32,12 @@ let currentQuestion = 0;
 let responses = {};
 let participantData = {};
 let surveyStarted = false;
-let isGoogleApiLoaded = false;
-let isGoogleSignedIn = false;
+// Google API variables removed - using simple Apps Script approach
 
 // Survey Initialization
 function initializeSurvey() {
-    // Load configuration from external file
+    // Load configuration from external file  
     loadConfiguration();
-    initializeGoogleAPI();
     showInstructionsPage();
     setupEventListeners();
 }
@@ -72,48 +70,8 @@ function setupEventListeners() {
     });
 }
 
-// Google API Integration
-function initializeGoogleAPI() {
-    if (typeof gapi !== 'undefined') {
-        gapi.load('auth2:client', initGoogleAuth);
-    } else {
-        console.warn('Google API not loaded. Google Sheets functionality will be disabled.');
-    }
-}
-
-function initGoogleAuth() {
-    console.log('🔧 Initializing Google API with config:', window.SURVEY_CONFIG.google);
-    gapi.client.init({
-        apiKey: window.SURVEY_CONFIG.google.apiKey,
-        clientId: window.SURVEY_CONFIG.google.clientId,
-        discoveryDocs: window.SURVEY_CONFIG.google.discoveryDocs,
-        scope: window.SURVEY_CONFIG.google.scope
-    }).then(() => {
-        isGoogleApiLoaded = true;
-        const authInstance = gapi.auth2.getAuthInstance();
-        isGoogleSignedIn = authInstance.isSignedIn.get();
-        console.log('✅ Google API initialized successfully! Signed in:', isGoogleSignedIn);
-        console.log('📋 Spreadsheet ID:', window.SURVEY_CONFIG.google.spreadsheetId);
-    }).catch((error) => {
-        console.error('❌ Error initializing Google API:', error);
-        console.log('🔍 Check: 1) APIs enabled, 2) OAuth origins configured, 3) Credentials correct');
-    });
-}
-
-function signIntoGoogle() {
-    if (!isGoogleApiLoaded) {
-        throw new Error('Google API is not loaded yet. Please try again in a moment.');
-    }
-
-    const authInstance = gapi.auth2.getAuthInstance();
-    return authInstance.signIn().then(() => {
-        isGoogleSignedIn = true;
-        console.log('Successfully signed into Google');
-    }).catch((error) => {
-        console.error('Error signing into Google:', error);
-        throw error;
-    });
-}
+// Google Apps Script Integration (no API/OAuth needed)
+// Data is sent directly to Apps Script web app URL
 
 // Navigation Functions
 function showInstructionsPage() {
