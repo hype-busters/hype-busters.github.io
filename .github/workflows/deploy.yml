@@ -1,0 +1,40 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Create config.js from secrets
+      run: |
+        cat > config.js << EOF
+        // Auto-generated configuration file
+        // Generated during GitHub Actions deployment
+        
+        const SURVEY_CONFIG = {
+            google: {
+                apiKey: '${{ secrets.GOOGLE_API_KEY }}',
+                clientId: '${{ secrets.GOOGLE_CLIENT_ID }}',
+                discoveryDocs: ['https://sheets.googleapis.com/\$discovery/rest?version=v4'],
+                scope: 'https://www.googleapis.com/auth/spreadsheets',
+                spreadsheetId: '${{ secrets.GOOGLE_SPREADSHEET_ID }}'
+            }
+        };
+        
+        // Export for use in survey.js
+        window.SURVEY_CONFIG = SURVEY_CONFIG;
+        EOF
+    
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./

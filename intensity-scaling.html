@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Intensity Survey</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://apis.google.com/js/api.js"></script>
+    <!-- Try to load config.js, fallback to env-config.js for GitHub Pages -->
+    <script src="config.js" onerror="loadFallbackConfig()"></script>
+    <script>
+        function loadFallbackConfig() {
+            console.log('config.js not found, loading environment configuration...');
+            const script = document.createElement('script');
+            script.src = 'env-config.js';
+            document.head.appendChild(script);
+        }
+    </script>
+    <script src="survey.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #f5f5f5;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4a4a4a 0%, #2c2c2c 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 1.1em;
+        }
+
+        .progress-bar {
+            background: rgba(255,255,255,0.2);
+            height: 8px;
+            border-radius: 4px;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: white;
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .question-card {
+            background: #e8e8e8;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 2px solid #c0c0c0;
+        }
+
+        .meaning {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #2c2c2c;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .words-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .word-option {
+            background: #f8f8f8;
+            border: 2px solid #d0d0d0;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .word-option:hover {
+            border-color: #6a6a6a;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .word-option.most-intense {
+            background: #0d47a1;
+            border-color: #0d47a1;
+            color: white;
+            font-weight: 700;
+        }
+
+        .word-option.least-intense {
+            background: #87ceeb;
+            border-color: #87ceeb;
+            color: white;
+            font-weight: 700;
+        }
+
+        .intensity-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .label {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+
+        .most-label {
+            background: #0d47a1;
+            color: white;
+        }
+
+        .least-label {
+            background: #87ceeb;
+            color: white;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #4a4a4a 0%, #2c2c2c 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .question-counter {
+            font-weight: 600;
+            color: #2c2c2c;
+        }
+
+        .results {
+            background: #e8e8e8;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 20px;
+        }
+
+        .results h3 {
+            color: #2c2c2c;
+            margin-bottom: 20px;
+        }
+
+        .result-item {
+            background: #f8f8f8;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-left: 4px solid #5a5a5a;
+        }
+
+        .admin-panel {
+            background: #e8e8e8;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .admin-panel h3 {
+            color: #2c2c2c;
+            margin-bottom: 20px;
+        }
+
+        .export-btn {
+            background: #4a4a4a;
+            margin-right: 10px;
+        }
+
+        .reset-btn {
+            background: #6a6a6a;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Word Intensity Survey</h1>
+            <p>Select the most and least intense words for each meaning</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- Admin Panel -->
+            <div class="admin-panel" id="adminPanel">
+                <h3>Survey Management</h3>
+                <button class="btn export-btn" onclick="exportResults()">Export Results</button>
+                <button class="btn reset-btn" onclick="resetSurvey()">Reset Survey</button>
+                <button class="btn" onclick="viewResults()">View All Results</button>
+            </div>
+
+            <!-- Demographics Questionnaire -->
+            <div id="demographicsContainer">
+                <div class="question-card">
+                    <h2 style="color: #2c2c2c; margin-bottom: 30px; text-align: center;">Before we begin...</h2>
+                    <p style="text-align: center; margin-bottom: 30px; color: #666;">Please provide some basic information about yourself. This helps us better understand our participants.</p>
+                    
+                    <form id="demographicsForm" style="max-width: 500px; margin: 0 auto;">
+                        <div style="margin-bottom: 20px;">
+                            <label style="display: block; margin-bottom: 8px; font-weight: 500; color: #333;">Name *</label>
+                            <input type="text" id="participantName" required style="width: 100%; padding: 12px; border: 2px solid #c0c0c0; border-radius: 8px; font-size: 16px;">
+                        </div>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <label style="display: block; margin-bottom: 8px; font-weight: 500; color: #333;">Age *</label>
+                            <input type="number" id="participantAge" min="18" max="100" required style="width: 100%; padding: 12px; border: 2px solid #c0c0c0; border-radius: 8px; font-size: 16px;">
+                        </div>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <label style="display: block; margin-bottom: 8px; font-weight: 500; color: #333;">Gender *</label>
+                            <select id="participantGender" required style="width: 100%; padding: 12px; border: 2px solid #c0c0c0; border-radius: 8px; font-size: 16px;">
+                                <option value="">Select gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Non-binary">Non-binary</option>
+                                <option value="Prefer not to say">Prefer not to say</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <label style="display: block; margin-bottom: 8px; font-weight: 500; color: #333;">Country *</label>
+                            <input type="text" id="participantCountry" required placeholder="e.g., United States, Canada, etc." style="width: 100%; padding: 12px; border: 2px solid #c0c0c0; border-radius: 8px; font-size: 16px;">
+                        </div>
+                        
+                        <div style="margin-bottom: 30px;">
+                            <label style="display: block; margin-bottom: 8px; font-weight: 500; color: #333;">First Language *</label>
+                            <input type="text" id="participantLanguage" required placeholder="e.g., English, Spanish, Mandarin, etc." style="width: 100%; padding: 12px; border: 2px solid #c0c0c0; border-radius: 8px; font-size: 16px;">
+                        </div>
+                        
+                        <div style="text-align: center;">
+                            <button type="submit" class="btn" style="font-size: 1.1em; padding: 15px 40px; background: linear-gradient(135deg, #4a4a4a 0%, #2c2c2c 100%); border: none; border-radius: 25px; color: white; cursor: pointer;">
+                                Start Survey
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Question Display -->
+            <div id="questionContainer">
+                <div class="question-card">
+                    <div class="meaning" id="meaningText"></div>
+                    
+                    <div class="intensity-labels">
+                        <div class="label most-label">Most Intense</div>
+                        <div class="label least-label">Least Intense</div>
+                    </div>
+                    
+                    <div class="words-grid" id="wordsGrid"></div>
+                    
+                    <div class="navigation">
+                        <button class="btn" id="prevBtn" onclick="previousQuestion()">Previous</button>
+                        <span class="question-counter" id="questionCounter"></span>
+                        <button class="btn" id="nextBtn" onclick="nextQuestion()">Next</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Survey Completion Screen -->
+            <div id="completionContainer" style="display: none;">
+                <div class="question-card">
+                    <div style="text-align: center; padding: 40px;">
+                        <h2 style="color: #2c2c2c; margin-bottom: 20px; font-size: 2.5em;">🎉 Survey Completed!</h2>
+                        <p style="font-size: 1.2em; margin-bottom: 20px; color: #666;">
+                            Thank you for participating in our Word Intensity Survey. Your responses have been recorded successfully.
+                        </p>
+                        <p style="font-size: 1em; margin-bottom: 30px; color: #888; font-style: italic;">
+                            📁 Note: Your data will be automatically saved to Google Sheets when you click the button below.
+                        </p>
+                        <button class="btn" onclick="completeSurvey()" style="font-size: 1.2em; padding: 15px 40px; background: linear-gradient(135deg, #4a4a4a 0%, #2c2c2c 100%); border: none; border-radius: 25px; color: white; cursor: pointer; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);">
+                            Survey Completed
+                        </button>
+                        <div style="margin-top: 20px;">
+                            <button class="btn" onclick="backToSurvey()" style="background: transparent; color: #2c2c2c; border: 2px solid #2c2c2c;">
+                                Return to Survey
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Instructions Page -->
+            <div id="instructionsContainer" style="display: none;">
+                <div class="question-card">
+                    <h1 style="color: #2c2c2c; text-align: center; margin-bottom: 30px;">Best–Worst Scaling: Participant Instructions</h1>
+                    
+                    <div style="max-width: 700px; margin: 0 auto; text-align: left;">
+                        <h2 style="color: #2c2c2c; margin-top: 30px; margin-bottom: 15px;">General Instructions</h2>
+                        <p style="margin-bottom: 15px; line-height: 1.6;">In this study, you will be shown small sets of words. Your job is to decide which word in the set is the <strong>most intense</strong> and which is the <strong>least intense</strong>, based on the meaning we are focusing on for that session.</p>
+                        
+                        <p style="margin-bottom: 15px; line-height: 1.6;">You will see 4 words at a time. For each set, choose:</p>
+                        <ol style="margin-bottom: 20px; padding-left: 25px; line-height: 1.6;">
+                            <li>The <strong>most intense</strong> word (best match to the meaning for this session).</li>
+                            <li>The <strong>least intense</strong> word (weakest match to the meaning for this session).</li>
+                        </ol>
+                        
+                        <p style="margin-bottom: 15px; line-height: 1.6;"><strong>Focus only on the strength of the meaning.</strong></p>
+                        
+                        <p style="margin-bottom: 25px; line-height: 1.6;">There are no 'right' or 'wrong' answers — we are interested in your judgments. Try to make your decision quickly based on your first impression. You must choose one most intense and one least intense word for every set. If you feel two words are equally intense, pick the one you feel is slightly stronger or weaker.</p>
+                        
+                        <h2 style="color: #2c2c2c; margin-top: 30px; margin-bottom: 15px;">Example</h2>
+                        <div style="background: #f0f0f0; padding: 20px; border-radius: 10px; margin-bottom: 25px;">
+                            <p style="margin-bottom: 10px;"><strong>Meaning:</strong> 'level of spiciness in food'</p>
+                            <p style="margin-bottom: 10px;"><strong>Words:</strong> mild, medium, hot, spicy</p>
+                            <p style="margin-bottom: 10px; color: #0d47a1;"><strong>Most intense:</strong> hot</p>
+                            <p style="color: #87ceeb;"><strong>Least intense:</strong> mild</p>
+                        </div>
+                        
+                        <h2 style="color: #2c2c2c; margin-top: 30px; margin-bottom: 15px;">Practice Items</h2>
+                        
+                        <div style="background: #f8f8f8; padding: 15px; border-radius: 10px; margin-bottom: 15px; border-left: 4px solid #5a5a5a;">
+                            <p style="margin-bottom: 8px;"><strong>Meaning:</strong> 'Size of an animal'</p>
+                            <p style="margin-bottom: 8px;"><strong>Words:</strong> tiny, huge, large, small</p>
+                            <p style="margin-bottom: 5px; color: #0d47a1;"><strong>Most intense:</strong> huge</p>
+                            <p style="color: #87ceeb;"><strong>Least intense:</strong> tiny</p>
+                        </div>
+                        
+                        <div style="background: #f8f8f8; padding: 15px; border-radius: 10px; margin-bottom: 15px; border-left: 4px solid #5a5a5a;">
+                            <p style="margin-bottom: 8px;"><strong>Meaning:</strong> 'Speed of movement'</p>
+                            <p style="margin-bottom: 8px;"><strong>Words:</strong> slow, rapid, fast, sluggish</p>
+                            <p style="margin-bottom: 5px; color: #0d47a1;"><strong>Most intense:</strong> rapid</p>
+                            <p style="color: #87ceeb;"><strong>Least intense:</strong> slow</p>
+                        </div>
+                        
+                        <div style="background: #f8f8f8; padding: 15px; border-radius: 10px; margin-bottom: 15px; border-left: 4px solid #5a5a5a;">
+                            <p style="margin-bottom: 8px;"><strong>Meaning:</strong> 'Temperature of a drink'</p>
+                            <p style="margin-bottom: 8px;"><strong>Words:</strong> warm, boiling, cold, hot</p>
+                            <p style="margin-bottom: 5px; color: #0d47a1;"><strong>Most intense:</strong> boiling</p>
+                            <p style="color: #87ceeb;"><strong>Least intense:</strong> cold</p>
+                        </div>
+                        
+                        <div style="background: #f8f8f8; padding: 15px; border-radius: 10px; margin-bottom: 15px; border-left: 4px solid #5a5a5a;">
+                            <p style="margin-bottom: 8px;"><strong>Meaning:</strong> 'Positive feelings'</p>
+                            <p style="margin-bottom: 8px;"><strong>Words:</strong> happy, joyful, pleased, content</p>
+                            <p style="margin-bottom: 5px; color: #0d47a1;"><strong>Most intense:</strong> joyful</p>
+                            <p style="color: #87ceeb;"><strong>Least intense:</strong> pleased</p>
+                        </div>
+                        
+                        <div style="background: #f8f8f8; padding: 15px; border-radius: 10px; margin-bottom: 30px; border-left: 4px solid #5a5a5a;">
+                            <p style="margin-bottom: 8px;"><strong>Meaning:</strong> 'Negative feelings'</p>
+                            <p style="margin-bottom: 8px;"><strong>Words:</strong> annoyed, furious, upset, irritated</p>
+                            <p style="margin-bottom: 5px; color: #0d47a1;"><strong>Most intense:</strong> furious</p>
+                            <p style="color: #87ceeb;"><strong>Least intense:</strong> annoyed</p>
+                        </div>
+                        
+                        <div style="text-align: center; margin-top: 40px;">
+                            <button class="btn" onclick="startNewSurvey()" style="font-size: 1.2em; padding: 15px 40px; background: linear-gradient(135deg, #4a4a4a 0%, #2c2c2c 100%); border: none; border-radius: 25px; color: white; cursor: pointer;">
+                                Start Survey
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Display -->
+            <div class="results" id="resultsContainer" style="display: none;">
+                <h3>Survey Results</h3>
+                <div id="resultsContent"></div>
+                <button class="btn" onclick="backToSurvey()">Back to Survey</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
