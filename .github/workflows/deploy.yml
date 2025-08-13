@@ -2,24 +2,24 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
     
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout
+      uses: actions/checkout@v4
     
     - name: Create config.js from secrets
       run: |
-        cat > config.js << EOF
-        // Auto-generated configuration file
-        // Generated during GitHub Actions deployment
-        
-        const SURVEY_CONFIG = {
+        echo "const SURVEY_CONFIG = {
             google: {
                 apiKey: '${{ secrets.GOOGLE_API_KEY }}',
                 clientId: '${{ secrets.GOOGLE_CLIENT_ID }}',
@@ -28,13 +28,16 @@ jobs:
                 spreadsheetId: '${{ secrets.GOOGLE_SPREADSHEET_ID }}'
             }
         };
-        
-        // Export for use in survey.js
-        window.SURVEY_CONFIG = SURVEY_CONFIG;
-        EOF
+        window.SURVEY_CONFIG = SURVEY_CONFIG;" > config.js
+    
+    - name: Setup Pages
+      uses: actions/configure-pages@v4
+    
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: './'
     
     - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./
+      id: deployment
+      uses: actions/deploy-pages@v4
