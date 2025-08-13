@@ -358,12 +358,17 @@ async function saveToGoogleSheets() {
             const wordSet = wordSets[questionIndex];
             
             if (response.mostIntense && response.leastIntense && wordSet) {
+                // For example question (index 0), use questionNumber 0
+                // For actual survey questions, use questionNumber starting from 1
+                const questionNumber = wordSet.isExample ? 0 : questionIndex;
+                
                 surveyData.responses.push({
-                    questionNumber: questionIndex + 1,
+                    questionNumber: questionNumber,
                     meaning: wordSet.meaning,
                     mostIntense: response.mostIntense,
                     leastIntense: response.leastIntense,
-                    words: wordSet.words
+                    words: wordSet.words,
+                    isExample: wordSet.isExample || false
                 });
             }
         });
