@@ -6,16 +6,8 @@
     <title>Word Intensity Survey</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script src="https://apis.google.com/js/api.js"></script>
-    <!-- Try to load config.js, fallback to env-config.js for GitHub Pages -->
-    <script src="config.js" onerror="loadFallbackConfig()"></script>
-    <script>
-        function loadFallbackConfig() {
-            console.log('config.js not found, loading environment configuration...');
-            const script = document.createElement('script');
-            script.src = 'env-config.js';
-            document.head.appendChild(script);
-        }
-    </script>
+    <!-- Load configuration -->
+    <script src="config.js"></script>
     <script src="survey.js"></script>
     <style>
         * {
