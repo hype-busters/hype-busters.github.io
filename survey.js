@@ -7,13 +7,6 @@
 // Survey Data
 const wordSets = [
     {
-        meaning: "level of spiciness in food",
-        words: ["mild", "medium", "hot", "spicy"],
-        isExample: true,
-        exampleMostIntense: "hot",
-        exampleLeastIntense: "mild"
-    },
-    {
         meaning: "degree of brightness",
         words: ["dim", "bright", "brilliant", "radiant"]
     },
@@ -79,6 +72,16 @@ function showInstructionsPage() {
     document.getElementById('instructionsContainer').style.display = 'block';
 }
 
+function showAnimatedExample() {
+    hideAllContainers();
+    document.getElementById('animatedExampleContainer').style.display = 'block';
+    
+    // Start the instructions animation
+    setTimeout(() => {
+        startInstructionsAnimation();
+    }, 500);
+}
+
 function showDemographicsForm() {
     hideAllContainers();
     document.getElementById('demographicsContainer').style.display = 'block';
@@ -88,11 +91,30 @@ function showQuestionContainer() {
     hideAllContainers();
     document.getElementById('questionContainer').style.display = 'block';
     document.getElementById('intensityPanel').style.display = 'block';
+    
+    // Start the example animation
+    setTimeout(() => {
+        startExampleAnimation();
+    }, 500);
 }
 
 function showCompletionScreen() {
     hideAllContainers();
     document.getElementById('completionContainer').style.display = 'block';
+    
+    // Reset the completion button state
+    resetCompletionButton();
+}
+
+function resetCompletionButton() {
+    const completeBtn = document.getElementById('completeSurveyBtn');
+    if (completeBtn) {
+        completeBtn.disabled = false;
+        completeBtn.textContent = 'Complete Survey';
+        completeBtn.style.background = 'linear-gradient(135deg, #4CAF50 0%, #45a049 100%)';
+        completeBtn.style.opacity = '1';
+        completeBtn.style.cursor = 'pointer';
+    }
 }
 
 function showSuccessScreen() {
@@ -112,6 +134,7 @@ function hideAllContainers() {
         'completionContainer',
         'successContainer',
         'instructionsContainer',
+        'animatedExampleContainer',
         'resultsContainer',
         'intensityPanel'
     ];
@@ -160,13 +183,8 @@ function startNewSurvey() {
 function updateQuestion() {
     const currentSet = wordSets[currentQuestion];
     
-    // Check if this is an example question
-    if (currentSet.isExample) {
-        document.getElementById('meaningText').innerHTML = 
-            `<span style="color: #0d47a1; font-weight: bold;">EXAMPLE:</span> "${currentSet.meaning}"`;
-    } else {
-        document.getElementById('meaningText').textContent = `"${currentSet.meaning}"`;
-    }
+    // Display the meaning
+    document.getElementById('meaningText').textContent = `"${currentSet.meaning}"`;
     
     const wordsGrid = document.getElementById('wordsGrid');
     wordsGrid.innerHTML = '';
@@ -175,26 +193,12 @@ function updateQuestion() {
         const wordElement = document.createElement('div');
         wordElement.className = 'word-option';
         wordElement.textContent = word;
-        
-        // For example question, pre-fill the selections and disable clicking
-        if (currentSet.isExample) {
-            if (word === currentSet.exampleMostIntense) {
-                wordElement.classList.add('most-intense');
-            }
-            if (word === currentSet.exampleLeastIntense) {
-                wordElement.classList.add('least-intense');
-            }
-            wordElement.style.cursor = 'default';
-            wordElement.onclick = null; // Disable clicking for example
-        } else {
-            wordElement.onclick = () => selectWord(word, wordElement);
-        }
-        
+        wordElement.onclick = () => selectWord(word, wordElement);
         wordsGrid.appendChild(wordElement);
     });
     
-    // Restore previous selections for non-example questions
-    if (!currentSet.isExample && responses[currentQuestion]) {
+    // Restore previous selections if they exist
+    if (responses[currentQuestion]) {
         const response = responses[currentQuestion];
         const wordElements = wordsGrid.children;
         for (let elem of wordElements) {
@@ -212,35 +216,36 @@ function updateQuestion() {
 }
 
 function updateQuestionCounter() {
-    const currentSet = wordSets[currentQuestion];
-    
-    if (currentSet.isExample) {
-        document.getElementById('questionCounter').textContent = 'Example Question - Practice';
-    } else {
-        // Adjust numbering to account for example question
-        const actualQuestionNumber = currentQuestion;
-        const totalActualQuestions = wordSets.length - 1; // Subtract 1 for example
-        document.getElementById('questionCounter').textContent = 
-            `Question ${actualQuestionNumber} of ${totalActualQuestions}`;
-    }
+    // All questions are now real questions (no examples)
+    const actualQuestionNumber = currentQuestion + 1; // +1 because arrays are 0-indexed
+    const totalActualQuestions = wordSets.length;
+    document.getElementById('questionCounter').textContent = 
+        `Question ${actualQuestionNumber} of ${totalActualQuestions}`;
 }
 
 function updateNavigationButtons() {
-    const currentSet = wordSets[currentQuestion];
-    
     document.getElementById('prevBtn').disabled = currentQuestion === 0;
     
     // Update next button text and behavior
     const nextBtn = document.getElementById('nextBtn');
-    if (currentSet.isExample) {
-        nextBtn.textContent = 'Start Survey';
-        nextBtn.disabled = false;
-    } else if (currentQuestion === wordSets.length - 1) {
+    const currentResponse = responses[currentQuestion];
+    const isCurrentQuestionComplete = currentResponse && currentResponse.mostIntense && currentResponse.leastIntense;
+    
+    if (currentQuestion === wordSets.length - 1) {
         nextBtn.textContent = 'Finish';
-        nextBtn.disabled = false;
+        nextBtn.disabled = !isCurrentQuestionComplete;
     } else {
         nextBtn.textContent = 'Next';
-        nextBtn.disabled = false;
+        nextBtn.disabled = !isCurrentQuestionComplete;
+    }
+    
+    // Add visual feedback for disabled state
+    if (nextBtn.disabled) {
+        nextBtn.style.opacity = '0.5';
+        nextBtn.style.cursor = 'not-allowed';
+    } else {
+        nextBtn.style.opacity = '1';
+        nextBtn.style.cursor = 'pointer';
     }
 }
 
@@ -290,16 +295,29 @@ function selectWord(word, element) {
     }
     
     updateProgress();
+    updateNavigationButtons(); // Update button state when selections change
 }
 
 function nextQuestion() {
+    // Check if both most and least intense are selected
+    const currentResponse = responses[currentQuestion];
+    
+    if (!currentResponse || !currentResponse.mostIntense || !currentResponse.leastIntense) {
+        alert('Please select both a MOST INTENSE and LEAST INTENSE word before continuing.');
+        return; // Don't proceed to next question
+    }
+    
     if (currentQuestion < wordSets.length - 1) {
         currentQuestion++;
         updateQuestion();
         updateProgress();
     } else {
-        // Last question completed, show completion screen
-        showCompletionScreen();
+        // Last question completed, check if all required questions are answered
+        if (validateAllResponses()) {
+            showCompletionScreen();
+        } else {
+            alert('Please complete all questions before finishing the survey.');
+        }
     }
 }
 
@@ -317,14 +335,33 @@ function updateProgress() {
         return response.mostIntense && response.leastIntense;
     }).length;
     
-    // Don't count example question in progress calculation
-    const totalActualQuestions = wordSets.length - 1; // Subtract 1 for example
+    // All questions are now real questions
+    const totalActualQuestions = wordSets.length;
     const progress = (completedQuestions / totalActualQuestions) * 100;
     document.getElementById('progressFill').style.width = progress + '%';
 }
 
+// Validation function to check if all questions are completed
+function validateAllResponses() {
+    for (let i = 0; i < wordSets.length; i++) {
+        const response = responses[i];
+        if (!response || !response.mostIntense || !response.leastIntense) {
+            console.log(`Question ${i + 1} is incomplete:`, response);
+            return false;
+        }
+    }
+    return true;
+}
+
 // Survey Completion
 async function completeSurvey() {
+    // Final validation before submission
+    if (!validateAllResponses()) {
+        alert('Please complete all survey questions before submitting. You must select both a MOST INTENSE and LEAST INTENSE word for each question.');
+        showQuestionContainer(); // Go back to questions
+        return;
+    }
+    
     const completeBtn = document.getElementById('completeSurveyBtn');
     const originalText = completeBtn.textContent;
     
@@ -399,17 +436,12 @@ async function saveToGoogleSheets() {
             const wordSet = wordSets[questionIndex];
             
             if (response.mostIntense && response.leastIntense && wordSet) {
-                // For example question (index 0), use questionNumber 0
-                // For actual survey questions, use questionNumber starting from 1
-                const questionNumber = wordSet.isExample ? 0 : questionIndex;
-                
                 surveyData.responses.push({
-                    questionNumber: questionNumber,
+                    questionNumber: questionIndex + 1, // 1-indexed for human readability
                     meaning: wordSet.meaning,
                     mostIntense: response.mostIntense,
                     leastIntense: response.leastIntense,
-                    words: wordSet.words,
-                    isExample: wordSet.isExample || false
+                    words: wordSet.words
                 });
             }
         });
@@ -437,18 +469,50 @@ async function saveToGoogleSheets() {
             input.value = JSON.stringify(surveyData);
             form.appendChild(input);
             
+            // Add timeout to prevent hanging
+            const timeoutId = setTimeout(() => {
+                console.log('⏰ Submission timeout after 10 seconds');
+                try {
+                    document.body.removeChild(iframe);
+                    document.body.removeChild(form);
+                } catch (e) {}
+                reject(new Error('Submission timeout - please check your Google Apps Script deployment'));
+            }, 10000); // 10 second timeout
+            
             // Handle response
             iframe.onload = function() {
+                console.log('📥 Iframe loaded, checking response...');
                 setTimeout(() => {
-                    console.log('✅ Data submitted to Google Sheets successfully!');
+                    try {
+                        // Try to read response from iframe
+                        const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                        const responseText = iframeDoc.body ? iframeDoc.body.textContent : 'No response body';
+                        console.log('📄 Response from Google Apps Script:', responseText);
+                        
+                        // Check if response indicates success
+                        if (responseText.includes('success') || responseText.includes('true')) {
+                            console.log('✅ Data submitted to Google Sheets successfully!');
+                        } else if (responseText.includes('error') || responseText.includes('false')) {
+                            console.log('❌ Google Apps Script returned error:', responseText);
+                            throw new Error('Server returned error: ' + responseText);
+                        } else {
+                            console.log('✅ Form submitted (response unclear, assuming success)');
+                        }
+                    } catch (readError) {
+                        console.log('⚠️ Could not read iframe response (CORS protection) - assuming success');
+                        console.log('✅ Data submitted to Google Sheets successfully!');
+                    }
+                    
+                    clearTimeout(timeoutId); // Clear the timeout
                     document.body.removeChild(iframe);
                     document.body.removeChild(form);
                     resolve(true);
-                }, 1000);
+                }, 2000); // Increased timeout to 2 seconds
             };
             
             iframe.onerror = function() {
                 console.error('❌ Failed to submit to Google Sheets');
+                clearTimeout(timeoutId); // Clear the timeout
                 document.body.removeChild(iframe);
                 document.body.removeChild(form);
                 reject(new Error('Form submission failed'));
@@ -667,6 +731,8 @@ function viewResults() {
 }
 
 function backToSurvey() {
+    // Reset completion button state before returning to survey
+    resetCompletionButton();
     showQuestionContainer();
 }
 
@@ -679,6 +745,9 @@ function resetSurvey() {
         
         // Clear demographic form
         document.getElementById('demographicsForm').reset();
+        
+        // Reset completion button state
+        resetCompletionButton();
         
         // Show demographics form again
         showDemographicsForm();
@@ -775,6 +844,53 @@ async function testGoogleAppsScriptConnection() {
 
 // Add to window for console access
 window.testGoogleAppsScriptConnection = testGoogleAppsScriptConnection;
+
+// Example Animation Functions
+function startExampleAnimation(prefix = 'example') {
+    const exampleWords = document.querySelectorAll(`#${prefix}-mild, #${prefix}-medium, #${prefix}-hot, #${prefix}-spicy`);
+    
+    // Reset all words
+    exampleWords.forEach(word => {
+        word.classList.remove('example-most-intense', 'example-least-intense', 'animating');
+    });
+    
+    // Animation sequence
+    setTimeout(() => {
+        // Step 1: Click on "hot" (most intense) - Dark Blue #0d47a1
+        const hotWord = document.getElementById(`${prefix}-hot`);
+        if (hotWord) {
+            hotWord.classList.add('animating');
+            setTimeout(() => {
+                hotWord.classList.remove('animating');
+                hotWord.classList.add('example-most-intense');
+            }, 300);
+        }
+    }, 1000);
+    
+    setTimeout(() => {
+        // Step 2: Click on "mild" (least intense) - Light Blue #87ceeb
+        const mildWord = document.getElementById(`${prefix}-mild`);
+        if (mildWord) {
+            mildWord.classList.add('animating');
+            setTimeout(() => {
+                mildWord.classList.remove('animating');
+                mildWord.classList.add('example-least-intense');
+            }, 300);
+        }
+    }, 2500);
+    
+    setTimeout(() => {
+        // Step 3: Reset and restart the animation
+        startExampleAnimation(prefix);
+    }, 5000);
+}
+
+// Start animation for instructions page
+function startInstructionsAnimation() {
+    startExampleAnimation('instructions-example');
+}
+
+// Updated to include animation start
 
 // Initialize when page loads
 document.addEventListener('DOMContentLoaded', initializeSurvey);

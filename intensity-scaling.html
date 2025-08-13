@@ -131,6 +131,58 @@
             margin-bottom: 20px;
         }
 
+        /* Example Animation Styles */
+        .example-words-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .example-word {
+            padding: 12px;
+            background: #f5f5f5;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .example-word:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .example-word.example-most-intense {
+            background: #0d47a1;
+            border-color: #0d47a1;
+            color: white;
+            font-weight: 700;
+            transform: scale(1.05);
+        }
+
+        .example-word.example-least-intense {
+            background: #87ceeb;
+            border-color: #87ceeb;
+            color: white;
+            font-weight: 700;
+            transform: scale(1.05);
+        }
+
+        /* Animation keyframes for the selection effect */
+        @keyframes selectEffect {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1.05); }
+        }
+
+        .example-word.animating {
+            animation: selectEffect 0.3s ease;
+        }
+
         .label {
             padding: 8px 16px;
             border-radius: 20px;
@@ -242,6 +294,22 @@
                     <div class="label most-label">Most Intense</div>
                     <div class="label least-label">Least Intense</div>
                 </div>
+                
+                <!-- Animated Example -->
+                <div style="background: #f8f9fa; border: 2px solid #e9ecef; border-radius: 12px; padding: 15px; margin-top: 15px;">
+                    <div style="color: #0d47a1; font-weight: bold; margin-bottom: 10px; text-align: center;">📝 EXAMPLE: "level of spiciness in food"</div>
+                    <div class="example-animation" id="exampleAnimation">
+                        <div class="example-words-grid">
+                            <div class="example-word" data-word="mild" id="example-mild">mild</div>
+                            <div class="example-word" data-word="medium" id="example-medium">medium</div>
+                            <div class="example-word" data-word="hot" id="example-hot">hot</div>
+                            <div class="example-word" data-word="spicy" id="example-spicy">spicy</div>
+                        </div>
+                        <div style="text-align: center; margin-top: 10px; font-size: 0.9em; color: #666; font-style: italic;">
+                            Watch the colors change as words are selected...
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- Demographics Questionnaire -->
@@ -349,7 +417,7 @@
                 </div>
             </div>
 
-            <!-- Instructions Page -->
+            <!-- Detailed Instructions Page -->
             <div id="instructionsContainer">
                 <div class="question-card">
                     <h1 style="color: #2c2c2c; text-align: center; margin-bottom: 30px;">Best–Worst Scaling: Participant Instructions</h1>
@@ -414,7 +482,42 @@
                         </div>
                         
                         <div style="text-align: center; margin-top: 40px;">
-                            <button class="btn" onclick="startNewSurvey()" style="font-size: 1.2em; padding: 15px 40px; background: linear-gradient(135deg, #4a4a4a 0%, #2c2c2c 100%); border: none; border-radius: 25px; color: white; cursor: pointer;">
+                            <button class="btn" onclick="showAnimatedExample()" style="font-size: 1.2em; padding: 15px 40px; background: linear-gradient(135deg, #0d47a1 0%, #1976d2 100%); border: none; border-radius: 25px; color: white; cursor: pointer; box-shadow: 0 5px 15px rgba(13, 71, 161, 0.3);">
+                                Continue
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Animated Example Page -->
+            <div id="animatedExampleContainer" style="display: none;">
+                <div class="question-card">
+                    <h1 style="color: #2c2c2c; text-align: center; margin-bottom: 30px;">Word Intensity Survey</h1>
+                    
+                    <div style="max-width: 600px; margin: 0 auto; text-align: center;">
+                        <p style="margin-bottom: 30px; line-height: 1.6; font-size: 1.1em; color: #666;">
+                            Select the <strong>most intense</strong> and <strong>least intense</strong> words from small sets based on a given meaning.
+                        </p>
+                        
+                        <!-- Animated Example -->
+                        <div style="background: #f8f9fa; border: 2px solid #e9ecef; border-radius: 12px; padding: 20px; margin: 30px 0;">
+                            <div style="color: #0d47a1; font-weight: bold; margin-bottom: 15px; font-size: 1.1em;">📝 EXAMPLE: "level of spiciness in food"</div>
+                            <div class="example-animation" id="instructionsExampleAnimation">
+                                <div class="example-words-grid">
+                                    <div class="example-word" data-word="mild" id="instructions-example-mild">mild</div>
+                                    <div class="example-word" data-word="medium" id="instructions-example-medium">medium</div>
+                                    <div class="example-word" data-word="hot" id="instructions-example-hot">hot</div>
+                                    <div class="example-word" data-word="spicy" id="instructions-example-spicy">spicy</div>
+                                </div>
+                                <div style="text-align: center; margin-top: 15px; font-size: 0.9em; color: #666; font-style: italic;">
+                                    Watch how the colors change when words are selected...
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div style="text-align: center; margin-top: 40px;">
+                            <button class="btn" onclick="showDemographicsForm()" style="font-size: 1.3em; padding: 15px 40px; background: linear-gradient(135deg, #0d47a1 0%, #1976d2 100%); border: none; border-radius: 25px; color: white; cursor: pointer; box-shadow: 0 5px 15px rgba(13, 71, 161, 0.3);">
                                 Start Survey
                             </button>
                         </div>
