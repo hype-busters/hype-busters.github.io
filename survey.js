@@ -87,7 +87,7 @@ function showDemographicsForm() {
 function showQuestionContainer() {
     hideAllContainers();
     document.getElementById('questionContainer').style.display = 'block';
-    document.getElementById('adminPanel').style.display = 'block';
+    document.getElementById('intensityPanel').style.display = 'block';
 }
 
 function showCompletionScreen() {
@@ -113,7 +113,7 @@ function hideAllContainers() {
         'successContainer',
         'instructionsContainer',
         'resultsContainer',
-        'adminPanel'
+        'intensityPanel'
     ];
     
     containers.forEach(id => {

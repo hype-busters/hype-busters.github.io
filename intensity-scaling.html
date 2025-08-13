@@ -236,12 +236,12 @@
         </div>
 
         <div class="content">
-            <!-- Admin Panel -->
-            <div class="admin-panel" id="adminPanel" style="display: none;">
-                <h3>Survey Management</h3>
-                <button class="btn export-btn" onclick="exportResults()">Export Results</button>
-                <button class="btn reset-btn" onclick="resetSurvey()">Reset Survey</button>
-                <button class="btn" onclick="viewResults()">View All Results</button>
+            <!-- Intensity Labels Panel -->
+            <div class="intensity-panel" id="intensityPanel" style="display: none;">
+                <div class="intensity-labels">
+                    <div class="label most-label">Most Intense</div>
+                    <div class="label least-label">Least Intense</div>
+                </div>
             </div>
 
             <!-- Demographics Questionnaire -->
@@ -295,11 +295,6 @@
             <div id="questionContainer" style="display: none;">
                 <div class="question-card">
                     <div class="meaning" id="meaningText"></div>
-                    
-                    <div class="intensity-labels">
-                        <div class="label most-label">Most Intense</div>
-                        <div class="label least-label">Least Intense</div>
-                    </div>
                     
                     <div class="words-grid" id="wordsGrid"></div>
                     
