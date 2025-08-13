@@ -46,5 +46,10 @@ function loadEnvironmentConfig() {
     };
 }
 
-// Export the config
-window.SURVEY_CONFIG = loadEnvironmentConfig();
+// Only set config if not already defined (avoid redeclaration)
+if (typeof window.SURVEY_CONFIG === 'undefined') {
+    window.SURVEY_CONFIG = loadEnvironmentConfig();
+    console.log('Configuration loaded from env-config.js');
+} else {
+    console.log('Configuration already exists, skipping env-config.js');
+}
