@@ -82,7 +82,7 @@ function initializeGoogleAPI() {
 }
 
 function initGoogleAuth() {
-    console.log('Initializing Google API with config:', window.SURVEY_CONFIG.google);
+    console.log('🔧 Initializing Google API with config:', window.SURVEY_CONFIG.google);
     gapi.client.init({
         apiKey: window.SURVEY_CONFIG.google.apiKey,
         clientId: window.SURVEY_CONFIG.google.clientId,
@@ -93,8 +93,10 @@ function initGoogleAuth() {
         const authInstance = gapi.auth2.getAuthInstance();
         isGoogleSignedIn = authInstance.isSignedIn.get();
         console.log('✅ Google API initialized successfully! Signed in:', isGoogleSignedIn);
+        console.log('📋 Spreadsheet ID:', window.SURVEY_CONFIG.google.spreadsheetId);
     }).catch((error) => {
-        console.error('Error initializing Google API:', error);
+        console.error('❌ Error initializing Google API:', error);
+        console.log('🔍 Check: 1) APIs enabled, 2) OAuth origins configured, 3) Credentials correct');
     });
 }
 
@@ -375,12 +377,142 @@ async function completeSurvey() {
 
 // Data Export Functions
 async function saveToGoogleSheets() {
+    // Google Apps Script Web App URL (you'll replace this with your actual URL)
+    const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwmPGv7BNcRvOhhhy8NY8Gcr7i3s_E2Y4oavseBaAb4zFjk9lD2gc4NRbxSGWomjuR0DQ/exec';
+    
+    try {
+        // Prepare data in the exact format you want in the spreadsheet
+        const surveyData = {
+            timestamp: new Date().toISOString(),
+            participant: {
+                name: participantData.name,
+                age: participantData.age,
+                gender: participantData.gender,
+                country: participantData.country,
+                firstLanguage: participantData.firstLanguage
+            },
+            responses: []
+        };
 
-    // Check if signed in, if not, sign in first
-    if (!isGoogleSignedIn) {
-        await signIntoGoogle();
+        // Add each response as a separate row
+        Object.entries(responses).forEach(([index, response]) => {
+            const questionIndex = parseInt(index);
+            const wordSet = wordSets[questionIndex];
+            
+            if (response.mostIntense && response.leastIntense && wordSet) {
+                surveyData.responses.push({
+                    questionNumber: questionIndex + 1,
+                    meaning: wordSet.meaning,
+                    mostIntense: response.mostIntense,
+                    leastIntense: response.leastIntense,
+                    words: wordSet.words
+                });
+            }
+        });
+
+        console.log('📊 Sending data to Google Sheets:', surveyData);
+        console.log('🔗 Using URL:', GOOGLE_APPS_SCRIPT_URL);
+
+        // Send to Google Apps Script
+        const response = await fetch(GOOGLE_APPS_SCRIPT_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(surveyData)
+        });
+
+        console.log('📡 Response status:', response.status, response.statusText);
+
+        if (response.ok) {
+            const result = await response.text(); // Try text first in case it's not JSON
+            console.log('✅ Raw response:', result);
+            
+            try {
+                const jsonResult = JSON.parse(result);
+                console.log('✅ Data saved to Google Sheets successfully!', jsonResult);
+                return true;
+            } catch (e) {
+                console.log('✅ Data saved (response was not JSON):', result);
+                return true;
+            }
+        } else {
+            const errorText = await response.text();
+            console.error('❌ Error response body:', errorText);
+            throw new Error(`HTTP ${response.status}: ${response.statusText} - ${errorText}`);
+        }
+        
+    } catch (error) {
+        console.error('❌ Failed to save to Google Sheets:', error);
+        console.log('🔄 Falling back to alternative storage methods...');
+        
+        // Fallback to localStorage and show user message
+        saveToLocalStorage();
+        alert('Data temporarily saved locally. Please contact the researcher to ensure your responses are recorded.');
+        
+        // Still throw error to trigger Excel download as backup
+        throw error;
     }
+}
 
+// Alternative backend methods
+async function saveToAlternativeBackend() {
+    // Option 2: Simple webhook service (like Zapier, Make.com, or n8n)
+    // Option 3: Firebase Firestore
+    // Option 4: Airtable
+    // Option 5: EmailJS (send data via email)
+    
+    try {
+        // Example: EmailJS integration (sends data via email)
+        return await sendDataViaEmail();
+    } catch (error) {
+        console.error('❌ All backend methods failed:', error);
+        // Final fallback: store in localStorage for manual export
+        saveToLocalStorage();
+        throw new Error('Unable to save data automatically. Data stored locally.');
+    }
+}
+
+async function sendDataViaEmail() {
+    // Using EmailJS service (free tier available)
+    // You'll need to set up an EmailJS account and get service/template IDs
+    
+    const emailData = {
+        to_email: 'your-email@example.com', // Replace with your email
+        participant_name: participantData.name,
+        participant_data: JSON.stringify(participantData, null, 2),
+        survey_responses: JSON.stringify(responses, null, 2),
+        timestamp: new Date().toISOString()
+    };
+    
+    // EmailJS send (requires EmailJS library and configuration)
+    // emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', emailData);
+    
+    console.log('📧 Email method not configured - using localStorage fallback');
+    throw new Error('Email service not configured');
+}
+
+function saveToLocalStorage() {
+    const surveyData = {
+        participant: participantData,
+        responses: responses,
+        timestamp: new Date().toISOString(),
+        id: Date.now()
+    };
+    
+    // Get existing data
+    const existingData = JSON.parse(localStorage.getItem('surveyResponses') || '[]');
+    existingData.push(surveyData);
+    
+    // Save back to localStorage
+    localStorage.setItem('surveyResponses', JSON.stringify(existingData));
+    
+    console.log('💾 Data saved to browser localStorage. Access via browser dev tools.');
+}
+
+// Legacy Google Sheets API method (keeping for reference)
+async function saveToGoogleSheetsAPI() {
+    // This is the old method that requires OAuth
     // Prepare data for Google Sheets
     const values = [
         // Header row
