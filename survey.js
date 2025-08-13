@@ -335,7 +335,6 @@ async function completeSurvey() {
 
 // Data Export Functions
 async function saveToGoogleSheets() {
-    // Google Apps Script Web App URL (you'll replace this with your actual URL)
     const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwmPGv7BNcRvOhhhy8NY8Gcr7i3s_E2Y4oavseBaAb4zFjk9lD2gc4NRbxSGWomjuR0DQ/exec';
     
     try {
@@ -368,61 +367,48 @@ async function saveToGoogleSheets() {
             }
         });
 
-        console.log('📊 Sending data to Google Sheets:', surveyData);
-        console.log('🔗 Using URL:', GOOGLE_APPS_SCRIPT_URL);
-        console.log('📋 Participant data:', participantData);
-        console.log('📝 Responses data:', responses);
-        console.log('📊 Survey data structure:', JSON.stringify(surveyData, null, 2));
+        console.log('📊 Submitting to Google Sheets via form method...');
 
-        // Try different methods to avoid CORS issues
-        
-        // Method 1: Try regular fetch
-        try {
-            const response = await fetch(GOOGLE_APPS_SCRIPT_URL, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(surveyData)
-            });
+        // CORS-free method: Create a hidden form and submit it
+        return new Promise((resolve, reject) => {
+            const iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            iframe.name = 'googleSheetFrame';
+            document.body.appendChild(iframe);
             
-            if (response.ok) {
-                const result = await response.text();
-                console.log('✅ Method 1 success:', result);
-                return true;
-            }
-        } catch (fetchError) {
-            console.log('🔄 Method 1 failed, trying Method 2...');
-        }
-        
-        // Method 2: Use form submission to bypass CORS
-        const formData = new FormData();
-        formData.append('data', JSON.stringify(surveyData));
-        
-        const response = await fetch(GOOGLE_APPS_SCRIPT_URL, {
-            method: 'POST',
-            body: formData
+            const form = document.createElement('form');
+            form.target = 'googleSheetFrame';
+            form.method = 'POST';
+            form.action = GOOGLE_APPS_SCRIPT_URL;
+            
+            // Create form data input
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'data';
+            input.value = JSON.stringify(surveyData);
+            form.appendChild(input);
+            
+            // Handle response
+            iframe.onload = function() {
+                setTimeout(() => {
+                    console.log('✅ Data submitted to Google Sheets successfully!');
+                    document.body.removeChild(iframe);
+                    document.body.removeChild(form);
+                    resolve(true);
+                }, 1000);
+            };
+            
+            iframe.onerror = function() {
+                console.error('❌ Failed to submit to Google Sheets');
+                document.body.removeChild(iframe);
+                document.body.removeChild(form);
+                reject(new Error('Form submission failed'));
+            };
+            
+            // Submit the form
+            document.body.appendChild(form);
+            form.submit();
         });
-
-        console.log('📡 Response status:', response.status, response.statusText);
-
-        if (response.ok) {
-            const result = await response.text(); // Try text first in case it's not JSON
-            console.log('✅ Raw response:', result);
-            
-            try {
-                const jsonResult = JSON.parse(result);
-                console.log('✅ Data saved to Google Sheets successfully!', jsonResult);
-                return true;
-            } catch (e) {
-                console.log('✅ Data saved (response was not JSON):', result);
-                return true;
-            }
-        } else {
-            const errorText = await response.text();
-            console.error('❌ Error response body:', errorText);
-            throw new Error(`HTTP ${response.status}: ${response.statusText} - ${errorText}`);
-        }
         
     } catch (error) {
         console.error('❌ Failed to save to Google Sheets:', error);
