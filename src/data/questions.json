@@ -1,0 +1,42 @@
+[
+    {
+        "meaning": "degree of brightness",
+        "words": ["dim", "bright", "brilliant", "radiant"]
+    },
+    {
+        "meaning": "speed of movement",
+        "words": ["slow", "moderate", "fast", "rapid"]
+    },
+    {
+        "meaning": "emotional intensity",
+        "words": ["calm", "excited", "thrilled", "ecstatic"]
+    },
+    {
+        "meaning": "level of difficulty",
+        "words": ["easy", "moderate", "challenging", "impossible"]
+    },
+    {
+        "meaning": "temperature sensation",
+        "words": ["cool", "warm", "hot", "scorching"]
+    },
+    {
+        "meaning": "volume of sound",
+        "words": ["quiet", "audible", "loud", "deafening"]
+    },
+    {
+        "meaning": "physical strength",
+        "words": ["weak", "average", "strong", "powerful"]
+    },
+    {
+        "meaning": "level of happiness",
+        "words": ["sad", "content", "happy", "ecstatic"]
+    },
+    {
+        "meaning": "size of object",
+        "words": ["tiny", "small", "large", "enormous"]
+    },
+    {
+        "meaning": "quality of taste",
+        "words": ["bland", "mild", "flavorful", "intense"]
+    }
+]

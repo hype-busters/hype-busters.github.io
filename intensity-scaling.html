@@ -8,8 +8,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script src="https://apis.google.com/js/api.js"></script>
     <!-- Load configuration -->
-    <script src="config.js?v=3"></script>
-    <script src="survey.js?v=3"></script>
+    <script src="src/config/config.js?v=3"></script>
+    <script src="src/js/survey.js?v=3"></script>
     <style>
         * {
             margin: 0;
@@ -23,6 +23,7 @@
             min-height: 100vh;
             padding: 20px;
         }
+
 
         .container {
             max-width: 800px;
@@ -275,9 +276,38 @@
         .reset-btn {
             background: #6a6a6a;
         }
+
+        /* Survey Selection Styles */
+        .survey-option:hover {
+            border-color: #6a6a6a;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .survey-option.selected {
+            background: #000000;
+            border-color: #000000;
+            color: white;
+        }
+
+        .survey-option.selected h3 {
+            color: #1976d2 !important;
+        }
+
+        .survey-option.selected p {
+            color: #1976d2 !important;
+        }
+
+        /* Start button turns black when survey is selected */
+        #startSelectedSurveyBtn:not(:disabled) {
+            background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%) !important;
+            border: none;
+            color: white;
+        }
     </style>
 </head>
 <body>
+    <!-- Navigation hidden for survey focus -->
     <div class="container">
         <div class="header">
             <h1>Word Intensity Survey</h1>
@@ -340,6 +370,45 @@
                             </button>
                         </div>
                     </form>
+                </div>
+            </div>
+
+            <!-- Survey Selection Page -->
+            <div id="surveySelectionContainer" style="display: none;">
+                <div class="question-card">
+                    <h2 style="color: #2c2c2c; margin-bottom: 30px; text-align: center;">Choose Your Daily Survey</h2>
+                    <p style="text-align: center; margin-bottom: 30px; color: #666;">Please select one of the five available surveys for today. Each survey contains different word sets for evaluation.</p>
+                    
+                    <div style="max-width: 600px; margin: 0 auto;">
+                        <div id="surveyOptions" style="display: grid; gap: 15px; margin-bottom: 30px;">
+                            <div class="survey-option" data-survey="1" style="background: #f8f8f8; border: 2px solid #d0d0d0; border-radius: 10px; padding: 20px; cursor: pointer; transition: all 0.2s ease; text-align: center;">
+                                <h3 style="color: #2c2c2c; margin-bottom: 10px;">Survey 1: Basic Intensity</h3>
+                                <p style="color: #666; margin: 0; font-size: 0.9em;">Brightness, speed, emotions, difficulty, and more</p>
+                            </div>
+                            <div class="survey-option" data-survey="2" style="background: #f8f8f8; border: 2px solid #d0d0d0; border-radius: 10px; padding: 20px; cursor: pointer; transition: all 0.2s ease; text-align: center;">
+                                <h3 style="color: #2c2c2c; margin-bottom: 10px;">Survey 2: Certainty & Formality</h3>
+                                <p style="color: #666; margin: 0; font-size: 0.9em;">Certainty levels, formality, urgency, and complexity</p>
+                            </div>
+                            <div class="survey-option" data-survey="3" style="background: #f8f8f8; border: 2px solid #d0d0d0; border-radius: 10px; padding: 20px; cursor: pointer; transition: all 0.2s ease; text-align: center;">
+                                <h3 style="color: #2c2c2c; margin-bottom: 10px;">Survey 3: Physical Properties</h3>
+                                <p style="color: #666; margin: 0; font-size: 0.9em;">Wetness, cleanliness, light, texture, and sensations</p>
+                            </div>
+                            <div class="survey-option" data-survey="4" style="background: #f8f8f8; border: 2px solid #d0d0d0; border-radius: 10px; padding: 20px; cursor: pointer; transition: all 0.2s ease; text-align: center;">
+                                <h3 style="color: #2c2c2c; margin-bottom: 10px;">Survey 4: Sensory Experience</h3>
+                                <p style="color: #666; margin: 0; font-size: 0.9em;">Thickness, heat, freshness, softness, and clarity</p>
+                            </div>
+                            <div class="survey-option" data-survey="5" style="background: #f8f8f8; border: 2px solid #d0d0d0; border-radius: 10px; padding: 20px; cursor: pointer; transition: all 0.2s ease; text-align: center;">
+                                <h3 style="color: #2c2c2c; margin-bottom: 10px;">Survey 5: Personal Traits</h3>
+                                <p style="color: #666; margin: 0; font-size: 0.9em;">Intelligence, experience, creativity, and personality</p>
+                            </div>
+                        </div>
+                        
+                        <div style="text-align: center;">
+                            <button id="startSelectedSurveyBtn" class="btn" onclick="startSelectedSurvey()" disabled style="font-size: 1.1em; padding: 15px 40px; background: linear-gradient(135deg, #4a4a4a 0%, #2c2c2c 100%); border: none; border-radius: 25px; color: white; cursor: pointer; opacity: 0.5;">
+                                Start Selected Survey
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -514,6 +583,11 @@
                 <h3>Survey Results</h3>
                 <div id="resultsContent"></div>
                 <button class="btn" onclick="backToSurvey()">Back to Survey</button>
+            </div>
+            
+            <!-- Simple back link -->
+            <div style="text-align: center; margin-top: 20px; padding: 20px;">
+                <a href="index.html" style="color: #666; text-decoration: none; font-size: 14px; opacity: 0.7;">← Back to Website</a>
             </div>
         </div>
     </div>

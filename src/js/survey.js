@@ -12,6 +12,7 @@ let currentQuestion = 0;
 let responses = {};
 let participantData = {};
 let surveyStarted = false;
+let selectedSurvey = null;
 // Google API variables removed - using simple Apps Script approach
 
 // Survey Initialization
@@ -33,16 +34,44 @@ async function initializeSurvey() {
                 words: ["dim", "bright", "brilliant", "radiant"]
             },
             {
-                meaning: "speed of movement", 
+                meaning: "speed of movement",
                 words: ["slow", "moderate", "fast", "rapid"]
             },
             {
                 meaning: "emotional intensity",
                 words: ["calm", "excited", "thrilled", "ecstatic"]
+            },
+            {
+                meaning: "level of difficulty",
+                words: ["easy", "moderate", "challenging", "impossible"]
+            },
+            {
+                meaning: "temperature sensation",
+                words: ["cool", "warm", "hot", "scorching"]
+            },
+            {
+                meaning: "volume of sound",
+                words: ["quiet", "audible", "loud", "deafening"]
+            },
+            {
+                meaning: "physical strength",
+                words: ["weak", "average", "strong", "powerful"]
+            },
+            {
+                meaning: "level of happiness",
+                words: ["sad", "content", "happy", "ecstatic"]
+            },
+            {
+                meaning: "size of object",
+                words: ["tiny", "small", "large", "enormous"]
+            },
+            {
+                meaning: "quality of taste",
+                words: ["bland", "mild", "flavorful", "intense"]
             }
         ];
         
-        alert('Unable to load questions from external files. Using sample questions for demonstration. Please check that questions.json or questions.csv exists and is properly formatted.');
+        alert('Unable to load questions from external files. Using sample questions for demonstration.\n\nTo fix this:\n• Run a local server (see scripts/start-server.bat)\n• Or deploy to a web server\n• Files are located in src/data/ folder');
     }
     
     showInstructionsPage();
@@ -68,42 +97,55 @@ function parseCSV(csvText) {
     return data;
 }
 
-// Load questions from external JSON or CSV file
+// Load questions from external JSON or CSV file (fallback for initial load)
 async function loadQuestions() {
-    // Try to load from JSON first, then CSV as fallback
+    // Load default questions (survey1) for fallback
+    try {
+        await loadQuestionsFromSurvey('1');
+    } catch (error) {
+        console.error('❌ Failed to load default questions:', error);
+        
+        // Fallback to hardcoded questions if loading fails
+        console.log('🔄 Using fallback questions...');
+        wordSets = [
+            {
+                meaning: "degree of brightness",
+                words: ["dim", "bright", "brilliant", "radiant"]
+            },
+            {
+                meaning: "speed of movement",
+                words: ["slow", "moderate", "fast", "rapid"]
+            },
+            {
+                meaning: "emotional intensity",
+                words: ["calm", "excited", "thrilled", "ecstatic"]
+            }
+        ];
+        
+        throw error;
+    }
+}
+
+// Load questions from a specific survey CSV file
+async function loadQuestionsFromSurvey(surveyNumber) {
     let questions = [];
     let loadedFrom = '';
     
     try {
-        console.log('📚 Loading questions from questions.json...');
-        const jsonResponse = await fetch('questions.json?v=' + Date.now());
+        console.log(`📚 Loading questions from survey${surveyNumber}.csv...`);
+        const csvResponse = await fetch(`src/data/survey${surveyNumber}.csv?v=` + Date.now());
         
-        if (jsonResponse.ok) {
-            questions = await jsonResponse.json();
-            loadedFrom = 'JSON';
+        if (csvResponse.ok) {
+            const csvText = await csvResponse.text();
+            questions = parseCSV(csvText);
+            loadedFrom = `Survey ${surveyNumber} CSV`;
         } else {
-            throw new Error('JSON file not found or inaccessible');
+            throw new Error(`Survey ${surveyNumber} CSV file not found or inaccessible`);
         }
         
-    } catch (jsonError) {
-        console.log('JSON loading failed, trying CSV...', jsonError.message);
-        
-        try {
-            console.log('📚 Loading questions from questions.csv...');
-            const csvResponse = await fetch('questions.csv?v=' + Date.now());
-            
-            if (csvResponse.ok) {
-                const csvText = await csvResponse.text();
-                questions = parseCSV(csvText);
-                loadedFrom = 'CSV';
-            } else {
-                throw new Error('CSV file not found or inaccessible');
-            }
-            
-        } catch (csvError) {
-            console.log('CSV loading failed:', csvError.message);
-            throw new Error('Both JSON and CSV loading failed');
-        }
+    } catch (csvError) {
+        console.log('CSV loading failed:', csvError.message);
+        throw new Error(`Failed to load survey ${surveyNumber}`);
     }
     
     // Validate questions format
@@ -120,7 +162,7 @@ async function loadQuestions() {
     }
     
     wordSets = questions;
-    console.log(`✅ Successfully loaded ${wordSets.length} questions from ${loadedFrom} file`);
+    console.log(`✅ Successfully loaded ${wordSets.length} questions from ${loadedFrom}`);
 }
 
 // Load configuration from config.js
@@ -175,6 +217,12 @@ function showDemographicsForm() {
     document.getElementById('demographicsContainer').style.display = 'block';
 }
 
+function showSurveySelection() {
+    hideAllContainers();
+    document.getElementById('surveySelectionContainer').style.display = 'block';
+    setupSurveySelection();
+}
+
 function showQuestionContainer() {
     hideAllContainers();
     document.getElementById('questionContainer').style.display = 'block';
@@ -214,6 +262,7 @@ function showResultsContainer() {
 function hideAllContainers() {
     const containers = [
         'demographicsContainer',
+        'surveySelectionContainer',
         'questionContainer', 
         'completionContainer',
         'successContainer',
@@ -243,10 +292,8 @@ function startSurveyWithDemographics() {
         timestamp: new Date().toISOString()
     };
 
-    showQuestionContainer();
-    surveyStarted = true;
-    updateQuestion();
-    updateProgress();
+    // After demographics, show survey selection
+    showSurveySelection();
 }
 
 function startNewSurvey() {
@@ -255,12 +302,60 @@ function startNewSurvey() {
     participantData = {};
     currentQuestion = 0;
     surveyStarted = false;
+    selectedSurvey = null;
     
     // Clear demographic form
     document.getElementById('demographicsForm').reset();
     
     // Show demographics form to start fresh
     showDemographicsForm();
+}
+
+// Survey Selection Functions
+function setupSurveySelection() {
+    const surveyOptions = document.querySelectorAll('.survey-option');
+    const startBtn = document.getElementById('startSelectedSurveyBtn');
+    
+    // Remove any existing event listeners and setup new ones
+    surveyOptions.forEach(option => {
+        option.onclick = function() {
+            // Remove selected class from all options
+            surveyOptions.forEach(opt => opt.classList.remove('selected'));
+            
+            // Add selected class to clicked option
+            this.classList.add('selected');
+            
+            // Store selected survey
+            selectedSurvey = this.dataset.survey;
+            
+            // Enable start button
+            startBtn.disabled = false;
+            startBtn.style.opacity = '1';
+            startBtn.style.cursor = 'pointer';
+        };
+    });
+}
+
+async function startSelectedSurvey() {
+    if (!selectedSurvey) {
+        alert('Please select a survey first.');
+        return;
+    }
+    
+    try {
+        // Load questions from the selected survey CSV file
+        await loadQuestionsFromSurvey(selectedSurvey);
+        
+        // Start the actual survey
+        showQuestionContainer();
+        surveyStarted = true;
+        updateQuestion();
+        updateProgress();
+        
+    } catch (error) {
+        console.error('Failed to load survey questions:', error);
+        alert('Error loading survey questions. Please try again or select a different survey.');
+    }
 }
 
 // Question Management
@@ -504,6 +599,7 @@ async function saveToGoogleSheets() {
         // Prepare data in the exact format you want in the spreadsheet
         const surveyData = {
             timestamp: new Date().toISOString(),
+            selectedSurvey: selectedSurvey,
             participant: {
                 name: participantData.name,
                 age: participantData.age,
@@ -826,6 +922,7 @@ function resetSurvey() {
         participantData = {};
         currentQuestion = 0;
         surveyStarted = false;
+        selectedSurvey = null;
         
         // Clear demographic form
         document.getElementById('demographicsForm').reset();
