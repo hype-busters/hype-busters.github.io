@@ -2,6 +2,42 @@
 // Professional survey implementation with Google Sheets integration
 
 // Survey Configuration will be loaded from config.js
+
+// Function to detect attention check questions by specific word combinations
+function checkIfAttentionCheck(words) {
+    // Define the exact attention check combinations for each survey
+    const attentionCheckSets = [
+        // Survey 1 - ATTITUDE & IMPORTANCE
+        ['boring', 'tedious', 'dull', 'amazing'],
+        ['trivial', 'minor', 'irrelevant', 'essential'],
+        ['optional', 'unimportant', 'helpful', 'crucial'],
+        
+        // Survey 2 - QUALITY & PROBLEM  
+        ['expert', 'incompetent', 'skilled', 'professional'],
+        ['adequate', 'mediocre', 'average', 'outstanding'],
+        ['catastrophic', 'devastating', 'severe', 'trivial'],
+        
+        // Survey 3 - NOVELTY & RIGOUR
+        ['ordinary', 'common', 'standard', 'groundbreaking'],
+        ['cutting-edge', 'pioneering', 'innovative', 'outdated'],
+        ['sloppy', 'careless', 'adequate', 'meticulous'],
+        ['flawless', 'perfect', 'precise', 'unreliable'],
+        
+        // Survey 4 - SCALE
+        ['small', 'limited', 'tiny', 'enormous'],
+        ['enormous', 'gigantic', 'colossal', 'minimal'],
+        
+        // Survey 5 - UTILITY
+        ['useless', 'ineffective', 'impractical', 'transformative'],
+        ['perfect', 'excellent', 'outstanding', 'useless']
+    ];
+    
+    // Check if the current word set matches any attention check set exactly
+    return attentionCheckSets.some(checkSet => {
+        return checkSet.length === words.length && 
+               checkSet.every(word => words.includes(word));
+    });
+}
 // This file is not committed to version control for security
 
 // Survey Data - will be loaded from external file
@@ -779,15 +815,9 @@ async function saveResponseChunk(chunkResponses, chunkNumber, totalChunks) {
         const wordSet = wordSets[questionIndex];
         
         if (response.mostIntense && response.leastIntense && wordSet) {
-            // Check if this is an attention check question (has obvious extreme pairs)
+            // Check if this is an attention check question (specific combinations)
             const words = wordSet.words;
-            const attentionKeywords = [
-                'boring', 'amazing', 'trivial', 'essential', 'optional', 'crucial',
-                'incompetent', 'outstanding', 'trivial', 'catastrophic',
-                'ordinary', 'groundbreaking', 'outdated', 'sloppy', 'meticulous', 'unreliable',
-                'minimal', 'enormous', 'useless', 'transformative'
-            ];
-            const isAttentionCheck = words.some(word => attentionKeywords.includes(word));
+            const isAttentionCheck = checkIfAttentionCheck(words);
             
             surveyData.responses.push({
                 questionNumber: questionIndex + 1,
@@ -895,15 +925,9 @@ async function saveToGoogleSheets() {
             const wordSet = wordSets[questionIndex];
             
             if (response.mostIntense && response.leastIntense && wordSet) {
-                // Check if this is an attention check question (has obvious extreme pairs)
+                // Check if this is an attention check question (specific combinations)
                 const words = wordSet.words;
-                const attentionKeywords = [
-                    'boring', 'amazing', 'trivial', 'essential', 'optional', 'crucial',
-                    'incompetent', 'outstanding', 'trivial', 'catastrophic',
-                    'ordinary', 'groundbreaking', 'outdated', 'sloppy', 'meticulous', 'unreliable',
-                    'minimal', 'enormous', 'useless', 'transformative'
-                ];
-                const isAttentionCheck = words.some(word => attentionKeywords.includes(word));
+                const isAttentionCheck = checkIfAttentionCheck(words);
                 
                 surveyData.responses.push({
                     questionNumber: questionIndex + 1, // 1-indexed for human readability
