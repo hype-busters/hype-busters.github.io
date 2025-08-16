@@ -165,11 +165,21 @@ async function loadQuestionsFromSurvey(surveyNumber) {
     console.log(`✅ Successfully loaded ${wordSets.length} questions from ${loadedFrom}`);
 }
 
-// Load configuration from config.js
+// Load configuration from config.js or env-config.js
 function loadConfiguration() {
-    // Check if config is already loaded from config.js
+    // Check if config is already loaded
     if (window.SURVEY_CONFIG) {
-        console.log('Configuration loaded successfully');
+        // Check if we have Google Apps Script URL (for deployed environment)
+        if (window.SURVEY_CONFIG.googleAppsScript && window.SURVEY_CONFIG.googleAppsScript.url) {
+            console.log('Configuration loaded successfully (using Google Apps Script)');
+        }
+        // Check if we have Google API credentials (for local development)
+        else if (window.SURVEY_CONFIG.google && window.SURVEY_CONFIG.google.apiKey) {
+            console.log('Configuration loaded successfully (using Google Sheets API)');
+        }
+        else {
+            console.warn('Configuration found but missing required credentials.');
+        }
     } else {
         console.warn('Configuration not found. Please ensure config.js is loaded and contains valid configuration.');
         // Fallback configuration for development
@@ -740,7 +750,9 @@ async function saveToGoogleSheetsChunked() {
 }
 
 async function saveResponseChunk(chunkResponses, chunkNumber, totalChunks) {
-    const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyXBTHgmzL4YUmBCbPC5vqBe7-GxxizqkTnu2JwSeCeIfbXJpVvAVa61ueelvjhHp6VWA/exec';
+    // Get Google Apps Script URL from configuration
+    const config = window.SURVEY_CONFIG;
+    const GOOGLE_APPS_SCRIPT_URL = config.googleAppsScript?.url || 'https://script.google.com/macros/s/AKfycbxFG53hdkB0s4FkVM0gAe9N6cST04KPDfG8kQbzSAxVzhTZ1zQDNQt4cQsw8sIip07p7g/exec';
     
     // Prepare chunk data
     const surveyData = {
@@ -853,8 +865,9 @@ async function saveResponseChunk(chunkResponses, chunkNumber, totalChunks) {
 }
 
 async function saveToGoogleSheets() {
-    // UPDATE THIS URL with your current Google Apps Script deployment URL
-    const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyXBTHgmzL4YUmBCbPC5vqBe7-GxxizqkTnu2JwSeCeIfbXJpVvAVa61ueelvjhHp6VWA/exec';
+    // Get Google Apps Script URL from configuration
+    const config = window.SURVEY_CONFIG;
+    const GOOGLE_APPS_SCRIPT_URL = config.googleAppsScript?.url || 'https://script.google.com/macros/s/AKfycbxFG53hdkB0s4FkVM0gAe9N6cST04KPDfG8kQbzSAxVzhTZ1zQDNQt4cQsw8sIip07p7g/exec';
     
     try {
         // Prepare data in the exact format you want in the spreadsheet
@@ -1215,7 +1228,9 @@ function resetSurvey() {
 
 // Debugging function to test Google Apps Script connection
 async function testGoogleAppsScriptConnection() {
-    const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzWEacy_zklziuIhalsLdieyQjWUyxyPX5OoQpBScQRW30uiGeu6KG8-hf3uNmayMADlg/exec';
+    // Get Google Apps Script URL from configuration
+    const config = window.SURVEY_CONFIG;
+    const GOOGLE_APPS_SCRIPT_URL = config.googleAppsScript?.url || 'https://script.google.com/macros/s/AKfycbxFG53hdkB0s4FkVM0gAe9N6cST04KPDfG8kQbzSAxVzhTZ1zQDNQt4cQsw8sIip07p7g/exec';
     
     console.log('🧪 Testing Google Apps Script connection...');
     
