@@ -73,6 +73,13 @@ function doPost(e) {
     console.log('surveyNumber (with fallback):', surveyNumber);
     console.log('Type of selectedSurvey:', typeof data.selectedSurvey);
     
+    // Check if this is a chunked submission
+    let chunkInfo = '';
+    if (data.chunkInfo && data.chunkInfo.isChunked) {
+      chunkInfo = ` (Chunk ${data.chunkInfo.chunkNumber}/${data.chunkInfo.totalChunks})`;
+      console.log('📦 CHUNKED SUBMISSION:', chunkInfo);
+    }
+    
     // Add each survey response as a row
     let rowsAdded = 0;
     if (data.responses && Array.isArray(data.responses)) {
@@ -102,16 +109,17 @@ function doPost(e) {
       console.log('No responses array found in data');
     }
     
-    console.log('Successfully added', rowsAdded, 'rows');
+    console.log('Successfully added', rowsAdded, 'rows' + chunkInfo);
     console.log('=== REQUEST COMPLETE ===');
     
     // Return success message
     return ContentService
       .createTextOutput(JSON.stringify({
         success: true, 
-        message: 'Data saved successfully!',
+        message: `Data saved successfully!${chunkInfo}`,
         rowsAdded: rowsAdded,
         surveyNumber: surveyNumber,  // Include survey number in response
+        chunkInfo: data.chunkInfo || null,
         timestamp: new Date().toISOString()
       }))
       .setMimeType(ContentService.MimeType.JSON);

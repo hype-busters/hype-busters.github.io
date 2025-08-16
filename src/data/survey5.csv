@@ -1,11 +1,83 @@
 meaning,word1,word2,word3,word4
-degree of intelligence,simple,basic,smart,brilliant
-level of experience,novice,beginner,experienced,expert
-intensity of emotion,numb,calm,emotional,passionate
-degree of organization,chaotic,messy,organized,systematic
-level of creativity,dull,ordinary,creative,innovative
-intensity of focus,distracted,aware,focused,laser-sharp
-degree of friendliness,hostile,neutral,friendly,warm
-level of independence,dependent,assisted,independent,self-reliant
-intensity of curiosity,indifferent,interested,curious,fascinated
-degree of patience,impatient,restless,patient,zen-like
+UTILITY: Shows practical usefulness,practicable,transferable,optimal,self-explanatory
+UTILITY: Shows practical usefulness,timely,transferable,transformative,ineffective
+UTILITY: Shows practical usefulness,valuable,transferable,sustainable,safer
+UTILITY: Shows practical usefulness,well-timed,transferable,easy-to-use,impactful
+UTILITY: Shows practical usefulness,transformative,impactful,optimal,safer
+UTILITY: Shows practical usefulness,valuable,timely,easy-to-use,optimal
+UTILITY: Shows practical usefulness,timely,sustainable,impactful,self-explanatory
+UTILITY: Shows practical usefulness,practicable,transformative,easy-to-use,sustainable
+UTILITY: Shows practical usefulness,ineffective,easy-to-use,safer,self-explanatory
+UTILITY: Shows practical usefulness,valuable,practicable,ineffective,impactful
+UTILITY: Shows practical usefulness,valuable,well-timed,transformative,self-explanatory
+UTILITY: Shows practical usefulness,well-timed,practicable,timely,safer
+UTILITY: Shows practical usefulness,well-timed,ineffective,sustainable,optimal
+UTILITY: Shows practical usefulness,adequate,simple,opportune,accessible
+UTILITY: Shows practical usefulness,ineffective,simple,synergistic,ideal
+UTILITY: Shows practical usefulness,durable,simple,concrete,easy
+UTILITY: Shows practical usefulness,useful,simple,meaningful,expandable
+UTILITY: Shows practical usefulness,synergistic,expandable,opportune,easy
+UTILITY: Shows practical usefulness,durable,ineffective,meaningful,opportune
+UTILITY: Shows practical usefulness,useless,ineffective,impractical,transformative
+UTILITY: Shows practical usefulness,ineffective,concrete,expandable,accessible
+UTILITY: Shows practical usefulness,adequate,synergistic,meaningful,concrete
+UTILITY: Shows practical usefulness,ideal,meaningful,easy,accessible
+UTILITY: Shows practical usefulness,durable,adequate,ideal,expandable
+UTILITY: Shows practical usefulness,durable,useful,synergistic,accessible
+UTILITY: Shows practical usefulness,useful,adequate,ineffective,easy
+UTILITY: Shows practical usefulness,useful,ideal,concrete,opportune
+UTILITY: Shows practical usefulness,tangible,fruitful,tactical,user-friendly
+UTILITY: Shows practical usefulness,constructive,fruitful,transformative,adequate
+UTILITY: Shows practical usefulness,maintainable,fruitful,deployable,productive
+UTILITY: Shows practical usefulness,generalizable,fruitful,high-performance,streamlined
+UTILITY: Shows practical usefulness,transformative,streamlined,tactical,productive
+UTILITY: Shows practical usefulness,maintainable,constructive,high-performance,tactical
+UTILITY: Shows practical usefulness,constructive,deployable,streamlined,user-friendly
+UTILITY: Shows practical usefulness,tangible,transformative,high-performance,deployable
+UTILITY: Shows practical usefulness,adequate,high-performance,productive,user-friendly
+UTILITY: Shows practical usefulness,maintainable,tangible,adequate,streamlined
+UTILITY: Shows practical usefulness,maintainable,generalizable,transformative,user-friendly
+UTILITY: Shows practical usefulness,generalizable,tangible,constructive,productive
+UTILITY: Shows practical usefulness,generalizable,adequate,deployable,tactical
+UTILITY: Shows practical usefulness,high-performing,actionable,straightforward,economical
+UTILITY: Shows practical usefulness,dependable,actionable,transformative,ineffective
+UTILITY: Shows practical usefulness,perfect,excellent,outstanding,useless
+UTILITY: Shows practical usefulness,perfect,actionable,implementable,rich
+UTILITY: Shows practical usefulness,seamless,actionable,usable,adaptable
+UTILITY: Shows practical usefulness,transformative,adaptable,straightforward,rich
+UTILITY: Shows practical usefulness,perfect,dependable,usable,straightforward
+UTILITY: Shows practical usefulness,dependable,implementable,adaptable,economical
+UTILITY: Shows practical usefulness,high-performing,transformative,usable,implementable
+UTILITY: Shows practical usefulness,ineffective,usable,rich,economical
+UTILITY: Shows practical usefulness,perfect,high-performing,ineffective,adaptable
+UTILITY: Shows practical usefulness,perfect,seamless,transformative,economical
+UTILITY: Shows practical usefulness,seamless,high-performing,dependable,rich
+UTILITY: Shows practical usefulness,seamless,ineffective,implementable,straightforward
+UTILITY: Shows practical usefulness,adequate,ineffective,high-yielding,practical
+UTILITY: Shows practical usefulness,efficacious,ineffective,effective,purposeful
+UTILITY: Shows practical usefulness,efficacious,ineffective,high-yielding,practical
+UTILITY: Shows practical usefulness,ineffective,effective,high-yielding,extensible
+UTILITY: Shows practical usefulness,efficacious,adequate,high-yielding,purposeful
+UTILITY: Shows practical usefulness,adequate,effective,extensible,practical
+UTILITY: Shows practical usefulness,ineffective,effective,purposeful,practical
+UTILITY: Shows practical usefulness,efficacious,adequate,ineffective,extensible
+UTILITY: Shows practical usefulness,high-yielding,purposeful,extensible,practical
+UTILITY: Shows practical usefulness,efficacious,adequate,effective,practical
+UTILITY: Shows practical usefulness,adequate,effective,high-yielding,purposeful
+UTILITY: Shows practical usefulness,efficacious,effective,high-yielding,extensible
+UTILITY: Shows practical usefulness,efficacious,purposeful,extensible,practical
+UTILITY: Shows practical usefulness,adequate,ineffective,purposeful,extensible
+UTILITY: Shows practical usefulness,scalable,efficient,adequate,intuitive
+UTILITY: Shows practical usefulness,ready,efficient,transformative,tailored
+UTILITY: Shows practical usefulness,ready,efficient,adequate,intuitive
+UTILITY: Shows practical usefulness,efficient,transformative,adequate,viable
+UTILITY: Shows practical usefulness,ready,scalable,adequate,tailored
+UTILITY: Shows practical usefulness,scalable,transformative,viable,intuitive
+UTILITY: Shows practical usefulness,efficient,transformative,tailored,intuitive
+UTILITY: Shows practical usefulness,ready,scalable,efficient,viable
+UTILITY: Shows practical usefulness,adequate,tailored,viable,intuitive
+UTILITY: Shows practical usefulness,ready,scalable,transformative,intuitive
+UTILITY: Shows practical usefulness,scalable,transformative,adequate,tailored
+UTILITY: Shows practical usefulness,ready,transformative,adequate,viable
+UTILITY: Shows practical usefulness,ready,tailored,viable,intuitive
+UTILITY: Shows practical usefulness,scalable,efficient,tailored,viable

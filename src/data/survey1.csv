@@ -1,11 +1,79 @@
 meaning,word1,word2,word3,word4
-degree of brightness,dim,bright,brilliant,radiant
-speed of movement,slow,moderate,fast,rapid
-emotional intensity,calm,excited,thrilled,ecstatic
-level of difficulty,easy,moderate,challenging,impossible
-temperature sensation,cool,warm,hot,scorching
-volume of sound,quiet,audible,loud,deafening
-physical strength,weak,average,strong,powerful
-level of happiness,sad,content,happy,ecstatic
-size of object,tiny,small,large,enormous
-quality of taste,bland,mild,flavorful,intense
+ATTITUDE: Shows positive reaction to research,intriguing,thrilling,surprising,incredible
+ATTITUDE: Shows positive reaction to research,astonishing,surprising,notable,incredible
+ATTITUDE: Shows positive reaction to research,unremarkable,remarkable,thrilling,notable
+ATTITUDE: Shows positive reaction to research,phenomenal,unremarkable,notable,incredible
+ATTITUDE: Shows positive reaction to research,phenomenal,intriguing,notable,confident
+ATTITUDE: Shows positive reaction to research,astonishing,unremarkable,intriguing,remarkable
+ATTITUDE: Shows positive reaction to research,astonishing,phenomenal,intriguing,thrilling
+ATTITUDE: Shows positive reaction to research,unremarkable,intriguing,confident,incredible
+ATTITUDE: Shows positive reaction to research,astonishing,unremarkable,surprising,confident
+ATTITUDE: Shows positive reaction to research,remarkable,thrilling,confident,incredible
+ATTITUDE: Shows positive reaction to research,phenomenal,remarkable,surprising,confident
+ATTITUDE: Shows positive reaction to research,intriguing,remarkable,surprising,notable
+ATTITUDE: Shows positive reaction to research,phenomenal,unremarkable,thrilling,surprising
+ATTITUDE: Shows positive reaction to research,astonishing,thrilling,notable,confident
+ATTITUDE: Shows positive reaction to research,astonishing,phenomenal,remarkable,incredible
+ATTITUDE: Shows positive reaction to research,fascinating,exciting,superb,impressive
+ATTITUDE: Shows positive reaction to research,interesting,superb,extraordinary,impressive
+ATTITUDE: Shows positive reaction to research,unremarkable,appealing,exciting,extraordinary
+ATTITUDE: Shows positive reaction to research,adequate,unremarkable,extraordinary,impressive
+ATTITUDE: Shows positive reaction to research,adequate,fascinating,extraordinary,rewarding
+ATTITUDE: Shows positive reaction to research,boring,tedious,dull,amazing
+ATTITUDE: Shows positive reaction to research,interesting,unremarkable,fascinating,appealing
+ATTITUDE: Shows positive reaction to research,interesting,adequate,fascinating,exciting
+ATTITUDE: Shows positive reaction to research,unremarkable,fascinating,rewarding,impressive
+ATTITUDE: Shows positive reaction to research,interesting,unremarkable,superb,rewarding
+ATTITUDE: Shows positive reaction to research,appealing,exciting,rewarding,impressive
+ATTITUDE: Shows positive reaction to research,adequate,appealing,superb,rewarding
+ATTITUDE: Shows positive reaction to research,fascinating,appealing,superb,extraordinary
+ATTITUDE: Shows positive reaction to research,adequate,unremarkable,exciting,superb
+ATTITUDE: Shows positive reaction to research,interesting,exciting,extraordinary,rewarding
+ATTITUDE: Shows positive reaction to research,interesting,adequate,appealing,impressive
+ATTITUDE: Shows positive reaction to research,outstanding,excellent,attractive,phenomenal
+ATTITUDE: Shows positive reaction to research,outstanding,attractive,phenomenal,adequate
+ATTITUDE: Shows positive reaction to research,outstanding,excellent,attractive,adequate
+ATTITUDE: Shows positive reaction to research,outstanding,excellent,phenomenal,adequate
+ATTITUDE: Shows positive reaction to research,excellent,attractive,phenomenal,adequate
+IMPORTANCE: Makes research sound urgent,chief,irrelevant,foundational,urgent
+IMPORTANCE: Makes research sound urgent,paramount,irrelevant,momentous,ultimate
+IMPORTANCE: Makes research sound urgent,major,irrelevant,profound,decisive
+IMPORTANCE: Makes research sound urgent,strategic,irrelevant,important,pivotal
+IMPORTANCE: Makes research sound urgent,momentous,pivotal,foundational,decisive
+IMPORTANCE: Makes research sound urgent,trivial,minor,irrelevant,essential
+IMPORTANCE: Makes research sound urgent,major,paramount,important,foundational
+IMPORTANCE: Makes research sound urgent,paramount,profound,pivotal,urgent
+IMPORTANCE: Makes research sound urgent,chief,momentous,important,profound
+IMPORTANCE: Makes research sound urgent,ultimate,important,decisive,urgent
+IMPORTANCE: Makes research sound urgent,major,chief,ultimate,pivotal
+IMPORTANCE: Makes research sound urgent,major,strategic,momentous,urgent
+IMPORTANCE: Makes research sound urgent,strategic,chief,paramount,decisive
+IMPORTANCE: Makes research sound urgent,strategic,ultimate,profound,foundational
+IMPORTANCE: Makes research sound urgent,relevant,pressing,influential,necessary
+IMPORTANCE: Makes research sound urgent,irrelevant,pressing,essential,vital
+IMPORTANCE: Makes research sound urgent,high-priority,pressing,significant,crucial
+IMPORTANCE: Makes research sound urgent,critical,pressing,invaluable,prime
+IMPORTANCE: Makes research sound urgent,essential,prime,influential,crucial
+IMPORTANCE: Makes research sound urgent,high-priority,irrelevant,invaluable,influential
+IMPORTANCE: Makes research sound urgent,irrelevant,significant,prime,necessary
+IMPORTANCE: Makes research sound urgent,relevant,essential,invaluable,significant
+IMPORTANCE: Makes research sound urgent,vital,invaluable,crucial,necessary
+IMPORTANCE: Makes research sound urgent,high-priority,relevant,vital,prime
+IMPORTANCE: Makes research sound urgent,high-priority,critical,essential,necessary
+IMPORTANCE: Makes research sound urgent,optional,unimportant,helpful,crucial
+IMPORTANCE: Makes research sound urgent,critical,relevant,irrelevant,crucial
+IMPORTANCE: Makes research sound urgent,critical,vital,significant,influential
+IMPORTANCE: Makes research sound urgent,key,compelling,imperative,relevant
+IMPORTANCE: Makes research sound urgent,fundamental,compelling,consequential,indispensable
+IMPORTANCE: Makes research sound urgent,fundamental,compelling,imperative,relevant
+IMPORTANCE: Makes research sound urgent,compelling,consequential,imperative,paramount
+IMPORTANCE: Makes research sound urgent,fundamental,key,imperative,indispensable
+IMPORTANCE: Makes research sound urgent,key,consequential,paramount,relevant
+IMPORTANCE: Makes research sound urgent,compelling,consequential,indispensable,relevant
+IMPORTANCE: Makes research sound urgent,fundamental,key,compelling,paramount
+IMPORTANCE: Makes research sound urgent,imperative,indispensable,paramount,relevant
+IMPORTANCE: Makes research sound urgent,fundamental,key,consequential,relevant
+IMPORTANCE: Makes research sound urgent,key,consequential,imperative,indispensable
+IMPORTANCE: Makes research sound urgent,fundamental,consequential,imperative,paramount
+IMPORTANCE: Makes research sound urgent,fundamental,indispensable,paramount,relevant
+IMPORTANCE: Makes research sound urgent,key,compelling,indispensable,paramount

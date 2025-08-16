@@ -1,11 +1,109 @@
 meaning,word1,word2,word3,word4
-degree of wetness,dry,damp,wet,soaked
-level of cleanliness,dirty,dusty,clean,spotless
-intensity of light,dark,dim,bright,blazing
-degree of smoothness,rough,coarse,smooth,silky
-level of richness,poor,modest,wealthy,luxurious
-intensity of smell,odorless,faint,strong,overpowering
-degree of flexibility,rigid,stiff,flexible,elastic
-level of popularity,unknown,known,popular,famous
-intensity of flavor,bland,mild,tangy,spicy
-degree of sharpness,dull,blunt,sharp,razor-sharp
+NOVELTY: Makes research sound new,revolutionary,paradigm-shifting,incomparable,trailblazing
+NOVELTY: Makes research sound new,unoriginal,paradigm-shifting,fresh,up-and-coming
+NOVELTY: Makes research sound new,unrivaled,paradigm-shifting,game-changing,never-before-seen
+NOVELTY: Makes research sound new,novel,paradigm-shifting,newest,cutting-edge
+NOVELTY: Makes research sound new,fresh,cutting-edge,incomparable,never-before-seen
+NOVELTY: Makes research sound new,unrivaled,unoriginal,newest,incomparable
+NOVELTY: Makes research sound new,unoriginal,game-changing,cutting-edge,trailblazing
+NOVELTY: Makes research sound new,revolutionary,fresh,newest,game-changing
+NOVELTY: Makes research sound new,up-and-coming,newest,never-before-seen,trailblazing
+NOVELTY: Makes research sound new,unrivaled,revolutionary,up-and-coming,cutting-edge
+NOVELTY: Makes research sound new,unrivaled,novel,fresh,trailblazing
+NOVELTY: Makes research sound new,novel,revolutionary,unoriginal,never-before-seen
+NOVELTY: Makes research sound new,novel,up-and-coming,game-changing,incomparable
+NOVELTY: Makes research sound new,emerging,unique,standard,latest
+NOVELTY: Makes research sound new,unequaled,unique,ground-breaking,unoriginal
+NOVELTY: Makes research sound new,one-of-a-kind,unique,creative,up-to-date
+NOVELTY: Makes research sound new,inventive,unique,first,unheard-of
+NOVELTY: Makes research sound new,ground-breaking,unheard-of,standard,up-to-date
+NOVELTY: Makes research sound new,one-of-a-kind,unequaled,first,standard
+NOVELTY: Makes research sound new,ordinary,common,standard,groundbreaking
+NOVELTY: Makes research sound new,unequaled,creative,unheard-of,latest
+NOVELTY: Makes research sound new,emerging,ground-breaking,first,creative
+NOVELTY: Makes research sound new,unoriginal,first,up-to-date,latest
+NOVELTY: Makes research sound new,one-of-a-kind,emerging,unoriginal,unheard-of
+NOVELTY: Makes research sound new,one-of-a-kind,inventive,ground-breaking,latest
+NOVELTY: Makes research sound new,inventive,emerging,unequaled,up-to-date
+NOVELTY: Makes research sound new,inventive,unoriginal,creative,standard
+NOVELTY: Makes research sound new,revolutionary,pioneering,original,unparalleled
+NOVELTY: Makes research sound new,recent,original,innovative,unparalleled
+NOVELTY: Makes research sound new,unprecedented,standard,pioneering,innovative
+NOVELTY: Makes research sound new,imaginative,unprecedented,innovative,unparalleled
+NOVELTY: Makes research sound new,imaginative,revolutionary,innovative,radical
+NOVELTY: Makes research sound new,recent,unprecedented,revolutionary,standard
+NOVELTY: Makes research sound new,recent,imaginative,revolutionary,pioneering
+NOVELTY: Makes research sound new,unprecedented,revolutionary,radical,unparalleled
+NOVELTY: Makes research sound new,recent,unprecedented,original,radical
+NOVELTY: Makes research sound new,standard,pioneering,radical,unparalleled
+NOVELTY: Makes research sound new,imaginative,standard,original,radical
+NOVELTY: Makes research sound new,revolutionary,standard,original,innovative
+NOVELTY: Makes research sound new,imaginative,unprecedented,pioneering,original
+NOVELTY: Makes research sound new,recent,pioneering,innovative,radical
+NOVELTY: Makes research sound new,recent,imaginative,standard,unparalleled
+NOVELTY: Makes research sound new,cutting-edge,pioneering,innovative,outdated
+RIGOUR: Shows careful research methods,flawless,advanced,systematic,exact
+RIGOUR: Shows careful research methods,unreliable,advanced,nuanced,meticulous
+RIGOUR: Shows careful research methods,empirical,advanced,refined,powerful
+RIGOUR: Shows careful research methods,thorough,advanced,verifiable,complex
+RIGOUR: Shows careful research methods,nuanced,complex,systematic,powerful
+RIGOUR: Shows careful research methods,empirical,unreliable,verifiable,systematic
+RIGOUR: Shows careful research methods,unreliable,refined,complex,exact
+RIGOUR: Shows careful research methods,flawless,nuanced,verifiable,refined
+RIGOUR: Shows careful research methods,meticulous,verifiable,powerful,exact
+RIGOUR: Shows careful research methods,empirical,flawless,meticulous,complex
+RIGOUR: Shows careful research methods,empirical,thorough,nuanced,exact
+RIGOUR: Shows careful research methods,thorough,flawless,unreliable,powerful
+RIGOUR: Shows careful research methods,thorough,meticulous,refined,systematic
+RIGOUR: Shows careful research methods,adequate,organized,scientific,detailed
+RIGOUR: Shows careful research methods,unreliable,organized,high-level,disciplined
+RIGOUR: Shows careful research methods,elegant,organized,coordinated,reproducible
+RIGOUR: Shows careful research methods,methodical,organized,exacting,high-standard
+RIGOUR: Shows careful research methods,high-level,high-standard,scientific,reproducible
+RIGOUR: Shows careful research methods,elegant,unreliable,exacting,scientific
+RIGOUR: Shows careful research methods,unreliable,coordinated,high-standard,detailed
+RIGOUR: Shows careful research methods,adequate,high-level,exacting,coordinated
+RIGOUR: Shows careful research methods,disciplined,exacting,reproducible,detailed
+RIGOUR: Shows careful research methods,elegant,adequate,disciplined,high-standard
+RIGOUR: Shows careful research methods,elegant,methodical,high-level,detailed
+RIGOUR: Shows careful research methods,methodical,adequate,unreliable,reproducible
+RIGOUR: Shows careful research methods,methodical,disciplined,coordinated,scientific
+RIGOUR: Shows careful research methods,sloppy,careless,adequate,meticulous
+RIGOUR: Shows careful research methods,accurate,repeatable,error-free,adequate
+RIGOUR: Shows careful research methods,structured,error-free,integrated,adequate
+RIGOUR: Shows careful research methods,quality,strong,repeatable,integrated
+RIGOUR: Shows careful research methods,unified,quality,integrated,adequate
+RIGOUR: Shows careful research methods,unified,accurate,integrated,flawless
+RIGOUR: Shows careful research methods,structured,quality,accurate,strong
+RIGOUR: Shows careful research methods,structured,unified,accurate,repeatable
+RIGOUR: Shows careful research methods,quality,accurate,flawless,adequate
+RIGOUR: Shows careful research methods,structured,quality,error-free,flawless
+RIGOUR: Shows careful research methods,strong,repeatable,flawless,adequate
+RIGOUR: Shows careful research methods,unified,strong,error-free,flawless
+RIGOUR: Shows careful research methods,accurate,strong,error-free,integrated
+RIGOUR: Shows careful research methods,unified,quality,repeatable,error-free
+RIGOUR: Shows careful research methods,structured,repeatable,integrated,flawless
+RIGOUR: Shows careful research methods,structured,unified,strong,adequate
+RIGOUR: Shows careful research methods,strict,fine-grained,logical,unreliable
+RIGOUR: Shows careful research methods,discriminating,logical,robust,unreliable
+RIGOUR: Shows careful research methods,correct,sophisticated,fine-grained,robust
+RIGOUR: Shows careful research methods,subtle,correct,robust,unreliable
+RIGOUR: Shows careful research methods,subtle,strict,robust,flawless
+RIGOUR: Shows careful research methods,discriminating,correct,strict,sophisticated
+RIGOUR: Shows careful research methods,discriminating,subtle,strict,fine-grained
+RIGOUR: Shows careful research methods,correct,strict,flawless,unreliable
+RIGOUR: Shows careful research methods,discriminating,correct,logical,flawless
+RIGOUR: Shows careful research methods,flawless,perfect,precise,unreliable
+RIGOUR: Shows careful research methods,sophisticated,fine-grained,flawless,unreliable
+RIGOUR: Shows careful research methods,subtle,sophisticated,logical,flawless
+RIGOUR: Shows careful research methods,strict,sophisticated,logical,robust
+RIGOUR: Shows careful research methods,subtle,correct,fine-grained,logical
+RIGOUR: Shows careful research methods,discriminating,fine-grained,robust,flawless
+RIGOUR: Shows careful research methods,discriminating,subtle,sophisticated,unreliable
+RIGOUR: Shows careful research methods,precise,painstaking,adequate,unreliable
+RIGOUR: Shows careful research methods,careful,cohesive,painstaking,adequate
+RIGOUR: Shows careful research methods,careful,painstaking,rigorous,unreliable
+RIGOUR: Shows careful research methods,precise,careful,rigorous,adequate
+RIGOUR: Shows careful research methods,precise,cohesive,painstaking,rigorous
+RIGOUR: Shows careful research methods,cohesive,rigorous,adequate,unreliable
+RIGOUR: Shows careful research methods,precise,careful,cohesive,unreliable

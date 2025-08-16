@@ -342,6 +342,100 @@ async function startSelectedSurvey() {
         return;
     }
     
+    // Show instructions modal before starting survey
+    showInstructionsModal(selectedSurvey);
+}
+
+function showInstructionsModal(surveyNumber) {
+    const instructionsContent = document.getElementById('instructionsContent');
+    const modal = document.getElementById('instructionsModal');
+    
+    // Define instructions for each category
+    const categoryInstructions = {
+        'IMPORTANCE': {
+            meaning: 'These words make the research sound important or urgent',
+            examples: 'Early diagnosis is <strong>essential</strong> for improving patient survival rates.<br>Reducing hospital infections is a <strong>priority</strong> for public health.<br>Funding for vaccine research is <strong>crucial</strong> to prevent future outbreaks.',
+            rating: 'Judge how strongly the word makes the research sound important or urgent.'
+        },
+        'NOVELTY': {
+            meaning: 'These words make the research sound new or different from anything done before.',
+            examples: 'The team developed a <strong>new</strong> method for detecting rare cancers.<br>This study offers an <strong>unprecedented</strong> view of brain activity during sleep.<br>The drug uses an <strong>innovative</strong> delivery system to target specific cells.',
+            rating: 'Judge how strongly the word makes the research seem original or different from existing work.'
+        },
+        'RIGOUR': {
+            meaning: 'These words make the research sound careful, precise, and done to a high standard.',
+            examples: 'The trial was conducted in a <strong>controlled</strong> setting to ensure accurate results.<br>Data were analysed using <strong>careful</strong> statistical methods.<br>The researchers followed a <strong>strict</strong> protocol throughout the experiment.',
+            rating: 'Judge how strongly the word promotes the idea that the research was carried out with high standards and precision.'
+        },
+        'SCALE': {
+            meaning: 'These words make the research sound big in size, scope, or range.',
+            examples: 'The study included a <strong>large-scale</strong> survey of hospital patients.<br>The outbreak affected a <strong>vast</strong> area of the country.<br>The database contains a <strong>huge</strong> amount of genetic information.',
+            rating: 'Judge how strongly the word makes the research seem large in scope, reach, or amount.'
+        },
+        'UTILITY': {
+            meaning: 'These words make the research sound useful, practical, and/or benefits.',
+            examples: 'The new tool is <strong>useful</strong> for monitoring blood sugar levels at home.<br>This app provides <strong>practical</strong> guidance for managing symptoms.<br>The treatment has been shown to be <strong>effective</strong> in reducing pain.',
+            rating: 'Judge how strongly the word makes the research or method sound helpful, beneficial, or applicable in practice.'
+        },
+        'QUALITY': {
+            meaning: 'These words make the people or environment involved in the research sound skilled, capable, or well regarded.',
+            examples: 'The hospital is known for its <strong>skilled</strong> surgical team.<br>The lab is equipped with <strong>dedicated</strong> scanning technology.<br>The team works in a <strong>renowned</strong> research institute.',
+            rating: 'Judge how strongly the word suggests that the people, facilities, or organisation involved are of high standing or ability.'
+        },
+        'ATTITUDE': {
+            meaning: 'These words show a positive reaction or strong approval of the research.',
+            examples: 'The results are <strong>exciting</strong> for the future of cancer treatment.<br>This finding is <strong>remarkable</strong> and may change clinical practice.<br>The study offers an <strong>inspiring</strong> example of patient-led research.',
+            rating: 'Judge how strongly the word shows enthusiasm, approval, or a positive emotional response to the research.'
+        },
+        'PROBLEM': {
+            meaning: 'These words make an issue sound serious or in need of urgent attention.',
+            examples: 'Antibiotic resistance is an <strong>alarming</strong> global health threat.<br>Shortages of medical staff are a <strong>serious</strong> concern for rural clinics.<br>The rise in obesity is a <strong>pressing</strong> public health issue.',
+            rating: 'Judge how strongly the word makes the problem seem severe, urgent, or demanding immediate action.'
+        }
+    };
+    
+    // Define which categories are in each survey
+    const surveyCategories = {
+        '1': ['ATTITUDE', 'IMPORTANCE'],
+        '2': ['QUALITY', 'PROBLEM'],
+        '3': ['NOVELTY', 'RIGOUR'],
+        '4': ['SCALE'],
+        '5': ['UTILITY']
+    };
+    
+    // Get categories for selected survey
+    const categories = surveyCategories[surveyNumber] || [];
+    
+    // Build instructions HTML
+    let html = '';
+    categories.forEach(category => {
+        const instruction = categoryInstructions[category];
+        if (instruction) {
+            html += `
+                <div class="category-instruction">
+                    <div class="category-title">${category}</div>
+                    <div class="category-meaning">
+                        <strong>Meaning:</strong> ${instruction.meaning}
+                    </div>
+                    <div class="category-examples">
+                        ${instruction.examples}
+                    </div>
+                    <div class="category-rating">
+                        <strong>How to rate:</strong> ${instruction.rating}
+                    </div>
+                </div>
+            `;
+        }
+    });
+    
+    instructionsContent.innerHTML = html;
+    modal.style.display = 'flex';
+}
+
+async function closeInstructionsAndStartSurvey() {
+    // Hide the instructions modal
+    document.getElementById('instructionsModal').style.display = 'none';
+    
     try {
         // Load questions from the selected survey CSV file
         await loadQuestionsFromSurvey(selectedSurvey);
@@ -552,8 +646,18 @@ async function completeSurvey() {
         
         console.log('🚀 Starting survey submission...');
         
-        // Try to save to Google Sheets first
-        await saveToGoogleSheets();
+        // Check if we have a large dataset that needs chunking
+        const responseCount = Object.keys(responses).length;
+        console.log(`📊 Total responses to submit: ${responseCount}`);
+        
+        if (responseCount > 50) {
+            console.log('📦 Large dataset detected, using chunked submission...');
+            completeBtn.textContent = 'Submitting (Large Dataset)...';
+            await saveToGoogleSheetsChunked();
+        } else {
+            // Use regular submission for smaller datasets
+            await saveToGoogleSheets();
+        }
         
         console.log('✅ Survey submitted successfully!');
         
@@ -591,9 +695,166 @@ async function completeSurvey() {
 }
 
 // Data Export Functions
+
+// Chunked submission for large datasets
+async function saveToGoogleSheetsChunked() {
+    const CHUNK_SIZE = 25; // Submit 25 responses at a time
+    const responseEntries = Object.entries(responses);
+    const totalChunks = Math.ceil(responseEntries.length / CHUNK_SIZE);
+    
+    console.log(`📦 Submitting ${responseEntries.length} responses in ${totalChunks} chunks of ${CHUNK_SIZE}`);
+    
+    const completeBtn = document.getElementById('completeSurveyBtn');
+    
+    for (let chunkIndex = 0; chunkIndex < totalChunks; chunkIndex++) {
+        const startIndex = chunkIndex * CHUNK_SIZE;
+        const endIndex = Math.min(startIndex + CHUNK_SIZE, responseEntries.length);
+        const chunk = responseEntries.slice(startIndex, endIndex);
+        
+        // Update progress
+        completeBtn.textContent = `Submitting... (${chunkIndex + 1}/${totalChunks})`;
+        console.log(`📤 Submitting chunk ${chunkIndex + 1}/${totalChunks} (responses ${startIndex + 1}-${endIndex})`);
+        
+        // Create chunk data
+        const chunkResponses = {};
+        chunk.forEach(([index, response]) => {
+            chunkResponses[index] = response;
+        });
+        
+        try {
+            await saveResponseChunk(chunkResponses, chunkIndex + 1, totalChunks);
+            console.log(`✅ Chunk ${chunkIndex + 1}/${totalChunks} submitted successfully`);
+            
+            // Small delay between chunks to prevent overwhelming the server
+            if (chunkIndex < totalChunks - 1) {
+                await new Promise(resolve => setTimeout(resolve, 1000)); // 1 second delay
+            }
+            
+        } catch (error) {
+            console.error(`❌ Failed to submit chunk ${chunkIndex + 1}:`, error);
+            throw new Error(`Submission failed at chunk ${chunkIndex + 1} of ${totalChunks}. Some data may have been saved.`);
+        }
+    }
+    
+    console.log('✅ All chunks submitted successfully!');
+}
+
+async function saveResponseChunk(chunkResponses, chunkNumber, totalChunks) {
+    const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyXBTHgmzL4YUmBCbPC5vqBe7-GxxizqkTnu2JwSeCeIfbXJpVvAVa61ueelvjhHp6VWA/exec';
+    
+    // Prepare chunk data
+    const surveyData = {
+        timestamp: new Date().toISOString(),
+        selectedSurvey: selectedSurvey,
+        chunkInfo: {
+            chunkNumber: chunkNumber,
+            totalChunks: totalChunks,
+            isChunked: true
+        },
+        participant: {
+            name: participantData.name,
+            age: participantData.age,
+            gender: participantData.gender,
+            country: participantData.country,
+            firstLanguage: participantData.firstLanguage
+        },
+        responses: []
+    };
+
+    // Add chunk responses
+    Object.entries(chunkResponses).forEach(([index, response]) => {
+        const questionIndex = parseInt(index);
+        const wordSet = wordSets[questionIndex];
+        
+        if (response.mostIntense && response.leastIntense && wordSet) {
+            // Check if this is an attention check question (has obvious extreme pairs)
+            const words = wordSet.words;
+            const attentionKeywords = [
+                'boring', 'amazing', 'trivial', 'essential', 'optional', 'crucial',
+                'incompetent', 'outstanding', 'trivial', 'catastrophic',
+                'ordinary', 'groundbreaking', 'outdated', 'sloppy', 'meticulous', 'unreliable',
+                'minimal', 'enormous', 'useless', 'transformative'
+            ];
+            const isAttentionCheck = words.some(word => attentionKeywords.includes(word));
+            
+            surveyData.responses.push({
+                questionNumber: questionIndex + 1,
+                meaning: wordSet.meaning,
+                mostIntense: response.mostIntense,
+                leastIntense: response.leastIntense,
+                words: wordSet.words,
+                isExample: isAttentionCheck // Mark attention checks as examples for easy identification
+            });
+        }
+    });
+
+    console.log(`📊 Chunk ${chunkNumber} contains ${surveyData.responses.length} responses`);
+
+    // Submit chunk using same method as regular submission but with shorter timeout
+    return new Promise((resolve, reject) => {
+        const iframe = document.createElement('iframe');
+        iframe.style.display = 'none';
+        iframe.name = `chunkFrame${chunkNumber}`;
+        document.body.appendChild(iframe);
+        
+        const form = document.createElement('form');
+        form.target = iframe.name;
+        form.method = 'POST';
+        form.action = GOOGLE_APPS_SCRIPT_URL;
+        
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'data';
+        input.value = JSON.stringify(surveyData);
+        form.appendChild(input);
+        
+        // Shorter timeout for chunks
+        const timeoutId = setTimeout(() => {
+            console.log(`⏰ Chunk ${chunkNumber} timeout after 30 seconds`);
+            try {
+                document.body.removeChild(iframe);
+                document.body.removeChild(form);
+            } catch (e) {}
+            reject(new Error(`Chunk ${chunkNumber} submission timeout`));
+        }, 30000);
+        
+        iframe.onload = function() {
+            setTimeout(() => {
+                try {
+                    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                    const responseText = iframeDoc.body ? iframeDoc.body.textContent : 'No response body';
+                    console.log(`📄 Chunk ${chunkNumber} response:`, responseText);
+                    
+                    if (responseText.includes('error') || responseText.includes('false')) {
+                        throw new Error(`Chunk ${chunkNumber} server error: ${responseText}`);
+                    }
+                } catch (readError) {
+                    console.log(`⚠️ Could not read chunk ${chunkNumber} response - assuming success`);
+                }
+                
+                clearTimeout(timeoutId);
+                document.body.removeChild(iframe);
+                document.body.removeChild(form);
+                resolve(true);
+            }, 2000);
+        };
+        
+        iframe.onerror = function() {
+            console.error(`❌ Chunk ${chunkNumber} submission failed`);
+            clearTimeout(timeoutId);
+            document.body.removeChild(iframe);
+            document.body.removeChild(form);
+            reject(new Error(`Chunk ${chunkNumber} form submission failed`));
+        };
+        
+        document.body.appendChild(form);
+        form.submit();
+    });
+}
+
 async function saveToGoogleSheets() {
     // UPDATE THIS URL with your current Google Apps Script deployment URL
-    const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxFG53hdkB0s4FkVM0gAe9N6cST04KPDfG8kQbzSAxVzhTZ1zQDNQt4cQsw8sIip07p7g/exec';
+    const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyXBTHgmzL4YUmBCbPC5vqBe7-GxxizqkTnu2JwSeCeIfbXJpVvAVa61ueelvjhHp6VWA/exec';
     
     try {
         // Prepare data in the exact format you want in the spreadsheet
@@ -621,12 +882,23 @@ async function saveToGoogleSheets() {
             const wordSet = wordSets[questionIndex];
             
             if (response.mostIntense && response.leastIntense && wordSet) {
+                // Check if this is an attention check question (has obvious extreme pairs)
+                const words = wordSet.words;
+                const attentionKeywords = [
+                    'boring', 'amazing', 'trivial', 'essential', 'optional', 'crucial',
+                    'incompetent', 'outstanding', 'trivial', 'catastrophic',
+                    'ordinary', 'groundbreaking', 'outdated', 'sloppy', 'meticulous', 'unreliable',
+                    'minimal', 'enormous', 'useless', 'transformative'
+                ];
+                const isAttentionCheck = words.some(word => attentionKeywords.includes(word));
+                
                 surveyData.responses.push({
                     questionNumber: questionIndex + 1, // 1-indexed for human readability
                     meaning: wordSet.meaning,
                     mostIntense: response.mostIntense,
                     leastIntense: response.leastIntense,
-                    words: wordSet.words
+                    words: wordSet.words,
+                    isExample: isAttentionCheck // Mark attention checks as examples for easy identification
                 });
             }
         });
@@ -654,15 +926,15 @@ async function saveToGoogleSheets() {
             input.value = JSON.stringify(surveyData);
             form.appendChild(input);
             
-            // Add timeout to prevent hanging
+            // Add timeout to prevent hanging (increased for large datasets)
             const timeoutId = setTimeout(() => {
-                console.log('⏰ Submission timeout after 20 seconds');
+                console.log('⏰ Submission timeout after 60 seconds');
                 try {
                     document.body.removeChild(iframe);
                     document.body.removeChild(form);
                 } catch (e) {}
                 reject(new Error('Submission timeout - please check your Google Apps Script deployment'));
-            }, 20000); // 20 second timeout
+            }, 60000); // 60 second timeout for large surveys
             
             // Handle response
             iframe.onload = function() {
@@ -692,7 +964,7 @@ async function saveToGoogleSheets() {
                     document.body.removeChild(iframe);
                     document.body.removeChild(form);
                     resolve(true);
-                }, 2000); // Increased timeout to 2 seconds
+                }, 5000); // Increased timeout to 5 seconds for large data processing
             };
             
             iframe.onerror = function() {

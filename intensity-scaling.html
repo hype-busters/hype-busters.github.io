@@ -298,6 +298,92 @@
             color: #1976d2 !important;
         }
 
+        /* Modal/Card Instructions Styles */
+        .instructions-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .instructions-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            margin: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        .instructions-card h2 {
+            color: #2c2c2c;
+            margin-bottom: 20px;
+            text-align: center;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .category-instruction {
+            margin-bottom: 25px;
+            padding: 15px;
+            border-left: 4px solid #2196f3;
+            background: #f8f9fa;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .category-title {
+            font-weight: bold;
+            color: #1976d2;
+            font-size: 1.1em;
+            margin-bottom: 8px;
+        }
+
+        .category-meaning {
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .category-examples {
+            margin-bottom: 10px;
+            font-style: italic;
+            color: #555;
+            line-height: 1.4;
+        }
+
+        .category-rating {
+            font-weight: 500;
+            color: #2c2c2c;
+            line-height: 1.4;
+        }
+
+        .close-instructions-btn {
+            background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 600;
+            margin-top: 20px;
+            width: 100%;
+            transition: all 0.2s ease;
+        }
+
+        .close-instructions-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(33, 150, 243, 0.3);
+        }
+
         /* Start button turns black when survey is selected */
         #startSelectedSurveyBtn:not(:disabled) {
             background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%) !important;
@@ -382,24 +468,24 @@
                     <div style="max-width: 600px; margin: 0 auto;">
                         <div id="surveyOptions" style="display: grid; gap: 15px; margin-bottom: 30px;">
                             <div class="survey-option" data-survey="1" style="background: #f8f8f8; border: 2px solid #d0d0d0; border-radius: 10px; padding: 20px; cursor: pointer; transition: all 0.2s ease; text-align: center;">
-                                <h3 style="color: #2c2c2c; margin-bottom: 10px;">Survey 1: Basic Intensity</h3>
-                                <p style="color: #666; margin: 0; font-size: 0.9em;">Brightness, speed, emotions, difficulty, and more</p>
+                                <h3 style="color: #2c2c2c; margin-bottom: 10px;">Survey 1: Attitude & Importance</h3>
+                                <p style="color: #666; margin: 0; font-size: 0.9em;">Positive reactions to research and urgency indicators</p>
                             </div>
                             <div class="survey-option" data-survey="2" style="background: #f8f8f8; border: 2px solid #d0d0d0; border-radius: 10px; padding: 20px; cursor: pointer; transition: all 0.2s ease; text-align: center;">
-                                <h3 style="color: #2c2c2c; margin-bottom: 10px;">Survey 2: Certainty & Formality</h3>
-                                <p style="color: #666; margin: 0; font-size: 0.9em;">Certainty levels, formality, urgency, and complexity</p>
+                                <h3 style="color: #2c2c2c; margin-bottom: 10px;">Survey 2: Quality & Problem</h3>
+                                <p style="color: #666; margin: 0; font-size: 0.9em;">Research quality indicators and problem severity</p>
                             </div>
                             <div class="survey-option" data-survey="3" style="background: #f8f8f8; border: 2px solid #d0d0d0; border-radius: 10px; padding: 20px; cursor: pointer; transition: all 0.2s ease; text-align: center;">
-                                <h3 style="color: #2c2c2c; margin-bottom: 10px;">Survey 3: Physical Properties</h3>
-                                <p style="color: #666; margin: 0; font-size: 0.9em;">Wetness, cleanliness, light, texture, and sensations</p>
+                                <h3 style="color: #2c2c2c; margin-bottom: 10px;">Survey 3: Novelty & Rigour</h3>
+                                <p style="color: #666; margin: 0; font-size: 0.9em;">Research originality and methodological precision</p>
                             </div>
                             <div class="survey-option" data-survey="4" style="background: #f8f8f8; border: 2px solid #d0d0d0; border-radius: 10px; padding: 20px; cursor: pointer; transition: all 0.2s ease; text-align: center;">
-                                <h3 style="color: #2c2c2c; margin-bottom: 10px;">Survey 4: Sensory Experience</h3>
-                                <p style="color: #666; margin: 0; font-size: 0.9em;">Thickness, heat, freshness, softness, and clarity</p>
+                                <h3 style="color: #2c2c2c; margin-bottom: 10px;">Survey 4: Scale</h3>
+                                <p style="color: #666; margin: 0; font-size: 0.9em;">Research scope, size, and magnitude indicators</p>
                             </div>
                             <div class="survey-option" data-survey="5" style="background: #f8f8f8; border: 2px solid #d0d0d0; border-radius: 10px; padding: 20px; cursor: pointer; transition: all 0.2s ease; text-align: center;">
-                                <h3 style="color: #2c2c2c; margin-bottom: 10px;">Survey 5: Personal Traits</h3>
-                                <p style="color: #666; margin: 0; font-size: 0.9em;">Intelligence, experience, creativity, and personality</p>
+                                <h3 style="color: #2c2c2c; margin-bottom: 10px;">Survey 5: Utility</h3>
+                                <p style="color: #666; margin: 0; font-size: 0.9em;">Practical usefulness and beneficial outcomes</p>
                             </div>
                         </div>
                         
@@ -589,6 +675,19 @@
             <div style="text-align: center; margin-top: 20px; padding: 20px;">
                 <a href="index.html" style="color: #666; text-decoration: none; font-size: 14px; opacity: 0.7;">← Back to Website</a>
             </div>
+        </div>
+    </div>
+
+    <!-- Instructions Modal -->
+    <div class="instructions-modal" id="instructionsModal">
+        <div class="instructions-card">
+            <h2>Category Instructions</h2>
+            <div id="instructionsContent">
+                <!-- Content will be dynamically populated -->
+            </div>
+            <button class="close-instructions-btn" onclick="closeInstructionsAndStartSurvey()">
+                I understand - Start Survey
+            </button>
         </div>
     </div>
 </body>
