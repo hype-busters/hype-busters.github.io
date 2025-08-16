@@ -79,7 +79,7 @@ function doPost(e) {
       console.log('Processing', data.responses.length, 'responses');
       data.responses.forEach((response, index) => {
         console.log('Adding response', index + 1, ':', JSON.stringify(response));
-        sheet.appendRow([
+        const rowData = [
           data.timestamp,
           surveyNumber,  // NEW: Include the selected survey number
           data.participant.name,
@@ -92,7 +92,10 @@ function doPost(e) {
           response.mostIntense,
           response.leastIntense,
           response.isExample ? 'Yes' : 'No' // New column to clearly identify example vs real questions
-        ]);
+        ];
+        
+        console.log('📝 Adding row:', JSON.stringify(rowData));
+        sheet.appendRow(rowData);
         rowsAdded++;
       });
     } else {
