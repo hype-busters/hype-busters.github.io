@@ -610,6 +610,11 @@ async function saveToGoogleSheets() {
             responses: []
         };
 
+        // Debug logging to check if selectedSurvey is being sent
+        console.log('🔍 Survey data being prepared for submission:');
+        console.log('selectedSurvey value:', selectedSurvey);
+        console.log('Full surveyData object:', JSON.stringify(surveyData, null, 2));
+
         // Add each response as a separate row
         Object.entries(responses).forEach(([index, response]) => {
             const questionIndex = parseInt(index);

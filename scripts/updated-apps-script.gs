@@ -68,7 +68,10 @@ function doPost(e) {
     
     // Extract survey number from data (with fallback to 1 if not provided)
     const surveyNumber = data.selectedSurvey || '1';
-    console.log('Survey number:', surveyNumber);
+    console.log('🔍 SURVEY NUMBER DEBUG:');
+    console.log('data.selectedSurvey:', data.selectedSurvey);
+    console.log('surveyNumber (with fallback):', surveyNumber);
+    console.log('Type of selectedSurvey:', typeof data.selectedSurvey);
     
     // Add each survey response as a row
     let rowsAdded = 0;
