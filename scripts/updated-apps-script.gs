@@ -46,9 +46,10 @@ function doPost(e) {
     if (!sheet) {
       console.log('Creating new Survey Responses sheet');
       sheet = spreadsheet.insertSheet('Survey Responses');
-      // Updated headers to include IsExample column
+      // Updated headers to include Survey Number column
       sheet.appendRow([
         'Timestamp', 
+        'Survey Number',  // NEW COLUMN for survey selection
         'Name', 
         'Age', 
         'Gender', 
@@ -65,6 +66,10 @@ function doPost(e) {
       console.log('Found existing Survey Responses sheet');
     }
     
+    // Extract survey number from data (with fallback to 1 if not provided)
+    const surveyNumber = data.selectedSurvey || '1';
+    console.log('Survey number:', surveyNumber);
+    
     // Add each survey response as a row
     let rowsAdded = 0;
     if (data.responses && Array.isArray(data.responses)) {
@@ -73,6 +78,7 @@ function doPost(e) {
         console.log('Adding response', index + 1, ':', JSON.stringify(response));
         sheet.appendRow([
           data.timestamp,
+          surveyNumber,  // NEW: Include the selected survey number
           data.participant.name,
           data.participant.age,
           data.participant.gender,
@@ -99,6 +105,7 @@ function doPost(e) {
         success: true, 
         message: 'Data saved successfully!',
         rowsAdded: rowsAdded,
+        surveyNumber: surveyNumber,  // Include survey number in response
         timestamp: new Date().toISOString()
       }))
       .setMimeType(ContentService.MimeType.JSON);
@@ -155,6 +162,7 @@ function testDirectly() {
   
   const testData = {
     timestamp: new Date().toISOString(),
+    selectedSurvey: "3",  // NEW: Test with survey number 3
     participant: {
       name: "Manual Test",
       age: "30", 
@@ -172,9 +180,9 @@ function testDirectly() {
       },
       {
         questionNumber: 1, // First real question
-        meaning: "degree of brightness",
-        mostIntense: "radiant",
-        leastIntense: "dim",
+        meaning: "degree of wetness",  // From survey 3
+        mostIntense: "soaked",
+        leastIntense: "dry",
         isExample: false
       }
     ]
