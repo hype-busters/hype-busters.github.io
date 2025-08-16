@@ -593,7 +593,7 @@ async function completeSurvey() {
 // Data Export Functions
 async function saveToGoogleSheets() {
     // UPDATE THIS URL with your current Google Apps Script deployment URL
-    const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzWEacy_zklziuIhalsLdieyQjWUyxyPX5OoQpBScQRW30uiGeu6KG8-hf3uNmayMADlg/exec';
+    const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxFG53hdkB0s4FkVM0gAe9N6cST04KPDfG8kQbzSAxVzhTZ1zQDNQt4cQsw8sIip07p7g/exec';
     
     try {
         // Prepare data in the exact format you want in the spreadsheet
