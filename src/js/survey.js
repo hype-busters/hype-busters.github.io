@@ -399,51 +399,51 @@ function showInstructionsModal(surveyNumber) {
     // Define instructions for each category
     const categoryInstructions = {
         'IMPORTANCE': {
-            meaning: 'These words make the research sound important or urgent',
+            meaning: 'These words promote the research as important.',
             examples: 'Early diagnosis is <strong>essential</strong> for improving patient survival rates.<br>Reducing hospital infections is a <strong>priority</strong> for public health.<br>Funding for vaccine research is <strong>crucial</strong> to prevent future outbreaks.',
-            rating: 'Judge how strongly the word makes the research sound important or urgent.'
+            rating: 'Judge how strongly the word promotes the research as important.'
         },
         'NOVELTY': {
-            meaning: 'These words make the research sound new or different from anything done before.',
+            meaning: 'These words promote the research as new or different from anything done before.',
             examples: 'The team developed a <strong>new</strong> method for detecting rare cancers.<br>This study offers an <strong>unprecedented</strong> view of brain activity during sleep.<br>The drug uses an <strong>innovative</strong> delivery system to target specific cells.',
-            rating: 'Judge how strongly the word makes the research seem original or different from existing work.'
+            rating: 'Judge how strongly the word promotes the research as original or different from existing work.'
         },
         'RIGOUR': {
-            meaning: 'These words make the research sound careful, precise, and done to a high standard.',
+            meaning: 'These words promote the research as careful, precise, and done to a high standard.',
             examples: 'The trial was conducted in a <strong>controlled</strong> setting to ensure accurate results.<br>Data were analysed using <strong>careful</strong> statistical methods.<br>The researchers followed a <strong>strict</strong> protocol throughout the experiment.',
             rating: 'Judge how strongly the word promotes the idea that the research was carried out with high standards and precision.'
         },
         'SCALE': {
-            meaning: 'These words make the research sound big in size, scope, or range.',
+            meaning: 'These words promote the size, breadth, depth, and rank of the research.',
             examples: 'The study included a <strong>large-scale</strong> survey of hospital patients.<br>The outbreak affected a <strong>vast</strong> area of the country.<br>The database contains a <strong>huge</strong> amount of genetic information.',
-            rating: 'Judge how strongly the word makes the research seem large in scope, reach, or amount.'
+            rating: 'Judge how strongly the word promotes size, breadth, depth, or rank.'
         },
         'UTILITY': {
-            meaning: 'These words make the research sound useful, practical, and/or benefits.',
+            meaning: 'These words promote the research as useful, practical, and/or beneficial.',
             examples: 'The new tool is <strong>useful</strong> for monitoring blood sugar levels at home.<br>This app provides <strong>practical</strong> guidance for managing symptoms.<br>The treatment has been shown to be <strong>effective</strong> in reducing pain.',
-            rating: 'Judge how strongly the word makes the research or method sound helpful, beneficial, or applicable in practice.'
+            rating: 'Judge how strongly the word promotes the research or method as helpful, beneficial, or applicable in practice.'
         },
-        'QUALITY': {
-            meaning: 'These words make the people or environment involved in the research sound skilled, capable, or well regarded.',
+        'QUALITIES': {
+            meaning: 'These words promote the people or environment involved in the research as skilled, capable, or suitable.',
             examples: 'The hospital is known for its <strong>skilled</strong> surgical team.<br>The lab is equipped with <strong>dedicated</strong> scanning technology.<br>The team works in a <strong>renowned</strong> research institute.',
-            rating: 'Judge how strongly the word suggests that the people, facilities, or organisation involved are of high standing or ability.'
+            rating: 'Judge how strongly the word promotes qualities of people, facilities, or organisation.'
         },
         'ATTITUDE': {
-            meaning: 'These words show a positive reaction or strong approval of the research.',
+            meaning: 'These words promote a positive reaction to or strong approval of the research.',
             examples: 'The results are <strong>exciting</strong> for the future of cancer treatment.<br>This finding is <strong>remarkable</strong> and may change clinical practice.<br>The study offers an <strong>inspiring</strong> example of patient-led research.',
-            rating: 'Judge how strongly the word shows enthusiasm, approval, or a positive emotional response to the research.'
+            rating: 'Judge how strongly the word promotes enthusiasm, approval, or a positive emotional response to the research.'
         },
         'PROBLEM': {
-            meaning: 'These words make an issue sound serious or in need of urgent attention.',
+            meaning: 'These words promote an issue as serious or in need of urgent attention.',
             examples: 'Antibiotic resistance is an <strong>alarming</strong> global health threat.<br>Shortages of medical staff are a <strong>serious</strong> concern for rural clinics.<br>The rise in obesity is a <strong>pressing</strong> public health issue.',
-            rating: 'Judge how strongly the word makes the problem seem severe, urgent, or demanding immediate action.'
+            rating: 'Judge how strongly the word promotes the problem as severe, urgent, or demanding immediate action.'
         }
     };
     
     // Define which categories are in each survey
     const surveyCategories = {
         '1': ['ATTITUDE', 'IMPORTANCE'],
-        '2': ['QUALITY', 'PROBLEM'],
+        '2': ['QUALITIES', 'PROBLEM'],
         '3': ['NOVELTY', 'RIGOUR'],
         '4': ['SCALE'],
         '5': ['UTILITY']

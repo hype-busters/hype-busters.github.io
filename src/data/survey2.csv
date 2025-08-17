@@ -1,111 +1,111 @@
 meaning,word1,word2,word3,word4
-QUALITY: Shows skilled people involved,motivated,unqualified,ambitious,prestigious
-QUALITY: Shows skilled people involved,exceptional,unqualified,renowned,gifted
-QUALITY: Shows skilled people involved,pre-eminent,unqualified,successful,cohessive
-QUALITY: Shows skilled people involved,committed,unqualified,vibrant,credentialed
-QUALITY: Shows skilled people involved,renowned,credentialed,ambitious,cohessive
-QUALITY: Shows skilled people involved,pre-eminent,exceptional,vibrant,ambitious
-QUALITY: Shows skilled people involved,exceptional,successful,credentialed,prestigious
-QUALITY: Shows skilled people involved,motivated,renowned,vibrant,successful
-QUALITY: Shows skilled people involved,gifted,vibrant,cohessive,prestigious
-QUALITY: Shows skilled people involved,pre-eminent,motivated,gifted,credentialed
-QUALITY: Shows skilled people involved,pre-eminent,committed,renowned,prestigious
-QUALITY: Shows skilled people involved,committed,motivated,exceptional,cohessive
-QUALITY: Shows skilled people involved,committed,gifted,successful,ambitious
-QUALITY: Shows skilled people involved,adequate,qualified,veteran,energetic
-QUALITY: Shows skilled people involved,unqualified,qualified,supportive,foremost
-QUALITY: Shows skilled people involved,certified,qualified,leading,holistic
-QUALITY: Shows skilled people involved,distinguished,qualified,promising,established
-QUALITY: Shows skilled people involved,supportive,established,veteran,holistic
-QUALITY: Shows skilled people involved,certified,unqualified,promising,veteran
-QUALITY: Shows skilled people involved,expert,incompetent,skilled,professional
-QUALITY: Shows skilled people involved,unqualified,leading,established,energetic
-QUALITY: Shows skilled people involved,adequate,supportive,promising,leading
-QUALITY: Shows skilled people involved,foremost,promising,holistic,energetic
-QUALITY: Shows skilled people involved,certified,adequate,foremost,established
-QUALITY: Shows skilled people involved,certified,distinguished,supportive,energetic
-QUALITY: Shows skilled people involved,distinguished,adequate,unqualified,holistic
-QUALITY: Shows skilled people involved,distinguished,foremost,leading,veteran
-QUALITY: Shows skilled people involved,adequate,thriving,premier,lively
-QUALITY: Shows skilled people involved,talented,premier,skilled,lively
-QUALITY: Shows skilled people involved,exceptional,senior,thriving,skilled
-QUALITY: Shows skilled people involved,rising,exceptional,skilled,lively
-QUALITY: Shows skilled people involved,rising,adequate,skilled,collegial
-QUALITY: Shows skilled people involved,talented,exceptional,adequate,senior
-QUALITY: Shows skilled people involved,talented,rising,adequate,thriving
-QUALITY: Shows skilled people involved,exceptional,adequate,collegial,lively
-QUALITY: Shows skilled people involved,talented,exceptional,premier,collegial
-QUALITY: Shows skilled people involved,senior,thriving,collegial,lively
-QUALITY: Shows skilled people involved,rising,senior,premier,collegial
-QUALITY: Shows skilled people involved,adequate,senior,premier,skilled
-QUALITY: Shows skilled people involved,rising,exceptional,thriving,premier
-QUALITY: Shows skilled people involved,talented,thriving,skilled,collegial
-QUALITY: Shows skilled people involved,adequate,mediocre,average,outstanding
-QUALITY: Shows skilled people involved,talented,rising,senior,lively
-QUALITY: Shows skilled people involved,longstanding,seasoned,experienced,unqualified
-QUALITY: Shows skilled people involved,accomplished,experienced,integrative,unqualified
-QUALITY: Shows skilled people involved,intellectual,reputable,seasoned,integrative
-QUALITY: Shows skilled people involved,forward-thinking,intellectual,integrative,unqualified
-QUALITY: Shows skilled people involved,forward-thinking,longstanding,integrative,exceptional
-QUALITY: Shows skilled people involved,accomplished,intellectual,longstanding,reputable
-QUALITY: Shows skilled people involved,accomplished,forward-thinking,longstanding,seasoned
-QUALITY: Shows skilled people involved,intellectual,longstanding,exceptional,unqualified
-QUALITY: Shows skilled people involved,accomplished,intellectual,experienced,exceptional
-QUALITY: Shows skilled people involved,reputable,seasoned,exceptional,unqualified
-QUALITY: Shows skilled people involved,forward-thinking,reputable,experienced,exceptional
-QUALITY: Shows skilled people involved,longstanding,reputable,experienced,integrative
-QUALITY: Shows skilled people involved,forward-thinking,intellectual,seasoned,experienced
-QUALITY: Shows skilled people involved,accomplished,seasoned,integrative,exceptional
-QUALITY: Shows skilled people involved,accomplished,forward-thinking,reputable,unqualified
-QUALITY: Shows skilled people involved,knowledgeable,dynamic,adequate,unqualified
-QUALITY: Shows skilled people involved,dedicated,stellar,dynamic,adequate
-QUALITY: Shows skilled people involved,dedicated,dynamic,brilliant,unqualified
-QUALITY: Shows skilled people involved,knowledgeable,dedicated,brilliant,adequate
-QUALITY: Shows skilled people involved,knowledgeable,stellar,dynamic,brilliant
-QUALITY: Shows skilled people involved,stellar,brilliant,adequate,unqualified
-QUALITY: Shows skilled people involved,knowledgeable,dedicated,stellar,unqualified
-PROBLEM: Makes issue sound serious,grim,minor,unmet,frightening
-PROBLEM: Makes issue sound serious,catastrophic,minor,formidable,elusive
-PROBLEM: Makes issue sound serious,catastrophic,devastating,severe,trivial
-PROBLEM: Makes issue sound serious,dismal,minor,serious,worrying
-PROBLEM: Makes issue sound serious,hopeless,minor,devastating,perilous
-PROBLEM: Makes issue sound serious,formidable,perilous,unmet,worrying
-PROBLEM: Makes issue sound serious,dismal,catastrophic,devastating,unmet
-PROBLEM: Makes issue sound serious,catastrophic,serious,perilous,frightening
-PROBLEM: Makes issue sound serious,grim,formidable,devastating,serious
-PROBLEM: Makes issue sound serious,elusive,devastating,worrying,frightening
-PROBLEM: Makes issue sound serious,dismal,grim,elusive,perilous
-PROBLEM: Makes issue sound serious,dismal,hopeless,formidable,frightening
-PROBLEM: Makes issue sound serious,hopeless,grim,catastrophic,worrying
-PROBLEM: Makes issue sound serious,hopeless,elusive,serious,unmet
-PROBLEM: Makes issue sound serious,shocking,scarce,ruinous,alarming
-PROBLEM: Makes issue sound serious,miserable,scarce,intimidating,unanswered
-PROBLEM: Makes issue sound serious,dire,scarce,inconvenient,disasterous
-PROBLEM: Makes issue sound serious,bleak,scarce,minor,daunting
-PROBLEM: Makes issue sound serious,intimidating,daunting,ruinous,disasterous
-PROBLEM: Makes issue sound serious,dire,miserable,minor,ruinous
-PROBLEM: Makes issue sound serious,miserable,inconvenient,daunting,alarming
-PROBLEM: Makes issue sound serious,shocking,intimidating,minor,inconvenient
-PROBLEM: Makes issue sound serious,unanswered,minor,disasterous,alarming
-PROBLEM: Makes issue sound serious,dire,shocking,unanswered,daunting
-PROBLEM: Makes issue sound serious,dire,bleak,intimidating,alarming
-PROBLEM: Makes issue sound serious,bleak,shocking,miserable,disasterous
-PROBLEM: Makes issue sound serious,bleak,unanswered,inconvenient,ruinous
-PROBLEM: Makes issue sound serious,desperate,stark,catastrophic,inconvenient
-PROBLEM: Makes issue sound serious,grave,stark,troubling,catastrophic
-PROBLEM: Makes issue sound serious,disturbing,desperate,troubling,catastrophic
-PROBLEM: Makes issue sound serious,disturbing,desperate,grave,stark
-PROBLEM: Makes issue sound serious,disturbing,deadly,catastrophic,inconvenient
-PROBLEM: Makes issue sound serious,dramatic,deadly,troubling,catastrophic
-PROBLEM: Makes issue sound serious,dramatic,stark,catastrophic,inconvenient
-PROBLEM: Makes issue sound serious,desperate,deadly,stark,troubling
-PROBLEM: Makes issue sound serious,disturbing,grave,troubling,inconvenient
-PROBLEM: Makes issue sound serious,dramatic,grave,troubling,inconvenient
-PROBLEM: Makes issue sound serious,disturbing,dramatic,deadly,stark
-PROBLEM: Makes issue sound serious,desperate,dramatic,grave,deadly
-PROBLEM: Makes issue sound serious,desperate,deadly,troubling,inconvenient
-PROBLEM: Makes issue sound serious,disturbing,desperate,dramatic,inconvenient
-PROBLEM: Makes issue sound serious,disturbing,grave,deadly,catastrophic
-PROBLEM: Makes issue sound serious,disturbing,dramatic,stark,troubling
-PROBLEM: Makes issue sound serious,desperate,dramatic,grave,catastrophic
-PROBLEM: Makes issue sound serious,grave,deadly,stark,inconvenient
+QUALITIES: Promotes suitability of people or environment,motivated,unqualified,ambitious,prestigious
+QUALITIES: Promotes suitability of people or environment,exceptional,unqualified,renowned,gifted
+QUALITIES: Promotes suitability of people or environment,pre-eminent,unqualified,successful,cohessive
+QUALITIES: Promotes suitability of people or environment,committed,unqualified,vibrant,credentialed
+QUALITIES: Promotes suitability of people or environment,renowned,credentialed,ambitious,cohessive
+QUALITIES: Promotes suitability of people or environment,pre-eminent,exceptional,vibrant,ambitious
+QUALITIES: Promotes suitability of people or environment,exceptional,successful,credentialed,prestigious
+QUALITIES: Promotes suitability of people or environment,motivated,renowned,vibrant,successful
+QUALITIES: Promotes suitability of people or environment,gifted,vibrant,cohessive,prestigious
+QUALITIES: Promotes suitability of people or environment,pre-eminent,motivated,gifted,credentialed
+QUALITIES: Promotes suitability of people or environment,pre-eminent,committed,renowned,prestigious
+QUALITIES: Promotes suitability of people or environment,committed,motivated,exceptional,cohessive
+QUALITIES: Promotes suitability of people or environment,committed,gifted,successful,ambitious
+QUALITIES: Promotes suitability of people or environment,adequate,qualified,veteran,energetic
+QUALITIES: Promotes suitability of people or environment,unqualified,qualified,supportive,foremost
+QUALITIES: Promotes suitability of people or environment,certified,qualified,leading,holistic
+QUALITIES: Promotes suitability of people or environment,distinguished,qualified,promising,established
+QUALITIES: Promotes suitability of people or environment,supportive,established,veteran,holistic
+QUALITIES: Promotes suitability of people or environment,certified,unqualified,promising,veteran
+QUALITIES: Promotes suitability of people or environment,expert,incompetent,skilled,professional
+QUALITIES: Promotes suitability of people or environment,unqualified,leading,established,energetic
+QUALITIES: Promotes suitability of people or environment,adequate,supportive,promising,leading
+QUALITIES: Promotes suitability of people or environment,foremost,promising,holistic,energetic
+QUALITIES: Promotes suitability of people or environment,certified,adequate,foremost,established
+QUALITIES: Promotes suitability of people or environment,certified,distinguished,supportive,energetic
+QUALITIES: Promotes suitability of people or environment,distinguished,adequate,unqualified,holistic
+QUALITIES: Promotes suitability of people or environment,distinguished,foremost,leading,veteran
+QUALITIES: Promotes suitability of people or environment,adequate,thriving,premier,lively
+QUALITIES: Promotes suitability of people or environment,talented,premier,skilled,lively
+QUALITIES: Promotes suitability of people or environment,exceptional,senior,thriving,skilled
+QUALITIES: Promotes suitability of people or environment,rising,exceptional,skilled,lively
+QUALITIES: Promotes suitability of people or environment,rising,adequate,skilled,collegial
+QUALITIES: Promotes suitability of people or environment,talented,exceptional,adequate,senior
+QUALITIES: Promotes suitability of people or environment,talented,rising,adequate,thriving
+QUALITIES: Promotes suitability of people or environment,exceptional,adequate,collegial,lively
+QUALITIES: Promotes suitability of people or environment,talented,exceptional,premier,collegial
+QUALITIES: Promotes suitability of people or environment,senior,thriving,collegial,lively
+QUALITIES: Promotes suitability of people or environment,rising,senior,premier,collegial
+QUALITIES: Promotes suitability of people or environment,adequate,senior,premier,skilled
+QUALITIES: Promotes suitability of people or environment,rising,exceptional,thriving,premier
+QUALITIES: Promotes suitability of people or environment,talented,thriving,skilled,collegial
+QUALITIES: Promotes suitability of people or environment,adequate,mediocre,average,outstanding
+QUALITIES: Promotes suitability of people or environment,talented,rising,senior,lively
+QUALITIES: Promotes suitability of people or environment,longstanding,seasoned,experienced,unqualified
+QUALITIES: Promotes suitability of people or environment,accomplished,experienced,integrative,unqualified
+QUALITIES: Promotes suitability of people or environment,intellectual,reputable,seasoned,integrative
+QUALITIES: Promotes suitability of people or environment,forward-thinking,intellectual,integrative,unqualified
+QUALITIES: Promotes suitability of people or environment,forward-thinking,longstanding,integrative,exceptional
+QUALITIES: Promotes suitability of people or environment,accomplished,intellectual,longstanding,reputable
+QUALITIES: Promotes suitability of people or environment,accomplished,forward-thinking,longstanding,seasoned
+QUALITIES: Promotes suitability of people or environment,intellectual,longstanding,exceptional,unqualified
+QUALITIES: Promotes suitability of people or environment,accomplished,intellectual,experienced,exceptional
+QUALITIES: Promotes suitability of people or environment,reputable,seasoned,exceptional,unqualified
+QUALITIES: Promotes suitability of people or environment,forward-thinking,reputable,experienced,exceptional
+QUALITIES: Promotes suitability of people or environment,longstanding,reputable,experienced,integrative
+QUALITIES: Promotes suitability of people or environment,forward-thinking,intellectual,seasoned,experienced
+QUALITIES: Promotes suitability of people or environment,accomplished,seasoned,integrative,exceptional
+QUALITIES: Promotes suitability of people or environment,accomplished,forward-thinking,reputable,unqualified
+QUALITIES: Promotes suitability of people or environment,knowledgeable,dynamic,adequate,unqualified
+QUALITIES: Promotes suitability of people or environment,dedicated,stellar,dynamic,adequate
+QUALITIES: Promotes suitability of people or environment,dedicated,dynamic,brilliant,unqualified
+QUALITIES: Promotes suitability of people or environment,knowledgeable,dedicated,brilliant,adequate
+QUALITIES: Promotes suitability of people or environment,knowledgeable,stellar,dynamic,brilliant
+QUALITIES: Promotes suitability of people or environment,stellar,brilliant,adequate,unqualified
+QUALITIES: Promotes suitability of people or environment,knowledgeable,dedicated,stellar,unqualified
+PROBLEM: Promotes severity of the problem,grim,minor,unmet,frightening
+PROBLEM: Promotes severity of the problem,catastrophic,minor,formidable,elusive
+PROBLEM: Promotes severity of the problem,catastrophic,devastating,severe,trivial
+PROBLEM: Promotes severity of the problem,dismal,minor,serious,worrying
+PROBLEM: Promotes severity of the problem,hopeless,minor,devastating,perilous
+PROBLEM: Promotes severity of the problem,formidable,perilous,unmet,worrying
+PROBLEM: Promotes severity of the problem,dismal,catastrophic,devastating,unmet
+PROBLEM: Promotes severity of the problem,catastrophic,serious,perilous,frightening
+PROBLEM: Promotes severity of the problem,grim,formidable,devastating,serious
+PROBLEM: Promotes severity of the problem,elusive,devastating,worrying,frightening
+PROBLEM: Promotes severity of the problem,dismal,grim,elusive,perilous
+PROBLEM: Promotes severity of the problem,dismal,hopeless,formidable,frightening
+PROBLEM: Promotes severity of the problem,hopeless,grim,catastrophic,worrying
+PROBLEM: Promotes severity of the problem,hopeless,elusive,serious,unmet
+PROBLEM: Promotes severity of the problem,shocking,scarce,ruinous,alarming
+PROBLEM: Promotes severity of the problem,miserable,scarce,intimidating,unanswered
+PROBLEM: Promotes severity of the problem,dire,scarce,inconvenient,disasterous
+PROBLEM: Promotes severity of the problem,bleak,scarce,minor,daunting
+PROBLEM: Promotes severity of the problem,intimidating,daunting,ruinous,disasterous
+PROBLEM: Promotes severity of the problem,dire,miserable,minor,ruinous
+PROBLEM: Promotes severity of the problem,miserable,inconvenient,daunting,alarming
+PROBLEM: Promotes severity of the problem,shocking,intimidating,minor,inconvenient
+PROBLEM: Promotes severity of the problem,unanswered,minor,disasterous,alarming
+PROBLEM: Promotes severity of the problem,dire,shocking,unanswered,daunting
+PROBLEM: Promotes severity of the problem,dire,bleak,intimidating,alarming
+PROBLEM: Promotes severity of the problem,bleak,shocking,miserable,disasterous
+PROBLEM: Promotes severity of the problem,bleak,unanswered,inconvenient,ruinous
+PROBLEM: Promotes severity of the problem,desperate,stark,catastrophic,inconvenient
+PROBLEM: Promotes severity of the problem,grave,stark,troubling,catastrophic
+PROBLEM: Promotes severity of the problem,disturbing,desperate,troubling,catastrophic
+PROBLEM: Promotes severity of the problem,disturbing,desperate,grave,stark
+PROBLEM: Promotes severity of the problem,disturbing,deadly,catastrophic,inconvenient
+PROBLEM: Promotes severity of the problem,dramatic,deadly,troubling,catastrophic
+PROBLEM: Promotes severity of the problem,dramatic,stark,catastrophic,inconvenient
+PROBLEM: Promotes severity of the problem,desperate,deadly,stark,troubling
+PROBLEM: Promotes severity of the problem,disturbing,grave,troubling,inconvenient
+PROBLEM: Promotes severity of the problem,dramatic,grave,troubling,inconvenient
+PROBLEM: Promotes severity of the problem,disturbing,dramatic,deadly,stark
+PROBLEM: Promotes severity of the problem,desperate,dramatic,grave,deadly
+PROBLEM: Promotes severity of the problem,desperate,deadly,troubling,inconvenient
+PROBLEM: Promotes severity of the problem,disturbing,desperate,dramatic,inconvenient
+PROBLEM: Promotes severity of the problem,disturbing,grave,deadly,catastrophic
+PROBLEM: Promotes severity of the problem,disturbing,dramatic,stark,troubling
+PROBLEM: Promotes severity of the problem,desperate,dramatic,grave,catastrophic
+PROBLEM: Promotes severity of the problem,grave,deadly,stark,inconvenient
