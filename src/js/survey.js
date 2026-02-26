@@ -169,7 +169,7 @@ async function loadQuestionsFromSurvey(surveyNumber) {
     
     try {
         console.log(`📚 Loading questions from survey${surveyNumber}.csv...`);
-        const csvResponse = await fetch(`src/data/survey${surveyNumber}.csv?v=` + Date.now());
+        const csvResponse = await fetch(`../src/data/survey${surveyNumber}.csv?v=` + Date.now());
         
         if (csvResponse.ok) {
             const csvText = await csvResponse.text();
