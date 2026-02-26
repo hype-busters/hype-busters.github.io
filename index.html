@@ -20,6 +20,21 @@
       .hero {
         background: linear-gradient(135deg, #8B1538 0%, #4A0E26 100%);
       }
+      .columns.is-multiline {
+        display: flex;
+      }
+      .project-card {
+        display: flex;
+      }
+      .project-card .box {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+      }
+      .project-card .box p {
+        flex-grow: 1;
+        margin-bottom: 1rem;
+      }
     </style>
 </head>
 <body>
@@ -42,7 +57,7 @@
           <a class="navbar-item" href="/about/">About</a>
           <a class="navbar-item" href="/resources/">Previous Works</a>
           <a class="navbar-item" href="/people/">People</a>
-          <a class="navbar-item" href="https://docs.google.com/forms/d/e/1FAIpQLSeyjl-GfXRSTftkpB54rT9u7aBQzNR8fOdShzdEya_O4LsMYA/viewform" target="_blank">NIH Data Access</a>
+          <a class="navbar-item" href="/nih-data/">NIH Data Access</a>
           <a class="navbar-item" href="/tools/">Tools</a>
         </div>
       </div>
@@ -78,6 +93,32 @@
         </ul>
         
         <p>By understanding and detecting hype, our project seeks to foster greater transparency and objectivity in scientific communication, contributing to a more robust and trustworthy research ecosystem.</p>
+      </div>
+
+      <!-- Recent Projects Section -->
+      <div class="content" style="margin-top: 3rem;">
+        <h2 class="title is-3">Recent Projects</h2>
+        <div class="columns is-multiline">
+          <!-- Hype or Not Project -->
+          <div class="column is-half project-card">
+            <div class="box">
+              <h3 class="title is-5">Hype or not? — Automatic Detection</h3>
+              <p>Formalizing automatic promotional language detection in biomedical research with annotation guidelines and curated dataset.</p>
+              <br>
+              <a href="/hype-or-not/" class="button is-link is-light">View Project</a>
+            </div>
+          </div>
+
+          <!-- Hyplex Project -->
+          <div class="column is-half project-card">
+            <div class="box">
+              <h3 class="title is-5">Hyplex — Intensity Lexicon</h3>
+              <p>An intensity-scaled lexicon of 303 promotional adjectives in biomedical research built using Best-Worst Scaling.</p>
+              <br>
+              <a href="/hyplex/" class="button is-link is-light">View Project</a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>

@@ -13,9 +13,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script src="https://apis.google.com/js/api.js"></script>
     <!-- Load configuration with fallback -->
-    <script src="src/config/config.js?v=3" onerror="console.log('config.js not found, will use env-config.js fallback')"></script>
-    <script src="src/config/env-config.js?v=3"></script>
-    <script src="src/js/survey.js?v=3"></script>
+    <script src="../src/config/config.js?v=3" onerror="console.log('config.js not found, will use env-config.js fallback')"></script>
+    <script src="../src/config/env-config.js?v=3"></script>
+    <script src="../src/js/survey.js?v=3"></script>
     <style>
         * {
             margin: 0;
@@ -25,7 +25,7 @@
 
         body {
             font-family: 'Google Sans', sans-serif;
-            background: linear-gradient(135deg, #8B1538 0%, #4A0E26 100%);
+            background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
             min-height: 100vh;
         }
         
@@ -34,7 +34,7 @@
         }
         
         body > .container {
-            max-width: 1400px;
+            max-width: 700px;
             margin: 40px auto;
             padding: 0 20px;
             background: #f5f5f5;
@@ -44,7 +44,7 @@
         }
 
         .header {
-            background: linear-gradient(135deg, #8B1538 0%, #4A0E26 100%);
+            background: linear-gradient(135deg, #4a4a4a 0%, #2c2c2c 100%);
             color: white;
             padding: 30px;
             text-align: center;
@@ -325,7 +325,7 @@
             background: white;
             border-radius: 15px;
             padding: 30px;
-            max-width: 1400px;
+            max-width: 700px;
             max-height: 80vh;
             overflow-y: auto;
             margin: 20px;
@@ -421,7 +421,7 @@
                     <a class="navbar-item" href="/about/">About</a>
                     <a class="navbar-item" href="/resources/">Previous Works</a>
                     <a class="navbar-item" href="/people/">People</a>
-                    <a class="navbar-item" href="https://docs.google.com/forms/d/e/1FAIpQLSeyjl-GfXRSTftkpB54rT9u7aBQzNR8fOdShzdEya_O4LsMYA/viewform" target="_blank">NIH Data Access</a>
+                    <a class="navbar-item" href="/nih-data/">NIH Data Access</a>
                     <a class="navbar-item" href="/tools/">Tools</a>
                 </div>
             </div>
@@ -499,7 +499,7 @@
                     <h2 style="color: #2c2c2c; margin-bottom: 30px; text-align: center;">Choose Your Daily Survey</h2>
                     <p style="text-align: center; margin-bottom: 30px; color: #666;">Please select one of the five available surveys for today. Each survey contains different word sets for evaluation.</p>
                     
-                    <div style="max-width: 600px; margin: 0 auto;">
+                    <div style="max-width: 500px; margin: 0 auto;">
                         <div id="surveyOptions" style="display: grid; gap: 15px; margin-bottom: 30px;">
                             <div class="survey-option" data-survey="1" style="background: #f8f8f8; border: 2px solid #d0d0d0; border-radius: 10px; padding: 20px; cursor: pointer; transition: all 0.2s ease; text-align: center;">
                                 <h3 style="color: #2c2c2c; margin-bottom: 10px;">Survey 1: Attitude & Importance</h3>
@@ -595,7 +595,7 @@
                 <div class="question-card">
                     <h1 style="color: #2c2c2c; text-align: center; margin-bottom: 30px;">Best–Worst Scaling: Participant Instructions</h1>
                     
-                    <div style="max-width: 700px; margin: 0 auto; text-align: left;">
+                    <div style="max-width: 600px; margin: 0 auto; text-align: left;">
                         <h2 style="color: #2c2c2c; margin-top: 30px; margin-bottom: 15px;">General Instructions</h2>
                         <p style="margin-bottom: 15px; line-height: 1.6;">In this study, you will be shown small sets of words. Your job is to decide which word in the set is the <strong>most intense</strong> and which is the <strong>least intense</strong>, based on the meaning we are focusing on for that session.</p>
                         
@@ -668,7 +668,7 @@
                 <div class="question-card">
                     <h1 style="color: #2c2c2c; text-align: center; margin-bottom: 30px;">Word Intensity Survey</h1>
                     
-                    <div style="max-width: 600px; margin: 0 auto; text-align: center;">
+                    <div style="max-width: 500px; margin: 0 auto; text-align: center;">
                         <p style="margin-bottom: 30px; line-height: 1.6; font-size: 1.1em; color: #666;">
                             Select the <strong>most intense</strong> and <strong>least intense</strong> words from small sets based on a given meaning.
                         </p>

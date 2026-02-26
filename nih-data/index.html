@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../assets/images/hype_favicon.png">
+    <title>NIH Data Access − Hype-Busters</title>
+    
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+      body {
+        font-family: 'Google Sans', sans-serif;
+      }
+      .navbar-brand strong {
+        font-size: 1.3rem;
+      }
+      .hero {
+        background: linear-gradient(135deg, #8B1538 0%, #4A0E26 100%);
+      }
+      .data-access-card {
+        background: #f8f9fa;
+        border: 2px solid #e9ecef;
+        border-radius: 15px;
+        padding: 40px;
+        text-align: center;
+        margin-top: 2rem;
+      }
+      .data-access-card .icon {
+        font-size: 4em;
+        color: #8B1538;
+        margin-bottom: 20px;
+      }
+      .data-access-card h3 {
+        color: #333;
+        margin-bottom: 20px;
+        font-size: 1.5em;
+      }
+      .data-access-card p {
+        color: #666;
+        line-height: 1.8;
+        margin-bottom: 25px;
+      }
+      .button.is-maroon {
+        background-color: #8B1538;
+        border-color: transparent;
+        color: #fff;
+      }
+      .button.is-maroon:hover {
+        background-color: #6B0F2A;
+      }
+    </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar is-light" role="navigation" aria-label="main navigation">
+    <div class="container is-max-desktop">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="/">
+          <strong>Hype-Busters</strong>
+        </a>
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div id="navbarMenu" class="navbar-menu">
+        <div class="navbar-end">
+          <a class="navbar-item" href="/about/">About</a>
+          <a class="navbar-item" href="/resources/">Previous Works</a>
+          <a class="navbar-item" href="/people/">People</a>
+          <a class="navbar-item is-active" href="/nih-data/">NIH Data Access</a>
+          <a class="navbar-item" href="/tools/">Tools</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero is-medium">
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <h1 class="title is-1 has-text-white">
+          NIH Data Access
+        </h1>
+        <p class="subtitle is-4 has-text-white">
+          Request access to our NIH grant application dataset
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="content">
+        <h2 class="title is-3">Dataset Information</h2>
+        <p>
+          Our research team has compiled a comprehensive dataset of NIH grant applications and associated publications spanning from 1985 to 2020. This dataset has been instrumental in our analysis of promotional language trends in biomedical research.
+        </p>
+        
+        <h3 class="title is-4">What's Included</h3>
+        <ul>
+          <li>Abstracts from successful NIH grant applications (1985-2020)</li>
+          <li>Associated PubMed publications from funded research</li>
+          <li>Linguistic annotations for promotional language patterns</li>
+          <li>Temporal trends in epistemic stance and promotional language use</li>
+          <li>Metadata including funding amounts, research areas, and NIH institutes</li>
+        </ul>
+
+        <h3 class="title is-4">Access Request</h3>
+        <p>
+          To maintain data integrity and comply with NIH policies, we require researchers to submit a formal access request. Please fill out the form below to request access to our dataset. We typically respond to requests within 5-7 business days.
+        </p>
+
+        <div class="data-access-card">
+          <div class="icon">
+            <i class="fas fa-file-alt"></i>
+          </div>
+          <h3>Request Dataset Access</h3>
+          <p>Complete the Google Form to submit your access request. Please provide information about your research objectives and how you plan to use the data.</p>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSeyjl-GfXRSTftkpB54rT9u7aBQzNR8fOdShzdEya_O4LsMYA/viewform" target="_blank" class="button is-maroon is-large">
+            Access Request Form
+          </a>
+        </div>
+
+        <div class="notification is-light" style="margin-top: 2rem; background-color: #fff3f3; border-left: 4px solid #8B1538;">
+          <p><strong>Note:</strong> Access to this dataset is granted for academic research purposes only. By requesting access, you agree to use the data in accordance with NIH policies and to properly cite our work in any resulting publications.</p>
+        </div>
+
+        <h3 class="title is-4">Citation</h3>
+        <p>If you use this dataset in your research, please cite our relevant publications:</p>
+        <ul>
+          <li>Millar, N., Mathis, B., Batalo, B., & Budgell, B. (2023). Promotional Language (Hype) in Abstracts of Publications of National Institutes of Health–Funded Research, 1985-2020. <i>JAMA Network Open</i>, 6(12).</li>
+          <li>Millar, N., Batalo, B., & Budgell, B. (2022). Trends in the Use of Promotional Language (Hype) in Abstracts of Successful National Institutes of Health Grant Applications, 1985-2020. <i>JAMA Network Open</i>, 5(8).</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="content has-text-centered">
+      <p>
+        <strong>Hype-Busters</strong> — Identifying promotional language in biomedical research.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+      $navbarBurgers.forEach( el => {
+        el.addEventListener('click', () => {
+          const target = el.dataset.target;
+          const $target = document.getElementById(target);
+          el.classList.toggle('is-active');
+          $target.classList.toggle('is-active');
+        });
+      });
+    });
+  </script>
+</body>
+</html>
