@@ -20,14 +20,29 @@
             margin: 0 0 20px 0;
             border-bottom: 1px solid #dee2e6;
             display: flex;
+            justify-content: space-between;
+            align-items: center;
             list-style: none;
         }
-        .nav-tabs li {
+        .brand {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 15px 20px;
+            text-decoration: none;
+        }
+        .nav-items {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .nav-items li {
             margin: 0;
             padding: 0;
             position: relative;
         }
-        .nav-tabs a {
+        .nav-items a {
             display: block;
             padding: 10px 20px;
             color: #495057;
@@ -109,20 +124,22 @@
     </style>
 </head>
 <body>
-    <ul class="nav-tabs">
-        <li><a href="/">Home</a></li>
-        <li><a href="/about/" class="active">About</a></li>
-        <li><a href="/resources/">Previous Works</a></li>
-        <li><a href="/people/">People</a></li>
-        <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSeyjl-GfXRSTftkpB54rT9u7aBQzNR8fOdShzdEya_O4LsMYA/viewform" target="_blank">NIH Data Access</a></li>
-        <li class="dropdown">
-            <a href="#" onclick="return false;">Tools</a>
-            <div class="dropdown-content">
-                <a href="/bws/">Best-Worst Scaling</a>
-                <a href="/intensity-scaling/">Word Intensity Survey</a>
-            </div>
-        </li>
-    </ul>
+    <div class="nav-tabs">
+        <a href="/" class="brand">Hype-Busters</a>
+        <ul class="nav-items">
+            <li><a href="/about/" class="active">About</a></li>
+            <li><a href="/resources/">Previous Works</a></li>
+            <li><a href="/people/">People</a></li>
+            <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSeyjl-GfXRSTftkpB54rT9u7aBQzNR8fOdShzdEya_O4LsMYA/viewform" target="_blank">NIH Data Access</a></li>
+            <li class="dropdown">
+                <a href="#" onclick="return false;">Tools</a>
+                <div class="dropdown-content">
+                    <a href="/bws/">Best-Worst Scaling</a>
+                    <a href="/intensity-scaling/">Word Intensity Survey</a>
+                </div>
+            </li>
+        </ul>
+    </div>
 
     <div>
         <h1>About</h1>
