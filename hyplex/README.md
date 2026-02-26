@@ -1,6 +1,10 @@
-# Hyplex Project Page
+# Hyplex: Best-Worst Scaling of Hype in Biomedical Research
 
-This is the project page for Hyplex, hosted at `hype-busters.github.io/hyplex`.
+This is the project page for Hyplex - an intensity-scaled lexicon of 303 promotional adjectives in biomedical research, hosted at `hype-busters.github.io/hyplex`.
+
+## About
+
+Hyplex (Hype Lexicon) is a resource containing promotional intensity ratings for 303 adjectives commonly used in biomedical research writing. The ratings were obtained through Best-Worst Scaling (BWS) with human participants evaluating adjectives across eight semantic categories: IMPORTANCE, NOVELTY, SCALE, RIGOUR, UTILITY, QUALITIES, ATTITUDE, and PROBLEM.
 
 ## Structure
 
@@ -31,19 +35,21 @@ hyplex/
 │       └── video3.mp4
 ```
 
-## Customization
+## Key Features
 
-1. **Update the meta tags** in `index.html` with your project details
-2. **Replace the title** and author information
-3. **Add your abstract** in the Abstract section
-4. **Update method description** with your approach
-5. **Add images** to `static/images/`:
-   - `teaser.png` - Main teaser image (shown at the top)
-   - `pipeline.png` - Method overview diagram
+- **303 adjectives** rated for promotional intensity
+- **8 semantic categories**: IMPORTANCE, NOVELTY, SCALE, RIGOUR, UTILITY, QUALITIES, ATTITUDE, PROBLEM
+- **High reliability**: Split-half reliability r = 0.87 (95% CI [0.85, 0.89])
+- **BWS methodology**: Comparative judgments producing stable interval-scaled scores
+- **Open resource**: Lexicon and BWS platform freely available
+
+## Images Needed
+
+To complete the page, add the following images to `static/images/`:
+   - `teaser.png` - Overview of the Hyplex categories and example adjectives
+   - `method.png` - BWS annotation interface or methodology diagram
+   - `results.png` - Distribution of promotional intensity scores across categories
    - `banner.png` - Social media banner (1200x630px)
-6. **Add videos** to `static/videos/` for the carousel
-7. **Update links** to your paper, code repository, and arXiv
-8. **Update BibTeX** citation with your paper details
 
 ## Features
 
@@ -56,7 +62,32 @@ hyplex/
 ## Usage
 
 Simply push changes to your GitHub repository and the page will be available at:
-`https://hype-busters.github.io/hyplex/`
+`htResources
+
+- **BWS Platform**: https://www.hype-busters.com/bws/
+- **Lexicon Data**: https://www.hype-busters.com/hyplex.html
+- **Paper**: To be published in LREC-COLING 2025
+
+## Authors
+
+- Neil Millar (University of Tsukuba)
+- Dipesh Satav (University of Tsukuba)
+- Bojan Batalo (AIST)
+- Erica K. Shimomoto (AIST)
+- Ryosuke L. Ohniwa (University of Tsukuba)
+
+## Citation
+
+```bibtex
+@inproceedings{millar2025hyplex,
+  title={Best-Worst Scaling of Hype in Biomedical Research: Building an Intensity Lexicon of Promotional Adjectives},
+  author={Millar, Neil and Satav, Dipesh and Batalo, Bojan and Shimomoto, Erica K. and Ohniwa, Ryosuke L.},
+  booktitle={Proceedings of the 2025 Joint International Conference on Computational Linguistics, Language Resources and Evaluation (LREC-COLING 2025)},
+  year={2025}
+}
+```
+
+## tps://hype-busters.github.io/hyplex/`
 
 ## Credits
 
