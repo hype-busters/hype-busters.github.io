@@ -167,37 +167,23 @@
           <h2 class="title is-3">Proposed Annotation Guidelines</h2>
           <div class="content has-text-justified">
             <p>
-              To address the subjectivity inherent in hype detection, we propose six sequential annotation steps that guide annotators through a systematic evaluation process:
+              We developed six sequential annotation steps to systematically evaluate whether adjectives are used in a promotional manner:
             </p>
-            <div class="guidelines-container" style="background: #f9f9f9; padding: 20px; border-radius: 8px; margin: 20px 0;">
-              <div style="margin-bottom: 15px;">
-                <strong>Step 1: Value-Judgment</strong>
-                <p>Does the adjective imply positive value judgment? Most selected adjectives do, including priority claims ("first method to..."). If yes, proceed to steps 2-6. If not, mark as <em>Not Hype</em>.</p>
-              </div>
-              <div style="margin-bottom: 15px;">
-                <strong>Step 2: Hyperbolic</strong>
-                <p>Is the adjective hyperbolic or exaggerated? Examples: <em>revolutionary</em>, <em>unprecedented</em>, <em>unparalleled</em>, <em>groundbreaking</em>. These are usually promotional: "unparalleled opportunity", "revolutionary tool".</p>
-              </div>
-              <div style="margin-bottom: 15px;">
-                <strong>Step 3: Gratuitous</strong>
-                <p>Can the adjective be removed without loss of meaning? If the propositional content remains unchanged or the adjective is redundant ("discovered a novel gene"), mark as <em>Hype</em>. If removal substantially alters meaning or justification is given, mark as <em>Not Hype</em>.</p>
-              </div>
-              <div style="margin-bottom: 15px;">
-                <strong>Step 4: Amplified</strong>
-                <p>Is the adjective strengthened by modifiers? Examples: "truly novel", "extremely rigorous", "highly cohesive".</p>
-              </div>
-              <div style="margin-bottom: 15px;">
-                <strong>Step 5: Coordinated</strong>
-                <p>Is the adjective coordinated with other hype candidates (adjective stacking)? Example: "innovative and strong researcher".</p>
-              </div>
-              <div style="margin-bottom: 15px;">
-                <strong>Step 6: Broader Context</strong>
-                <p>When ambiguous, consider the overall tone. If the sentence contains multiple promotional adjectives, mark as <em>Hype</em>.</p>
-              </div>
+            <ol style="text-align: left; display: inline-block;">
+              <li><strong>Value-Judgment:</strong> Does the adjective imply positive value judgment?</li>
+              <li><strong>Hyperbolic:</strong> Is it exaggerated? (e.g., revolutionary, unprecedented)</li>
+              <li><strong>Gratuitous:</strong> Can it be removed without loss of meaning?</li>
+              <li><strong>Amplified:</strong> Is it strengthened by modifiers? (e.g., "truly novel")</li>
+              <li><strong>Coordinated:</strong> Is it stacked with other hype adjectives?</li>
+              <li><strong>Broader Context:</strong> Does the overall sentence tone suggest promotion?</li>
+            </ol>
+            <p style="margin-top: 20px;">
+              <strong>Impact of Discussion:</strong> Four annotators initially showed fair agreement (Cohen's Kappa: 0.30–0.52). Discussion sessions resolved 545 out of 575 disagreements, dramatically improving agreement to 0.94–0.96.
+            </p>
+            <div style="margin-top: 30px; text-align: center;">
+              <img src="static/images/disagreements_adj.png" alt="Annotator disagreements before and after discussion" style="max-width: 100%; height: auto; border-radius: 8px;">
+              <p style="font-size: 0.9em; color: #666; margin-top: 10px;"><em>Figure 2: Initial disagreements largely resolved through guided discussion</em></p>
             </div>
-            <p>
-              Discussion sessions were held to resolve conflicts between annotators. These discussions resolved 545 out of 575 initial disagreements, significantly improving inter-annotator agreement from Cohen's Kappa of 0.30–0.52 to 0.94–0.96.
-            </p>
           </div>
         </div>
       </div>
@@ -249,47 +235,74 @@
       <div class="columns is-centered has-text-centered">
         <div class="column is-full-width">
           <h2 class="title is-3">Experimental Results</h2>
+          
+          <!-- Hype Distribution -->
+          <div style="margin: 30px 0;">
+            <h4 style="text-align: center; margin-bottom: 20px;">Hype Distribution Across Adjectives</h4>
+            <img src="static/images/nb_hype_percentage.png" alt="Hype percentage distribution across adjectives" style="max-width: 100%; height: auto; border-radius: 8px;">
+            <p style="font-size: 0.9em; color: #666; margin-top: 10px; text-align: center;"><em>Figure 4: Percentage of samples labeled as 'hype' per adjective. Some adjectives (groundbreaking, revolutionary) are nearly always hype, while others vary contextually.</em></p>
+          </div>
+          
           <div class="content has-text-justified">
             <p>
-              We evaluated four categories of models: traditional text classifiers, pre-trained language models (PLMs), large language models (LLMs), and human annotators.
+              We evaluated four model categories: traditional classifiers, pre-trained language models (PLMs), large language models (LLMs), and humans.
             </p>
             
-            <h4><strong>Traditional Text Classifiers</strong></h4>
-            <p>
-              Methods based on bag-of-words and GLOVE embeddings showed limited performance. SVM achieved the best accuracy (77.6%) but lagged behind the human baseline due to bias toward classifying sentences as Hype for adjectives like "groundbreaking" and "revolutionary".
-            </p>
-            
-            <h4><strong>Pre-trained Language Models</strong></h4>
-            <p>
-              Fine-tuned BERT-based models substantially outperformed both traditional classifiers and the human baseline:
-            </p>
+            <div style="background: #f9f9f9; padding: 20px; border-radius: 8px; margin: 20px 0;">
+              <h4 style="text-align: center;">Model Performance Comparison (Accuracy)</h4>
+              <ul style="list-style: none; padding: 0;">
+                <li><strong>DISTILBERT + Fine-tuning:</strong> <span style="color: #28a745;">85.8%</span> ✓ Best overall</li>
+                <li><strong>BERT + Fine-tuning:</strong> <span style="color: #28a745;">86.2%</span> ✓ Best F1-score</li>
+                <li><strong>Human Baseline:</strong> <span style="color: #007bff;">76.7%</span></li>
+                <li><strong>SVM (Bag-of-Words):</strong> 77.6%</li>
+                <li><strong>GPT-4O-MINI (Strict):</strong> 67.5%</li>
+                <li><strong>No Fine-tuning Models:</strong> ~72% or lower</li>
+                <li><strong>LLAMA3.1-INST:</strong> <span style="color: #dc3545;">45.1%</span> ✗</li>
+              </ul>
+            </div>
+
+            <h4>Key Insights:</h4>
             <ul>
-              <li><strong>BERT + Finetuning:</strong> 86.2% accuracy, 0.909 F1-score, 0.812 macro F1-score</li>
-              <li><strong>DISTILBERT + Finetuning:</strong> 85.8% accuracy (best macro F1 of 0.821)</li>
-              <li><strong>GPT-2 + Finetuning:</strong> 80.7% accuracy</li>
-              <li><strong>BIOMEDBERT + Finetuning:</strong> 83.5% accuracy (domain knowledge did not improve performance)</li>
+              <li><strong>Fine-tuning Works:</strong> Fine-tuned BERT models surpass human-level performance (86% vs 77%)</li>
+              <li><strong>Bidirectionality Matters:</strong> BERT > GPT-2 because context is crucial before and after the adjective</li>
+              <li><strong>Domain Knowledge Doesn't Help:</strong> DISTILBERT outperformed BiomedBERT despite no biomedical pretraining</li>
+              <li><strong>Zero-shot LLMs Fail:</strong> Exposed to common academic parlance, LLMs classify most as "Not Hype"</li>
+              <li><strong>Guidelines Enable Humans:</strong> Humans without guidelines: 77%; with guidelines: ~85%+ accuracy (estimated)</li>
             </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Confusion Matrices Section -->
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">Model Classification Patterns</h2>
+          <div class="content" style="margin-bottom: 30px;">
             <p>
-              Bidirectional models (BERT-based) outperformed causal models (GPT-2) because context appears both before and after the adjective.
+              Confusion matrices reveal how different models classify hype adjectives, showing their strengths and weaknesses.
             </p>
-            
-            <h4><strong>Large Language Models</strong></h4>
-            <p>
-              Zero-shot LLMs underperformed:
-            </p>
-            <ul>
-              <li><strong>LLAMA3.1-INST. (+Broad Prompt):</strong> 45.1% accuracy (worse than traditional methods)</li>
-              <li><strong>GPT-4O-MINI (+Broad Prompt):</strong> 63.1% accuracy (below human baseline)</li>
-              <li><strong>GPT-4O-MINI (+Strict Prompt):</strong> 67.5% accuracy (improved with stricter definition)</li>
-            </ul>
-            <p>
-              LLMs showed bias toward classifying as "Not Hype" due to exposure to common academic parlance in training data.
-            </p>
-            
-            <h4><strong>Human Baseline</strong></h4>
-            <p>
-              Two researchers with 10+ years academic experience achieved 76.7% accuracy and 0.730 macro F1-score on the hold-out test set using only the broad definition of hype (without guidelines). This validates the complexity of the task and the value of formal guidelines.
-            </p>
+          </div>
+          
+          <div class="columns is-centered">
+            <div class="column is-one-third has-text-centered">
+              <h4 style="margin-bottom: 15px;">BERT (Fine-tuned)</h4>
+              <img src="static/images/cm_bert.png" alt="BERT Confusion Matrix" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+              <p style="font-size: 0.85em; margin-top: 10px; color: #666;"><strong>Best Performance</strong><br>86.2% Accuracy</p>
+            </div>
+            <div class="column is-one-third has-text-centered">
+              <h4 style="margin-bottom: 15px;">SVM (GLOVE)</h4>
+              <img src="static/images/cm_glove_svm.png" alt="SVM GLOVE Confusion Matrix" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+              <p style="font-size: 0.85em; margin-top: 10px; color: #666;"><strong>Traditional Method</strong><br>77.6% Accuracy</p>
+            </div>
+            <div class="column is-one-third has-text-centered">
+              <h4 style="margin-bottom: 15px;">Human Annotators</h4>
+              <img src="static/images/cm_human.png" alt="Human Baseline Confusion Matrix" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+              <p style="font-size: 0.85em; margin-top: 10px; color: #666;"><strong>Human Baseline</strong><br>76.7% Accuracy</p>
+            </div>
           </div>
         </div>
       </div>
