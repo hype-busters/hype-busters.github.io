@@ -4,8 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="../assets/images/hype_favicon.png">
-    <!-- Content Security Policy temporarily removed for styling fix -->
-    <title>Word Intensity Survey</title>
+    <title>Word Intensity Survey - Hype-Busters</title>
+    
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script src="https://apis.google.com/js/api.js"></script>
     <!-- Load configuration with fallback -->
@@ -20,16 +24,19 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
+            font-family: 'Google Sans', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            padding: 20px;
         }
-
-
-        .container {
+        
+        .navbar-brand strong {
+            font-size: 1.3rem;
+        }
+        
+        body > .container {
             max-width: 1400px;
-            margin: 0 auto;
+            margin: 40px auto;
+            padding: 0 20px;
             background: #f5f5f5;
             border-radius: 20px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.3);
@@ -37,7 +44,7 @@
         }
 
         .header {
-            background: linear-gradient(135deg, #4a4a4a 0%, #2c2c2c 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             padding: 30px;
             text-align: center;
@@ -395,7 +402,33 @@
     </style>
 </head>
 <body>
-    <!-- Navigation hidden for survey focus -->
+    <!-- Navigation -->
+    <nav class="navbar is-light" role="navigation" aria-label="main navigation">
+        <div class="container is-max-desktop">
+            <div class="navbar-brand">
+                <a class="navbar-item" href="/">
+                    <strong>Hype-Busters</strong>
+                </a>
+                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
+
+            <div id="navbarMenu" class="navbar-menu">
+                <div class="navbar-end">
+                    <a class="navbar-item" href="/">Home</a>
+                    <a class="navbar-item" href="/about/">About</a>
+                    <a class="navbar-item" href="/resources/">Previous Works</a>
+                    <a class="navbar-item" href="/people/">People</a>
+                    <a class="navbar-item" href="https://docs.google.com/forms/d/e/1FAIpQLSeyjl-GfXRSTftkpB54rT9u7aBQzNR8fOdShzdEya_O4LsMYA/viewform" target="_blank">NIH Data Access</a>
+                    <a class="navbar-item" href="/tools/">Tools</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
     <div class="container">
         <div class="header">
             <h1>Word Intensity Survey</h1>
@@ -692,5 +725,30 @@
             </button>
         </div>
     </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer" style="background: transparent; margin-top: 40px;">
+        <div class="content has-text-centered has-text-white">
+            <p>
+                <strong class="has-text-white">Hype-Busters</strong> — Identifying promotional language in biomedical research.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.addEventListener('DOMContentLoaded', () => {
+            const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+            $navbarBurgers.forEach( el => {
+                el.addEventListener('click', () => {
+                    const target = el.dataset.target;
+                    const $target = document.getElementById(target);
+                    el.classList.toggle('is-active');
+                    $target.classList.toggle('is-active');
+                });
+            });
+        });
+    </script>
 </body>
 </html>

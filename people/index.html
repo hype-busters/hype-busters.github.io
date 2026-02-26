@@ -8,6 +8,7 @@
   
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <style>
     body {
@@ -15,6 +16,9 @@
     }
     .navbar-brand strong {
       font-size: 1.3rem;
+    }
+    .hero {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     }
   </style>
 </head>
@@ -43,10 +47,23 @@
       </div>
     </div>
   </nav>
+  
+  <!-- Hero Section -->
+  <section class="hero is-medium">
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <h1 class="title is-1 has-text-white">
+          Our Team
+        </h1>
+        <p class="subtitle is-4 has-text-white">
+          Meet the researchers behind Hype-Busters
+        </p>
+      </div>
+    </div>
+  </section>
+
   <section class="section">
     <div class="container is-max-desktop">
-      <h1 class="title is-3">Our Team</h1>
-      
       <div class="columns is-multiline">
         <div class="column is-one-third">
           <div class="box has-text-centered">
@@ -141,6 +158,16 @@
       </div>
     </div>
   </section>
+  
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="content has-text-centered">
+      <p>
+        <strong>Hype-Busters</strong> — Identifying promotional language in biomedical research.
+      </p>
+    </div>
+  </footer>
+  
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);

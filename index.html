@@ -6,8 +6,9 @@
     <link rel="icon" type="image/png" href="assets/images/hype_favicon.png">
     <title>Hype-Busters — Identifying Hype in Biomedical Research</title>
     
-    <link href="https://fonts.googleapis.com/css? family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
       body {
@@ -15,6 +16,9 @@
       }
       .navbar-brand strong {
         font-size: 1.3rem;
+      }
+      .hero {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       }
     </style>
 </head>
@@ -46,11 +50,23 @@
     </div>
   </nav>
 
+  <!-- Hero Section -->
+  <section class="hero is-medium">
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <h1 class="title is-1 has-text-white">
+          Hype-Busters
+        </h1>
+        <p class="subtitle is-4 has-text-white">
+          Identifying "Hype" in Biomedical Research: A Linguistics and AI Approach
+        </p>
+      </div>
+    </div>
+  </section>
+
   <!-- Main Content -->
   <section class="section">
     <div class="container is-max-desktop">
-      <h1 class="title is-3">Identifying "Hype" in Biomedical Research: A Linguistics and AI Approach</h1>
-
       <div class="content">
         <p>The scientific landscape is increasingly competitive, leading researchers to use "hype"—promotional language that can exaggerate findings and influence perceptions. This phenomenon can undermine objective evaluation of research, potentially misdirecting funding and eroding trust in science.</p>
 
@@ -66,6 +82,15 @@
       </div>
     </div>
   </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="content has-text-centered">
+      <p>
+        <strong>Hype-Busters</strong> — Identifying promotional language in biomedical research.
+      </p>
+    </div>
+  </footer>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {

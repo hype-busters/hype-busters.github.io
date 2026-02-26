@@ -4,7 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" href="../assets/images/hype_favicon.png">
-  <title>Best-Worst Scaling Tool</title>
+  <title>Best-Worst Scaling Tool - Hype-Busters</title>
+  
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
   <style>
     * {
       margin: 0;
@@ -13,15 +18,19 @@
     }
 
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Google Sans', sans-serif;
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       min-height: 100vh;
-      padding: 20px;
     }
-
-    .container {
+    
+    .navbar-brand strong {
+      font-size: 1.3rem;
+    }
+    
+    body > .container {
       max-width: 900px;
-      margin: 0 auto;
+      margin: 40px auto;
+      padding: 0 20px;
       background: white;
       border-radius: 20px;
       box-shadow: 0 20px 60px rgba(0,0,0,0.3);
@@ -214,6 +223,33 @@
   </style>
 </head>
 <body>
+  <!-- Navigation -->
+  <nav class="navbar is-light" role="navigation" aria-label="main navigation">
+    <div class="container is-max-desktop">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="/">
+          <strong>Hype-Busters</strong>
+        </a>
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div id="navbarMenu" class="navbar-menu">
+        <div class="navbar-end">
+          <a class="navbar-item" href="/">Home</a>
+          <a class="navbar-item" href="/about/">About</a>
+          <a class="navbar-item" href="/resources/">Previous Works</a>
+          <a class="navbar-item" href="/people/">People</a>
+          <a class="navbar-item" href="https://docs.google.com/forms/d/e/1FAIpQLSeyjl-GfXRSTftkpB54rT9u7aBQzNR8fOdShzdEya_O4LsMYA/viewform" target="_blank">NIH Data Access</a>
+          <a class="navbar-item" href="/tools/">Tools</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
   <div class="container">
     <div class="header">
       <h1>Best-Worst Scaling Tool</h1>
@@ -305,5 +341,29 @@
       </div>
     </div>
   </div>
+
+  <!-- Footer -->
+  <footer class="footer" style="background: transparent; margin-top: 40px;">
+    <div class="content has-text-centered has-text-white">
+      <p>
+        <strong class="has-text-white">Hype-Busters</strong> — Identifying promotional language in biomedical research.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    document.addEventListener('DOMContentLoaded', () => {
+      const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+      $navbarBurgers.forEach( el => {
+        el.addEventListener('click', () => {
+          const target = el.dataset.target;
+          const $target = document.getElementById(target);
+          el.classList.toggle('is-active');
+          $target.classList.toggle('is-active');
+        });
+      });
+    });
+  </script>
 </body>
 </html>

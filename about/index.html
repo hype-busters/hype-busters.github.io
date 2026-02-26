@@ -8,12 +8,17 @@
     
     <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
       body {
         font-family: 'Google Sans', sans-serif;
       }
       .navbar-brand strong {
         font-size: 1.3rem;
+      }
+      .hero {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       }
     </style>
 </head>
@@ -45,11 +50,23 @@
     </div>
   </nav>
 
+  <!-- Hero Section -->
+  <section class="hero is-medium">
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <h1 class="title is-1 has-text-white">
+          About
+        </h1>
+        <p class="subtitle is-4 has-text-white">
+          Our research publications and impact
+        </p>
+      </div>
+    </div>
+  </section>
+
   <!-- Main Content -->
   <section class="section">
     <div class="container is-max-desktop">
-      <h1 class="title is-3">About</h1>
-
       <div class="content">
         <p>Some of our past publications</p>
         <h2 class="title is-4">Selected Publications</h2>
@@ -66,6 +83,15 @@
       </div>
     </div>
   </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="content has-text-centered">
+      <p>
+        <strong>Hype-Busters</strong> — Identifying promotional language in biomedical research.
+      </p>
+    </div>
+  </footer>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
