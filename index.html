@@ -4,157 +4,81 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="assets/images/hype_favicon.png">
-    <title>Identifying "Hype" in Biomedical Research</title>
+    <title>Hype-Busters — Identifying Hype in Biomedical Research</title>
+    
+    <link href="https://fonts.googleapis.com/css? family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    
     <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            line-height: 1.6;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 20px;
-            color: #333;
-        }
-        .nav-tabs {
-            background: #f8f9fa;
-            padding: 0;
-            margin: 0 0 20px 0;
-            border-bottom: 1px solid #dee2e6;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            list-style: none;
-        }
-        .brand {
-            font-size: 24px;
-            font-weight: bold;
-            color: #2c3e50;
-            padding: 15px 20px;
-            text-decoration: none;
-        }
-        .nav-items {
-            display: flex;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-        .nav-items li {
-            margin: 0;
-            padding: 0;
-            position: relative;
-        }
-        .nav-items a {
-            display: block;
-            padding: 10px 20px;
-            color: #495057;
-            text-decoration: none;
-            border-bottom: 2px solid transparent;
-        }
-        .nav-tabs a:hover {
-            color: #007bff;
-            border-bottom: 2px solid #007bff;
-            text-decoration: none;
-        }
-        .nav-tabs a.active {
-            color: #007bff;
-            border-bottom: 2px solid #007bff;
-            font-weight: 500;
-        }
-        
-        /* Dropdown styles */
-        .dropdown {
-            position: relative;
-        }
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: white;
-            min-width: 200px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-            border: 1px solid #dee2e6;
-            border-radius: 4px;
-            top: 100%;
-            left: 0;
-        }
-        .dropdown-content a {
-            color: #495057;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            border-bottom: none;
-        }
-        .dropdown-content a:hover {
-            background-color: #f8f9fa;
-            color: #007bff;
-            border-bottom: none;
-        }
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-        .dropdown > a::after {
-            content: " ▼";
-            font-size: 12px;
-            margin-left: 5px;
-        }
-        h1 {
-            color: #2c3e50;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
-        }
-        h2 {
-            color: #34495e;
-            margin-top: 30px;
-        }
-        ul {
-            padding-left: 20px;
-        }
-        li {
-            margin: 10px 0;
-        }
-        a {
-            color: #3498db;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        .content {
-            margin-top: 20px;
-        }
+      body {
+        font-family: 'Google Sans', sans-serif;
+      }
+      .navbar-brand strong {
+        font-size: 1.3rem;
+      }
     </style>
 </head>
 <body>
-    <div class="nav-tabs">
-        <a href="/" class="brand">Hype-Busters</a>
-        <ul class="nav-items">
-            <li><a href="/about/">About</a></li>
-            <li><a href="/resources/">Previous Works</a></li>
-            <li><a href="/people/">People</a></li>
-            <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSeyjl-GfXRSTftkpB54rT9u7aBQzNR8fOdShzdEya_O4LsMYA/viewform" target="_blank">NIH Data Access</a></li>
-            <li class="dropdown">
-                <a href="#" onclick="return false;">Tools</a>
-                <div class="dropdown-content">
-                    <a href="/bws/">Best-Worst Scaling</a>
-                    <a href="/intensity-scaling/">Word Intensity Survey</a>
-                </div>
-            </li>
-        </ul>
+  <!-- Navigation -->
+  <nav class="navbar is-light" role="navigation" aria-label="main navigation">
+    <div class="container">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="/">
+          <strong>Hype-Busters</strong>
+        </a>
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div id="navbarMenu" class="navbar-menu">
+        <div class="navbar-end">
+          <a class="navbar-item is-active" href="/">Home</a>
+          <a class="navbar-item" href="/about/">About</a>
+          <a class="navbar-item" href="/resources/">Previous Works</a>
+          <a class="navbar-item" href="/people/">People</a>
+          <a class="navbar-item" href="https://docs.google.com/forms/d/e/1FAIpQLSeyjl-GfXRSTftkpB54rT9u7aBQzNR8fOdShzdEya_O4LsMYA/viewform" target="_blank">NIH Data Access</a>
+          <a class="navbar-item" href="/tools/">Tools</a>
+        </div>
+      </div>
     </div>
+  </nav>
 
-    <div class="content">
-        <h1>Identifying "Hype" in Biomedical Research: A Linguistics and AI Approach</h1>
+  <!-- Main Content -->
+  <section class="section">
+    <div class="container">
+      <h1 class="title is-2">Identifying "Hype" in Biomedical Research: A Linguistics and AI Approach</h1>
 
+      <div class="content is-medium">
         <p>The scientific landscape is increasingly competitive, leading researchers to use "hype"—promotional language that can exaggerate findings and influence perceptions. This phenomenon can undermine objective evaluation of research, potentially misdirecting funding and eroding trust in science.</p>
 
         <p>Our project, combining linguistics and artificial intelligence, aims to address this by:</p>
 
         <ul>
-            <li><strong>Identifying Hype Trends:</strong> We observe a significant increase in promotional language in abstracts of successful NIH grant applications and subsequent PubMed publications (1985-2020). This includes a shift towards more confident and assertive language, with terms expressing weak possibility declining and terms conveying certainty and objective verifiability rising.</li>
-            <li><strong>Analyzing Influences:</strong> The use of hype in grant applications is strongly correlated with its appearance in NIH funding opportunity announcements, suggesting that institutional guidelines may inadvertently encourage this trend. This creates a "path dependency" where initial language choices for funding can become entrenched in later research reporting.</li>
-            <li><strong>Developing Detection Tools:</strong> We are formalizing annotation guidelines and training machine learning models to automatically identify hype in scientific texts, building on prior work that defined hype as "hyperbolic and/or subjective language that authors use to glamorize, promote, embellish and/or exaggerate aspects of their research".</li>
+          <li><strong>Identifying Hype Trends:</strong> We observe a significant increase in promotional language in abstracts of successful NIH grant applications and subsequent PubMed publications (1985-2020). This includes a shift towards more confident and assertive language, with terms expressing weak possibility declining and terms conveying certainty and objective verifiability rising.</li>
+          <li><strong>Analyzing Influences:</strong> The use of hype in grant applications is strongly correlated with its appearance in NIH funding opportunity announcements, suggesting that institutional guidelines may inadvertently encourage this trend. This creates a "path dependency" where initial language choices for funding can become entrenched in later research reporting.</li>
+          <li><strong>Developing Detection Tools:</strong> We are formalizing annotation guidelines and training machine learning models to automatically identify hype in scientific texts, building on prior work that defined hype as "hyperbolic and/or subjective language that authors use to glamorize, promote, embellish and/or exaggerate aspects of their research".</li>
         </ul>
         
         <p>By understanding and detecting hype, our project seeks to foster greater transparency and objectivity in scientific communication, contributing to a more robust and trustworthy research ecosystem.</p>
+      </div>
     </div>
+  </section>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+      $navbarBurgers.forEach( el => {
+        el.addEventListener('click', () => {
+          const target = el.dataset.target;
+          const $target = document.getElementById(target);
+          el.classList.toggle('is-active');
+          $target.classList.toggle('is-active');
+        });
+      });
+    });
+  </script>
 </body>
 </html> 

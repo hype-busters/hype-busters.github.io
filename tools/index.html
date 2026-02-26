@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="../assets/images/hype_favicon.png">
+  <title>Tools - Hype-Busters</title>
+  
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    body {
+      font-family: 'Google Sans', sans-serif;
+    }
+    .navbar-brand strong {
+      font-size: 1.3rem;
+    }
+    .tool-card {
+      height: 100%;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .tool-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    }
+    .hero {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar is-light" role="navigation" aria-label="main navigation">
+    <div class="container is-max-desktop">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="/">
+          <strong>Hype-Busters</strong>
+        </a>
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div id="navbarMenu" class="navbar-menu">
+        <div class="navbar-end">
+          <a class="navbar-item" href="/">Home</a>
+          <a class="navbar-item" href="/about/">About</a>
+          <a class="navbar-item" href="/resources/">Previous Works</a>
+          <a class="navbar-item" href="/people/">People</a>
+          <a class="navbar-item" href="https://docs.google.com/forms/d/e/1FAIpQLSeyjl-GfXRSTftkpB54rT9u7aBQzNR8fOdShzdEya_O4LsMYA/viewform" target="_blank">NIH Data Access</a>
+          <a class="navbar-item is-active" href="/tools/">Tools</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero is-medium">
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <h1 class="title is-1 has-text-white">
+          Research Tools
+        </h1>
+        <p class="subtitle is-4 has-text-white">
+          Interactive tools for hype detection and analysis
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tools Section -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-multiline">
+        <!-- Best-Worst Scaling Tool -->
+        <div class="column is-half">
+          <div class="card tool-card">
+            <div class="card-content">
+              <div class="media">
+                <div class="media-left">
+                  <span class="icon is-large has-text-primary">
+                    <i class="fas fa-balance-scale fa-3x"></i>
+                  </span>
+                </div>
+                <div class="media-content">
+                  <p class="title is-4">Best-Worst Scaling</p>
+                  <p class="subtitle is-6">Annotation Tool</p>
+                </div>
+              </div>
+
+              <div class="content">
+                <p>
+                  Use our Best-Worst Scaling tool to annotate and compare the intensity of promotional adjectives in biomedical research. This tool helps build intensity-scaled lexicons through systematic pairwise comparisons.
+                </p>
+                <br>
+                <a href="/bws/" class="button is-primary is-fullwidth">
+                  <span class="icon">
+                    <i class="fas fa-arrow-right"></i>
+                  </span>
+                  <span>Launch Tool</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Word Intensity Survey -->
+        <div class="column is-half">
+          <div class="card tool-card">
+            <div class="card-content">
+              <div class="media">
+                <div class="media-left">
+                  <span class="icon is-large has-text-info">
+                    <i class="fas fa-chart-line fa-3x"></i>
+                  </span>
+                </div>
+                <div class="media-content">
+                  <p class="title is-4">Word Intensity Survey</p>
+                  <p class="subtitle is-6">Data Collection</p>
+                </div>
+              </div>
+
+              <div class="content">
+                <p>
+                  Participate in our word intensity survey to help us understand how different promotional adjectives are perceived in scientific contexts. Your input contributes to building better hype detection models.
+                </p>
+                <br>
+                <a href="/intensity-scaling/" class="button is-info is-fullwidth">
+                  <span class="icon">
+                    <i class="fas fa-arrow-right"></i>
+                  </span>
+                  <span>Launch Survey</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Projects Section -->
+      <div class="content" style="margin-top: 3rem;">
+        <h2 class="title is-3">Related Projects</h2>
+        <div class="columns is-multiline">
+          <!-- Hype or Not Project -->
+          <div class="column is-half">
+            <div class="box">
+              <h3 class="title is-5">Hype or not? — Automatic Detection</h3>
+              <p>Formalizing automatic promotional language detection in biomedical research with annotation guidelines and curated dataset.</p>
+              <br>
+              <a href="/hype-or-not/" class="button is-link is-light">View Project</a>
+            </div>
+          </div>
+
+          <!-- Hyplex Project -->
+          <div class="column is-half">
+            <div class="box">
+              <h3 class="title is-5">Hyplex — Intensity Lexicon</h3>
+              <p>An intensity-scaled lexicon of 303 promotional adjectives in biomedical research built using Best-Worst Scaling.</p>
+              <br>
+              <a href="/hyplex/" class="button is-link is-light">View Project</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="content has-text-centered">
+      <p>
+        <strong>Hype-Busters</strong> — Identifying promotional language in biomedical research.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    document.addEventListener('DOMContentLoaded', () => {
+      const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+      $navbarBurgers.forEach( el => {
+        el.addEventListener('click', () => {
+          const target = el.dataset.target;
+          const $target = document.getElementById(target);
+          el.classList.toggle('is-active');
+          $target.classList.toggle('is-active');
+        });
+      });
+    });
+  </script>
+</body>
+</html>
