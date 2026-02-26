@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <!-- Meta tags for social media banners, these should be filled in appropriately as they are your "business card" -->
+  <!-- Replace the content tag with appropriate information -->
+  <meta name="description" content="Hype or not? Formalizing Automatic Promotional Language Detection in Biomedical Research">
+  <meta property="og:title" content="Hype or not? Formalizing Automatic Promotional Language Detection in Biomedical Research"/>
+  <meta property="og:description" content="Introducing the task of automatic detection of hype language in biomedical texts with formalized annotation guidelines and a curated dataset."/>
+  <meta property="og:url" content="https://hype-busters.github.io/hype-or-not"/>
+  <!-- Path to banner image, should be in the path listed below. Optimal dimensions are 1200X630-->
+  <meta property="og:image" content="static/images/banner.png" />
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+
+  <meta name="twitter:title" content="Hype or not? Automatic Promotional Language Detection in Biomedical Research">
+  <meta name="twitter:description" content="Formalizing automatic detection of hype language in biomedical research texts using NLP and machine learning.">
+  <!-- Path to banner image, should be in the path listed below. Optimal dimensions are 1200X600-->
+  <meta name="twitter:image" content="static/images/twitter_banner.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- Keywords for your paper to be indexed by-->
+  <meta name="keywords" content="hype detection, promotional language, biomedical research, NLP, text classification, annotation guidelines, machine learning">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Hype or not? Automatic Promotional Language Detection in Biomedical Research</title>
+  <link rel="icon" type="image/x-icon" href="">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+</head>
+<body>
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">Hype or not? Formalizing Automatic Promotional Language Detection in Biomedical Research</h1>
+            <div class="is-size-5 publication-authors">
+              <!-- Paper authors -->
+              <span class="author-block">
+                <a href="mailto:bojan.batalo@aist.go.jp">Bojan Batalo</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a href="mailto:kidoshimomoto.e@aist.go.jp">Erica K. Shimomoto</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a href="mailto:dsatav@cvlab.cs.tsukuba.ac.jp">Dipesh Satav</a><sup>2</sup>,</span>
+              <span class="author-block">
+                <a href="mailto:millar.neil.gm@u.tsukuba.ac.jp">Neil Millar</a><sup>2</sup>
+              </span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup>1</sup>National Institute of Advanced Industrial Science and Technology (AIST), <sup>2</sup>University of Tsukuba<br><strong>EACL 2026</strong></span>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- Paper PDF link -->
+                <span class="link-block">
+                  <a href="https://github.com/hype-busters/eacl2026-hype-dataset" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Dataset & Code</span>
+                  </a>
+                </span>
+
+                <!-- Dataset Paper link -->
+                <span class="link-block">
+                  <a href="#" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Paper (Coming Soon)</span>
+                  </a>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Teaser section -->
+  <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <h2 class="subtitle has-text-justified">
+          We introduce the task of <strong>automatic detection of hype language</strong> in biomedical research texts. We define hype as <em>hyperbolic or subjective language that authors use to glamorize, promote, embellish, or exaggerate aspects of their research</em>. We propose formalized annotation guidelines and apply them to annotate 1,270 sentences from the NIH grant application corpus. We then evaluate traditional text classifiers and language models on this task, comparing their performance with a human baseline.
+        </h2>
+      </div>
+    </div>
+  </section>
+  <!-- End teaser section -->
+
+  <!-- Paper abstract -->
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              In science, promotional language ("hype") is increasing and can undermine objective evaluation of evidence, impede research development, and erode trust in science. We introduce the task of automatic detection of hype, defined as hyperbolic or subjective language that authors use to glamorize, promote, embellish, or exaggerate aspects of their research.
+            </p>
+            <p>
+              We propose formalized guidelines for identifying hype language and apply them to annotate a portion of the National Institutes of Health (NIH) grant application corpus. The annotation process revealed fair inter-annotator agreement initially, which improved substantially after discussion and clarification of guidelines (Cohen's Kappa: 0.30–0.52 before, 0.94–0.96 after).
+            </p>
+            <p>
+              We evaluate traditional text classifiers and language models on this task, comparing their performance with a human baseline. Our experiments show that formalizing annotation guidelines can help humans reliably annotate candidate hype adjectives and that using our annotated dataset to train machine learning models yields promising results. Our annotation guidelines and dataset are available at <a href="https://github.com/hype-busters/eacl2026-hype-dataset" target="_blank">https://github.com/hype-busters/eacl2026-hype-dataset</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End paper abstract -->
+
+  <!-- Problem Motivation -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">The Problem: Hype in Scientific Publishing</h2>
+          <div class="content has-text-justified">
+            <p>
+              Promotional language in scientific writing has been increasing in biomedical funding applications and journal publications. Terms such as <i>revolutionary</i>, <i>unprecedented</i>, <i>groundbreaking</i>, and <i>transformative</i> are becoming more common, yet they are rarely justified and can:
+            </p>
+            <ul>
+              <li><strong>Undermine Objectivity:</strong> Words like "groundbreaking" and "transformative" impose value judgments rather than letting research speak for itself</li>
+              <li>Bias Readers:</li> Promotional language can influence readers' evaluation of research quality beyond the actual evidence presented
+              <li><strong>Erode Trust:</strong> When promotional language creates unrealistic expectations or misrepresents findings, public trust in science is eroded</li>
+              <li><strong>Impede Development:</strong> Overstatement can misdirect research efforts and policy decisions</li>
+            </ul>
+            <p>
+              While promotional language is common, determining whether a specific term constitutes hype remains problematic. The same word may be promotional in one context but neutral or technical in another. For example, the adjectives <em>essential</em> and <em>meticulous</em> can promote significance or rigor ("meticulous experimental design"), but they may also occur in neutral contexts or as part of technical terms ("essential fatty acid", "meticulous hemostasis").
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Annotation Guidelines -->
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">Proposed Annotation Guidelines</h2>
+          <div class="content has-text-justified">
+            <p>
+              To address the subjectivity inherent in hype detection, we propose six sequential annotation steps that guide annotators through a systematic evaluation process:
+            </p>
+            <div class="guidelines-container" style="background: #f9f9f9; padding: 20px; border-radius: 8px; margin: 20px 0;">
+              <div style="margin-bottom: 15px;">
+                <strong>Step 1: Value-Judgment</strong>
+                <p>Does the adjective imply positive value judgment? Most selected adjectives do, including priority claims ("first method to..."). If yes, proceed to steps 2-6. If not, mark as <em>Not Hype</em>.</p>
+              </div>
+              <div style="margin-bottom: 15px;">
+                <strong>Step 2: Hyperbolic</strong>
+                <p>Is the adjective hyperbolic or exaggerated? Examples: <em>revolutionary</em>, <em>unprecedented</em>, <em>unparalleled</em>, <em>groundbreaking</em>. These are usually promotional: "unparalleled opportunity", "revolutionary tool".</p>
+              </div>
+              <div style="margin-bottom: 15px;">
+                <strong>Step 3: Gratuitous</strong>
+                <p>Can the adjective be removed without loss of meaning? If the propositional content remains unchanged or the adjective is redundant ("discovered a novel gene"), mark as <em>Hype</em>. If removal substantially alters meaning or justification is given, mark as <em>Not Hype</em>.</p>
+              </div>
+              <div style="margin-bottom: 15px;">
+                <strong>Step 4: Amplified</strong>
+                <p>Is the adjective strengthened by modifiers? Examples: "truly novel", "extremely rigorous", "highly cohesive".</p>
+              </div>
+              <div style="margin-bottom: 15px;">
+                <strong>Step 5: Coordinated</strong>
+                <p>Is the adjective coordinated with other hype candidates (adjective stacking)? Example: "innovative and strong researcher".</p>
+              </div>
+              <div style="margin-bottom: 15px;">
+                <strong>Step 6: Broader Context</strong>
+                <p>When ambiguous, consider the overall tone. If the sentence contains multiple promotional adjectives, mark as <em>Hype</em>.</p>
+              </div>
+            </div>
+            <p>
+              Discussion sessions were held to resolve conflicts between annotators. These discussions resolved 545 out of 575 initial disagreements, significantly improving inter-annotator agreement from Cohen's Kappa of 0.30–0.52 to 0.94–0.96.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dataset Section -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">NIH Grant Application Dataset</h2>
+          <div class="content has-text-justified">
+            <p>
+              We annotated 1,270 sentences from the NIH grant application abstract corpus, focusing on novelty and rigour adjective groups:
+            </p>
+            <div style="background: #f5f5f5; padding: 15px; border-radius: 8px; margin: 15px 0;">
+              <p><strong>Dataset Statistics:</strong></p>
+              <ul>
+                <li><strong>Total Sentences:</strong> 1,270 annotated sentences</li>
+                <li><strong>Hype Examples:</strong> 917 (72.2%)</li>
+                <li><strong>Not Hype Examples:</strong> 353 (27.8%)</li>
+                <li><strong>Novelty Adjectives:</strong> 11 members (creative, emerging, first, groundbreaking, innovative, latest, novel, revolutionary, unique, unparalleled, unprecedented)</li>
+                <li><strong>Rigour Adjectives:</strong> 15 members (accurate, advanced, careful, cohesive, detailed, nuanced, powerful, quality, reproducible, rigorous, robust, scientific, sophisticated, strong, systematic)</li>
+              </ul>
+            </div>
+            <p>
+              <strong>Most Promotional Adjectives (100% classified as Hype):</strong> groundbreaking, revolutionary, unparalleled, unprecedented, careful
+            </p>
+            <p>
+              <strong>Classification Rationales:</strong>
+            </p>
+            <ul>
+              <li><strong>Gratuitous (683 samples):</strong> Adjectives adding little substance to the proposition</li>
+              <li><strong>Broader Context (220 samples):</strong> Hype determined by overall sentence tone</li>
+              <li><strong>Hyperbolic (208 samples):</strong> Exaggerated or unambiguous promotional adjectives</li>
+              <li><strong>Coordinated (138 samples):</strong> Adjectives stacked with other hype candidates</li>
+              <li><strong>Amplified (22 samples):</strong> Adjectives strengthened by modifiers</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experiments Section -->
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">Experimental Results</h2>
+          <div class="content has-text-justified">
+            <p>
+              We evaluated four categories of models: traditional text classifiers, pre-trained language models (PLMs), large language models (LLMs), and human annotators.
+            </p>
+            
+            <h4><strong>Traditional Text Classifiers</strong></h4>
+            <p>
+              Methods based on bag-of-words and GLOVE embeddings showed limited performance. SVM achieved the best accuracy (77.6%) but lagged behind the human baseline due to bias toward classifying sentences as Hype for adjectives like "groundbreaking" and "revolutionary".
+            </p>
+            
+            <h4><strong>Pre-trained Language Models</strong></h4>
+            <p>
+              Fine-tuned BERT-based models substantially outperformed both traditional classifiers and the human baseline:
+            </p>
+            <ul>
+              <li><strong>BERT + Finetuning:</strong> 86.2% accuracy, 0.909 F1-score, 0.812 macro F1-score</li>
+              <li><strong>DISTILBERT + Finetuning:</strong> 85.8% accuracy (best macro F1 of 0.821)</li>
+              <li><strong>GPT-2 + Finetuning:</strong> 80.7% accuracy</li>
+              <li><strong>BIOMEDBERT + Finetuning:</strong> 83.5% accuracy (domain knowledge did not improve performance)</li>
+            </ul>
+            <p>
+              Bidirectional models (BERT-based) outperformed causal models (GPT-2) because context appears both before and after the adjective.
+            </p>
+            
+            <h4><strong>Large Language Models</strong></h4>
+            <p>
+              Zero-shot LLMs underperformed:
+            </p>
+            <ul>
+              <li><strong>LLAMA3.1-INST. (+Broad Prompt):</strong> 45.1% accuracy (worse than traditional methods)</li>
+              <li><strong>GPT-4O-MINI (+Broad Prompt):</strong> 63.1% accuracy (below human baseline)</li>
+              <li><strong>GPT-4O-MINI (+Strict Prompt):</strong> 67.5% accuracy (improved with stricter definition)</li>
+            </ul>
+            <p>
+              LLMs showed bias toward classifying as "Not Hype" due to exposure to common academic parlance in training data.
+            </p>
+            
+            <h4><strong>Human Baseline</strong></h4>
+            <p>
+              Two researchers with 10+ years academic experience achieved 76.7% accuracy and 0.730 macro F1-score on the hold-out test set using only the broad definition of hype (without guidelines). This validates the complexity of the task and the value of formal guidelines.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Findings -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">Key Findings</h2>
+          <div class="content has-text-justified">
+            <ul>
+              <li><strong>Formalized Guidelines Help:</strong> Annotation guidelines substantially improved inter-annotator agreement and human baseline performance</li>
+              <li><strong>Hype Detection is Context-Dependent:</strong> The same adjective (e.g., "essential", "nuanced") can be hype or neutral depending on context</li>
+              <li><strong>Fine-tuned Models Excel:</strong> Fine-tuned BERT models achieved 86.2% accuracy, surpassing both traditional methods and zero-shot LLMs</li>
+              <li><strong>Domain Knowledge Matters:</strong> Domain-specific knowledge was important for both annotators and models, especially for rigour adjectives</li>
+              <li><strong>Adjective-Specific Challenges:</strong> Some adjectives (emerging, latest, scientific, nuanced) were consistently difficult to classify, even for humans</li>
+              <li><strong>Most Hype from Gratuitous Use:</strong> The largest category of promotional adjectives (683 samples) is gratuitous use—adjectives that can be removed without loss of meaning</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Applications Section -->
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Applications & Future Directions</h2>
+          <div class="content has-text-justified">
+            <p><strong>Applications:</strong></p>
+            <ul>
+              <li><strong>Automated Editing Tools:</strong> Flagging promotional language to help authors write more objectively</li>
+              <li><strong>Scientific Fact-Checking:</strong> Foundation for downstream fact-checking systems</li>
+              <li><strong>Publication Quality:</strong> Assisting editors in identifying over-promoted claims</li>
+              <li><strong>Research Transparency:</strong> Supporting more objective communication in grant applications and publications</li>
+            </ul>
+            
+            <p><strong>Future Work:</strong></p>
+            <ul>
+              <li>Develop guidelines for the remaining six adjective groups (importance, scale, utility, quality, attitude, problem)</li>
+              <li>Expand lexicon to include adverbs, nouns, and verbs</li>
+              <li>Consider intensity levels of hype (not just binary classification)</li>
+              <li>Apply to other research fields and languages</li>
+              <li>Scale annotation process to larger datasets</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BibTex citation -->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>@inproceedings{batalo2026hypeonot,
+  title={Hype or not? {F}ormalizing Automatic Promotional Language Detection in Biomedical Research},
+  author={Batalo, Bojan and Shimomoto, Erica K. and Satav, Dipesh and Millar, Neil},
+  booktitle={Proceedings of the 18th Conference of the European Chapter of the Association for Computational Linguistics (EACL 2026)},
+  year={2026}
+}</code></pre>
+    </div>
+  </section>
+  <!-- End BibTex citation -->
+
+  <footer class="footer">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+            <p>
+              This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> 
+              which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+              You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. 
+              <br> This website is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+              Commons Attribution-ShareAlike 4.0 International License</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
