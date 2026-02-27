@@ -5,228 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" href="../assets/images/hype_favicon.png">
   <title>Best-Worst Scaling Tool - Hype-Busters</title>
-  
+
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
 
+  <style>
     body {
       font-family: 'Google Sans', sans-serif;
-      background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
-      min-height: 100vh;
     }
-    
     .navbar-brand strong {
       font-size: 1.3rem;
     }
-    
-    body > .container {
-      max-width: 950px;
-      margin: 40px auto;
-      padding: 0;
-      background: white;
-      border-radius: 16px;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.4);
-      overflow: hidden;
+    /* Only the hero (header band) is dark */
+    .hero {
+      background: radial-gradient(circle at top, #333 0%, #111 55%, #000 100%);
     }
-
-    .header {
-      background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
-      color: white;
-      padding: 48px 32px;
-      text-align: center;
-    }
-
-    .header h1 {
-      font-size: 2.2em;
-      margin-bottom: 12px;
-      font-weight: 400;
-      letter-spacing: -0.5px;
-    }
-
-    .header p {
-      opacity: 1;
-      font-size: 1em;
-      font-weight: 300;
-      letter-spacing: 0.3px;
-    }
-
-    .content {
-      padding: 40px 60px;
-    }
-
-    .intro-section {
-      margin-bottom: 40px;
-    }
-
-    .intro-section h2 {
-      color: #1a1a1a;
-      margin-bottom: 15px;
-      font-size: 1.8em;
-    }
-
-    .intro-section p {
-      color: #555;
-      line-height: 1.8;
-      font-size: 1.1em;
-      margin-bottom: 15px;
-    }
-
-    .intro-section ul {
-      margin-left: 25px;
-      color: #555;
-      line-height: 1.8;
-      font-size: 1.05em;
-    }
-
-    .intro-section li {
-      margin-bottom: 10px;
-    }
-
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 25px;
-      margin-top: 30px;
-      margin-bottom: 40px;
-    }
-
     .feature-card {
-      background: #f8f9fa;
-      border: 2px solid #e9ecef;
-      border-radius: 15px;
-      padding: 25px;
-      text-align: center;
-      transition: all 0.3s ease;
-    }
-
-    .feature-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 25px rgba(26, 26, 26, 0.2);
-      border-color: #1a1a1a;
-    }
-
-    .feature-card .icon {
-      font-size: 3em;
-      margin-bottom: 15px;
-    }
-
-    .feature-card h3 {
-      color: #333;
-      margin-bottom: 10px;
-      font-size: 1.3em;
-    }
-
-    .feature-card p {
-      color: #666;
-      line-height: 1.6;
-    }
-
-    .cta-section {
-      background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
-      color: white;
-      padding: 40px;
-      border-radius: 15px;
-      text-align: center;
-      margin-top: 40px;
-    }
-
-    .cta-section h2 {
-      margin-bottom: 20px;
-      font-size: 2em;
-    }
-
-    .cta-section p {
-      margin-bottom: 30px;
-      font-size: 1.2em;
-      opacity: 0.95;
-    }
-
-    .btn {
-      background: white;
-      color: #1a1a1a;
-      padding: 15px 40px;
-      border: none;
-      border-radius: 50px;
-      font-size: 1.2em;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      text-decoration: none;
-      display: inline-block;
-    }
-
-    .btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-    }
-
-    .methodology-section {
-      background: #fafafa;
-      border-left: 4px solid #1a1a1a;
-      padding: 30px;
-      border-radius: 12px;
-      margin: 30px 0;
-      border: 1px solid #e0e0e0;
-    }
-
-    .methodology-section h3 {
-      color: #1a1a1a;
-      margin-bottom: 15px;
-      font-size: 1.5em;
-    }
-
-    .methodology-section p {
-      color: #555;
-      line-height: 1.8;
-      margin-bottom: 10px;
-    }
-
-    .back-link {
-      text-align: center;
-      margin-top: 30px;
-      padding: 20px;
-    }
-
-    .back-link a {
-      color: #1a1a1a;
-      text-decoration: none;
-      font-size: 16px;
-      transition: all 0.3s ease;
-    }
-
-    .back-link a:hover {
-      color: #2c2c2c;
-    }
-
-    .example-box {
-      background: #fff3cd;
-      border: 2px solid #ffc107;
-      border-radius: 10px;
-      padding: 20px;
-      margin: 20px 0;
-    }
-
-    .example-box h4 {
-      color: #856404;
-      margin-bottom: 10px;
-    }
-
-    .example-box p {
-      color: #856404;
-      line-height: 1.6;
+      height: 100%;
     }
   </style>
 </head>
 <body>
-  <!-- Navigation -->
+  <!-- Navigation (matches main site) -->
   <nav class="navbar is-light" role="navigation" aria-label="main navigation">
     <div class="container is-max-desktop">
       <div class="navbar-brand">
@@ -252,87 +53,89 @@
     </div>
   </nav>
 
-  <div class="container">
-    <div class="header">
-      <h1>Best-Worst Scaling Tool</h1>
-      <p>A powerful methodology for measuring preferences and perceptions</p>
+  <!-- Hero Section (same style as home/about) -->
+  <section class="hero is-medium">
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <h1 class="title is-1 has-text-white">
+          Best-Worst Scaling Tool
+        </h1>
+        <p class="subtitle is-4 has-text-white">
+          A methodology for measuring preferences and perceptions in scientific language.
+        </p>
+      </div>
     </div>
+  </section>
 
-    <div class="content">
-      <div class="intro-section">
-        <h2>What is Best-Worst Scaling?</h2>
+  <!-- Main Content -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="content">
+        <h2 class="title is-3">What is Best-Worst Scaling?</h2>
         <p>
-          Best-Worst Scaling (BWS) asks participants to identify the "best" and "worst" items from a set. 
+          Best-Worst Scaling (BWS) asks participants to identify the "best" and "worst" items from a set.
           This forces choices between items, providing more reliable data than traditional rating scales.
         </p>
       </div>
 
-      <div class="feature-grid">
-        <div class="feature-card">
-          <div class="icon">📊</div>
-          <h3>Better Discrimination</h3>
-          <p>Choosing extremes provides clearer differentiation between items than rating scales.</p>
+      <div class="columns is-multiline" style="margin-top: 2rem;">
+        <div class="column is-one-third">
+          <div class="box feature-card has-text-centered">
+            <div class="icon is-large" style="margin-bottom: 0.75rem;">
+              <span style="font-size: 2.5rem;">📊</span>
+            </div>
+            <h3 class="title is-5">Better Discrimination</h3>
+            <p>Choosing extremes provides clearer differentiation between items than rating scales.</p>
+          </div>
         </div>
-        <div class="feature-card">
-          <div class="icon">⚖️</div>
-          <h3>Reduced Bias</h3>
-          <p>Eliminates cultural and personal rating scale biases by using relative comparisons.</p>
+        <div class="column is-one-third">
+          <div class="box feature-card has-text-centered">
+            <div class="icon is-large" style="margin-bottom: 0.75rem;">
+              <span style="font-size: 2.5rem;">⚖️</span>
+            </div>
+            <h3 class="title is-5">Reduced Bias</h3>
+            <p>Eliminates cultural and personal rating scale biases by using relative comparisons.</p>
+          </div>
         </div>
-        <div class="feature-card">
-          <div class="icon">🎯</div>
-          <h3>More Reliable</h3>
-          <p>Produces consistent results with smaller sample sizes than traditional methods.</p>
+        <div class="column is-one-third">
+          <div class="box feature-card has-text-centered">
+            <div class="icon is-large" style="margin-bottom: 0.75rem;">
+              <span style="font-size: 2.5rem;">🎯</span>
+            </div>
+            <h3 class="title is-5">More Reliable</h3>
+            <p>Produces consistent results with smaller sample sizes than traditional methods.</p>
+          </div>
         </div>
       </div>
 
-      <div class="methodology-section">
-        <h3>How It Works</h3>
+      <div class="content" style="margin-top: 2.5rem;">
+        <h2 class="title is-4">How It Works</h2>
         <p>
-          Participants see small sets of items (3-5) and select the "best" and "worst" according to a criterion. 
-          This repeats across multiple sets. The frequency of choices calculates preference or intensity scores.
+          Participants see small sets of items (3–5) and select the "best" and "worst" according to a criterion.
+          This process is repeated across multiple sets. The frequency of best and worst selections is then
+          converted into continuous scores that reflect preference or intensity.
         </p>
       </div>
 
-      <div class="intro-section">
-        <h2>Our Research</h2>
-        <p>
-          We use BWS to measure the intensity and promotional nature of language in biomedical research, 
-          helping create guidelines for transparent scientific communication.
-        </p>
-      </div>
-
-      <div class="cta-section">
-        <h2>Word Intensity Survey</h2>
-        <p>Help us measure the intensity of promotional language.</p>
-        <a href="/intensity-scaling/" class="btn">Take Survey →</a>
-      </div>
-
-      <div class="cta-section">
-        <h2>BWS Annotation Tool</h2>
-        <p>Contribute to our linguistic research.</p>
-        <a href="https://bws.hype-busters.com" class="btn" target="_blank">Launch BWS Tool →</a>
-      </div>
-
-      <div class="back-link">
-        <a href="/">← Back to Website</a>
+      <div class="has-text-centered" style="margin-top: 1.5rem;">
+        <a href="/" class="has-text-link">← Back to Home</a>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- Footer -->
-  <footer class="footer" style="background: transparent; margin-top: 40px;">
-    <div class="content has-text-centered has-text-white">
+  <!-- Footer (matches main site) -->
+  <footer class="footer">
+    <div class="content has-text-centered">
       <p>
-        <strong class="has-text-white">Hype-Busters</strong> — Identifying promotional language in biomedical research.
+        <strong>Hype-Busters</strong> — Identifying promotional language in biomedical research.
       </p>
     </div>
   </footer>
 
   <script>
-    // Mobile menu toggle
     document.addEventListener('DOMContentLoaded', () => {
       const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
-      $navbarBurgers.forEach( el => {
+      $navbarBurgers.forEach(el => {
         el.addEventListener('click', () => {
           const target = el.dataset.target;
           const $target = document.getElementById(target);
