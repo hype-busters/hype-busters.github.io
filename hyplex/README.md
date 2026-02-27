@@ -64,7 +64,7 @@ To complete the page, add the following images to `static/images/`:
 Simply push changes to your GitHub repository and the page will be available at:
 `htResources
 
-- **BWS Platform**: https://www.hype-busters.com/bws/
+- **BWS Platform**: https://bws.hype-busters.com
 - **Lexicon Data**: https://www.hype-busters.com/hyplex.html
 - **Paper**: To be published in LREC 2026
 

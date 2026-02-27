@@ -41,7 +41,7 @@ hyplex/
 
 ### Links
 - Paper PDF (placeholder - add your link)
-- BWS Platform: https://www.hype-busters.com/bws/
+- BWS Platform: https://bws.hype-busters.com
 - Lexicon Data: https://www.hype-busters.com/hyplex.html
 
 ### Citation
