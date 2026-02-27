@@ -34,7 +34,7 @@
         }
         
         body > .container {
-            max-width: 650px;
+            max-width: 1000px !important;
             margin: 40px auto;
             padding: 0;
             background: #ffffff;
@@ -56,6 +56,7 @@
             margin-bottom: 12px;
             font-weight: 400;
             letter-spacing: -0.5px;
+            color: #ffffff;
         }
 
         .header p {
@@ -63,6 +64,7 @@
             font-size: 1em;
             font-weight: 300;
             letter-spacing: 0.3px;
+            color: #ffffff;
         }
 
         .progress-bar {
@@ -81,7 +83,7 @@
         }
 
         .content {
-            padding: 44px 36px;
+            padding: 40px 60px;
         }
 
         .question-card {
@@ -131,19 +133,19 @@
         }
 
         .word-option.most-intense {
-            background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%);
-            border-color: #1a1a1a;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            border-color: #000000;
             color: white;
             font-weight: 600;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
         }
 
         .word-option.least-intense {
-            background: linear-gradient(135deg, #757575 0%, #9e9e9e 100%);
-            border-color: #757575;
+            background: linear-gradient(135deg, #adadad 0%, #c0c0c0 100%);
+            border-color: #adadad;
             color: white;
             font-weight: 600;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
         }
 
         .intensity-labels {
@@ -180,16 +182,16 @@
         }
 
         .example-word.example-most-intense {
-            background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%);
-            border-color: #1a1a1a;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            border-color: #000000;
             color: white;
             font-weight: 600;
             transform: scale(1.05);
         }
 
         .example-word.example-least-intense {
-            background: linear-gradient(135deg, #757575 0%, #9e9e9e 100%);
-            border-color: #757575;
+            background: linear-gradient(135deg, #adadad 0%, #c0c0c0 100%);
+            border-color: #adadad;
             color: white;
             font-weight: 600;
             transform: scale(1.05);
@@ -216,12 +218,12 @@
         }
 
         .most-label {
-            background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%);
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
             color: white;
         }
 
         .least-label {
-            background: linear-gradient(135deg, #757575 0%, #9e9e9e 100%);
+            background: linear-gradient(135deg, #adadad 0%, #c0c0c0 100%);
             color: white;
         }
 
@@ -354,7 +356,7 @@
             background: white;
             border-radius: 16px;
             padding: 40px;
-            max-width: 700px;
+            max-width: 900px;
             max-height: 85vh;
             overflow-y: auto;
             margin: 20px;
@@ -548,7 +550,7 @@
         }
 
         .form-section {
-            max-width: 500px;
+            max-width: 700px;
             margin: 0 auto;
         }
 
@@ -655,7 +657,7 @@
                     <h2 style="margin-bottom: 30px; text-align: center;">Choose Your Daily Survey</h2>
                     <p style="text-align: center; margin-bottom: 30px;">Please select one of the five available surveys for today. Each survey contains different word sets for evaluation.</p>
                     
-                    <div style="max-width: 500px; margin: 0 auto;">
+                    <div style="max-width: 700px; margin: 0 auto;">
                         <div id="surveyOptions" style="display: grid; gap: 15px; margin-bottom: 30px;">
                             <div class="survey-option" data-survey="1">
                                 <h3>Survey 1: Attitude & Importance</h3>
@@ -751,7 +753,7 @@
                 <div class="question-card">
                     <h1 style="text-align: center; margin-bottom: 32px; font-size: 1.8em;">Best–Worst Scaling: Participant Instructions</h1>
                     
-                    <div style="max-width: 600px; margin: 0 auto; text-align: left;">
+                    <div style="max-width: 800px; margin: 0 auto; text-align: left;">
                         <h2 style="margin-top: 32px; margin-bottom: 16px; font-size: 1.4em;">General Instructions</h2>
                         <p style="margin-bottom: 15px; line-height: 1.6;">In this study, you will be shown small sets of words. Your job is to decide which word in the set is the <strong>most intense</strong> and which is the <strong>least intense</strong>, based on the meaning we are focusing on for that session.</p>
                         
@@ -824,7 +826,7 @@
                 <div class="question-card">
                     <h1 style="text-align: center; margin-bottom: 32px; font-size: 1.8em;">Word Intensity Survey</h1>
                     
-                    <div style="max-width: 600px; margin: 0 auto; text-align: left;">
+                    <div style="max-width: 800px; margin: 0 auto; text-align: left;">
                         <p style="margin-bottom: 32px; line-height: 1.7; font-size: 1.05em;">
                             Select the <strong>most intense</strong> and <strong>least intense</strong> words from small sets based on a given meaning.
                         </p>
