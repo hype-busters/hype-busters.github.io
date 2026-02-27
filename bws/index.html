@@ -19,7 +19,7 @@
 
     body {
       font-family: 'Google Sans', sans-serif;
-      background: linear-gradient(135deg, #8B1538 0%, #4A0E26 100%);
+      background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
       min-height: 100vh;
     }
     
@@ -28,36 +28,38 @@
     }
     
     body > .container {
-      max-width: 900px;
+      max-width: 950px;
       margin: 40px auto;
-      padding: 0 20px;
+      padding: 0;
       background: white;
-      border-radius: 20px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.4);
       overflow: hidden;
     }
 
     .header {
-      background: linear-gradient(135deg, #8B1538 0%, #4A0E26 100%);
+      background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
       color: white;
-      padding: 40px;
+      padding: 48px 32px;
       text-align: center;
     }
 
     .header h1 {
-      font-size: 2.5em;
-      margin-bottom: 10px;
-      font-weight: 600;
+      font-size: 2.2em;
+      margin-bottom: 12px;
+      font-weight: 400;
+      letter-spacing: -0.5px;
     }
 
     .header p {
-      opacity: 0.9;
-      font-size: 1.2em;
-      line-height: 1.6;
+      opacity: 1;
+      font-size: 1em;
+      font-weight: 300;
+      letter-spacing: 0.3px;
     }
 
     .content {
-      padding: 50px;
+      padding: 40px 60px;
     }
 
     .intro-section {
@@ -65,7 +67,7 @@
     }
 
     .intro-section h2 {
-      color: #8B1538;
+      color: #1a1a1a;
       margin-bottom: 15px;
       font-size: 1.8em;
     }
@@ -107,8 +109,8 @@
 
     .feature-card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 10px 25px rgba(139, 21, 56, 0.2);
-      border-color: #8B1538;
+      box-shadow: 0 10px 25px rgba(26, 26, 26, 0.2);
+      border-color: #1a1a1a;
     }
 
     .feature-card .icon {
@@ -128,7 +130,7 @@
     }
 
     .cta-section {
-      background: linear-gradient(135deg, #8B1538 0%, #4A0E26 100%);
+      background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
       color: white;
       padding: 40px;
       border-radius: 15px;
@@ -149,7 +151,7 @@
 
     .btn {
       background: white;
-      color: #8B1538;
+      color: #1a1a1a;
       padding: 15px 40px;
       border: none;
       border-radius: 50px;
@@ -167,15 +169,16 @@
     }
 
     .methodology-section {
-      background: #f8f9fa;
-      border-left: 4px solid #8B1538;
+      background: #fafafa;
+      border-left: 4px solid #1a1a1a;
       padding: 30px;
-      border-radius: 10px;
+      border-radius: 12px;
       margin: 30px 0;
+      border: 1px solid #e0e0e0;
     }
 
     .methodology-section h3 {
-      color: #8B1538;
+      color: #1a1a1a;
       margin-bottom: 15px;
       font-size: 1.5em;
     }
@@ -193,14 +196,14 @@
     }
 
     .back-link a {
-      color: #8B1538;
+      color: #1a1a1a;
       text-decoration: none;
       font-size: 16px;
       transition: all 0.3s ease;
     }
 
     .back-link a:hover {
-      color: #4A0E26;
+      color: #2c2c2c;
     }
 
     .example-box {
@@ -259,20 +262,9 @@
       <div class="intro-section">
         <h2>What is Best-Worst Scaling?</h2>
         <p>
-          Best-Worst Scaling (BWS) is a sophisticated research methodology that asks participants to identify 
-          the "best" and "worst" items from a set. This approach provides more reliable and discriminating 
-          data than traditional rating scales.
+          Best-Worst Scaling (BWS) asks participants to identify the "best" and "worst" items from a set. 
+          This forces choices between items, providing more reliable data than traditional rating scales.
         </p>
-        <p>
-          Also known as Maximum Difference Scaling, BWS forces choices between items, making it particularly 
-          useful for measuring:
-        </p>
-        <ul>
-          <li>Relative importance of features or attributes</li>
-          <li>Preference rankings among multiple options</li>
-          <li>Intensity or strength of language and concepts</li>
-          <li>Value perceptions in consumer research</li>
-        </ul>
       </div>
 
       <div class="feature-grid">
@@ -296,49 +288,29 @@
       <div class="methodology-section">
         <h3>How It Works</h3>
         <p>
-          Participants are shown small sets of items (typically 3-5) and asked to select which item is the 
-          "best" and which is the "worst" according to a specific criterion. This process is repeated across 
-          multiple sets, with items appearing in different combinations.
+          Participants see small sets of items (3-5) and select the "best" and "worst" according to a criterion. 
+          This repeats across multiple sets. The frequency of choices calculates preference or intensity scores.
         </p>
-        <p>
-          The frequency with which an item is chosen as "best" and "worst" is used to calculate a preference 
-          or intensity score on an interval scale.
-        </p>
-                
-        <div class="example-box">
-          <h4>Example in Biomedical Research</h4>
-          <p>
-            For studying promotional language in research abstracts, participants might see sets of words 
-            like "important, significant, critical, essential" and choose which conveys the MOST and LEAST 
-            intensity for the meaning of "importance."
-          </p>
-        </div>
       </div>
 
       <div class="intro-section">
-        <h2>Applications in Our Research</h2>
+        <h2>Our Research</h2>
         <p>
-          We use Best-Worst Scaling to understand how biomedical researchers and readers perceive the 
-          intensity and promotional nature of language used in scientific communication. This helps us:
+          We use BWS to measure the intensity and promotional nature of language in biomedical research, 
+          helping create guidelines for transparent scientific communication.
         </p>
-        <ul>
-          <li>Quantify the strength of promotional terms in research abstracts</li>
-          <li>Identify which words are perceived as more "hyped" by different audiences</li>
-          <li>Develop objective measures of language intensity</li>
-          <li>Create guidelines for transparent scientific communication</li>
-        </ul>
       </div>
 
       <div class="cta-section">
-        <h2>Use the BWS Annotation Tool</h2>
-        <p>Access our online Best-Worst Scaling annotation platform to contribute to linguistic research.</p>
+        <h2>Word Intensity Survey</h2>
+        <p>Help us measure the intensity of promotional language.</p>
+        <a href="/intensity-scaling/" class="btn">Take Survey →</a>
+      </div>
+
+      <div class="cta-section">
+        <h2>BWS Annotation Tool</h2>
+        <p>Contribute to our linguistic research.</p>
         <a href="https://bws.hype-busters.com" class="btn" target="_blank">Launch BWS Tool →</a>
-      </div>
-
-      <div class="cta-section">
-        <h2>Ready to Participate?</h2>
-        <p>Help us advance scientific communication by participating in our word intensity surveys.</p>
-        <a href="/intensity-scaling/" class="btn">Go to Survey →</a>
       </div>
 
       <div class="back-link">
