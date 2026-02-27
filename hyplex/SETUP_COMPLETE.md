@@ -2,7 +2,7 @@
 
 ## ✅ What's Been Created
 
-The Hyplex project page has been successfully created at `/hyplex/` with all content from your LREC-COLING 2025 paper.
+The Hyplex project page has been successfully created at `/hyplex/` with all content from your LREC 2026 paper.
 
 ### Structure
 ```
@@ -31,7 +31,7 @@ hyplex/
 - **Title**: "Best-Worst Scaling of Hype in Biomedical Research: Building an Intensity Lexicon of Promotional Adjectives"
 - **Authors**: Neil Millar, Dipesh Satav, Bojan Batalo, Erica K. Shimomoto, Ryosuke L. Ohniwa
 - **Affiliations**: University of Tsukuba, AIST
-- **Conference**: LREC-COLING 2025
+- **Conference**: LREC 2026
 
 ### Sections
 1. **Abstract** - Full abstract from the paper

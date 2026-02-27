@@ -66,7 +66,7 @@ Simply push changes to your GitHub repository and the page will be available at:
 
 - **BWS Platform**: https://www.hype-busters.com/bws/
 - **Lexicon Data**: https://www.hype-busters.com/hyplex.html
-- **Paper**: To be published in LREC-COLING 2025
+- **Paper**: To be published in LREC 2026
 
 ## Authors
 
@@ -79,11 +79,11 @@ Simply push changes to your GitHub repository and the page will be available at:
 ## Citation
 
 ```bibtex
-@inproceedings{millar2025hyplex,
+@inproceedings{millar2026hyplex,
   title={Best-Worst Scaling of Hype in Biomedical Research: Building an Intensity Lexicon of Promotional Adjectives},
   author={Millar, Neil and Satav, Dipesh and Batalo, Bojan and Shimomoto, Erica K. and Ohniwa, Ryosuke L.},
-  booktitle={Proceedings of the 2025 Joint International Conference on Computational Linguistics, Language Resources and Evaluation (LREC-COLING 2025)},
-  year={2025}
+  booktitle={Proceedings of the 2026 Language Resources and Evaluation Conference (LREC 2026)},
+  year={2026}
 }
 ```
 
