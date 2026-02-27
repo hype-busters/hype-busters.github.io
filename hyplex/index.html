@@ -1,129 +1,145 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
-  <!-- Meta tags for social media banners, these should be filled in appropriately as they are your "business card" -->
-  <!-- Replace the content tag with appropriate information -->
+
+  <!-- SEO & social -->
   <meta name="description" content="Hyplex: An intensity-scaled lexicon of 303 promotional adjectives in biomedical research">
-  <meta property="og:title" content="Best-Worst Scaling of Hype in Biomedical Research"/>
-  <meta property="og:description" content="Building an Intensity Lexicon of Promotional Adjectives using Best-Worst Scaling"/>
+  <meta property="og:title" content="Hyplex — Intensity Lexicon for Promotional Adjectives"/>
+  <meta property="og:description" content="Best–Worst Scaling of hype in biomedical research to build an intensity-scaled lexicon of promotional adjectives."/>
   <meta property="og:url" content="https://hype-busters.github.io/hyplex"/>
-  <!-- Path to banner image, should be in the path listed below. Optimal dimensions are 1200X630-->
   <meta property="og:image" content="static/images/banner.png" />
   <meta property="og:image:width" content="1200"/>
   <meta property="og:image:height" content="630"/>
 
   <meta name="twitter:title" content="Hyplex: Hype Intensity Lexicon">
   <meta name="twitter:description" content="An intensity-scaled lexicon of promotional adjectives in biomedical research">
-  <!-- Path to banner image, should be in the path listed below. Optimal dimensions are 1200X600-->
   <meta name="twitter:image" content="static/images/twitter_banner.png">
   <meta name="twitter:card" content="summary_large_image">
-  <!-- Keywords for your paper to be indexed by-->
+
   <meta name="keywords" content="hyplex, promotional language, best-worst scaling, lexical resources, biomedical research, hype detection, NLP">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Hyplex: Best-Worst Scaling of Hype in Biomedical Research</title>
+  <title>Hyplex — Intensity Lexicon for Promotional Adjectives</title>
   <link rel="icon" type="image/png" href="../assets/images/hype_favicon.png">
+
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-  <link rel="stylesheet" href="static/css/bulma.min.css">
-  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
-  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
-  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="static/css/index.css">
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
-  <script defer src="static/js/fontawesome.all.min.js"></script>
-  <script src="static/js/bulma-carousel.min.js"></script>
-  <script src="static/js/bulma-slider.min.js"></script>
-  <script src="static/js/index.js"></script>
+  <style>
+    body {
+      font-family: 'Google Sans', sans-serif;
+    }
+    .navbar-brand strong {
+      font-size: 1.3rem;
+    }
+    .hero {
+      background: linear-gradient(135deg, #8B1538 0%, #4A0E26 100%);
+    }
+    .hero.is-light {
+      background: #f5f5f5;
+      color: #363636;
+    }
+    .hero.is-light .title,
+    .hero.is-light .subtitle {
+      color: #363636;
+    }
+    .project-links .button {
+      margin: 0.25rem;
+    }
+    .content img {
+      border-radius: 8px;
+    }
+  </style>
 </head>
 <body>
+  <!-- Navigation (matches home page) -->
+  <nav class="navbar is-light" role="navigation" aria-label="main navigation">
+    <div class="container is-max-desktop">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="/">
+          <strong>Hype-Busters</strong>
+        </a>
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
 
-  <section class="hero">
+      <div id="navbarMenu" class="navbar-menu">
+        <div class="navbar-end">
+          <a class="navbar-item" href="/about/">About</a>
+          <a class="navbar-item" href="/resources/">Previous Works</a>
+          <a class="navbar-item" href="/people/">People</a>
+          <a class="navbar-item" href="/nih-data/">NIH Data Access</a>
+          <a class="navbar-item" href="/tools/">Tools</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero (same style as home, with Hyplex content) -->
+  <section class="hero is-medium">
     <div class="hero-body">
-      <div class="container is-max-desktop">
-        <div class="columns is-centered">
-          <div class="column has-text-centered">
-            <h1 class="title is-1 publication-title">Best-Worst Scaling of Hype in Biomedical Research: Building an Intensity Lexicon of Promotional Adjectives</h1>
-            <div class="is-size-5 publication-authors">
-              <!-- Paper authors -->
-              <span class="author-block">
-                <a href="mailto:millar.neil.gm@u.tsukuba.ac.jp">Neil Millar</a><sup>1</sup>,</span>
-              <span class="author-block">
-                <a href="mailto:dsatav@cvlab.cs.tsukuba.ac.jp">Dipesh Satav</a><sup>1</sup>,</span>
-              <span class="author-block">
-                <a href="mailto:bojan.batalo@aist.go.jp">Bojan Batalo</a><sup>2</sup>,</span>
-              <span class="author-block">
-                <a href="mailto:kidoshimomoto.e@aist.go.jp">Erica K. Shimomoto</a><sup>2</sup>,</span>
-              <span class="author-block">
-                <a href="mailto:ohniwa@md.tsukuba.ac.jp">Ryosuke L. Ohniwa</a><sup>1</sup>
-              </span>
-            </div>
+      <div class="container has-text-centered">
+        <h1 class="title is-1 has-text-white">
+          Hyplex — Intensity Lexicon
+        </h1>
+        <p class="subtitle is-4 has-text-white">
+          Best–Worst Scaling of hype in biomedical research to build an intensity-scaled lexicon of promotional adjectives.
+        </p>
+        <p class="has-text-white is-size-6">
+          Neil Millar<sup>1</sup>, Dipesh Satav<sup>1</sup>, Bojan Batalo<sup>2</sup>, Erica K. Shimomoto<sup>2</sup>, Ryosuke L. Ohniwa<sup>1</sup><br>
+          <span class="is-size-7">(<sup>1</sup>University of Tsukuba, <sup>2</sup>AIST Japan) — LREC 2026</span>
+        </p>
+        <div class="project-links" style="margin-top: 1.75rem;">
+          <a href="#" target="_blank" class="button is-light is-outlined">
+            <span class="icon"><i class="fas fa-file-pdf"></i></span>
+            <span>Paper</span>
+          </a>
+          <a href="https://bws.hype-busters.com" target="_blank" class="button is-light is-outlined">
+            <span class="icon"><i class="fas fa-tools"></i></span>
+            <span>BWS Platform</span>
+          </a>
+          <a href="https://github.com/hype-busters/lrec2026-hype-lexicon" target="_blank" class="button is-light is-outlined">
+            <span class="icon"><i class="fab fa-github"></i></span>
+            <span>GitHub Page</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-            <div class="is-size-5 publication-authors">
-              <span class="author-block"><sup>1</sup>University of Tsukuba, <sup>2</sup>National Institute of Advanced Industrial Science and Technology (AIST)<br><strong>LREC 2026</strong></span>
-            </div>
-
-            <div class="column has-text-centered">
-              <div class="publication-links">
-                <!-- Paper PDF link -->
-                <span class="link-block">
-                  <a href="#" target="_blank" class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon">
-                      <i class="fas fa-file-pdf"></i>
-                    </span>
-                    <span>Paper</span>
-                  </a>
-                </span>
-
-                <!-- BWS Platform link -->
-                <span class="link-block">
-                  <a href="https://bws.hype-busters.com" target="_blank" class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon">
-                      <i class="fas fa-tools"></i>
-                    </span>
-                    <span>BWS Platform</span>
-                  </a>
-                </span>
-
-                <!-- Lexicon Data -->
-                <span class="link-block">
-                  <a href="https://github.com/hype-busters/lrec2026-hype-lexicon" target="_blank" class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon">
-                      <i class="fab fa-github"></i>
-                    </span>
-                    <span>GitHub Page</span>
-                  </a>
-                </span>
-              </div>
-            </div>
+  <!-- Overview / Intro -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-vcentered is-variable is-6">
+        <div class="column is-half">
+          <figure class="image">
+            <img src="static/images/teaser.png" alt="Hyplex overview">
+          </figure>
+        </div>
+        <div class="column is-half">
+          <div class="content">
+            <h2 class="title is-3">What is Hyplex?</h2>
+            <p>
+              <strong>Hyplex</strong> is an intensity-scaled lexicon of 303 promotional adjectives attested in biomedical writing across eight evaluative domains
+              (e.g. IMPORTANCE, NOVELTY, RIGOUR). Ratings were collected using <strong>Best–Worst Scaling (BWS)</strong>, where human annotators judged which
+              adjectives were most and least promotional in the context of scientific research reporting.
+            </p>
+            <p>
+              The lexicon enables comparisons such as <em>new</em> &lt; <em>novel</em> &lt; <em>groundbreaking</em> &lt; <em>revolutionary</em>, and supports both
+              qualitative analysis of scientific discourse and quantitative modeling of hype intensity.
+            </p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Teaser video/image -->
-  <section class="hero teaser">
-    <div class="container is-max-desktop">
-      <div class="hero-body">
-        <!-- Replace with your teaser video or image -->
-        <!-- <video poster="" id="tree" autoplay controls muted loop height="100%">
-          <source src="static/videos/teaser_video.mp4" type="video/mp4">
-        </video> -->
-        <img src="static/images/teaser.png" alt="Hyplex Overview" style="width: 100%;"/>
-        <h2 class="subtitle has-text-justified">
-          <strong>Hyplex</strong> is an intensity-scaled lexicon of 303 promotional adjectives attested in biomedical writing across eight evaluative domains (e.g. IMPORTANCE, NOVELTY, RIGOUR), developed using Best-Worst Scaling with human ratings.
-        </h2>
-      </div>
-    </div>
-  </section>
-  <!-- End teaser video -->
-
-  <!-- Paper abstract -->
+  <!-- Abstract-style description -->
   <section class="section hero is-light">
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
@@ -131,35 +147,64 @@
           <h2 class="title is-3">Abstract</h2>
           <div class="content has-text-justified">
             <p>
-              Promotional language, or "hype", is increasingly common in biomedical research reporting. Adjectives such as <i>groundbreaking</i>, <i>robust</i>, and <i>impactful</i> can engage readers but also risk imposing value judgements and undermining objectivity. Detecting and assessing such language requires distinguishing degrees of promotional intensity (e.g., <i>new</i> &lt; <i>novel</i> &lt; <i>groundbreaking</i> &lt; <i>revolutionary</i>), yet no such graded resource exists.
+              Promotional language, or "hype", is increasingly common in biomedical research reporting. Adjectives such as
+              <i>groundbreaking</i>, <i>robust</i>, and <i>impactful</i> can engage readers but also risk imposing value judgements and
+              undermining objectivity. Detecting and assessing such language requires distinguishing degrees of promotional intensity,
+              yet no graded resource previously existed.
             </p>
             <p>
-              We present an intensity-scaled lexicon of 303 promotional adjectives attested in biomedical writing across eight evaluative domains (e.g. IMPORTANCE, NOVELTY, RIGOUR). Ratings were obtained through Best–Worst Scaling (BWS) with human participants evaluating adjectives for promotional strength in the context of scientific research reporting. We refer to this as the <strong>Hyplex</strong> resource (Hype Lexicon).
+              We present an intensity-scaled lexicon of 303 promotional adjectives attested in biomedical writing across eight evaluative
+              domains. Ratings were obtained through Best–Worst Scaling with human participants evaluating adjectives for promotional
+              strength in the context of scientific research reporting. We refer to this as the <strong>Hyplex</strong> resource (Hype Lexicon).
             </p>
             <p>
-              The ratings show high internal consistency (r = 0.87; 95% CI [0.85, 0.89]) and correlate most strongly with arousal and dominance in the NRC VAD Lexicon, suggesting that promotional intensity aligns more with reader activation and perceptions of assertiveness than simple positivity. We also release an online BWS platform integrated with the R package bwsTools to support intensity-scaling research in other domains.
+              The ratings show high internal consistency (r = 0.87; 95% CI [0.85, 0.89]) and correlate most strongly with arousal and
+              dominance in the NRC VAD Lexicon, suggesting that promotional intensity aligns more with reader activation and perceptions
+              of assertiveness than simple positivity.
             </p>
           </div>
         </div>
       </div>
     </div>
   </section>
-  <!-- End paper abstract -->
 
-  <!-- Method Overview -->
+  <!-- Method & Results -->
   <section class="section">
     <div class="container is-max-desktop">
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-full-width">
-          <h2 class="title is-3">Method Overview</h2>
-          <div class="content has-text-justified">
-            <img src="./static/images/method.png" alt="BWS Method" style="max-width: 700px; max-height: 400px; width: 100%; height: auto; margin: 0 auto; display: block;"/>
+      <div class="columns is-variable is-6">
+        <div class="column">
+          <div class="content">
+            <h2 class="title is-3">Best–Worst Scaling Method</h2>
+            <figure class="image" style="margin-bottom: 1.5rem;">
+              <img src="static/images/method.png" alt="Best-Worst Scaling method">
+            </figure>
             <p>
-              <strong>Best-Worst Scaling Annotation Process.</strong> 
-              We applied Best–Worst Scaling (BWS) to obtain promotional intensity ratings for 303 adjectives common in biomedical texts. Participants were shown sets of four adjectives and asked to select the most promotional ("best") and least promotional ("worst") term in each set. The adjectives fall into eight semantic categories: IMPORTANCE (<i>imperative, paramount</i>), NOVELTY (<i>revolutionary, ground-breaking</i>), SCALE (<i>massive, vast</i>), RIGOUR (<i>careful, sophisticated</i>), UTILITY (<i>impactful, seamless</i>), QUALITIES (<i>renowned, stellar</i>), ATTITUDE (<i>incredible, excellent</i>), and PROBLEM (<i>dire, devastating</i>).
+              Participants were shown sets of four adjectives and asked to select the most promotional ("best") and least promotional
+              ("worst") term in each set. Adjectives were grouped into semantic categories such as IMPORTANCE, NOVELTY, SCALE, RIGOUR,
+              UTILITY, QUALITIES, ATTITUDE, and PROBLEM.
             </p>
             <p>
-              Annotation followed a Balanced Incomplete Block Design (BIBD) constructed separately for each semantic category using the bwsTools package in R. Ten annotators (including native speakers and expert English users) completed surveys over five days using our custom BWS platform. Final promotional intensity scores were calculated using difference-scoring and linearly calibrated using embedded anchor items (high, neutral, and low) to ensure consistency across categories.
+              A Balanced Incomplete Block Design (BIBD) was constructed separately for each category using the <code>bwsTools</code> R
+              package. Ten annotators completed surveys over five days using our online BWS platform. Final scores were computed via
+              difference-scoring and calibrated using embedded anchor items.
+            </p>
+          </div>
+        </div>
+        <div class="column">
+          <div class="content">
+            <h2 class="title is-3">Key Results</h2>
+            <figure class="image" style="margin-bottom: 1.5rem;">
+              <img src="static/images/results.png" alt="Hyplex results overview">
+            </figure>
+            <p>
+              The lexicon achieves an overall split-half reliability of <strong>r = 0.87</strong> (95% CI [0.85, 0.89]). Category-specific
+              reliability ranges from r = 0.75 (RIGOUR) to r = 0.94 (ATTITUDE), with clearer evaluative meanings generally yielding higher
+              consistency.
+            </p>
+            <p>
+              High-intensity examples include <i>extraordinary, revolutionary, catastrophic, flawless, colossal</i>, while lower-intensity
+              items include <i>intriguing, fresh, unanswered, subtle, ample</i>. Promotional intensity correlates more strongly with arousal
+              and dominance than with valence, highlighting its link to activation and assertiveness rather than simple positivity.
             </p>
           </div>
         </div>
@@ -167,43 +212,20 @@
     </div>
   </section>
 
-  <!-- Results Section -->
-  <section class="section">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-full-width">
-          <h2 class="title is-3">Key Results</h2>
-          <div class="content has-text-justified">
-            <img src="./static/images/results.png" alt="Distribution of Promotional Intensity" style="max-width: 700px; max-height: 400px; width: 100%; height: auto; margin: 0 auto; display: block;"/>
-            <p>
-              The lexicon demonstrated high internal consistency with an overall split-half reliability of <strong>r = 0.87</strong> (95% CI [0.85, 0.89]). Category-specific reliability ranged from r = 0.75 (RIGOUR) to r = 0.94 (ATTITUDE). Categories with clearer evaluative meanings showed higher consistency, while more technical categories (UTILITY, RIGOUR) showed more individual variation.
-            </p>
-            <p>
-              The distribution of promotional intensity scores was similar across categories, with means ranging from 0.55 (PROBLEM) to 0.64 (SCALE). High-intensity examples include: <i>extraordinary, revolutionary, catastrophic, flawless, colossal</i>. Low-intensity examples include: <i>intriguing, fresh, unanswered, subtle, ample</i>.
-            </p>
-            <p>
-              Comparison with the NRC VAD Lexicon revealed that promotional intensity correlates most strongly with <strong>arousal</strong> (r = 0.37) and <strong>dominance</strong> (r = 0.36) dimensions, but weakly with valence (r = 0.11). This suggests promotional language aims to activate readers and convey assertiveness rather than simple positivity.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Applications Section -->
+  <!-- Applications -->
   <section class="section hero is-light">
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
           <h2 class="title is-3">Applications</h2>
           <div class="content has-text-justified">
-            <p>The Hyplex resource enables various research applications:</p>
+            <p>The Hyplex resource enables a range of downstream applications:</p>
             <ul>
-              <li><strong>NLP Features:</strong> Providing interpretable features for hype-detection systems and developing hype-aware embeddings</li>
-              <li><strong>Benchmarking:</strong> Serving as gold-standard reference for evaluating automatic promotionality detection methods</li>
-              <li><strong>Diachronic Analysis:</strong> Tracking changes in promotional language across time, domains, or publication types</li>
-              <li><strong>Research Impact:</strong> Examining whether promotional intensity influences funding success, publication, and citation impact</li>
-              <li><strong>Resource Extension:</strong> Using the BWS platform to crowdsource additional annotations and expand coverage</li>
+              <li><strong>NLP features:</strong> interpretable features for hype-detection systems and hype-aware embeddings</li>
+              <li><strong>Benchmarking:</strong> gold-standard reference for evaluating automatic promotionality detection methods</li>
+              <li><strong>Diachronic analysis:</strong> tracking changes in promotional language across time, domains, or publication types</li>
+              <li><strong>Research impact:</strong> studying links between promotional intensity, funding success, publication, and citation impact</li>
+              <li><strong>Resource extension:</strong> using the BWS platform to crowdsource additional annotations and expand coverage</li>
             </ul>
           </div>
         </div>
@@ -211,12 +233,10 @@
     </div>
   </section>
 
-
-
-  <!-- BibTex citation -->
+  <!-- BibTeX -->
   <section class="section" id="BibTeX">
     <div class="container is-max-desktop content">
-      <h2 class="title">BibTeX</h2>
+      <h2 class="title is-4">BibTeX</h2>
       <pre><code>@inproceedings{millar2025hyplex,
   title={Best-Worst Scaling of Hype in Biomedical Research: Building an Intensity Lexicon of Promotional Adjectives},
   author={Millar, Neil and Satav, Dipesh and Batalo, Bojan and Shimomoto, Erica K. and Ohniwa, Ryosuke L.},
@@ -225,25 +245,29 @@
 }</code></pre>
     </div>
   </section>
-  <!-- End BibTex citation -->
 
+  <!-- Footer (matches home) -->
   <footer class="footer">
-    <div class="container">
-      <div class="columns is-centered">
-        <div class="column is-8">
-          <div class="content">
-            <p>
-              This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> 
-              which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
-              You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. 
-              <br> This website is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
-              Commons Attribution-ShareAlike 4.0 International License</a>.
-            </p>
-          </div>
-        </div>
-      </div>
+    <div class="content has-text-centered">
+      <p>
+        <strong>Hype-Busters</strong> — Identifying promotional language in biomedical research.
+      </p>
     </div>
   </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+      $navbarBurgers.forEach(el => {
+        el.addEventListener('click', () => {
+          const target = el.dataset.target;
+          const $target = document.getElementById(target);
+          el.classList.toggle('is-active');
+          $target.classList.toggle('is-active');
+        });
+      });
+    });
+  </script>
 
 </body>
 </html>
