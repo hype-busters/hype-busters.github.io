@@ -1,115 +1,140 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
-  <!-- Meta tags for social media banners, these should be filled in appropriately as they are your "business card" -->
-  <!-- Replace the content tag with appropriate information -->
+
+  <!-- SEO & social -->
   <meta name="description" content="Hype or not? Formalizing Automatic Promotional Language Detection in Biomedical Research">
-  <meta property="og:title" content="Hype or not? Formalizing Automatic Promotional Language Detection in Biomedical Research"/>
-  <meta property="og:description" content="Introducing the task of automatic detection of hype language in biomedical texts with formalized annotation guidelines and a curated dataset."/>
+  <meta property="og:title" content="Hype or not? Automatic Promotional Language Detection"/>
+  <meta property="og:description" content="Formalizing automatic detection of hype language in biomedical research texts using NLP and machine learning."/>
   <meta property="og:url" content="https://hype-busters.github.io/hype-or-not"/>
-  <!-- Path to banner image, should be in the path listed below. Optimal dimensions are 1200X630-->
   <meta property="og:image" content="static/images/banner.png" />
   <meta property="og:image:width" content="1200"/>
   <meta property="og:image:height" content="630"/>
 
-  <meta name="twitter:title" content="Hype or not? Automatic Promotional Language Detection in Biomedical Research">
+  <meta name="twitter:title" content="Hype or not? Automatic Promotional Language Detection">
   <meta name="twitter:description" content="Formalizing automatic detection of hype language in biomedical research texts using NLP and machine learning.">
-  <!-- Path to banner image, should be in the path listed below. Optimal dimensions are 1200X600-->
   <meta name="twitter:image" content="static/images/twitter_banner.png">
   <meta name="twitter:card" content="summary_large_image">
-  <!-- Keywords for your paper to be indexed by-->
+
   <meta name="keywords" content="hype detection, promotional language, biomedical research, NLP, text classification, annotation guidelines, machine learning">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>Hype or not? Automatic Promotional Language Detection in Biomedical Research</title>
   <link rel="icon" type="image/png" href="../assets/images/hype_favicon.png">
+
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-  <link rel="stylesheet" href="static/css/bulma.min.css">
-  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
-  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
-  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="static/css/index.css">
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
-  <script defer src="static/js/fontawesome.all.min.js"></script>
-  <script src="static/js/bulma-carousel.min.js"></script>
-  <script src="static/js/bulma-slider.min.js"></script>
-  <script src="static/js/index.js"></script>
+  <style>
+    body {
+      font-family: 'Google Sans', sans-serif;
+    }
+    .navbar-brand strong {
+      font-size: 1.3rem;
+    }
+    .hero {
+      background: linear-gradient(135deg, #8B1538 0%, #4A0E26 100%);
+    }
+    .hero.is-light {
+      background: #f5f5f5;
+      color: #363636;
+    }
+    .hero.is-light .title,
+    .hero.is-light .subtitle {
+      color: #363636;
+    }
+    .project-links .button {
+      margin: 0.25rem;
+    }
+    .content img {
+      border-radius: 8px;
+    }
+  </style>
 </head>
 <body>
-
-  <section class="hero">
-    <div class="hero-body">
-      <div class="container is-max-desktop">
-        <div class="columns is-centered">
-          <div class="column has-text-centered">
-            <h1 class="title is-1 publication-title">Hype or not? Formalizing Automatic Promotional Language Detection in Biomedical Research</h1>
-            <div class="is-size-5 publication-authors">
-              <!-- Paper authors -->
-              <span class="author-block">
-                <a href="mailto:bojan.batalo@aist.go.jp">Bojan Batalo</a><sup>1</sup>,</span>
-              <span class="author-block">
-                <a href="mailto:kidoshimomoto.e@aist.go.jp">Erica K. Shimomoto</a><sup>1</sup>,</span>
-              <span class="author-block">
-                <a href="mailto:dsatav@cvlab.cs.tsukuba.ac.jp">Dipesh Satav</a><sup>2</sup>,</span>
-              <span class="author-block">
-                <a href="mailto:millar.neil.gm@u.tsukuba.ac.jp">Neil Millar</a><sup>2</sup>
-              </span>
-            </div>
-
-            <div class="is-size-5 publication-authors">
-              <span class="author-block"><sup>1</sup>National Institute of Advanced Industrial Science and Technology (AIST), <sup>2</sup>University of Tsukuba<br><strong>EACL 2026</strong></span>
-            </div>
-
-            <div class="column has-text-centered">
-              <div class="publication-links">
-                <!-- Paper PDF link -->
-                <span class="link-block">
-                  <a href="https://github.com/hype-busters/eacl2026-hype-dataset" target="_blank" class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon">
-                      <i class="fab fa-github"></i>
-                    </span>
-                    <span>Dataset & Code</span>
-                  </a>
-                </span>
-
-                <!-- Dataset Paper link -->
-                <span class="link-block">
-                  <a href="#" target="_blank" class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon">
-                      <i class="fas fa-file-pdf"></i>
-                    </span>
-                    <span>Paper (Coming Soon)</span>
-                  </a>
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Teaser section -->
-  <section class="hero teaser">
+  <!-- Navigation -->
+  <nav class="navbar is-light" role="navigation" aria-label="main navigation">
     <div class="container is-max-desktop">
-      <div class="hero-body">
-        <div class="columns is-centered">
-          <div class="column is-full">
-            <img src="static/images/teaser.png" alt="Hype or Not Teaser" style="width: 100%; border-radius: 10px;">
-          </div>
+      <div class="navbar-brand">
+        <a class="navbar-item" href="/">
+          <strong>Hype-Busters</strong>
+        </a>
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div id="navbarMenu" class="navbar-menu">
+        <div class="navbar-end">
+          <a class="navbar-item" href="/about/">About</a>
+          <a class="navbar-item" href="/resources/">Previous Works</a>
+          <a class="navbar-item" href="/people/">People</a>
+          <a class="navbar-item" href="/nih-data/">NIH Data Access</a>
+          <a class="navbar-item" href="/tools/">Tools</a>
         </div>
-        <h2 class="subtitle has-text-justified">
-          We introduce the task of <strong>automatic detection of hype language</strong> in biomedical research texts. We define hype as <em>hyperbolic or subjective language that authors use to glamorize, promote, embellish, or exaggerate aspects of their research</em>. We propose formalized annotation guidelines and apply them to annotate 1,270 sentences from the NIH grant application corpus. We then evaluate traditional text classifiers and language models on this task, comparing their performance with a human baseline.
-        </h2>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero is-medium">
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <h1 class="title is-1 has-text-white">
+          Hype or not? Automatic Promotional Language Detection
+        </h1>
+        <p class="subtitle is-4 has-text-white">
+          Formalizing automatic detection of hype language in biomedical research texts
+        </p>
+        <p class="has-text-white is-size-6">
+          Bojan Batalo<sup>1</sup>, Erica K. Shimomoto<sup>1</sup>, Dipesh Satav<sup>2</sup>, Neil Millar<sup>2</sup><br>
+          <span class="is-size-7">(<sup>1</sup>AIST Japan, <sup>2</sup>University of Tsukuba) — EACL 2026</span>
+        </p>
+        <div class="project-links" style="margin-top: 1.75rem;">
+          <a href="#" target="_blank" class="button is-light is-outlined">
+            <span class="icon"><i class="fas fa-file-pdf"></i></span>
+            <span>Paper</span>
+          </a>
+          <a href="https://github.com/hype-busters/eacl2026-hype-dataset" target="_blank" class="button is-light is-outlined">
+            <span class="icon"><i class="fab fa-github"></i></span>
+            <span>Dataset & Code</span>
+          </a>
+        </div>
       </div>
     </div>
   </section>
-  <!-- End teaser section -->
+
+  <!-- Overview / Intro -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-vcentered is-variable is-6">
+        <div class="column is-half">
+          <figure class="image">
+            <img src="static/images/teaser.png" alt="Hype or Not overview">
+          </figure>
+        </div>
+        <div class="column is-half">
+          <div class="content">
+            <h2 class="title is-3">Overview</h2>
+            <p>
+              We introduce the task of <strong>automatic detection of hype language</strong> in biomedical research texts. 
+              We define hype as <em>hyperbolic or subjective language that authors use to glamorize, promote, embellish, 
+              or exaggerate aspects of their research</em>.
+            </p>
+            <p>
+              We propose formalized annotation guidelines and apply them to annotate 1,270 sentences from the NIH grant 
+              application corpus. We then evaluate traditional text classifiers and language models on this task, comparing 
+              their performance with a human baseline.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- Paper abstract -->
   <section class="section hero is-light">
@@ -359,10 +384,10 @@
     </div>
   </section>
 
-  <!-- BibTex citation -->
+  <!-- BibTeX -->
   <section class="section" id="BibTeX">
     <div class="container is-max-desktop content">
-      <h2 class="title">BibTeX</h2>
+      <h2 class="title is-4">BibTeX</h2>
       <pre><code>@inproceedings{batalo2026hypeonot,
   title={Hype or not? {F}ormalizing Automatic Promotional Language Detection in Biomedical Research},
   author={Batalo, Bojan and Shimomoto, Erica K. and Satav, Dipesh and Millar, Neil},
@@ -371,25 +396,29 @@
 }</code></pre>
     </div>
   </section>
-  <!-- End BibTex citation -->
 
+  <!-- Footer -->
   <footer class="footer">
-    <div class="container">
-      <div class="columns is-centered">
-        <div class="column is-8">
-          <div class="content">
-            <p>
-              This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> 
-              which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
-              You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. 
-              <br> This website is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
-              Commons Attribution-ShareAlike 4.0 International License</a>.
-            </p>
-          </div>
-        </div>
-      </div>
+    <div class="content has-text-centered">
+      <p>
+        <strong>Hype-Busters</strong> — Identifying promotional language in biomedical research.
+      </p>
     </div>
   </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+      $navbarBurgers.forEach(el => {
+        el.addEventListener('click', () => {
+          const target = el.dataset.target;
+          const $target = document.getElementById(target);
+          el.classList.toggle('is-active');
+          $target.classList.toggle('is-active');
+        });
+      });
+    });
+  </script>
 
 </body>
 </html>
