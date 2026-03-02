@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="../assets/images/hype_favicon.png">
+  <title>Current Works − Hype-Busters</title>
+  
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    body { font-family: 'Google Sans', sans-serif; }
+    .navbar-brand strong { font-size: 1.3rem; }
+    /* Blue banner for Current Works */
+    .hero { background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%); }
+    .columns.is-multiline { display: flex; }
+    .project-card { display: flex; }
+    .project-card .box { display: flex; flex-direction: column; width: 100%; }
+    .project-card .box p { flex-grow: 1; margin-bottom: 1rem; }
+  </style>
+</head>
+<body>
+  <nav class="navbar is-light" role="navigation" aria-label="main navigation">
+    <div class="container is-max-desktop">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="/"><strong>Hype-Busters</strong></a>
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
+          <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+        </a>
+      </div>
+      <div id="navbarMenu" class="navbar-menu">
+        <div class="navbar-end">
+          <a class="navbar-item" href="/about/">About</a>
+          <a class="navbar-item" href="/people/">People</a>
+          <a class="navbar-item is-active" href="/currentworks/">Current Works</a>
+          <a class="navbar-item" href="/nih-data/">NIH Data Access</a>
+          <a class="navbar-item" href="/tools/">Tools</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero is-medium">
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <h1 class="title is-1 has-text-white">Current Works</h1>
+        <p class="subtitle is-4 has-text-white">Our ongoing research projects</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="content">
+        <h2 class="title is-3">Recent Projects</h2>
+        <div class="columns is-multiline">
+          <div class="column is-half project-card">
+            <div class="box">
+              <h3 class="title is-5">Hype or not? — Automatic Detection</h3>
+              <p>Formalizing automatic promotional language detection in biomedical research with annotation guidelines and curated dataset.</p>
+              <br>
+              <a href="/hype-or-not/" class="button is-link is-light">View Project</a>
+            </div>
+          </div>
+          <div class="column is-half project-card">
+            <div class="box">
+              <h3 class="title is-5">Hyplex — Intensity Lexicon</h3>
+              <p>An intensity-scaled lexicon of 303 promotional adjectives in biomedical research built using Best-Worst Scaling.</p>
+              <br>
+              <a href="/hyplex/" class="button is-link is-light">View Project</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="content has-text-centered">
+      <p><strong>Hype-Busters</strong> — Identifying promotional language in biomedical research.</p>
+      <p style="margin-top: 1rem;">
+        <a href="/" style="color: #000000; text-decoration: none;"><span class="icon"><i class="fas fa-arrow-left"></i></span> <span>Back to Home</span></a>
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.navbar-burger').forEach(el => {
+        el.addEventListener('click', () => {
+          const t = document.getElementById(el.dataset.target);
+          el.classList.toggle('is-active'); t.classList.toggle('is-active');
+        });
+      });
+    });
+  </script>
+</body>
+</html>
