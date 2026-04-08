@@ -1,4 +1,4 @@
-# Hype Busters: Unveiling "Hype" in Biomedical Research
+# Linguistic Neutrality Labs: Unveiling "Hype" in Biomedical Research
 
 This project analyzes "hype" in biomedical research using a combination of linguistics and artificial intelligence. We aim to identify promotional language in scientific texts, understand its origins, and develop tools to detect it automatically. Our goal is to promote greater transparency and objectivity in scientific communication.
 

@@ -1,6 +1,6 @@
 # Hyplex: Best-Worst Scaling of Hype in Biomedical Research
 
-This is the project page for Hyplex - an intensity-scaled lexicon of 303 promotional adjectives in biomedical research, hosted at `hype-busters.github.io/hyplex`.
+This is the project page for Hyplex - an intensity-scaled lexicon of 303 promotional adjectives in biomedical research, hosted at Linguistic Neutrality Labs.
 
 ## About
 
