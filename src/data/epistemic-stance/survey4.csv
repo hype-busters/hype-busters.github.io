@@ -1,5 +1,17 @@
 meaning,word1,word2,word3,word4
-These methods [ITEM] play an important role in X.,usually,frequently,typically,sometimes
-These methods [ITEM] play an important role in X.,commonly,rarely,often,always
-These methods [ITEM] play an important role in X.,generally,occasionally,never,almost always
-"[ITEM], these methods play an important role in X.",in general,in most cases,in some cases,on the whole
+Consider the claim: These methods play an important role in X. Compare which option signals stronger versus weaker frequency/generality.,generally,rarely,usually,occasionally
+Consider the claim: These methods play an important role in X. Compare which option signals stronger versus weaker frequency/generality.,occasionally,typically,sometimes,frequently
+Consider the claim: These methods play an important role in X. Compare which option signals stronger versus weaker frequency/generality.,rarely,sometimes,almost always,in most cases
+Consider the claim: These methods play an important role in X. Compare which option signals stronger versus weaker frequency/generality.,never,frequently,usually,in general
+Consider the claim: These methods play an important role in X. Compare which option signals stronger versus weaker frequency/generality.,always,never,on the whole,commonly
+Consider the claim: These methods play an important role in X. Compare which option signals stronger versus weaker frequency/generality.,never,typically,in some cases,rarely
+Consider the claim: These methods play an important role in X. Compare which option signals stronger versus weaker frequency/generality.,frequently,commonly,in most cases,in some cases
+Consider the claim: These methods play an important role in X. Compare which option signals stronger versus weaker frequency/generality.,almost always,always,occasionally,on the whole
+Consider the claim: These methods play an important role in X. Compare which option signals stronger versus weaker frequency/generality.,usually,on the whole,in some cases,sometimes
+Consider the claim: These methods play an important role in X. Compare which option signals stronger versus weaker frequency/generality.,always,frequently,often,rarely
+Consider the claim: These methods play an important role in X. Compare which option signals stronger versus weaker frequency/generality.,almost always,in general,in some cases,commonly
+Consider the claim: These methods play an important role in X. Compare which option signals stronger versus weaker frequency/generality.,typically,on the whole,in most cases,generally
+Consider the claim: These methods play an important role in X. Compare which option signals stronger versus weaker frequency/generality.,in general,generally,sometimes,always
+Consider the claim: These methods play an important role in X. Compare which option signals stronger versus weaker frequency/generality.,occasionally,often,in general,in most cases
+Consider the claim: These methods play an important role in X. Compare which option signals stronger versus weaker frequency/generality.,typically,often,commonly,usually
+Consider the claim: These methods play an important role in X. Compare which option signals stronger versus weaker frequency/generality.,almost always,often,generally,never
