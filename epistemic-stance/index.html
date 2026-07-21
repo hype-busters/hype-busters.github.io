@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../assets/images/hype_favicon.png">
+    <title>Epistemic Stance Survey - Hype-Busters</title>
+    
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://apis.google.com/js/api.js"></script>
+    <!-- Load configuration with fallback -->
+    <script src="../src/config/config.js?v=3" onerror="console.log('config.js not found, will use env-config.js fallback')"></script>
+    <script src="../src/config/env-config.js?v=3"></script>
+    <script src="../src/js/epistemic-stance-survey.js?v=1"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Google Sans', sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+            min-height: 100vh;
+        }
+        
+        .navbar-brand strong {
+            font-size: 1.3rem;
+        }
+        
+        body > .container {
+            max-width: 950px !important;
+            margin: 40px auto;
+            padding: 0;
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
+            color: white;
+            padding: 48px 32px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .header h1 {
+            font-size: 2.2em;
+            margin-bottom: 12px;
+            font-weight: 400;
+            letter-spacing: -0.5px;
+            color: #ffffff;
+        }
+
+        .header p {
+            opacity: 1;
+            font-size: 1em;
+            font-weight: 300;
+            letter-spacing: 0.3px;
+            color: #ffffff;
+        }
+
+        .progress-bar {
+            background: rgba(255,255,255,0.15);
+            height: 4px;
+            border-radius: 2px;
+            margin-top: 24px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #ffffff 0%, #e0e0e0 100%);
+            height: 100%;
+            border-radius: 2px;
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .content {
+            padding: 40px 60px;
+        }
+
+        .question-card {
+            background: #fafafa;
+            border-radius: 12px;
+            padding: 36px 32px;
+            margin-bottom: 32px;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        .meaning {
+            font-size: 1.2em;
+            font-weight: 500;
+            color: #1a1a1a;
+            margin-bottom: 28px;
+            text-align: center;
+            letter-spacing: 0.2px;
+        }
+
+        .words-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            margin-bottom: 28px;
+        }
+
+        .word-option {
+            background: #ffffff;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 18px 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 500;
+            font-size: 0.95em;
+            position: relative;
+            letter-spacing: 0.3px;
+        }
+
+        .word-option:hover {
+            border-color: #9e9e9e;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+            background: #fafafa;
+        }
+
+        .word-option.most-intense {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            border-color: #000000;
+            color: white;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .word-option.least-intense {
+            background: linear-gradient(135deg, #adadad 0%, #c0c0c0 100%);
+            border-color: #adadad;
+            color: white;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+        }
+
+        .intensity-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 24px;
+            gap: 12px;
+        }
+
+        /* Example Animation Styles */
+        .example-words-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin: 16px 0;
+        }
+
+        .example-word {
+            padding: 14px;
+            background: #ffffff;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 500;
+            font-size: 0.9em;
+            position: relative;
+        }
+
+        .example-word:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        }
+
+        .example-word.example-most-intense {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            border-color: #000000;
+            color: white;
+            font-weight: 600;
+            transform: scale(1.05);
+        }
+
+        .example-word.example-least-intense {
+            background: linear-gradient(135deg, #adadad 0%, #c0c0c0 100%);
+            border-color: #adadad;
+            color: white;
+            font-weight: 600;
+            transform: scale(1.05);
+        }
+
+        /* Animation keyframes for the selection effect */
+        @keyframes selectEffect {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+            100% { transform: scale(1.05); }
+        }
+
+        .example-word.animating {
+            animation: selectEffect 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .label {
+            padding: 10px 20px;
+            border-radius: 24px;
+            font-size: 0.85em;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .most-label {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            color: white;
+        }
+
+        .least-label {
+            background: linear-gradient(135deg, #adadad 0%, #c0c0c0 100%);
+            color: white;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 24px;
+            cursor: pointer;
+            font-size: 0.95em;
+            font-weight: 600;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            letter-spacing: 0.3px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+        }
+
+        .btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .question-counter {
+            font-weight: 500;
+            color: #424242;
+            font-size: 0.9em;
+            letter-spacing: 0.3px;
+        }
+
+        .results {
+            background: #fafafa;
+            border-radius: 12px;
+            padding: 32px;
+            margin-top: 24px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .results h3 {
+            color: #1a1a1a;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .result-item {
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 12px;
+            border-left: 3px solid #2c2c2c;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .admin-panel {
+            background: #fafafa;
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 32px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .admin-panel h3 {
+            color: #1a1a1a;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .export-btn {
+            background: linear-gradient(135deg, #424242 0%, #2c2c2c 100%);
+            margin-right: 12px;
+        }
+
+        .reset-btn {
+            background: linear-gradient(135deg, #757575 0%, #616161 100%);
+        }
+
+        /* Survey Selection Styles */
+        .survey-option:hover {
+            border-color: #9e9e9e;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+        }
+
+        .survey-option.selected {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%);
+            border-color: #1a1a1a;
+            color: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .survey-option.selected h3 {
+            color: #ffffff !important;
+        }
+
+        .survey-option.selected p {
+            color: rgba(255,255,255,0.85) !important;
+        }
+
+        /* Modal/Card Instructions Styles */
+        .instructions-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(4px);
+        }
+
+        .instructions-card {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 900px;
+            max-height: 85vh;
+            overflow-y: auto;
+            margin: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+            position: relative;
+        }
+
+        .instructions-card h2 {
+            color: #1a1a1a;
+            margin-bottom: 28px;
+            text-align: center;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 16px;
+            font-weight: 500;
+            font-size: 1.6em;
+            letter-spacing: -0.3px;
+        }
+
+        .category-instruction {
+            margin-bottom: 28px;
+            padding: 20px;
+            border-left: 3px solid #2c2c2c;
+            background: #fafafa;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .category-title {
+            font-weight: 600;
+            color: #1a1a1a;
+            font-size: 1.05em;
+            margin-bottom: 10px;
+            letter-spacing: 0.2px;
+        }
+
+        .category-meaning {
+            margin-bottom: 12px;
+            line-height: 1.6;
+            color: #424242;
+        }
+
+        .category-examples {
+            margin-bottom: 12px;
+            font-style: italic;
+            color: #616161;
+            line-height: 1.5;
+            font-size: 0.95em;
+        }
+
+        .category-rating {
+            font-weight: 500;
+            color: #2c2c2c;
+            line-height: 1.5;
+            font-size: 0.95em;
+        }
+
+        .close-instructions-btn {
+            background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 24px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            margin-top: 24px;
+            width: 100%;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            letter-spacing: 0.3px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+
+        .close-instructions-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 16px rgba(0,0,0,0.3);
+        }
+
+        /* Start button turns black when survey is selected */
+        #startSelectedSurveyBtn:not(:disabled) {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%) !important;
+            border: none;
+            color: white;
+            opacity: 1;
+        }
+
+        #startSelectedSurveyBtn:disabled {
+            opacity: 0.4;
+        }
+
+        /* Form Elements */
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 0.95em;
+            font-family: 'Google Sans', sans-serif;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            background: #fff;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        select:focus {
+            outline: none;
+            border-color: #2c2c2c;
+            box-shadow: 0 0 0 3px rgba(44, 44, 44, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #1a1a1a;
+            font-size: 0.9em;
+            letter-spacing: 0.2px;
+        }
+
+        .survey-option {
+            background: #fafafa;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 24px;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: center;
+        }
+
+        .survey-option h3 {
+            color: #1a1a1a;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+            font-weight: 600;
+        }
+
+        .survey-option p {
+            color: #616161;
+            margin: 0;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        /* Special Button Styles */
+        .btn-submit {
+            background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
+            font-size: 1em;
+            padding: 14px 36px;
+        }
+
+        .btn-complete {
+            background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
+            font-size: 1.1em;
+            padding: 16px 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .btn-complete:hover {
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #757575 0%, #616161 100%);
+            padding: 12px 28px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+        }
+
+        .btn-secondary:hover {
+            box-shadow: 0 5px 16px rgba(0,0,0,0.25);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%);
+            font-size: 1.15em;
+            padding: 16px 40px;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        h2, h3 {
+            color: #1a1a1a;
+            font-weight: 500;
+        }
+
+        p {
+            color: #424242;
+            line-height: 1.6;
+        }
+
+        .form-section {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar is-light" role="navigation" aria-label="main navigation">
+        <div class="container is-max-desktop">
+            <div class="navbar-brand">
+                <a class="navbar-item" href="/">
+                    <strong>Hype-Busters</strong>
+                </a>
+                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
+
+            <div id="navbarMenu" class="navbar-menu">
+                <div class="navbar-end">
+                    <a class="navbar-item" href="/about/">About</a>
+                    <a class="navbar-item" href="/people/">People</a>
+                    <a class="navbar-item" href="/currentworks/">Current Works</a>
+                    <a class="navbar-item" href="/nih-data/">NIH Data Access</a>
+                    <a class="navbar-item" href="/tools/">Tools</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="header">
+            <h1>Epistemic Stance Survey</h1>
+            <p>Select the strongest and weakest claim-strength modifiers in each set</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- Intensity Labels Panel -->
+            <div class="intensity-panel" id="intensityPanel" style="display: none;">
+                <div class="intensity-labels">
+                    <div class="label most-label">Strongest</div>
+                    <div class="label least-label">Weakest</div>
+                </div>
+            </div>
+
+            <!-- Demographics Questionnaire -->
+            <div id="demographicsContainer" style="display: none;">
+                <div class="question-card">
+                    <h2 style="margin-bottom: 30px; text-align: center;">Before we begin...</h2>
+                    <p style="text-align: center; margin-bottom: 30px;">Please provide some basic information about yourself. This helps us better understand our participants.</p>
+                    
+                    <form id="demographicsForm" style="max-width: 500px; margin: 0 auto;">
+                        <div style="margin-bottom: 20px;">
+                            <label for="participantName" style="display: block; margin-bottom: 8px; font-weight: 500; color: #333;">Name *</label>
+                            <input type="text" id="participantName" required style="width: 100%; padding: 12px; border: 2px solid #c0c0c0; border-radius: 8px; font-size: 16px;">
+                        </div>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <label for="participantAge" style="display: block; margin-bottom: 8px; font-weight: 500; color: #333;">Age *</label>
+                            <input type="number" id="participantAge" min="18" max="100" required style="width: 100%; padding: 12px; border: 2px solid #c0c0c0; border-radius: 8px; font-size: 16px;">
+                        </div>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <label for="participantGender" style="display: block; margin-bottom: 8px; font-weight: 500; color: #333;">Gender *</label>
+                            <select id="participantGender" required style="width: 100%; padding: 12px; border: 2px solid #c0c0c0; border-radius: 8px; font-size: 16px;">
+                                <option value="">Select gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Prefer not to say">Prefer not to say</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <label for="participantCountry" style="display: block; margin-bottom: 8px; font-weight: 500; color: #333;">Country *</label>
+                            <input type="text" id="participantCountry" required placeholder="e.g., United States, Canada, etc." style="width: 100%; padding: 12px; border: 2px solid #c0c0c0; border-radius: 8px; font-size: 16px;">
+                        </div>
+                        
+                        <div style="margin-bottom: 30px;">
+                            <label for="participantLanguage" style="display: block; margin-bottom: 8px; font-weight: 500; color: #333;">First Language *</label>
+                            <input type="text" id="participantLanguage" required placeholder="e.g., English, Spanish, Mandarin, etc." style="width: 100%; padding: 12px; border: 2px solid #c0c0c0; border-radius: 8px; font-size: 16px;">
+                        </div>
+                        
+                        <div style="text-align: center;">
+                            <button type="submit" class="btn" style="font-size: 1.1em; padding: 15px 40px; background: linear-gradient(135deg, #4a4a4a 0%, #2c2c2c 100%); border: none; border-radius: 25px; color: white; cursor: pointer;">
+                                Start Survey
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Survey Selection Page -->
+            <div id="surveySelectionContainer" style="display: none;">
+                <div class="question-card">
+                    <h2 style="margin-bottom: 30px; text-align: center;">Choose Your Category Survey</h2>
+                    <p style="text-align: center; margin-bottom: 30px;">Select one of the five category surveys. Each survey contains BWS/MaxDiff comparison sets for claim-strength modifiers.</p>
+                    
+                    <div style="max-width: 700px; margin: 0 auto;">
+                        <div id="surveyOptions" style="display: grid; gap: 15px; margin-bottom: 30px;">
+                            <div class="survey-option" data-survey="1">
+                                <h3>Survey 1: Likelihood and Certainty</h3>
+                                <p>Modal possibility, probability, and certainty markers.</p>
+                            </div>
+                            <div class="survey-option" data-survey="2">
+                                <h3>Survey 2: Evidential Basis</h3>
+                                <p>Evidential clarity and support expressions.</p>
+                            </div>
+                            <div class="survey-option" data-survey="3">
+                                <h3>Survey 3: Authorial Positioning</h3>
+                                <p>Author commitment and claim-formulation verbs.</p>
+                            </div>
+                            <div class="survey-option" data-survey="4">
+                                <h3>Survey 4: Frequency</h3>
+                                <p>Frequency and generality markers.</p>
+                            </div>
+                            <div class="survey-option" data-survey="5">
+                                <h3>Survey 5: Degree</h3>
+                                <p>Degree and intensity modifiers.</p>
+                            </div>
+                        </div>
+                        
+                        <div style="text-align: center;">
+                            <button id="startSelectedSurveyBtn" class="btn" onclick="startSelectedSurvey()" disabled>
+                                Start Selected Survey
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question Display -->
+            <div id="questionContainer" style="display: none;">
+                <div class="question-card">
+                    <div class="meaning" id="meaningText"></div>
+                    
+                    <div class="words-grid" id="wordsGrid"></div>
+                    
+                    <div class="navigation">
+                        <button class="btn" id="prevBtn" onclick="previousQuestion()">Previous</button>
+                        <span class="question-counter" id="questionCounter"></span>
+                        <button class="btn" id="nextBtn" onclick="nextQuestion()">Next</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Survey Ready to Submit Screen -->
+            <div id="completionContainer" style="display: none;">
+                <div class="question-card">
+                    <div style="text-align: center; padding: 40px;">
+                        <h2 style="margin-bottom: 24px; font-size: 2.2em;">Ready to Submit</h2>
+                        <p style="font-size: 1.1em; margin-bottom: 24px;">
+                            You have completed all comparison sets. Click below to submit your responses.
+                        </p>
+                        <p style="font-size: 1em; margin-bottom: 30px; color: #888; font-style: italic;">
+                            Your data will be securely saved to Google Sheets.
+                        </p>
+                        <button class="btn btn-complete" id="completeSurveyBtn" onclick="completeSurvey()">
+                            Complete Survey
+                        </button>
+                        <div style="margin-top: 20px;">
+                            <button class="btn btn-secondary" onclick="backToSurvey()">
+                                Return to Survey
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Survey Successfully Completed Screen -->
+            <div id="successContainer" style="display: none;">
+                <div class="question-card">
+                    <div style="text-align: center; padding: 40px;">
+                        <h2 style="margin-bottom: 24px; font-size: 2.2em;">Survey Completed</h2>
+                        <p style="font-size: 1.1em; margin-bottom: 24px;">
+                            Thank you for participating in our Epistemic Stance Survey. Your responses have been successfully saved.
+                        </p>
+                        <div style="margin-top: 32px; padding: 20px; background: #f0f0f0; border-radius: 12px; border-left: 3px solid #2c2c2c;">
+                            <p style="color: #1a1a1a; margin: 0; font-weight: 600;">Data saved successfully</p>
+                        </div>
+                        <div style="margin-top: 32px;">
+                            <button class="btn btn-primary" onclick="startNewSurvey()">
+                                Start New Survey
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detailed Instructions Page -->
+            <div id="instructionsContainer">
+                <div class="question-card">
+                    <h1 style="text-align: center; margin-bottom: 32px; font-size: 1.8em;">BWS/MaxDiff: Participant Instructions</h1>
+                    
+                    <div style="max-width: 800px; margin: 0 auto; text-align: left;">
+                        <h2 style="margin-top: 32px; margin-bottom: 16px; font-size: 1.4em;">General Instructions</h2>
+                        <p style="margin-bottom: 15px; line-height: 1.6;">In this study, you will be shown small sets of claim-strength expressions. Your job is to decide which item in each set is the <strong>strongest</strong> and which is the <strong>weakest</strong> for the same underlying claim meaning.</p>
+                        
+                        <p style="margin-bottom: 15px; line-height: 1.6;">You will see 4 items at a time. For each set, choose:</p>
+                        <ol style="margin-bottom: 20px; padding-left: 25px; line-height: 1.6;">
+                            <li>The <strong>strongest</strong> item (most forceful expression).</li>
+                            <li>The <strong>weakest</strong> item (least forceful expression).</li>
+                        </ol>
+                        
+                        <p style="margin-bottom: 15px; line-height: 1.6;"><strong>Focus only on comparative strength.</strong></p>
+                        
+                        <p style="margin-bottom: 25px; line-height: 1.6;">There are no right or wrong answers. This task is Best-Worst Scaling (BWS), also known in many applied studies as MaxDiff. You must choose one strongest and one weakest item for every set. If two feel similar, choose the one that feels slightly stronger or weaker.</p>
+                        
+                        <h2 style="margin-top: 32px; margin-bottom: 16px; font-size: 1.3em;">Example</h2>
+                        <div style="background: #f0f0f0; padding: 20px; border-radius: 10px; margin-bottom: 25px;">
+                            <p style="margin-bottom: 10px;"><strong>Meaning:</strong> 'level of spiciness in food'</p>
+                            <p style="margin-bottom: 10px;"><strong>Words:</strong> mild, medium, hot, spicy</p>
+                            <p style="margin-bottom: 10px; color: #0d47a1;"><strong>Most intense:</strong> hot</p>
+                            <p style="color: #87ceeb;"><strong>Least intense:</strong> mild</p>
+                        </div>
+                        
+                        <h2 style="margin-top: 32px; margin-bottom: 16px; font-size: 1.3em;">Practice Items</h2>
+                        
+                        <div style="background: #f8f8f8; padding: 15px; border-radius: 10px; margin-bottom: 15px; border-left: 4px solid #5a5a5a;">
+                            <p style="margin-bottom: 8px;"><strong>Meaning:</strong> 'Size of an animal'</p>
+                            <p style="margin-bottom: 8px;"><strong>Words:</strong> tiny, huge, large, small</p>
+                            <p style="margin-bottom: 5px; color: #0d47a1;"><strong>Most intense:</strong> huge</p>
+                            <p style="color: #87ceeb;"><strong>Least intense:</strong> tiny</p>
+                        </div>
+                        
+                        <div style="background: #f8f8f8; padding: 15px; border-radius: 10px; margin-bottom: 15px; border-left: 4px solid #5a5a5a;">
+                            <p style="margin-bottom: 8px;"><strong>Meaning:</strong> 'Speed of movement'</p>
+                            <p style="margin-bottom: 8px;"><strong>Words:</strong> slow, rapid, fast, sluggish</p>
+                            <p style="margin-bottom: 5px; color: #0d47a1;"><strong>Most intense:</strong> rapid</p>
+                            <p style="color: #87ceeb;"><strong>Least intense:</strong> slow</p>
+                        </div>
+                        
+                        <div style="background: #f8f8f8; padding: 15px; border-radius: 10px; margin-bottom: 15px; border-left: 4px solid #5a5a5a;">
+                            <p style="margin-bottom: 8px;"><strong>Meaning:</strong> 'Temperature of a drink'</p>
+                            <p style="margin-bottom: 8px;"><strong>Words:</strong> warm, boiling, cold, hot</p>
+                            <p style="margin-bottom: 5px; color: #0d47a1;"><strong>Most intense:</strong> boiling</p>
+                            <p style="color: #87ceeb;"><strong>Least intense:</strong> cold</p>
+                        </div>
+                        
+                        <div style="background: #f8f8f8; padding: 15px; border-radius: 10px; margin-bottom: 15px; border-left: 4px solid #5a5a5a;">
+                            <p style="margin-bottom: 8px;"><strong>Meaning:</strong> 'Positive feelings'</p>
+                            <p style="margin-bottom: 8px;"><strong>Words:</strong> happy, joyful, pleased, content</p>
+                            <p style="margin-bottom: 5px; color: #0d47a1;"><strong>Most intense:</strong> joyful</p>
+                            <p style="color: #87ceeb;"><strong>Least intense:</strong> pleased</p>
+                        </div>
+                        
+                        <div style="background: #f8f8f8; padding: 15px; border-radius: 10px; margin-bottom: 30px; border-left: 4px solid #5a5a5a;">
+                            <p style="margin-bottom: 8px;"><strong>Meaning:</strong> 'Negative feelings'</p>
+                            <p style="margin-bottom: 8px;"><strong>Words:</strong> annoyed, furious, upset, irritated</p>
+                            <p style="margin-bottom: 5px; color: #0d47a1;"><strong>Most intense:</strong> furious</p>
+                            <p style="color: #87ceeb;"><strong>Least intense:</strong> annoyed</p>
+                        </div>
+                        
+                        <div style="text-align: center; margin-top: 40px;">
+                            <button class="btn" onclick="showAnimatedExample()" style="font-size: 1.2em; padding: 15px 40px; background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%); border: none; border-radius: 25px; color: white; cursor: pointer; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);">
+                                Continue
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Animated Example Page -->
+            <div id="animatedExampleContainer" style="display: none;">
+                <div class="question-card">
+                    <h1 style="text-align: center; margin-bottom: 32px; font-size: 1.8em;">Epistemic Stance Survey</h1>
+                    
+                    <div style="max-width: 800px; margin: 0 auto; text-align: left;">
+                        <p style="margin-bottom: 32px; line-height: 1.7; font-size: 1.05em;">
+                            Select the <strong>strongest</strong> and <strong>weakest</strong> expressions from each set.
+                        </p>
+                        
+                        <!-- Animated Example -->
+                        <div style="background: #f8f9fa; border: 2px solid #e9ecef; border-radius: 12px; padding: 20px; margin: 30px 0;">
+                            <div style="color: #0d47a1; font-weight: bold; margin-bottom: 15px; font-size: 1.1em;">📝 EXAMPLE: "level of spiciness in food"</div>
+                            <div class="example-animation" id="instructionsExampleAnimation">
+                                <div class="example-words-grid">
+                                    <div class="example-word" data-word="mild" id="instructions-example-mild">mild</div>
+                                    <div class="example-word" data-word="medium" id="instructions-example-medium">medium</div>
+                                    <div class="example-word" data-word="hot" id="instructions-example-hot">hot</div>
+                                    <div class="example-word" data-word="spicy" id="instructions-example-spicy">spicy</div>
+                                </div>
+                                <div style="text-align: center; margin-top: 16px; font-size: 0.9em; font-style: italic; opacity: 0.7;">
+                                    Watch how the colors change when words are selected...
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div style="text-align: center; margin-top: 40px;">
+                            <button class="btn btn-primary" onclick="showDemographicsForm()">
+                                Start Survey
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Display -->
+            <div class="results" id="resultsContainer" style="display: none;">
+                <h3>Survey Results</h3>
+                <div id="resultsContent"></div>
+                <button class="btn" onclick="backToSurvey()">Back to Survey</button>
+            </div>
+            
+            <!-- Simple back link -->
+            <div style="text-align: center; margin-top: 20px; padding: 20px;">
+                <a href="/" style="color: #424242; text-decoration: none; font-size: 14px; opacity: 0.7;">← Back to Website</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Instructions Modal -->
+    <div class="instructions-modal" id="instructionsModal">
+        <div class="instructions-card">
+            <h2>Category Instructions</h2>
+            <div id="instructionsContent">
+                <!-- Content will be dynamically populated -->
+            </div>
+            <button class="close-instructions-btn" onclick="closeInstructionsAndStartSurvey()">
+                I understand - Start Survey
+            </button>
+        </div>
+    </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer" style="background: transparent; margin-top: 40px;">
+        <div class="content has-text-centered has-text-white">
+            <p>
+                <strong class="has-text-white">Hype-Busters</strong> — Identifying promotional language in biomedical research.
+            </p>
+            <p style="margin-top: 1rem;">
+                <a href="/" style="color: #000000; text-decoration: none;">
+                    <span class="icon">
+                        <i class="fas fa-arrow-left"></i>
+                    </span>
+                    <span>Back to Home</span>
+                </a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.addEventListener('DOMContentLoaded', () => {
+            const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+            $navbarBurgers.forEach( el => {
+                el.addEventListener('click', () => {
+                    const target = el.dataset.target;
+                    const $target = document.getElementById(target);
+                    el.classList.toggle('is-active');
+                    $target.classList.toggle('is-active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

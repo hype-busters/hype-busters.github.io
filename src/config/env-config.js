@@ -7,6 +7,12 @@ function loadEnvironmentConfig() {
         googleAppsScript: {
             url: 'https://script.google.com/macros/s/AKfycbxFG53hdkB0s4FkVM0gAe9N6cST04KPDfG8kQbzSAxVzhTZ1zQDNQt4cQsw8sIip07p7g/exec'
         },
+        epistemicStance: {
+            // Set this to the dedicated Apps Script endpoint for /epistemic-stance.
+            googleAppsScript: {
+                url: 'https://script.google.com/macros/s/AKfycbybmVtZVAq31qZ4VXiy9Jjyiwm2_WBmmTOZl4DPEsSv3vzY-8JpwoU8K7tp7Rh9zQGa/exec'
+            }
+        },
         // Note: When using Google Apps Script, we don't need Google Sheets API credentials
         // The Apps Script handles the authentication server-side
         google: {

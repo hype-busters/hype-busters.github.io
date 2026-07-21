@@ -3,6 +3,16 @@
 // DO NOT commit config.js to version control
 
 const SURVEY_CONFIG = {
+    // Dedicated endpoint for epistemic-stance survey submissions
+    epistemicStance: {
+        googleAppsScript: {
+            url: 'YOUR_EPISTEMIC_STANCE_APPS_SCRIPT_URL_HERE'
+        }
+    },
+    // Legacy/shared endpoint (optional fallback)
+    googleAppsScript: {
+        url: 'YOUR_SHARED_APPS_SCRIPT_URL_HERE'
+    },
     google: {
         apiKey: 'YOUR_API_KEY_HERAIzaSyCH9nThfI04nI0jmDCtjkLyUyJvoqoypboE',
         clientId: 'YOUR_CLIENT_ID_HERE', 
