@@ -1,10 +1,12 @@
 meaning,word1,word2,word3,word4
-Likelihood and certainty (BWS/MaxDiff),doubtful,maybe,will,probably
-Likelihood and certainty (BWS/MaxDiff),undeniably,certainly,no doubt,possible
-Likelihood and certainty (BWS/MaxDiff),indisputable,certain beyond any doubt,plausible,highly likely
-Likelihood and certainty (BWS/MaxDiff),likely,indisputably,conceivable,probable
-Likelihood and certainty (BWS/MaxDiff),undeniable,could only remotely,doubtless,could
-Likelihood and certainty (BWS/MaxDiff),unquestionably,perhaps,presumably,might
-Likelihood and certainty (BWS/MaxDiff),undoubtedly,necessarily,unlikely,must
-Likelihood and certainty (BWS/MaxDiff),definitely,should,without doubt,plausibly
-Likelihood and certainty (BWS/MaxDiff),possibly,may,almost certainly,perhaps
+It is [ITEM] that this research has important implications for X.,unlikely,likely,highly likely,indisputable
+It is [ITEM] that this research has important implications for X.,possible,probable,undeniable,plausible
+It is [ITEM] that this research has important implications for X.,conceivable,doubtful,undeniable,unlikely
+This research [ITEM] has important implications for X.,possibly,certainly,doubtless,necessarily
+This research [ITEM] has important implications for X.,definitely,undoubtedly,probably,unquestionably
+This research [ITEM] has important implications for X.,indisputably,undeniably,presumably,plausibly
+This research [ITEM] has important implications for X.,almost certainly,undeniably,definitely,almost certainly
+This research [ITEM] have important implications for X.,will,might,should,must
+This research [ITEM] have important implications for X.,may,could,might,should
+[ITEM] this research has important implications for X.,perhaps,maybe,perhaps,maybe
+"[ITEM], this research has important implications for X.",without doubt,no doubt,without doubt,no doubt

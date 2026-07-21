@@ -508,8 +508,13 @@ async function closeInstructionsAndStartSurvey() {
 function updateQuestion() {
     const currentSet = wordSets[currentQuestion];
     
-    // Display the meaning
-    document.getElementById('meaningText').textContent = `"${currentSet.meaning}"`;
+    // Display either a generic meaning label or a sentence frame.
+    const meaningText = document.getElementById('meaningText');
+    if (currentSet.meaning.includes('[ITEM]')) {
+        meaningText.textContent = currentSet.meaning;
+    } else {
+        meaningText.textContent = `"${currentSet.meaning}"`;
+    }
     
     const wordsGrid = document.getElementById('wordsGrid');
     wordsGrid.innerHTML = '';

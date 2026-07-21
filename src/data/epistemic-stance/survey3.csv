@@ -1,9 +1,9 @@
 meaning,word1,word2,word3,word4
-Authorial positioning (BWS/MaxDiff),judge,in our view,contend,postulate
-Authorial positioning (BWS/MaxDiff),speculate,theorise,assert,hypothesise
-Authorial positioning (BWS/MaxDiff),claim,maintain,anticipate,foresee
-Authorial positioning (BWS/MaxDiff),guess,suspect,declare with complete confidence,predict
-Authorial positioning (BWS/MaxDiff),conjecture,infer,think,expect
-Authorial positioning (BWS/MaxDiff),suppose,assume,feel,conclude
-Authorial positioning (BWS/MaxDiff),believe,"speculate, without basis",argue,know
-Authorial positioning (BWS/MaxDiff),propose,arguably,assume,anticipate
+We [ITEM] that this research has important implications for X.,theorise,argue,propose,believe
+We [ITEM] that this research has important implications for X.,conclude,postulate,maintain,think
+We [ITEM] that this research has important implications for X.,hypothesise,claim,know,conjecture
+We [ITEM] that this research has important implications for X.,assert,judge,suppose,infer
+We [ITEM] that this research has important implications for X.,contend,guess,assume,suspect
+We [ITEM] that this research has important implications for X.,feel,guess,think,postulate
+We [ITEM] that this research will have important implications for X.,foresee,anticipate,expect,speculate
+We [ITEM] that this research will have important implications for X.,predict,expect,foresee,anticipate

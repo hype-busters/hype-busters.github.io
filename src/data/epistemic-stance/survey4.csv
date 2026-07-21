@@ -1,6 +1,5 @@
 meaning,word1,word2,word3,word4
-Frequency (BWS/MaxDiff),commonly,never,almost always,occasionally
-Frequency (BWS/MaxDiff),rarely,typically,in some cases,under no circumstances
-Frequency (BWS/MaxDiff),on the whole,frequently,sometimes,generally
-Frequency (BWS/MaxDiff),in general,without a single exception,often,usually
-Frequency (BWS/MaxDiff),in most cases,always,rarely,occasionally
+These methods [ITEM] play an important role in X.,usually,frequently,typically,sometimes
+These methods [ITEM] play an important role in X.,commonly,rarely,often,always
+These methods [ITEM] play an important role in X.,generally,occasionally,never,almost always
+"[ITEM], these methods play an important role in X.",in general,in most cases,in some cases,on the whole

@@ -1,8 +1,8 @@
 meaning,word1,word2,word3,word4
-Evidential basis (BWS/MaxDiff),establish,demonstrate,indicate,clear
-Evidential basis (BWS/MaxDiff),show,provide evidence,suggest,obvious
-Evidential basis (BWS/MaxDiff),irrefutably prove,barely seem,find,evident
-Evidential basis (BWS/MaxDiff),highlight,apparent,prove,support
-Evidential basis (BWS/MaxDiff),imply,are consistent with,reveal,confirm
-Evidential basis (BWS/MaxDiff),apparently,appear,obviously,clearly
-Evidential basis (BWS/MaxDiff),seem,evidently,obviously,indicate
+It [ITEM] that this research has important implications for X.,appear,seem,appear,seem
+It is [ITEM] that this research has important implications for X.,obvious,evident,clear,apparent
+The results [ITEM] that this research has important implications for X.,establish,provide evidence,demonstrate,reveal
+The results [ITEM] that this research has important implications for X.,show,imply,prove,confirm
+The results [ITEM] that this research has important implications for X.,indicate,suggest,indicate,show
+The results [ITEM] the conclusion that this research has important implications for X.,are consistent with,support,are consistent with,support
+This research [ITEM] has important implications for X.,obviously,apparently,evidently,clearly
