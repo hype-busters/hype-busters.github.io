@@ -34,12 +34,16 @@ let responses = {};
 let participantData = {};
 let surveyStarted = false;
 let selectedSurvey = null;
+let itemSentenceMap = {};
 // Google API variables removed - using simple Apps Script approach
 
 // Survey Initialization
 async function initializeSurvey() {
     // Load configuration from external file  
     loadConfiguration();
+
+    // Load item-specific sentence realizations for grammar-safe options.
+    await loadItemSentenceMap();
     
     // Load questions from external file
     try {
@@ -97,6 +101,32 @@ async function initializeSurvey() {
     
     showInstructionsPage();
     setupEventListeners();
+}
+
+async function loadItemSentenceMap() {
+    try {
+        const mapPath = `${EPISTEMIC_STANCE_CONFIG.dataBasePath}/item_sentences.json?v=${Date.now()}`;
+        const response = await fetch(mapPath);
+        if (!response.ok) {
+            throw new Error('item_sentences.json unavailable');
+        }
+        itemSentenceMap = await response.json();
+        console.log(`✅ Loaded ${Object.keys(itemSentenceMap).length} item sentences`);
+    } catch (error) {
+        console.warn('⚠️ Could not load item sentence map. Falling back to template substitution.', error);
+        itemSentenceMap = {};
+    }
+}
+
+function getOptionSentence(meaning, option) {
+    const key = option.trim().toLowerCase();
+    if (itemSentenceMap[key]) {
+        return itemSentenceMap[key];
+    }
+    if (meaning.includes('[ITEM]')) {
+        return meaning.replace('[ITEM]', option);
+    }
+    return option;
 }
 
 // CSV Parser utility function
@@ -354,6 +384,7 @@ function startSurveyWithDemographics() {
         name: document.getElementById('participantName').value,
         age: document.getElementById('participantAge').value,
         gender: document.getElementById('participantGender').value,
+        highestEducation: document.getElementById('participantEducation').value,
         country: document.getElementById('participantCountry').value,
         firstLanguage: document.getElementById('participantLanguage').value,
         timestamp: new Date().toISOString()
@@ -511,7 +542,7 @@ function updateQuestion() {
     // Display either a generic meaning label or a sentence frame.
     const meaningText = document.getElementById('meaningText');
     if (currentSet.meaning.includes('[ITEM]')) {
-        meaningText.textContent = currentSet.meaning;
+        meaningText.textContent = currentSet.meaning.replace('[ITEM]', '(option)');
     } else {
         meaningText.textContent = `"${currentSet.meaning}"`;
     }
@@ -522,7 +553,8 @@ function updateQuestion() {
     currentSet.words.forEach((word, index) => {
         const wordElement = document.createElement('div');
         wordElement.className = 'word-option';
-        wordElement.textContent = word;
+        wordElement.dataset.word = word;
+        wordElement.textContent = getOptionSentence(currentSet.meaning, word);
         wordElement.onclick = () => selectWord(word, wordElement);
         wordsGrid.appendChild(wordElement);
     });
@@ -532,10 +564,10 @@ function updateQuestion() {
         const response = responses[currentQuestion];
         const wordElements = wordsGrid.children;
         for (let elem of wordElements) {
-            if (elem.textContent === response.mostIntense) {
+            if (elem.dataset.word === response.mostIntense) {
                 elem.classList.add('most-intense');
             }
-            if (elem.textContent === response.leastIntense) {
+            if (elem.dataset.word === response.leastIntense) {
                 elem.classList.add('least-intense');
             }
         }
@@ -816,6 +848,7 @@ async function saveResponseChunk(chunkResponses, chunkNumber, totalChunks) {
             name: participantData.name,
             age: participantData.age,
             gender: participantData.gender,
+            highestEducation: participantData.highestEducation,
             country: participantData.country,
             firstLanguage: participantData.firstLanguage
         },
@@ -923,6 +956,7 @@ async function saveToGoogleSheets() {
                 name: participantData.name,
                 age: participantData.age,
                 gender: participantData.gender,
+            highestEducation: participantData.highestEducation,
                 country: participantData.country,
                 firstLanguage: participantData.firstLanguage
             },
@@ -1109,7 +1143,7 @@ async function saveToGoogleSheetsAPI() {
     // Prepare data for Google Sheets
     const values = [
         // Header row
-        ['Timestamp', 'Name', 'Age', 'Gender', 'Country', 'First Language', 'Question #', 'Meaning', 'Most Intense', 'Least Intense']
+        ['Timestamp', 'Name', 'Age', 'Gender', 'Highest Education', 'Country', 'First Language', 'Question #', 'Meaning', 'Most Intense', 'Least Intense']
     ];
 
     // Add participant data and responses
@@ -1119,6 +1153,7 @@ async function saveToGoogleSheetsAPI() {
             participantData.name,
             participantData.age,
             participantData.gender,
+            participantData.highestEducation,
             participantData.country,
             participantData.firstLanguage,
             parseInt(index) + 1,
@@ -1131,7 +1166,7 @@ async function saveToGoogleSheetsAPI() {
     // Append to spreadsheet
     const response = await gapi.client.sheets.spreadsheets.values.append({
         spreadsheetId: window.SURVEY_CONFIG.google.spreadsheetId,
-        range: 'Sheet1!A:J',
+        range: 'Sheet1!A:K',
         valueInputOption: 'RAW',
         resource: {
             values: values
@@ -1151,6 +1186,7 @@ function exportToExcel() {
     worksheetData.push(['Name', participantData.name]);
     worksheetData.push(['Age', participantData.age]);
     worksheetData.push(['Gender', participantData.gender]);
+    worksheetData.push(['Highest Education', participantData.highestEducation]);
     worksheetData.push(['Country', participantData.country]);
     worksheetData.push(['First Language', participantData.firstLanguage]);
     worksheetData.push(['Completion Date', new Date(participantData.timestamp).toLocaleString()]);
@@ -1281,6 +1317,7 @@ async function testGoogleAppsScriptConnection() {
             name: 'Test User',
             age: '25',
             gender: 'Test',
+            highestEducation: 'Test Education',
             country: 'Test Country',
             firstLanguage: 'English'
         },

@@ -106,7 +106,7 @@
 
         .words-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            grid-template-columns: 1fr;
             gap: 12px;
             margin-bottom: 28px;
         }
@@ -116,13 +116,14 @@
             border: 2px solid #e0e0e0;
             border-radius: 8px;
             padding: 18px 12px;
-            text-align: center;
+            text-align: left;
             cursor: pointer;
             transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             font-weight: 500;
             font-size: 0.95em;
             position: relative;
             letter-spacing: 0.3px;
+            line-height: 1.45;
         }
 
         .word-option:hover {
@@ -631,6 +632,20 @@
                                 <option value="Other">Other</option>
                             </select>
                         </div>
+
+                        <div style="margin-bottom: 20px;">
+                            <label for="participantEducation" style="display: block; margin-bottom: 8px; font-weight: 500; color: #333;">Highest Level of Education *</label>
+                            <select id="participantEducation" required style="width: 100%; padding: 12px; border: 2px solid #c0c0c0; border-radius: 8px; font-size: 16px;">
+                                <option value="">Select highest education</option>
+                                <option value="High school or equivalent">High school or equivalent</option>
+                                <option value="Associate degree">Associate degree</option>
+                                <option value="Bachelor's degree">Bachelor's degree</option>
+                                <option value="Master's degree">Master's degree</option>
+                                <option value="Doctoral degree">Doctoral degree</option>
+                                <option value="Other">Other</option>
+                                <option value="Prefer not to say">Prefer not to say</option>
+                            </select>
+                        </div>
                         
                         <div style="margin-bottom: 20px;">
                             <label for="participantCountry" style="display: block; margin-bottom: 8px; font-weight: 500; color: #333;">Country *</label>
@@ -751,11 +766,11 @@
             <!-- Detailed Instructions Page -->
             <div id="instructionsContainer">
                 <div class="question-card">
-                    <h1 style="text-align: center; margin-bottom: 32px; font-size: 1.8em;">BWS/MaxDiff: Participant Instructions</h1>
+                    <h1 style="text-align: center; margin-bottom: 32px; font-size: 1.8em;">Best-Worst Scaling (BWS): Participant Instructions</h1>
                     
                     <div style="max-width: 800px; margin: 0 auto; text-align: left;">
-                        <h2 style="margin-top: 32px; margin-bottom: 16px; font-size: 1.4em;">General Instructions</h2>
-                        <p style="margin-bottom: 15px; line-height: 1.6;">In this study, you will be shown small sets of claim-strength expressions. Your job is to decide which item in each set is the <strong>strongest</strong> and which is the <strong>weakest</strong> for the same underlying claim meaning.</p>
+                        <h2 style="margin-top: 32px; margin-bottom: 16px; font-size: 1.4em;">What Is Best-Worst Scaling?</h2>
+                        <p style="margin-bottom: 15px; line-height: 1.6;">Best-Worst Scaling (also called MaxDiff in many applied studies) asks you to pick the <strong>strongest</strong> and <strong>weakest</strong> option from a small set.</p>
                         
                         <p style="margin-bottom: 15px; line-height: 1.6;">You will see 4 items at a time. For each set, choose:</p>
                         <ol style="margin-bottom: 20px; padding-left: 25px; line-height: 1.6;">
@@ -765,7 +780,7 @@
                         
                         <p style="margin-bottom: 15px; line-height: 1.6;"><strong>Focus only on comparative strength.</strong></p>
                         
-                        <p style="margin-bottom: 25px; line-height: 1.6;">There are no right or wrong answers. This task is Best-Worst Scaling (BWS), also known in many applied studies as MaxDiff. You must choose one strongest and one weakest item for every set. If two feel similar, choose the one that feels slightly stronger or weaker.</p>
+                        <p style="margin-bottom: 25px; line-height: 1.6;">There are no right or wrong answers. You must choose one strongest and one weakest item for every set. If two feel similar, choose the one that feels slightly stronger or weaker.</p>
                         
                         <h2 style="margin-top: 32px; margin-bottom: 16px; font-size: 1.3em;">Example</h2>
                         <div style="background: #f0f0f0; padding: 20px; border-radius: 10px; margin-bottom: 25px;">
@@ -810,6 +825,14 @@
                             <p style="margin-bottom: 8px;"><strong>Words:</strong> annoyed, furious, upset, irritated</p>
                             <p style="margin-bottom: 5px; color: #0d47a1;"><strong>Most intense:</strong> furious</p>
                             <p style="color: #87ceeb;"><strong>Least intense:</strong> annoyed</p>
+                        </div>
+
+                        <h2 style="margin-top: 32px; margin-bottom: 16px; font-size: 1.3em;">What Is Claim-Strength Modification?</h2>
+                        <p style="margin-bottom: 15px; line-height: 1.6;">In this project, we compare words that make the <em>same claim</em> sound weaker or stronger.</p>
+                        <div style="background: #f8f8f8; padding: 15px; border-radius: 10px; margin-bottom: 30px; border-left: 4px solid #5a5a5a;">
+                            <p style="margin-bottom: 8px;"><strong>Base claim:</strong> this research has important implications for X.</p>
+                            <p style="margin-bottom: 8px;"><strong>Weaker:</strong> It is <strong>possible</strong> that this research has important implications for X.</p>
+                            <p style="margin-bottom: 8px;"><strong>Stronger:</strong> It is <strong>undeniable</strong> that this research has important implications for X.</p>
                         </div>
                         
                         <div style="text-align: center; margin-top: 40px;">
