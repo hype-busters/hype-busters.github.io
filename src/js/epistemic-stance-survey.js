@@ -313,6 +313,19 @@ function getAppsScriptUrl() {
         EPISTEMIC_STANCE_CONFIG.defaultAppsScriptUrl;
 }
 
+function getFormIdForSelectedSurvey() {
+    if (selectedSurvey === '3' || selectedSurvey === '4' || selectedSurvey === '5') {
+        return `S${selectedSurvey}-BIBD`;
+    }
+    const config = window.SURVEY_CONFIG || {};
+    const bySurvey = config.epistemicStance?.formIdBySurvey || {};
+    return bySurvey[selectedSurvey] || 'A';
+}
+
+function getBlockId(questionIndex) {
+    return `S${selectedSurvey}-B${questionIndex + 1}`;
+}
+
 // Event Listeners Setup
 function setupEventListeners() {
     document.getElementById('demographicsForm').addEventListener('submit', function(e) {
@@ -871,6 +884,7 @@ async function saveResponseChunk(chunkResponses, chunkNumber, totalChunks) {
         method: EPISTEMIC_STANCE_CONFIG.methodMode,
         responseFormatVersion: EPISTEMIC_STANCE_CONFIG.responseFormatVersion,
         selectedSurvey: selectedSurvey,
+        formId: getFormIdForSelectedSurvey(),
         chunkInfo: {
             chunkNumber: chunkNumber,
             totalChunks: totalChunks,
@@ -899,6 +913,8 @@ async function saveResponseChunk(chunkResponses, chunkNumber, totalChunks) {
             
             surveyData.responses.push({
                 questionNumber: questionIndex + 1,
+                blockId: getBlockId(questionIndex),
+                formId: getFormIdForSelectedSurvey(),
                 meaning: wordSet.meaning,
                 mostIntense: response.mostIntense,
                 leastIntense: response.leastIntense,
@@ -984,6 +1000,7 @@ async function saveToGoogleSheets() {
             method: EPISTEMIC_STANCE_CONFIG.methodMode,
             responseFormatVersion: EPISTEMIC_STANCE_CONFIG.responseFormatVersion,
             selectedSurvey: selectedSurvey,
+            formId: getFormIdForSelectedSurvey(),
             participant: {
                 name: participantData.name,
                 age: participantData.age,
@@ -1012,6 +1029,8 @@ async function saveToGoogleSheets() {
                 
                 surveyData.responses.push({
                     questionNumber: questionIndex + 1, // 1-indexed for human readability
+                    blockId: getBlockId(questionIndex),
+                    formId: getFormIdForSelectedSurvey(),
                     meaning: wordSet.meaning,
                     mostIntense: response.mostIntense,
                     leastIntense: response.leastIntense,
@@ -1153,6 +1172,7 @@ function saveToLocalStorage() {
         study: EPISTEMIC_STANCE_CONFIG.studyId,
         method: EPISTEMIC_STANCE_CONFIG.methodMode,
         responseFormatVersion: EPISTEMIC_STANCE_CONFIG.responseFormatVersion,
+        formId: getFormIdForSelectedSurvey(),
         participant: participantData,
         responses: responses,
         timestamp: new Date().toISOString(),

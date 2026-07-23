@@ -18,35 +18,49 @@ function doPost(e) {
     const spreadsheetId = '1NFtTKVG53mdqAwIf8-lmEewRwQ52C8yCwtI8hLryMb0';
     const spreadsheet = SpreadsheetApp.openById(spreadsheetId);
 
+    const expectedHeaders = [
+      'Timestamp',
+      'Study',
+      'Method',
+      'Response Format Version',
+      'Survey Number',
+      'Form ID',
+      'Block ID',
+      'Name',
+      'Age',
+      'Gender',
+      'Highest Education',
+      'Country',
+      'First Language',
+      'Question #',
+      'Meaning',
+      'Most Intense',
+      'Least Intense',
+      'Is Attention Check',
+      'Chunk Number',
+      'Total Chunks'
+    ];
+
     let sheet = spreadsheet.getSheetByName('Epistemic Stance Responses');
     if (!sheet) {
       sheet = spreadsheet.insertSheet('Epistemic Stance Responses');
-      sheet.appendRow([
-        'Timestamp',
-        'Study',
-        'Method',
-        'Response Format Version',
-        'Survey Number',
-        'Name',
-        'Age',
-        'Gender',
-        'Highest Education',
-        'Country',
-        'First Language',
-        'Question #',
-        'Meaning',
-        'Most Intense',
-        'Least Intense',
-        'Is Attention Check',
-        'Chunk Number',
-        'Total Chunks'
-      ]);
+    }
+
+    // Keep headers synchronized even if the sheet existed with an older schema.
+    const headerRange = sheet.getRange(1, 1, 1, expectedHeaders.length);
+    const currentHeaders = headerRange.getValues()[0];
+    const needsHeaderUpdate = expectedHeaders.some(function (h, i) {
+      return currentHeaders[i] !== h;
+    });
+    if (needsHeaderUpdate) {
+      headerRange.setValues([expectedHeaders]);
     }
 
     const surveyNumber = data.selectedSurvey || '';
     const study = data.study || 'epistemic-stance';
     const method = data.method || 'bws_maxdiff';
     const responseFormatVersion = data.responseFormatVersion || '1.0';
+    const formId = data.formId || '';
     const chunkNumber = data.chunkInfo && data.chunkInfo.chunkNumber ? data.chunkInfo.chunkNumber : '';
     const totalChunks = data.chunkInfo && data.chunkInfo.totalChunks ? data.chunkInfo.totalChunks : '';
 
@@ -59,6 +73,8 @@ function doPost(e) {
           method,
           responseFormatVersion,
           surveyNumber,
+          response.formId || formId,
+          response.blockId || '',
           data.participant ? data.participant.name : '',
           data.participant ? data.participant.age : '',
           data.participant ? data.participant.gender : '',
