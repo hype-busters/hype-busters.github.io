@@ -129,6 +129,37 @@ function getOptionSentence(meaning, option) {
     return option;
 }
 
+function escapeHtml(text) {
+    return String(text)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
+
+function getHighlightedSentenceHtml(sentence, option) {
+    const rawSentence = String(sentence || '');
+    const rawOption = String(option || '').trim();
+    if (!rawOption) {
+        return escapeHtml(rawSentence);
+    }
+
+    const lowerSentence = rawSentence.toLowerCase();
+    const lowerOption = rawOption.toLowerCase();
+    const matchIndex = lowerSentence.indexOf(lowerOption);
+
+    if (matchIndex === -1) {
+        return escapeHtml(rawSentence);
+    }
+
+    const before = escapeHtml(rawSentence.slice(0, matchIndex));
+    const match = escapeHtml(rawSentence.slice(matchIndex, matchIndex + rawOption.length));
+    const after = escapeHtml(rawSentence.slice(matchIndex + rawOption.length));
+
+    return `${before}<strong>${match}</strong>${after}`;
+}
+
 // CSV Parser utility function
 function parseCsvLine(line) {
     const values = [];
@@ -554,7 +585,8 @@ function updateQuestion() {
         const wordElement = document.createElement('div');
         wordElement.className = 'word-option';
         wordElement.dataset.word = word;
-        wordElement.textContent = getOptionSentence(currentSet.meaning, word);
+        const optionSentence = getOptionSentence(currentSet.meaning, word);
+        wordElement.innerHTML = getHighlightedSentenceHtml(optionSentence, word);
         wordElement.onclick = () => selectWord(word, wordElement);
         wordsGrid.appendChild(wordElement);
     });
