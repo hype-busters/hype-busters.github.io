@@ -3,167 +3,370 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Epistemic Stance Survey Design Report</title>
+  <title>Epistemic Stance Survey &middot; Design Report</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 32px; color: #1f2937; line-height: 1.5; }
-    h1, h2, h3 { color: #111827; }
-    .muted { color: #6b7280; }
-    .box { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px; padding: 14px 16px; margin: 12px 0; }
-    table { border-collapse: collapse; width: 100%; margin: 12px 0 20px; }
-    th, td { border: 1px solid #d1d5db; padding: 8px 10px; text-align: left; vertical-align: top; }
-    th { background: #111827; color: #fff; font-weight: 600; }
-    code { background: #f3f4f6; padding: 1px 4px; border-radius: 4px; }
-    ul { margin-top: 6px; }
+    :root {
+      --ink: #0f172a;
+      --ink-soft: #334155;
+      --muted: #64748b;
+      --line: #e2e8f0;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --accent: #4f46e5;
+      --accent-soft: #eef2ff;
+      --good: #059669;
+      --good-soft: #ecfdf5;
+      --warn: #b45309;
+      --warn-soft: #fffbeb;
+      --shadow: 0 1px 2px rgba(15,23,42,.06), 0 8px 24px rgba(15,23,42,.06);
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      margin: 0;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrap { max-width: 920px; margin: 0 auto; padding: 0 20px 80px; }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+      color: #fff;
+      padding: 56px 20px 64px;
+      margin-bottom: -28px;
+    }
+    .hero-inner { max-width: 920px; margin: 0 auto; }
+    .hero .eyebrow {
+      text-transform: uppercase; letter-spacing: .12em; font-size: 12px;
+      font-weight: 700; opacity: .85; margin: 0 0 10px;
+    }
+    .hero h1 { margin: 0 0 12px; font-size: 34px; line-height: 1.2; font-weight: 800; }
+    .hero p { margin: 0; max-width: 640px; font-size: 16px; opacity: .92; }
+
+    /* Cards / sections */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 26px 28px;
+      margin: 22px 0;
+      box-shadow: var(--shadow);
+    }
+    h2 {
+      font-size: 22px; margin: 4px 0 14px; color: var(--ink);
+      display: flex; align-items: center; gap: 10px;
+    }
+    h2 .num {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 30px; height: 30px; border-radius: 9px;
+      background: var(--accent-soft); color: var(--accent);
+      font-size: 15px; font-weight: 800; flex: none;
+    }
+    h3 { font-size: 16px; margin: 22px 0 8px; color: var(--ink-soft); }
+    p { margin: 10px 0; color: var(--ink-soft); }
+    ul, ol { margin: 8px 0; padding-left: 22px; color: var(--ink-soft); }
+    li { margin: 5px 0; }
+    strong { color: var(--ink); }
+
+    code {
+      background: #f1f5f9; padding: 2px 6px; border-radius: 5px;
+      font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace;
+      font-size: .9em; color: #db2777;
+    }
+
+    /* Table */
+    .table-scroll { overflow-x: auto; margin: 14px 0 4px; }
+    table { border-collapse: collapse; width: 100%; font-size: 14.5px; }
+    th, td { padding: 11px 13px; text-align: left; border-bottom: 1px solid var(--line); }
+    thead th {
+      background: #0f172a; color: #fff; font-weight: 600;
+      font-size: 12.5px; text-transform: uppercase; letter-spacing: .03em;
+    }
+    thead th:first-child { border-top-left-radius: 10px; }
+    thead th:last-child { border-top-right-radius: 10px; }
+    tbody tr:nth-child(even) { background: #fafbfc; }
+    tbody tr:hover { background: var(--accent-soft); }
+    td .pill {
+      display: inline-block; padding: 2px 9px; border-radius: 999px;
+      font-size: 12px; font-weight: 700;
+    }
+    .pill.strict { background: var(--good-soft); color: var(--good); }
+    .pill.near { background: var(--warn-soft); color: var(--warn); }
+
+    /* Callouts */
+    .callout {
+      border-radius: 12px; padding: 16px 18px; margin: 16px 0;
+      border: 1px solid var(--line); background: var(--bg);
+    }
+    .callout.info { background: var(--accent-soft); border-color: #c7d2fe; }
+    .callout.good { background: var(--good-soft); border-color: #a7f3d0; }
+    .callout.warn { background: var(--warn-soft); border-color: #fde68a; }
+    .callout .tag {
+      font-size: 12px; font-weight: 800; text-transform: uppercase;
+      letter-spacing: .06em; margin-bottom: 4px;
+    }
+    .callout.info .tag { color: var(--accent); }
+    .callout.good .tag { color: var(--good); }
+    .callout.warn .tag { color: var(--warn); }
+    .callout p:last-child { margin-bottom: 0; }
+    .callout p:first-of-type { margin-top: 2px; }
+
+    /* Formula block */
+    .formula {
+      background: #0f172a; color: #e2e8f0; border-radius: 12px;
+      padding: 20px 22px; margin: 16px 0; text-align: center;
+      font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace;
+      font-size: 18px; letter-spacing: .01em;
+    }
+    .formula .big { color: #a5b4fc; font-weight: 700; }
+
+    /* Definition grid */
+    .defs { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin: 14px 0; }
+    .def {
+      border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; background: #fff;
+    }
+    .def .term { font-weight: 800; color: var(--accent); font-family: "SF Mono", ui-monospace, monospace; }
+    .def .desc { font-size: 13.5px; color: var(--muted); margin-top: 3px; }
+
+    /* Steps */
+    ol.steps { counter-reset: step; list-style: none; padding-left: 0; }
+    ol.steps > li {
+      position: relative; padding: 14px 16px 14px 56px; margin: 10px 0;
+      border: 1px solid var(--line); border-radius: 12px; background: #fff;
+    }
+    ol.steps > li::before {
+      counter-increment: step; content: counter(step);
+      position: absolute; left: 14px; top: 14px;
+      width: 28px; height: 28px; border-radius: 8px;
+      background: var(--accent); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 14px;
+    }
+
+    .worked {
+      background: #fff; border: 1px dashed #c7d2fe; border-radius: 12px;
+      padding: 18px 20px; margin: 16px 0;
+    }
+    .worked .line { display: flex; justify-content: space-between; gap: 12px; padding: 6px 0; border-bottom: 1px dashed var(--line); }
+    .worked .line:last-child { border-bottom: none; }
+    .worked .line .lbl { color: var(--muted); }
+    .worked .line .val { font-family: "SF Mono", ui-monospace, monospace; color: var(--ink); font-weight: 600; }
+    .worked .result { color: var(--good); }
+
+    footer { text-align: center; color: var(--muted); font-size: 13px; margin-top: 28px; }
+    .toc { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .toc a {
+      text-decoration: none; font-size: 13px; font-weight: 600;
+      color: #fff; background: rgba(255,255,255,.14);
+      padding: 6px 12px; border-radius: 999px; border: 1px solid rgba(255,255,255,.22);
+    }
+    .toc a:hover { background: rgba(255,255,255,.26); }
   </style>
 </head>
 <body>
-  <h1>Epistemic Stance BWS Design Report</h1>
-  <p class="muted">Prepared for current survey configuration (post lexical cleanup and strict BIBD adoption for Surveys 3-5).</p>
+  <header class="hero">
+    <div class="hero-inner">
+      <p class="eyebrow">Hype-Busters &middot; Experiment Design</p>
+      <h1>Epistemic Stance Survey &mdash; Design &amp; Recruitment Report</h1>
+      <p>A plain-language walkthrough of how the Best-Worst Scaling study is built: how many options per question, how many questions per survey, and exactly how we work out the minimum number of people we need to pay.</p>
+      <nav class="toc">
+        <a href="#what">What we measure</a>
+        <a href="#format">Question format</a>
+        <a href="#split">Survey split</a>
+        <a href="#annotators">How many annotators</a>
+        <a href="#plan">Recruitment plan</a>
+        <a href="#pipeline">Pipeline</a>
+      </nav>
+    </div>
+  </header>
 
-  <h2>1) Core Question Format</h2>
-  <div class="box">
-    <ul>
-      <li>Each <strong>block</strong> has <strong>4 sentence options</strong> (<code>k=4</code>).</li>
-      <li>Each participant selects one <strong>strongest</strong> and one <strong>weakest</strong> option.</li>
-      <li>This is valid <strong>Best-Worst Scaling (Case 1 / MaxDiff-style)</strong> response design.</li>
-    </ul>
+  <div class="wrap">
+
+    <!-- 0. What we measure -->
+    <section class="card" id="what">
+      <h2><span class="num">0</span> What this experiment measures</h2>
+      <p>We want to rank English words and phrases by how strongly they signal an <strong>epistemic stance</strong> &mdash; how certain, evidence-based, or committed a claim sounds. For example, "this <em>proves</em>" is a much stronger stance than "this <em>might suggest</em>".</p>
+      <p>Instead of asking people to rate each word on a 1&ndash;7 scale (which people use inconsistently), we show a few words in context and ask them to pick the <strong>strongest</strong> and the <strong>weakest</strong>. This is called <strong>Best-Worst Scaling (BWS)</strong>, and it gives cleaner, more reliable rankings from fewer judgements.</p>
+      <p>Words are grouped into <strong>five surveys</strong>, one per stance category, so people only compare words that belong together.</p>
+    </section>
+
+    <!-- 1. Question format -->
+    <section class="card" id="format">
+      <h2><span class="num">1</span> The question format</h2>
+      <div class="callout info">
+        <div class="tag">One question = one block</div>
+        <p>Each question shows <strong>4 sentences</strong> that differ only by the stance word. The participant picks the <strong>strongest</strong> and the <strong>weakest</strong> of the four. Every "pick strongest + weakest" out of 4 implies 5 of the 6 possible pairwise comparisons at once &mdash; that is why BWS is so efficient.</p>
+      </div>
+      <div class="defs">
+        <div class="def"><div class="term">v</div><div class="desc">number of distinct items (words) in a survey</div></div>
+        <div class="def"><div class="term">k = 4</div><div class="desc">items shown per block (per question)</div></div>
+        <div class="def"><div class="term">b</div><div class="desc">number of blocks (questions) in the survey</div></div>
+        <div class="def"><div class="term">r</div><div class="desc">how many times each item is seen by one participant</div></div>
+      </div>
+      <p>These four numbers are linked by a simple accounting identity: total item-slots shown is <code>b &times; k</code>, and if every item is shown equally that equals <code>v &times; r</code>. So <code>b &times; 4 = v &times; r</code>.</p>
+    </section>
+
+    <!-- 2. Survey split -->
+    <section class="card" id="split">
+      <h2><span class="num">2</span> The current survey split</h2>
+      <p>Surveys 3&ndash;5 use a <strong>strict BIBD</strong> (Balanced Incomplete Block Design): every pair of words is compared exactly once, which is the gold standard. Surveys 1&ndash;2 have too many words for a strict design to be cheap, so they use a <strong>near-balanced</strong> design that still connects every word into one comparison network.</p>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Survey</th><th>Category</th><th>Items (v)</th><th>Blocks (b)</th>
+              <th>Seen/person (r)</th><th>Pair coverage</th><th>Design</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>S1</strong></td><td>Likelihood / Certainty</td><td>27</td><td>27</td><td>4</td>
+              <td>162 / 351 pairs (46%) &middot; fully connected</td>
+              <td><span class="pill near">Near-balanced</span></td>
+            </tr>
+            <tr>
+              <td><strong>S2</strong></td><td>Evidential Basis</td><td>21</td><td>21</td><td>4</td>
+              <td>126 / 210 pairs (60%) &middot; fully connected</td>
+              <td><span class="pill near">Near-balanced</span></td>
+            </tr>
+            <tr>
+              <td><strong>S3</strong></td><td>Authorial Positioning</td><td>28</td><td>63</td><td>9</td>
+              <td>All pairs exactly once</td>
+              <td><span class="pill strict">Strict BIBD</span></td>
+            </tr>
+            <tr>
+              <td><strong>S4</strong></td><td>Frequency / Generality</td><td>16</td><td>20</td><td>5</td>
+              <td>All pairs exactly once</td>
+              <td><span class="pill strict">Strict BIBD</span></td>
+            </tr>
+            <tr>
+              <td><strong>S5</strong></td><td>Degree / Intensity</td><td>13</td><td>13</td><td>4</td>
+              <td>All pairs exactly once</td>
+              <td><span class="pill strict">Strict BIBD</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout good">
+        <div class="tag">Good to know</div>
+        <p>"Fully connected" means there are no isolated words &mdash; every word can be ranked relative to every other word, even in S1/S2 where not all pairs are directly compared. Indirect comparisons fill the gaps (if A&gt;B and B&gt;C, we learn A&gt;C).</p>
+      </div>
+    </section>
+
+    <!-- 3. Annotators -->
+    <section class="card" id="annotators">
+      <h2><span class="num">3</span> How we work out the minimum number of annotators</h2>
+      <p>This is the part that costs money, so it is worth explaining slowly. The goal is: <strong>collect just enough judgements so each word's score is stable, and not one paid response more.</strong></p>
+
+      <h3>Step 1 &mdash; What "precision" means here</h3>
+      <p>Every word ends up with a score between 0 and 1 (roughly, "how often was this picked as strongest"). Because we only sample a limited number of people, that score has a margin of error, exactly like a political poll ("52% &plusmn; 3%"). That "&plusmn;" part is the <strong>half-width</strong>, which we call <code>h</code>.</p>
+      <div class="defs">
+        <div class="def"><div class="term">h = 0.15</div><div class="desc">"lean" precision &mdash; enough to rank words into clear tiers</div></div>
+        <div class="def"><div class="term">h = 0.10</div><div class="desc">"strong" precision &mdash; enough to separate close neighbours</div></div>
+      </div>
+
+      <h3>Step 2 &mdash; The polling formula</h3>
+      <p>Just like a poll, the 95% margin of error shrinks with the square root of the number of independent observations <code>M</code> collected for a word. Using a conservative unit (standardized) variability per judgement &mdash; a deliberately safe over-estimate &mdash; the margin is:</p>
+      <div class="formula">
+        h = 1.96 / &radic;<span style="text-decoration:overline">M</span>
+      </div>
+      <p>The <code>1.96</code> is the 95%-confidence multiplier. Turning this around to solve for how many observations per word we need to hit a target margin <code>h</code>:</p>
+      <div class="formula">
+        M = <span class="big">(1.96 / h)<sup>2</sup></span>
+      </div>
+
+      <h3>Step 3 &mdash; From observations to people</h3>
+      <p>Here is the key money-saving insight: each participant does not give us one observation per word &mdash; they give us <code>r</code> of them (they see each word <code>r</code> times). So the number of <em>people</em> we need is the number of observations divided by <code>r</code>:</p>
+      <div class="formula">
+        N = <span class="big">M / r</span> = (1.96 / h)<sup>2</sup> / r
+      </div>
+      <div class="callout info">
+        <div class="tag">In plain words</div>
+        <p>Want more precision (smaller <code>h</code>) &rarr; need more people. Design that shows each word more often (bigger <code>r</code>) &rarr; need <em>fewer</em> people. That is why S3, with <code>r = 9</code>, needs the fewest annotators even though it has the most words.</p>
+      </div>
+
+      <h3>Step 4 &mdash; A worked example (Survey 1)</h3>
+      <div class="worked">
+        <div class="line"><span class="lbl">Target precision, h</span><span class="val">0.15</span></div>
+        <div class="line"><span class="lbl">Confidence multiplier</span><span class="val">1.96</span></div>
+        <div class="line"><span class="lbl">Observations needed, M = (1.96 / 0.15)&sup2;</span><span class="val">&asymp; 170.7</span></div>
+        <div class="line"><span class="lbl">Times each word seen per person, r</span><span class="val">4</span></div>
+        <div class="line"><span class="lbl">People needed, N = 170.7 / 4</span><span class="val">42.7</span></div>
+        <div class="line"><span class="lbl">Round up to whole people</span><span class="val result">N = 43</span></div>
+      </div>
+
+      <h3>Step 5 &mdash; The result for every survey</h3>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>Survey</th><th>Seen/person (r)</th><th>N for h = 0.15 (lean)</th><th>N for h = 0.10 (strong)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>S1</strong></td><td>4</td><td>43</td><td>97</td></tr>
+            <tr><td><strong>S2</strong></td><td>4</td><td>43</td><td>97</td></tr>
+            <tr><td><strong>S3</strong></td><td>9</td><td>19</td><td>43</td></tr>
+            <tr><td><strong>S4</strong></td><td>5</td><td>35</td><td>77</td></tr>
+            <tr><td><strong>S5</strong></td><td>4</td><td>43</td><td>97</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout warn">
+        <div class="tag">Why these are minimums, not guesses</div>
+        <p>The formula deliberately assumes conservative (unit) variability and 95% confidence, so real precision is usually a little better than promised. We treat these as a <strong>floor</strong> and confirm with the reliability checks in the plan below rather than paying for more people up front.</p>
+      </div>
+    </section>
+
+    <!-- 4. Plan -->
+    <section class="card" id="plan">
+      <h2><span class="num">4</span> Cost-aware recruitment plan</h2>
+      <p>Rather than committing to the full "strong" numbers immediately, we start lean and only top up surveys that actually need it. This minimizes spend because most surveys stabilize early.</p>
+      <div class="callout good">
+        <div class="tag">Wave 1 targets</div>
+        <p><strong>S1 = 50 &middot; S2 = 50 &middot; S3 = 30 &middot; S4 = 40 &middot; S5 = 50</strong> participants.</p>
+      </div>
+      <ul>
+        <li>After Wave 1, run the checks below on each survey.</li>
+        <li>Add <strong>+15 participants</strong> only to surveys that fail.</li>
+        <li>Repeat until each survey passes twice in a row, then stop paying for that survey.</li>
+      </ul>
+      <h3>Stopping rule (pass both, twice in a row)</h3>
+      <ul>
+        <li><strong>Split-half reliability &ge; 0.75</strong> (prefer 0.80+): split responses in two random halves; the two rankings should strongly agree.</li>
+        <li><strong>Top/bottom quartile overlap &ge; 85%</strong>: the strongest and weakest words stay the same as more data comes in.</li>
+      </ul>
+    </section>
+
+    <!-- 5. Pipeline -->
+    <section class="card" id="pipeline">
+      <h2><span class="num">5</span> Step-by-step pipeline from here</h2>
+      <ol class="steps">
+        <li><strong>Freeze the design.</strong> Tag the current S1&ndash;S5 CSVs as <code>design_v1</code> so the item lists and blocks cannot drift mid-study.</li>
+        <li><strong>Confirm data capture.</strong> Verify the live Apps Script logs every column: <code>Form ID</code>, <code>Block ID</code>, <code>Survey Number</code>, choices, and participant metadata.</li>
+        <li><strong>Pilot QA (5&ndash;10 per survey).</strong> Check rows land in the sheet, block counts match, and sentences render correctly.</li>
+        <li><strong>Run Wave 1.</strong> Recruit the lean targets above.</li>
+        <li><strong>Checkpoint every +15.</strong> Recompute reliability and rank stability per survey.</li>
+        <li><strong>Selective top-up.</strong> Add participants only to surveys still failing (usually S1/S2 first, since they are near-balanced).</li>
+        <li><strong>Finalize scores.</strong> Produce BW-normalized scores plus a model-based estimate, and report each word's score with its uncertainty.</li>
+      </ol>
+    </section>
+
+    <!-- Notes -->
+    <section class="card">
+      <h2><span class="num">i</span> Notes &amp; decisions on record</h2>
+      <ul>
+        <li><code>unlikely</code> was removed from S1 to avoid polarity reversal within a "strength of certainty" scale.</li>
+        <li>Adjective/adverb duplicates were pruned by academic-usage frequency; <code>apparent</code> and <code>apparently</code> were deliberately both kept.</li>
+        <li>Total distinct items across the study currently stands at <strong>105</strong>.</li>
+        <li>Options render as full, grammatically correct sentences with the target word highlighted in the live UI.</li>
+      </ul>
+    </section>
+
+    <footer>
+      Epistemic Stance Survey &middot; Design Report &middot; Hype-Busters
+    </footer>
   </div>
-
-  <h2>2) Current Split by Survey</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Survey</th>
-        <th>Construct</th>
-        <th>Items (v)</th>
-        <th>Blocks (b)</th>
-        <th>Item Exposure (r)</th>
-        <th>Pair Coverage</th>
-        <th>Design Type</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>S1</td>
-        <td>Likelihood / Certainty</td>
-        <td>27</td>
-        <td>27</td>
-        <td>4</td>
-        <td>162/351 pairs (46.2%), connected graph</td>
-        <td>Near-balanced BWS (not strict BIBD)</td>
-      </tr>
-      <tr>
-        <td>S2</td>
-        <td>Evidential Basis</td>
-        <td>21</td>
-        <td>21</td>
-        <td>4</td>
-        <td>126/210 pairs (60.0%), connected graph</td>
-        <td>Near-balanced BWS (not strict BIBD)</td>
-      </tr>
-      <tr>
-        <td>S3</td>
-        <td>Authorial Positioning</td>
-        <td>28</td>
-        <td>63</td>
-        <td>9</td>
-        <td>All pairs covered exactly once</td>
-        <td><strong>Strict BIBD</strong> (2-(28,4,1))</td>
-      </tr>
-      <tr>
-        <td>S4</td>
-        <td>Frequency / Generality</td>
-        <td>16</td>
-        <td>20</td>
-        <td>5</td>
-        <td>All pairs covered exactly once</td>
-        <td><strong>Strict BIBD</strong> (2-(16,4,1))</td>
-      </tr>
-      <tr>
-        <td>S5</td>
-        <td>Degree / Intensity</td>
-        <td>13</td>
-        <td>13</td>
-        <td>4</td>
-        <td>All pairs covered exactly once</td>
-        <td><strong>Strict BIBD</strong> (2-(13,4,1))</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h2>3) Is BWS Possible for All Surveys?</h2>
-  <div class="box">
-    <p><strong>Yes.</strong> All surveys are valid BWS tasks.</p>
-    <ul>
-      <li>S3/S4/S5 use strict pair-balanced BIBD blocks.</li>
-      <li>S1/S2 are still BWS-valid but not strict BIBD; pair space is partially covered.</li>
-    </ul>
-  </div>
-
-  <h2>4) How to Arrange S1/S2 (if improving beyond current design)</h2>
-  <div class="box">
-    <p>Recommended low-cost improvement: create additional forms and randomize assignment.</p>
-    <ul>
-      <li>S1: 2-3 forms total (A/B/(C)) to increase global pair coverage.</li>
-      <li>S2: 2 forms total (A/B) usually sufficient.</li>
-      <li>Each participant completes only one form for their assigned survey.</li>
-    </ul>
-  </div>
-
-  <h2>5) Annotator Requirements (Mathematical Guide)</h2>
-  <p>Conservative CI-based rule for normalized item score precision:</p>
-  <p><code>N >= ceil(((1.96 / h)^2) / r)</code>, where <code>h</code> is target half-width and <code>r</code> is item exposures per participant.</p>
-
-  <table>
-    <thead>
-      <tr>
-        <th>Survey</th>
-        <th>r</th>
-        <th>N for h = 0.15 (lean)</th>
-        <th>N for h = 0.10 (stronger)</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr><td>S1</td><td>4</td><td>43</td><td>97</td></tr>
-      <tr><td>S2</td><td>4</td><td>43</td><td>97</td></tr>
-      <tr><td>S3</td><td>9</td><td>19</td><td>43</td></tr>
-      <tr><td>S4</td><td>5</td><td>35</td><td>77</td></tr>
-      <tr><td>S5</td><td>4</td><td>43</td><td>97</td></tr>
-    </tbody>
-  </table>
-
-  <h3>Cost-aware operational targets</h3>
-  <div class="box">
-    <ul>
-      <li>Initial wave: S1=50, S2=50, S3=30, S4=40, S5=50</li>
-      <li>Then add +15 only to surveys that fail stability checks.</li>
-      <li>Stopping rule: pass both twice in a row:
-        <ul>
-          <li>Split-half reliability >= 0.75 (prefer 0.80+)</li>
-          <li>Top/bottom quartile rank overlap >= 85%</li>
-        </ul>
-      </li>
-    </ul>
-  </div>
-
-  <h2>6) Step-by-Step Pipeline from Now</h2>
-  <ol>
-    <li><strong>Freeze current design files</strong> (S1-5 CSVs) as a versioned release (e.g., <code>design_v1</code>).</li>
-    <li><strong>Confirm live Apps Script deployment</strong> with current columns:<br/>
-      <code>Form ID</code>, <code>Block ID</code>, <code>Survey Number</code>, participant metadata.</li>
-    <li><strong>Pilot QA run</strong> (5-10 responses per survey) to verify data writes and block counts.</li>
-    <li><strong>Main collection wave 1</strong> with initial N targets above.</li>
-    <li><strong>Checkpoint analysis</strong> every +15 participants per survey (reliability + rank stability).</li>
-    <li><strong>Selective top-up</strong> only for unstable surveys (usually S1/S2 first).</li>
-    <li><strong>Finalize category scores</strong> (B-W normalized + model-based estimates) and report uncertainty.</li>
-  </ol>
-
-  <h2>7) Notes</h2>
-  <ul>
-    <li>S1 had <code>unlikely</code> removed intentionally due polarity concerns.</li>
-    <li>Lexical variant cleanup (adj/adv) already reduced redundancy; total distinct items currently 105.</li>
-    <li>Sentence-level option rendering is now grammar-safe and term-highlighted in the live UI.</li>
-  </ul>
-
 </body>
 </html>
