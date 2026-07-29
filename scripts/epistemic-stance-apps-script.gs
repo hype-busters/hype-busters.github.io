@@ -38,7 +38,9 @@ function doPost(e) {
       'Least Intense',
       'Is Attention Check',
       'Chunk Number',
-      'Total Chunks'
+      'Total Chunks',
+      'Anchor Check Type',
+      'Anchor Check Result'
     ];
 
     let sheet = spreadsheet.getSheetByName('Epistemic Stance Responses');
@@ -87,7 +89,9 @@ function doPost(e) {
           response.leastIntense || '',
           response.isExample ? 'Yes' : 'No',
           chunkNumber,
-          totalChunks
+          totalChunks,
+          response.anchorCheckType || '',
+          response.anchorCheckResult || ''
         ]);
         rowsAdded++;
       });

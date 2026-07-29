@@ -23,6 +23,44 @@ function checkIfAttentionCheck(words) {
                checkSet.every(word => words.includes(word));
     });
 }
+
+// Anchor items per survey (low = should be picked as weakest, high = should be picked as strongest).
+// Any block containing an anchor doubles as an attention check.
+const ANCHOR_ITEMS = {
+    '1': { low: 'could only remotely', high: 'certain beyond any doubt' },
+    '2': { low: 'barely seem', high: 'irrefutably prove' },
+    '3': { low: 'speculate, without basis', high: 'declare with complete confidence' },
+    '4': { low: 'under no circumstances', high: 'without a single exception' },
+    '5': { low: 'of zero', high: 'infinitely' }
+};
+
+// Evaluate whether a block is an anchor-based attention check, and whether the
+// participant answered it consistently (high anchor = most intense, low anchor = least intense).
+function evaluateAnchorCheck(words, mostIntense, leastIntense, surveyNumber) {
+    const result = { isAnchorCheck: false, type: '', expectedMost: '', expectedLeast: '', pass: '' };
+    const anchors = ANCHOR_ITEMS[String(surveyNumber)];
+    if (!anchors || !Array.isArray(words)) return result;
+
+    const norm = w => String(w || '').trim().toLowerCase();
+    const wl = words.map(norm);
+    const hasHigh = anchors.high && wl.includes(norm(anchors.high));
+    const hasLow = anchors.low && wl.includes(norm(anchors.low));
+    if (!hasHigh && !hasLow) return result;
+
+    result.isAnchorCheck = true;
+    result.type = (hasHigh && hasLow) ? 'both' : (hasHigh ? 'high' : 'low');
+    let pass = true;
+    if (hasHigh) {
+        result.expectedMost = anchors.high;
+        if (norm(mostIntense) !== norm(anchors.high)) pass = false;
+    }
+    if (hasLow) {
+        result.expectedLeast = anchors.low;
+        if (norm(leastIntense) !== norm(anchors.low)) pass = false;
+    }
+    result.pass = pass ? 'Pass' : 'Fail';
+    return result;
+}
 // This file is not committed to version control for security
 
 // Survey Data - will be loaded from external file
@@ -909,7 +947,8 @@ async function saveResponseChunk(chunkResponses, chunkNumber, totalChunks) {
         if (response.mostIntense && response.leastIntense && wordSet) {
             // Check if this is an attention check question (specific combinations)
             const words = wordSet.words;
-            const isAttentionCheck = checkIfAttentionCheck(words);
+            const anchorEval = evaluateAnchorCheck(words, response.mostIntense, response.leastIntense, selectedSurvey);
+            const isAttentionCheck = checkIfAttentionCheck(words) || anchorEval.isAnchorCheck;
             
             surveyData.responses.push({
                 questionNumber: questionIndex + 1,
@@ -919,7 +958,12 @@ async function saveResponseChunk(chunkResponses, chunkNumber, totalChunks) {
                 mostIntense: response.mostIntense,
                 leastIntense: response.leastIntense,
                 words: wordSet.words,
-                isExample: isAttentionCheck // Mark attention checks as examples for easy identification
+                isExample: isAttentionCheck, // Mark attention checks as examples for easy identification
+                isAnchorCheck: anchorEval.isAnchorCheck,
+                anchorCheckType: anchorEval.type,
+                anchorCheckResult: anchorEval.pass,
+                anchorExpectedMost: anchorEval.expectedMost,
+                anchorExpectedLeast: anchorEval.expectedLeast
             });
         }
     });
@@ -1025,7 +1069,8 @@ async function saveToGoogleSheets() {
             if (response.mostIntense && response.leastIntense && wordSet) {
                 // Check if this is an attention check question (specific combinations)
                 const words = wordSet.words;
-                const isAttentionCheck = checkIfAttentionCheck(words);
+                const anchorEval = evaluateAnchorCheck(words, response.mostIntense, response.leastIntense, selectedSurvey);
+                const isAttentionCheck = checkIfAttentionCheck(words) || anchorEval.isAnchorCheck;
                 
                 surveyData.responses.push({
                     questionNumber: questionIndex + 1, // 1-indexed for human readability
@@ -1035,7 +1080,12 @@ async function saveToGoogleSheets() {
                     mostIntense: response.mostIntense,
                     leastIntense: response.leastIntense,
                     words: wordSet.words,
-                    isExample: isAttentionCheck // Mark attention checks as examples for easy identification
+                    isExample: isAttentionCheck, // Mark attention checks as examples for easy identification
+                    isAnchorCheck: anchorEval.isAnchorCheck,
+                    anchorCheckType: anchorEval.type,
+                    anchorCheckResult: anchorEval.pass,
+                    anchorExpectedMost: anchorEval.expectedMost,
+                    anchorExpectedLeast: anchorEval.expectedLeast
                 });
             }
         });
