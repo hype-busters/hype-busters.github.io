@@ -228,83 +228,39 @@ footer { border-top: 1px solid var(--border-dark); padding: 22px 0; display: fle
     <span class="nlbl">What "fully connected" means</span>
     Even in S1/S2, where not every pair is compared directly, there are no isolated words — every word can still be ranked against every other through indirect chains (if A&nbsp;&gt;&nbsp;B and B&nbsp;&gt;&nbsp;C, we learn A&nbsp;&gt;&nbsp;C).
   </div>
+
+  <div class="note note-amber">
+    <span class="nlbl">Under review — PI feedback (Jul 2026)</span>
+    Two changes are prepared and staged (not yet live): (1) <strong>S3 → near-balanced</strong> to reduce fatigue — <strong>35 blocks with each item seen 5×</strong>, instead of 63 blocks / 9×; and (2) optionally adding <strong>2 anchor items per survey</strong> (one low, one high) to pin the ends of each scale and act as attention checks. Note that adding anchors shifts every survey to v&nbsp;≡&nbsp;0&nbsp;(mod&nbsp;3), which makes a strict BIBD impossible — so all five would then use the near-balanced design.
+  </div>
 </section>
 
 
 <!-- ══════════════════════ SECTION 4: HOW MANY ANNOTATORS ══════════════════════ -->
 <section>
-  <h2>How Many Annotators — Step by Step</h2>
-  <div class="sdesc">This is the part that costs money, so it is worth going slowly. The goal is to collect just enough judgements for each word's score to be stable — and not one paid response more.</div>
+  <h2>How Many Annotators — Sized Empirically, Not by Formula</h2>
+  <div class="sdesc">This is the part that costs money. Instead of fixing the number in advance with a sample-size formula, we begin with a reasonable sample, run it, and add participants only until the resulting scale is demonstrably stable.</div>
+
+  <div class="note note-amber">
+    <span class="nlbl">Why a polling / proportion formula does not fit BWS</span>
+    A binomial margin-of-error formula — the "±3%" of opinion polls — assumes independent yes/no answers to one fixed question. Our task differs on three counts: (1) each judgement is a <strong>choice among four alternatives</strong>, not a binary; (2) an item's score is <strong>relational</strong>, depending on which other items it is shown with, so there is no single fixed proportion to estimate; and (3) an item's <strong>repeated appearances within one participant are not independent</strong>, so they cannot be treated as separate observations. A fixed a-priori N is therefore not defensible for this design.
+  </div>
+
+  <div class="note note-navy">
+    <span class="nlbl">The defensible approach — measure scale stability</span>
+    We judge sample size by <strong>repeated split-half reliability</strong>: randomly split the collected participants into two halves, score every item from each half independently, and correlate the two score sets — averaged over many random splits. As participants are added the correlation rises and then plateaus; we stop once it is high and stable. This is the standard validation used in the BWS literature (e.g. Kiritchenko &amp; Mohammad, 2016/2017).
+  </div>
 
   <ul class="steps">
-    <li class="step-item">
-      <div class="step-n">1</div>
-      <div class="step-content">
-        <h3>Decide how precise each word's score must be</h3>
-        <p>Every word ends up with a score (roughly, how often it was picked as strongest). Because we only sample a limited number of people, that score carries a margin of error — exactly like a poll saying "52% ± 3%". That "±" part is the <strong>half-width</strong>, written <code style="font-family:'IBM Plex Mono',monospace;">h</code>. Smaller <code style="font-family:'IBM Plex Mono',monospace;">h</code> = more precise = more people.</p>
-      </div>
-    </li>
-    <li class="step-item">
-      <div class="step-n">2</div>
-      <div class="step-content">
-        <h3>Use the polling formula for observations</h3>
-        <p>Like any poll, the margin of error shrinks with the square root of the number of observations <code style="font-family:'IBM Plex Mono',monospace;">M</code> collected for a word. Using a conservative (unit) variability per judgement — a deliberately safe over-estimate — and 95% confidence gives the standard result below, which we then rearrange to solve for the observations we need.</p>
-      </div>
-    </li>
-    <li class="step-item">
-      <div class="step-n">3</div>
-      <div class="step-content">
-        <h3>Convert observations into people</h3>
-        <p>The money-saving insight: one participant does not give one observation per word — they give <code style="font-family:'IBM Plex Mono',monospace;">r</code> of them, because they see each word <code style="font-family:'IBM Plex Mono',monospace;">r</code> times. So the number of <em>people</em> is the observations divided by <code style="font-family:'IBM Plex Mono',monospace;">r</code>. A design that shows each word more often needs fewer people.</p>
-      </div>
-    </li>
+    <li class="step-item"><div class="step-n">1</div><div class="step-content"><h3>Run a modest starting sample</h3><p>Collect a reasonable first batch per survey (see the recruitment plan below) rather than a formula-derived target.</p></div></li>
+    <li class="step-item"><div class="step-n">2</div><div class="step-content"><h3>Measure split-half reliability</h3><p>Compute the average correlation between item scores from two random halves of participants, over many random splits.</p></div></li>
+    <li class="step-item"><div class="step-n">3</div><div class="step-content"><h3>Top up only if needed</h3><p>If a survey is below target, add a small increment of participants and recompute — repeat until the value plateaus.</p></div></li>
+    <li class="step-item"><div class="step-n">4</div><div class="step-content"><h3>Stop when stable</h3><p>Stop paying for a survey once reliability is high and the last increment barely moved it.</p></div></li>
   </ul>
 
-  <div class="formula">
-    <span class="flbl">Margin of error from M observations</span>
-    <div class="fexpr">h = 1.96 / <span class="ovl">&radic;M</span></div>
-    <div class="fnote">1.96 is the 95%-confidence multiplier.</div>
-  </div>
-
-  <div class="formula">
-    <span class="flbl">Rearranged — observations, then people</span>
-    <div class="fexpr">M = <span class="hi">(1.96 / h)²</span> &nbsp;&nbsp;→&nbsp;&nbsp; N = <span class="hi">M / r</span></div>
-    <div class="fnote">More precision (smaller h) → more people. More exposures (bigger r) → fewer people.</div>
-  </div>
-
-  <div class="note note-teal">
-    <span class="nlbl">In plain words</span>
-    That is why <strong>S3 needs the fewest annotators despite having the most words</strong>: each participant sees every S3 word 9 times (r&nbsp;=&nbsp;9), so each person contributes a lot of comparisons.
-  </div>
-
-  <h3 style="margin-top:28px;">Worked example — Survey 1 (r = 4, target h = 0.15)</h3>
-  <div class="calc">
-    <div class="calc-head">Plugging the numbers in</div>
-    <div class="calc-row"><span class="calc-lbl">Target precision, h</span><span class="calc-val">0.15</span></div>
-    <div class="calc-row"><span class="calc-lbl">Confidence multiplier</span><span class="calc-val">1.96</span></div>
-    <div class="calc-row"><span class="calc-lbl">Observations needed, M = (1.96 / 0.15)²</span><span class="calc-val">≈ 170.7</span></div>
-    <div class="calc-row"><span class="calc-lbl">Times each word seen per person, r</span><span class="calc-val">4</span></div>
-    <div class="calc-row"><span class="calc-lbl">People needed, N = 170.7 / 4</span><span class="calc-val">42.7</span></div>
-    <div class="calc-row final"><span class="calc-lbl">Round up to whole people</span><span class="calc-val">N = 43</span></div>
-  </div>
-
-  <h3 style="margin-top:28px;">The result for every survey</h3>
-  <table class="tbl">
-    <thead>
-      <tr><th>Survey</th><th>Seen / person (r)</th><th>N for h = 0.15 &nbsp;(lean)</th><th>N for h = 0.10 &nbsp;(strong)</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>S1</td><td class="num">4</td><td class="num">43</td><td class="num">97</td></tr>
-      <tr><td>S2</td><td class="num">4</td><td class="num">43</td><td class="num">97</td></tr>
-      <tr><td>S3</td><td class="num">9</td><td class="num">19</td><td class="num">43</td></tr>
-      <tr><td>S4</td><td class="num">5</td><td class="num">35</td><td class="num">77</td></tr>
-      <tr><td>S5</td><td class="num">4</td><td class="num">43</td><td class="num">97</td></tr>
-    </tbody>
-  </table>
-
-  <div class="note note-red">
-    <span class="nlbl">Why these are a floor, not a guess</span>
-    The formula assumes conservative (unit) variability and 95% confidence, so real precision is usually a little better than promised. We treat these numbers as a <strong>minimum</strong> and confirm with the reliability checks below, rather than paying for extra people up front.
+  <div class="note note-green">
+    <span class="nlbl">Target</span>
+    A split-half reliability of <strong>≥ 0.80</strong> that has <strong>plateaued</strong> (the last top-up barely changed it) is a strong, widely-accepted bar for a stable BWS scale. This replaces any fixed "N per survey": the data tells us when to stop.
   </div>
 </section>
 
@@ -312,16 +268,16 @@ footer { border-top: 1px solid var(--border-dark); padding: 22px 0; display: fle
 <!-- ══════════════════════ SECTION 5: RECRUITMENT PLAN ══════════════════════ -->
 <section>
   <h2>Cost-Aware Recruitment Plan</h2>
-  <div class="sdesc">Rather than committing to the full "strong" numbers immediately, we start lean and top up only the surveys that need it. Most surveys stabilise early, so this minimises spend.</div>
+  <div class="sdesc">We start with a modest sample per survey and top up only those that have not yet stabilised. Most surveys plateau early, so this minimises spend.</div>
 
   <div class="note note-green">
-    <span class="nlbl">Wave 1 targets</span>
-    <strong>S1 = 50 · S2 = 50 · S3 = 30 · S4 = 40 · S5 = 50</strong> participants. Run the checks below, then add <strong>+15</strong> only to surveys that fail — repeat until each passes twice in a row, then stop paying for that survey.
+    <span class="nlbl">Suggested starting samples (to be validated, not formula-derived)</span>
+    <strong>S1 = 50 · S2 = 50 · S3 = 30 · S4 = 40 · S5 = 50</strong> participants. Compute the checks below, then add <strong>+15</strong> only to surveys below target — repeat until each plateaus, then stop paying for that survey.
   </div>
 
   <div class="kv">
-    <div class="kv-item"><strong>Split-half reliability ≥ 0.75</strong><span>Prefer 0.80+. Split responses into two random halves; the two rankings should strongly agree.</span></div>
-    <div class="kv-item"><strong>Quartile overlap ≥ 85%</strong><span>The strongest and weakest words stay the same as more data arrives.</span></div>
+    <div class="kv-item"><strong>Split-half reliability ≥ 0.80 (primary)</strong><span>Score items from two random halves of participants and correlate, averaged over many splits; stop once it plateaus.</span></div>
+    <div class="kv-item"><strong>Quartile overlap ≥ 85% (secondary)</strong><span>The strongest and weakest words stay the same as more data arrives.</span></div>
   </div>
 </section>
 
@@ -360,7 +316,7 @@ footer { border-top: 1px solid var(--border-dark); padding: 22px 0; display: fle
 </section>
 
 <footer>
-  <span>Epistemic Stance · Survey Design Report · v2 · Jul 2026</span>
+  <span>Epistemic Stance · Survey Design Report · v3 · Jul 2026</span>
   <span>Internal — Hype-Busters</span>
 </footer>
 
