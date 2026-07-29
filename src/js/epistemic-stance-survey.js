@@ -459,10 +459,21 @@ function hideAllContainers() {
     });
 }
 
+// Generate a stable, unique ID for this participant session (survives chunked submissions).
+function generateParticipantId() {
+    try {
+        if (window.crypto && typeof window.crypto.randomUUID === 'function') {
+            return window.crypto.randomUUID();
+        }
+    } catch (e) {}
+    return 'p-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 10);
+}
+
 // Survey Flow Functions
 function startSurveyWithDemographics() {
     // Collect demographic data
     participantData = {
+        participantId: generateParticipantId(),
         name: document.getElementById('participantName').value,
         age: document.getElementById('participantAge').value,
         gender: document.getElementById('participantGender').value,
@@ -929,6 +940,7 @@ async function saveResponseChunk(chunkResponses, chunkNumber, totalChunks) {
             isChunked: true
         },
         participant: {
+            participantId: participantData.participantId,
             name: participantData.name,
             age: participantData.age,
             gender: participantData.gender,
@@ -1046,6 +1058,7 @@ async function saveToGoogleSheets() {
             selectedSurvey: selectedSurvey,
             formId: getFormIdForSelectedSurvey(),
             participant: {
+                participantId: participantData.participantId,
                 name: participantData.name,
                 age: participantData.age,
                 gender: participantData.gender,

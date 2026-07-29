@@ -40,7 +40,12 @@ function doPost(e) {
       'Chunk Number',
       'Total Chunks',
       'Anchor Check Type',
-      'Anchor Check Result'
+      'Anchor Check Result',
+      'Participant ID',
+      'Option 1',
+      'Option 2',
+      'Option 3',
+      'Option 4'
     ];
 
     let sheet = spreadsheet.getSheetByName('Epistemic Stance Responses');
@@ -91,7 +96,12 @@ function doPost(e) {
           chunkNumber,
           totalChunks,
           response.anchorCheckType || '',
-          response.anchorCheckResult || ''
+          response.anchorCheckResult || '',
+          (data.participant && data.participant.participantId) || '',
+          response.words && response.words[0] ? response.words[0] : '',
+          response.words && response.words[1] ? response.words[1] : '',
+          response.words && response.words[2] ? response.words[2] : '',
+          response.words && response.words[3] ? response.words[3] : ''
         ]);
         rowsAdded++;
       });
