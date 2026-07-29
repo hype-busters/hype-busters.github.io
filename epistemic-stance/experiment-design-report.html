@@ -136,7 +136,7 @@ footer { border-top: 1px solid var(--border-dark); padding: 22px 0; display: fle
   <div class="topbar-right">
     <div class="tm">Updated <strong>Jul 2026</strong></div>
     <div class="tm">Method <strong>Best-Worst Scaling</strong></div>
-    <div class="tm">Distinct items <strong>105</strong></div>
+    <div class="tm">Items <strong>115</strong> (105 + 10 anchors)</div>
   </div>
 </div>
 
@@ -184,7 +184,7 @@ footer { border-top: 1px solid var(--border-dark); padding: 22px 0; display: fle
 <!-- ══════════════════════ SECTION 3: THE FIVE SURVEYS ══════════════════════ -->
 <section>
   <h2>The Five Surveys</h2>
-  <div class="sdesc">Surveys 3–5 use a <em>strict BIBD</em> (Balanced Incomplete Block Design) — every pair of words is compared exactly once, the gold standard. Surveys 1–2 have too many words for a strict design to stay cheap, so they use a <em>near-balanced</em> design that still connects every word into one comparison network.</div>
+  <div class="sdesc">All five surveys now use a <em>near-balanced</em> design at r = 4 (each item seen four times), and each includes 2 anchor items. Adding anchors shifts every survey to v ≡ 0 (mod 3), which rules out a strict BIBD — but every survey stays fully connected, so all items remain rankable.</div>
 
   <table class="tbl">
     <thead>
@@ -193,45 +193,45 @@ footer { border-top: 1px solid var(--border-dark); padding: 22px 0; display: fle
     <tbody>
       <tr>
         <td>S1</td><td>Likelihood / Certainty</td>
-        <td class="num">27</td><td class="num">27</td><td class="num">4</td>
-        <td>162 / 351 pairs (46%) · fully connected</td>
+        <td class="num">29</td><td class="num">29</td><td class="num">4</td>
+        <td>174 / 406 pairs (43%) · fully connected</td>
         <td><span class="pill pill-near">Near-balanced</span></td>
       </tr>
       <tr>
         <td>S2</td><td>Evidential Basis</td>
-        <td class="num">21</td><td class="num">21</td><td class="num">4</td>
-        <td>126 / 210 pairs (60%) · fully connected</td>
+        <td class="num">23</td><td class="num">23</td><td class="num">4</td>
+        <td>138 / 253 pairs (55%) · fully connected</td>
         <td><span class="pill pill-near">Near-balanced</span></td>
       </tr>
       <tr>
         <td>S3</td><td>Authorial Positioning</td>
-        <td class="num">28</td><td class="num">63</td><td class="num">9</td>
-        <td>All pairs exactly once</td>
-        <td><span class="pill pill-strict">Strict BIBD</span></td>
+        <td class="num">30</td><td class="num">30</td><td class="num">4</td>
+        <td>180 / 435 pairs (41%) · fully connected</td>
+        <td><span class="pill pill-near">Near-balanced</span></td>
       </tr>
       <tr>
         <td>S4</td><td>Frequency / Generality</td>
-        <td class="num">16</td><td class="num">20</td><td class="num">5</td>
-        <td>All pairs exactly once</td>
-        <td><span class="pill pill-strict">Strict BIBD</span></td>
+        <td class="num">18</td><td class="num">18</td><td class="num">4</td>
+        <td>107 / 153 pairs (70%) · fully connected</td>
+        <td><span class="pill pill-near">Near-balanced</span></td>
       </tr>
       <tr>
         <td>S5</td><td>Degree / Intensity</td>
-        <td class="num">13</td><td class="num">13</td><td class="num">4</td>
-        <td>All pairs exactly once</td>
-        <td><span class="pill pill-strict">Strict BIBD</span></td>
+        <td class="num">15</td><td class="num">15</td><td class="num">4</td>
+        <td>84 / 105 pairs (80%) · fully connected</td>
+        <td><span class="pill pill-near">Near-balanced</span></td>
       </tr>
     </tbody>
   </table>
 
   <div class="note note-green">
     <span class="nlbl">What "fully connected" means</span>
-    Even in S1/S2, where not every pair is compared directly, there are no isolated words — every word can still be ranked against every other through indirect chains (if A&nbsp;&gt;&nbsp;B and B&nbsp;&gt;&nbsp;C, we learn A&nbsp;&gt;&nbsp;C).
+    In every survey, not all pairs are compared directly, but there are no isolated words — every word can still be ranked against every other through indirect chains (if A&nbsp;&gt;&nbsp;B and B&nbsp;&gt;&nbsp;C, we learn A&nbsp;&gt;&nbsp;C). The <em>Items</em> column above includes each survey's 2 anchors.
   </div>
 
   <div class="note note-amber">
-    <span class="nlbl">Under review — PI feedback (Jul 2026)</span>
-    Two changes are prepared and staged (not yet live): (1) <strong>S3 → near-balanced</strong> to reduce fatigue — <strong>35 blocks with each item seen 5×</strong>, instead of 63 blocks / 9×; and (2) optionally adding <strong>2 anchor items per survey</strong> (one low, one high) to pin the ends of each scale and act as attention checks. Note that adding anchors shifts every survey to v&nbsp;≡&nbsp;0&nbsp;(mod&nbsp;3), which makes a strict BIBD impossible — so all five would then use the near-balanced design.
+    <span class="nlbl">Design update — now live (PI feedback, Jul 2026)</span>
+    Two changes were adopted: (1) <strong>S3 moved off strict BIBD</strong> to reduce fatigue — now 30 blocks with each item seen 4× instead of 63 blocks / 9×; and (2) <strong>2 anchor items per survey</strong> (one low, one high) were added to pin the ends of each scale and double as attention checks. Because anchors make every survey v&nbsp;≡&nbsp;0&nbsp;(mod&nbsp;3), all five now use the near-balanced design.
   </div>
 </section>
 
@@ -293,7 +293,7 @@ footer { border-top: 1px solid var(--border-dark); padding: 22px 0; display: fle
     <li class="step-item"><div class="step-n">3</div><div class="step-content"><h3>Pilot QA — 5–10 per survey</h3><p>Check rows land in the sheet, block counts match, and sentences render correctly.</p></div></li>
     <li class="step-item"><div class="step-n">4</div><div class="step-content"><h3>Run Wave 1</h3><p>Recruit the lean targets above (S1=50, S2=50, S3=30, S4=40, S5=50).</p></div></li>
     <li class="step-item"><div class="step-n">5</div><div class="step-content"><h3>Checkpoint every +15</h3><p>Recompute split-half reliability and rank stability per survey.</p></div></li>
-    <li class="step-item"><div class="step-n">6</div><div class="step-content"><h3>Selective top-up</h3><p>Add participants only to surveys still failing — usually S1/S2 first, since they are near-balanced.</p></div></li>
+    <li class="step-item"><div class="step-n">6</div><div class="step-content"><h3>Selective top-up</h3><p>Add participants only to surveys still failing — usually the largest surveys first (S3, S1, S2).</p></div></li>
     <li class="step-item"><div class="step-n">7</div><div class="step-content"><h3>Finalise scores</h3><p>Produce BW-normalised scores plus a model-based estimate, and report each word's score with its uncertainty.</p></div></li>
   </ul>
 </section>
@@ -309,14 +309,15 @@ footer { border-top: 1px solid var(--border-dark); padding: 22px 0; display: fle
     <tbody>
       <tr><td>Removed <em>unlikely</em> from S1</td><td>Avoids polarity reversal inside a "strength of certainty" scale.</td></tr>
       <tr><td>Pruned adjective/adverb duplicates</td><td>Cut by academic-usage frequency; <em>apparent</em> and <em>apparently</em> were deliberately both kept.</td></tr>
-      <tr><td>105 distinct items total</td><td>Current count across all five surveys after cleanup.</td></tr>
+      <tr><td>Added 2 anchors per survey</td><td>One low + one high endpoint per scale (e.g. Degree: <em>of zero</em> / <em>infinitely</em>) to pin the scale and act as attention checks.</td></tr>
+      <tr><td>115 items total</td><td>105 target items + 10 anchors across the five surveys.</td></tr>
       <tr><td>Full-sentence options</td><td>Options render as grammatically correct sentences with the target word highlighted in the live UI.</td></tr>
     </tbody>
   </table>
 </section>
 
 <footer>
-  <span>Epistemic Stance · Survey Design Report · v3 · Jul 2026</span>
+  <span>Epistemic Stance · Survey Design Report · v4 · Jul 2026</span>
   <span>Internal — Hype-Busters</span>
 </footer>
 
