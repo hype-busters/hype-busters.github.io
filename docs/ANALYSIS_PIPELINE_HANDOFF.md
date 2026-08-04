@@ -319,7 +319,7 @@ epistemic-stance-analysis/
   blocks per participant per survey). Decide with the PI whether anchors are (a) included in
   the reported scale or (b) used only for anchoring/attention and excluded from the final
   item ranking. Both are defensible; be explicit.
-- **Polarity items:** some target words are negative (e.g. `unlikely`, `never`, `doubtful`).
+- **Polarity items:** some target words are negative (e.g. `unlikely`, `doubtful`, `rarely`).
   BWS handles this fine (they land at the weak end), but sanity-check that anchors sit at the
   extremes and negatives rank below neutral items.
 - **Near-balanced ≠ all pairs compared.** Don't use estimators that assume a complete design.
