@@ -15,7 +15,7 @@
     <!-- Load configuration with fallback -->
     <script src="../src/config/config.js?v=3" onerror="console.log('config.js not found, will use env-config.js fallback')"></script>
     <script src="../src/config/env-config.js?v=3"></script>
-    <script src="../src/js/epistemic-stance-survey.js?v=5"></script>
+    <script src="../src/js/epistemic-stance-survey.js?v=6"></script>
     <style>
         * {
             margin: 0;
@@ -622,9 +622,15 @@
                     <p style="text-align: center; margin-bottom: 30px;">Please provide some basic information about yourself. This helps us better understand our participants.</p>
                     
                     <form id="demographicsForm" style="max-width: 500px; margin: 0 auto;">
+                        <div style="margin-bottom: 20px; display: none;">
+                            <label for="participantName" style="display: block; margin-bottom: 8px; font-weight: 500; color: #333;">Name</label>
+                            <input type="text" id="participantName" style="width: 100%; padding: 12px; border: 2px solid #c0c0c0; border-radius: 8px; font-size: 16px;">
+                        </div>
+
                         <div style="margin-bottom: 20px;">
-                            <label for="participantName" style="display: block; margin-bottom: 8px; font-weight: 500; color: #333;">Name *</label>
-                            <input type="text" id="participantName" required style="width: 100%; padding: 12px; border: 2px solid #c0c0c0; border-radius: 8px; font-size: 16px;">
+                            <label for="participantProlificId" style="display: block; margin-bottom: 8px; font-weight: 500; color: #333;">Prolific ID</label>
+                            <input type="text" id="participantProlificId" readonly style="width: 100%; padding: 12px; border: 2px solid #c0c0c0; border-radius: 8px; font-size: 16px; background: #f5f5f5;">
+                            <p style="font-size: 0.85em; color: #777; margin-top: 6px;">Captured automatically from Prolific when available.</p>
                         </div>
                         
                         <div style="margin-bottom: 20px;">
@@ -753,100 +759,26 @@
                 </div>
             </div>
 
-            <!-- Survey Successfully Completed Screen -->
-            <div id="successContainer" style="display: none;">
-                <div class="question-card">
-                    <div style="text-align: center; padding: 40px;">
-                        <h2 style="margin-bottom: 24px; font-size: 2.2em;">Survey Completed</h2>
-                        <p style="font-size: 1.1em; margin-bottom: 24px;">
-                            Thank you for participating in our Epistemic Stance Survey. Your responses have been successfully saved.
-                        </p>
-                        <div style="margin-top: 32px; padding: 20px; background: #000000; border-radius: 12px;">
-                            <p style="color: #ffffff; margin: 0; font-weight: 600;">Data saved successfully</p>
-                        </div>
-                        <div style="margin-top: 32px;">
-                            <button class="btn btn-primary" onclick="startNewSurvey()">
-                                Start New Survey
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <!-- Detailed Instructions Page -->
             <div id="instructionsContainer">
                 <div class="question-card">
-                    <h1 style="text-align: center; margin-bottom: 32px; font-size: 1.8em;">Best-Worst Scaling (BWS): Participant Instructions</h1>
+                    <h1 style="text-align: center; margin-bottom: 28px; font-size: 1.8em;">Claim Strength Validation Survey</h1>
                     
-                    <div style="max-width: 800px; margin: 0 auto; text-align: left;">
-                        <h2 style="margin-top: 32px; margin-bottom: 16px; font-size: 1.4em;">What Is Best-Worst Scaling?</h2>
-                        <p style="margin-bottom: 15px; line-height: 1.6;">Best-Worst Scaling (also called MaxDiff in many applied studies) asks you to pick the <strong>strongest</strong> and <strong>weakest</strong> option from a small set.</p>
-                        
-                        <p style="margin-bottom: 15px; line-height: 1.6;">You will see 4 items at a time. For each set, choose:</p>
-                        <ol style="margin-bottom: 20px; padding-left: 25px; line-height: 1.6;">
-                            <li>The <strong>strongest</strong> item (most forceful expression).</li>
-                            <li>The <strong>weakest</strong> item (least forceful expression).</li>
-                        </ol>
-                        
-                        <p style="margin-bottom: 15px; line-height: 1.6;"><strong>Focus only on comparative strength.</strong></p>
-                        
-                        <p style="margin-bottom: 25px; line-height: 1.6;">There are no right or wrong answers. You must choose one strongest and one weakest item for every set. If two feel similar, choose the one that feels slightly stronger or weaker.</p>
-                        
-                        <h2 style="margin-top: 32px; margin-bottom: 16px; font-size: 1.3em;">Example</h2>
-                        <div style="background: #f0f0f0; padding: 20px; border-radius: 10px; margin-bottom: 25px;">
-                            <p style="margin-bottom: 10px;"><strong>Meaning:</strong> 'level of spiciness in food'</p>
-                            <p style="margin-bottom: 10px;"><strong>Words:</strong> mild, medium, hot, spicy</p>
-                            <p style="margin-bottom: 10px; color: #0d47a1;"><strong>Most intense:</strong> hot</p>
-                            <p style="color: #87ceeb;"><strong>Least intense:</strong> mild</p>
-                        </div>
-                        
-                        <h2 style="margin-top: 32px; margin-bottom: 16px; font-size: 1.3em;">Practice Items</h2>
-                        
-                        <div style="background: #f8f8f8; padding: 15px; border-radius: 10px; margin-bottom: 15px; border-left: 4px solid #5a5a5a;">
-                            <p style="margin-bottom: 8px;"><strong>Meaning:</strong> 'Size of an animal'</p>
-                            <p style="margin-bottom: 8px;"><strong>Words:</strong> tiny, huge, large, small</p>
-                            <p style="margin-bottom: 5px; color: #0d47a1;"><strong>Most intense:</strong> huge</p>
-                            <p style="color: #87ceeb;"><strong>Least intense:</strong> tiny</p>
-                        </div>
-                        
-                        <div style="background: #f8f8f8; padding: 15px; border-radius: 10px; margin-bottom: 15px; border-left: 4px solid #5a5a5a;">
-                            <p style="margin-bottom: 8px;"><strong>Meaning:</strong> 'Speed of movement'</p>
-                            <p style="margin-bottom: 8px;"><strong>Words:</strong> slow, rapid, fast, sluggish</p>
-                            <p style="margin-bottom: 5px; color: #0d47a1;"><strong>Most intense:</strong> rapid</p>
-                            <p style="color: #87ceeb;"><strong>Least intense:</strong> slow</p>
-                        </div>
-                        
-                        <div style="background: #f8f8f8; padding: 15px; border-radius: 10px; margin-bottom: 15px; border-left: 4px solid #5a5a5a;">
-                            <p style="margin-bottom: 8px;"><strong>Meaning:</strong> 'Temperature of a drink'</p>
-                            <p style="margin-bottom: 8px;"><strong>Words:</strong> warm, boiling, cold, hot</p>
-                            <p style="margin-bottom: 5px; color: #0d47a1;"><strong>Most intense:</strong> boiling</p>
-                            <p style="color: #87ceeb;"><strong>Least intense:</strong> cold</p>
-                        </div>
-                        
-                        <div style="background: #f8f8f8; padding: 15px; border-radius: 10px; margin-bottom: 15px; border-left: 4px solid #5a5a5a;">
-                            <p style="margin-bottom: 8px;"><strong>Meaning:</strong> 'Positive feelings'</p>
-                            <p style="margin-bottom: 8px;"><strong>Words:</strong> happy, joyful, pleased, content</p>
-                            <p style="margin-bottom: 5px; color: #0d47a1;"><strong>Most intense:</strong> joyful</p>
-                            <p style="color: #87ceeb;"><strong>Least intense:</strong> pleased</p>
-                        </div>
-                        
-                        <div style="background: #f8f8f8; padding: 15px; border-radius: 10px; margin-bottom: 30px; border-left: 4px solid #5a5a5a;">
-                            <p style="margin-bottom: 8px;"><strong>Meaning:</strong> 'Negative feelings'</p>
-                            <p style="margin-bottom: 8px;"><strong>Words:</strong> annoyed, furious, upset, irritated</p>
-                            <p style="margin-bottom: 5px; color: #0d47a1;"><strong>Most intense:</strong> furious</p>
-                            <p style="color: #87ceeb;"><strong>Least intense:</strong> annoyed</p>
-                        </div>
+                    <div style="max-width: 760px; margin: 0 auto; text-align: left;">
+                        <h2 style="margin-bottom: 14px; font-size: 1.35em;">Instructions</h2>
+                        <p style="margin-bottom: 14px; line-height: 1.7;">
+                            In this study, you will read groups of four sentences. The sentences express the same underlying idea, but differ in one highlighted word or phrase. Your task is to judge how strongly the claim is presented. For each group, select:
+                        </p>
+                        <ul style="margin-bottom: 18px; padding-left: 22px; line-height: 1.7;">
+                            <li>The sentence that presents the claim <strong>most strongly</strong></li>
+                            <li>The sentence that presents the claim <strong>least strongly</strong></li>
+                        </ul>
+                        <p style="margin-bottom: 28px; line-height: 1.7;">
+                            We are interested in your judgement of the language used. Please focus only on the highlighted word or phrase. Ignore whether you personally agree with the statement.
+                        </p>
 
-                        <h2 style="margin-top: 32px; margin-bottom: 16px; font-size: 1.3em;">What Is Claim-Strength Modification?</h2>
-                        <p style="margin-bottom: 15px; line-height: 1.6;">In this project, we compare words that make the <em>same claim</em> sound weaker or stronger.</p>
-                        <div style="background: #f8f8f8; padding: 15px; border-radius: 10px; margin-bottom: 30px; border-left: 4px solid #5a5a5a;">
-                            <p style="margin-bottom: 8px;"><strong>Base claim:</strong> this research has important implications for X.</p>
-                            <p style="margin-bottom: 8px;"><strong>Weaker:</strong> It is <strong>possible</strong> that this research has important implications for X.</p>
-                            <p style="margin-bottom: 8px;"><strong>Stronger:</strong> It is <strong>undeniable</strong> that this research has important implications for X.</p>
-                        </div>
-                        
-                        <div style="text-align: center; margin-top: 40px;">
-                            <button class="btn" onclick="showAnimatedExample()" style="font-size: 1.2em; padding: 15px 40px; background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%); border: none; border-radius: 25px; color: white; cursor: pointer; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);">
+                        <div style="text-align: center; margin-top: 36px;">
+                            <button class="btn" onclick="showPracticeBriefing()" style="font-size: 1.15em; padding: 14px 36px; background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%); border: none; border-radius: 25px; color: white; cursor: pointer;">
                                 Continue
                             </button>
                         </div>
@@ -854,7 +786,76 @@
                 </div>
             </div>
 
-            <!-- Animated Example Page -->
+            <!-- Practice briefing -->
+            <div id="practiceBriefingContainer" style="display: none;">
+                <div class="question-card">
+                    <h1 style="text-align: center; margin-bottom: 28px; font-size: 1.8em;">Practice</h1>
+                    <div style="max-width: 760px; margin: 0 auto; text-align: left;">
+                        <p style="margin-bottom: 14px; line-height: 1.7;">
+                            You will now complete five short practice questions. These are designed to familiarise you with the task and ensure you understand what is being judged. You will need to identify the strongest and weakest claim correctly before continuing to the main survey.
+                        </p>
+                        <p style="margin-bottom: 14px; line-height: 1.7;">
+                            Since these 5 questions are screening / test questions, you must give the correct responses before you are presented with the main study.
+                        </p>
+                        <div style="background: #fff8f0; border-left: 4px solid #b45309; padding: 14px 16px; border-radius: 8px; margin-bottom: 28px;">
+                            <p style="margin: 0; line-height: 1.6; color: #7a3e00;">
+                                <strong>Please note:</strong> failure to get all 5 test questions correct will result in elimination from the survey.
+                            </p>
+                        </div>
+                        <p style="margin-bottom: 24px; line-height: 1.6; color: #555;">
+                            For each question, click once for <strong>strongest</strong> and once for <strong>weakest</strong>, then press Next.
+                        </p>
+                        <div style="text-align: center;">
+                            <button class="btn btn-primary" onclick="startPracticeScreening()">
+                                Start Practice Questions
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Screened out -->
+            <div id="screenOutContainer" style="display: none;">
+                <div class="question-card">
+                    <div style="text-align: center; padding: 40px; max-width: 640px; margin: 0 auto;">
+                        <h2 style="margin-bottom: 20px; font-size: 2em;">Thank you</h2>
+                        <p style="font-size: 1.1em; margin-bottom: 16px; line-height: 1.7;">
+                            Based on the practice questions, you are not eligible to continue with this study.
+                        </p>
+                        <p style="font-size: 1em; margin-bottom: 28px; color: #666; line-height: 1.6;">
+                            You will now be redirected back to Prolific. Please wait a moment…
+                        </p>
+                        <p style="font-size: 0.95em; color: #888;">
+                            If you are not redirected automatically,
+                            <a id="screenOutLink" href="https://app.prolific.com/submissions/complete?cc=C57I5SPW">click here</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Survey Successfully Completed Screen -->
+            <div id="successContainer" style="display: none;">
+                <div class="question-card">
+                    <div style="text-align: center; padding: 40px;">
+                        <h2 style="margin-bottom: 24px; font-size: 2.2em;">Survey Completed</h2>
+                        <p style="font-size: 1.1em; margin-bottom: 24px;">
+                            Thank you for participating. Your responses have been saved.
+                        </p>
+                        <div style="margin-top: 24px; padding: 20px; background: #000000; border-radius: 12px;">
+                            <p style="color: #ffffff; margin: 0; font-weight: 600;">Data saved successfully</p>
+                        </div>
+                        <p style="margin-top: 28px; font-size: 1em; color: #555; line-height: 1.6;">
+                            Redirecting you to Prolific to record your completion…
+                        </p>
+                        <p style="margin-top: 12px; font-size: 0.95em; color: #888;">
+                            If you are not redirected automatically,
+                            <a id="completeLink" href="https://app.prolific.com/submissions/complete?cc=C1MHZ3PW">click here</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Animated Example Page (kept hidden; flow no longer uses it) -->
             <div id="animatedExampleContainer" style="display: none;">
                 <div class="question-card">
                     <h1 style="text-align: center; margin-bottom: 32px; font-size: 1.8em;">Epistemic Stance Survey</h1>

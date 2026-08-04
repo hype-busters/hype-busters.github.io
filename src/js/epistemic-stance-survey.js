@@ -61,6 +61,138 @@ function evaluateAnchorCheck(words, mostIntense, leastIntense, surveyNumber) {
     result.pass = pass ? 'Pass' : 'Fail';
     return result;
 }
+
+// ── Prolific + practice screening ──────────────────────────────────────────
+const PROLIFIC_CONFIG = {
+    completeUrl: 'https://app.prolific.com/submissions/complete?cc=C1MHZ3PW',
+    screenOutUrl: 'https://app.prolific.com/submissions/complete?cc=C57I5SPW'
+};
+
+const PRACTICE_SETS = [
+    {
+        prompt: 'Which sentence presents the claim most strongly and which least strongly?',
+        options: [
+            { id: 'certain beyond any doubt', html: 'It is <strong>certain beyond any doubt</strong> that this research has important implications for X.' },
+            { id: 'could only remotely', html: 'It <strong>could only remotely</strong> be the case that this research has important implications for X.' },
+            { id: 'probably', html: 'It is <strong>probably</strong> the case that this research has important implications for X.' },
+            { id: 'possible', html: 'It is <strong>possible</strong> that this research has important implications for X.' }
+        ],
+        correctMost: 'certain beyond any doubt',
+        correctLeast: 'could only remotely'
+    },
+    {
+        prompt: 'Which sentence presents the claim most strongly and which least strongly?',
+        options: [
+            { id: 'suggest', html: 'The results <strong>suggest</strong> that this research has important implications for X.' },
+            { id: 'irrefutably prove', html: 'The results <strong>irrefutably prove</strong> that this research has important implications for X.' },
+            { id: 'barely seem', html: 'The results <strong>barely seem</strong> to indicate that this research has important implications for X.' },
+            { id: 'demonstrate', html: 'The results <strong>demonstrate</strong> that this research has important implications for X.' }
+        ],
+        correctMost: 'irrefutably prove',
+        correctLeast: 'barely seem'
+    },
+    {
+        prompt: 'Which sentence presents the claim most strongly and which least strongly?',
+        options: [
+            { id: 'believe', html: 'We <strong>believe</strong> that this research has important implications for X.' },
+            { id: 'declare with complete confidence', html: 'We <strong>declare with complete confidence</strong> that this research has important implications for X.' },
+            { id: 'conclude', html: 'We <strong>conclude</strong> that this research has important implications for X.' },
+            { id: 'speculate without basis', html: 'We <strong>speculate without basis</strong> that this research has important implications for X.' }
+        ],
+        correctMost: 'declare with complete confidence',
+        correctLeast: 'speculate without basis'
+    },
+    {
+        prompt: 'Which sentence presents the claim most strongly and which least strongly?',
+        options: [
+            { id: 'usually', html: '<strong>Usually</strong>, these methods play an important role in X.' },
+            { id: 'without a single exception', html: '<strong>Without a single exception</strong>, these methods play an important role in X.' },
+            { id: 'only the rarest of cases', html: 'In <strong>only the rarest of cases</strong>, these methods play an important role in X.' },
+            { id: 'sometimes', html: '<strong>Sometimes</strong>, these methods play an important role in X.' }
+        ],
+        correctMost: 'without a single exception',
+        correctLeast: 'only the rarest of cases'
+    },
+    {
+        prompt: 'Which sentence presents the claim most strongly and which least strongly?',
+        options: [
+            { id: 'infinitely', html: 'The implications of this research for X are <strong>infinitely</strong> important.' },
+            { id: 'only barely', html: 'The implications of this research for X are <strong>only barely</strong> important.' },
+            { id: 'extremely', html: 'The implications of this research for X are <strong>extremely</strong> important.' },
+            { id: 'slightly', html: 'The implications of this research for X are <strong>slightly</strong> important.' }
+        ],
+        correctMost: 'infinitely',
+        correctLeast: 'only barely'
+    }
+];
+
+let practiceMode = false;
+let prolificPid = '';
+
+function getProlificPidFromUrl() {
+    try {
+        const params = new URLSearchParams(window.location.search);
+        return params.get('PROLIFIC_PID') || params.get('prolific_pid') || '';
+    } catch (e) {
+        return '';
+    }
+}
+
+function redirectToProlific(url, delayMs = 1800) {
+    setTimeout(() => {
+        window.location.href = url;
+    }, delayMs);
+}
+
+function showPracticeBriefing() {
+    hideAllContainers();
+    document.getElementById('practiceBriefingContainer').style.display = 'block';
+}
+
+function startPracticeScreening() {
+    practiceMode = true;
+    responses = {};
+    currentQuestion = 0;
+    surveyStarted = true;
+    // Adapt PRACTICE_SETS into wordSets-like structure for shared UI helpers
+    wordSets = PRACTICE_SETS.map((set) => ({
+        meaning: set.prompt,
+        words: set.options.map((o) => o.id),
+        options: set.options,
+        correctMost: set.correctMost,
+        correctLeast: set.correctLeast,
+        isPractice: true
+    }));
+    showQuestionContainer();
+    updateQuestion();
+    updateProgress();
+}
+
+function isPracticeAnswerCorrect(questionIndex) {
+    const set = wordSets[questionIndex];
+    const response = responses[questionIndex];
+    if (!set || !response) return false;
+    return response.mostIntense === set.correctMost && response.leastIntense === set.correctLeast;
+}
+
+function screenOutParticipant() {
+    practiceMode = false;
+    hideAllContainers();
+    const link = document.getElementById('screenOutLink');
+    if (link) link.href = PROLIFIC_CONFIG.screenOutUrl;
+    document.getElementById('screenOutContainer').style.display = 'block';
+    redirectToProlific(PROLIFIC_CONFIG.screenOutUrl);
+}
+
+function finishPracticeSuccessfully() {
+    practiceMode = false;
+    responses = {};
+    currentQuestion = 0;
+    surveyStarted = false;
+    wordSets = [];
+    showDemographicsForm();
+}
+
 // This file is not committed to version control for security
 
 // Survey Data - will be loaded from external file
@@ -430,7 +562,10 @@ function resetCompletionButton() {
 
 function showSuccessScreen() {
     hideAllContainers();
+    const link = document.getElementById('completeLink');
+    if (link) link.href = PROLIFIC_CONFIG.completeUrl;
     document.getElementById('successContainer').style.display = 'block';
+    redirectToProlific(PROLIFIC_CONFIG.completeUrl);
 }
 
 function showResultsContainer() {
@@ -447,6 +582,8 @@ function hideAllContainers() {
         'successContainer',
         'instructionsContainer',
         'animatedExampleContainer',
+        'practiceBriefingContainer',
+        'screenOutContainer',
         'resultsContainer',
         'intensityPanel'
     ];
@@ -472,9 +609,12 @@ function generateParticipantId() {
 // Survey Flow Functions
 function startSurveyWithDemographics() {
     // Collect demographic data
+    const prolificField = document.getElementById('participantProlificId');
+    const capturedPid = (prolificField && prolificField.value.trim()) || prolificPid || '';
     participantData = {
         participantId: generateParticipantId(),
-        name: document.getElementById('participantName').value,
+        prolificId: capturedPid,
+        name: capturedPid || document.getElementById('participantName').value || 'anonymous',
         age: document.getElementById('participantAge').value,
         gender: document.getElementById('participantGender').value,
         highestEducation: document.getElementById('participantEducation').value,
@@ -634,7 +774,9 @@ function updateQuestion() {
     
     // Display either a generic meaning label or a sentence frame.
     const meaningText = document.getElementById('meaningText');
-    if (currentSet.meaning.includes('[ITEM]')) {
+    if (practiceMode || currentSet.isPractice) {
+        meaningText.textContent = currentSet.meaning;
+    } else if (currentSet.meaning.includes('[ITEM]')) {
         meaningText.textContent = currentSet.meaning.replace('[ITEM]', '(option)');
     } else {
         meaningText.textContent = `"${currentSet.meaning}"`;
@@ -643,15 +785,26 @@ function updateQuestion() {
     const wordsGrid = document.getElementById('wordsGrid');
     wordsGrid.innerHTML = '';
     
-    currentSet.words.forEach((word, index) => {
-        const wordElement = document.createElement('div');
-        wordElement.className = 'word-option';
-        wordElement.dataset.word = word;
-        const optionSentence = getOptionSentence(currentSet.meaning, word);
-        wordElement.innerHTML = getHighlightedSentenceHtml(optionSentence, word);
-        wordElement.onclick = () => selectWord(word, wordElement);
-        wordsGrid.appendChild(wordElement);
-    });
+    if ((practiceMode || currentSet.isPractice) && currentSet.options) {
+        currentSet.options.forEach((opt) => {
+            const wordElement = document.createElement('div');
+            wordElement.className = 'word-option';
+            wordElement.dataset.word = opt.id;
+            wordElement.innerHTML = opt.html;
+            wordElement.onclick = () => selectWord(opt.id, wordElement);
+            wordsGrid.appendChild(wordElement);
+        });
+    } else {
+        currentSet.words.forEach((word) => {
+            const wordElement = document.createElement('div');
+            wordElement.className = 'word-option';
+            wordElement.dataset.word = word;
+            const optionSentence = getOptionSentence(currentSet.meaning, word);
+            wordElement.innerHTML = getHighlightedSentenceHtml(optionSentence, word);
+            wordElement.onclick = () => selectWord(word, wordElement);
+            wordsGrid.appendChild(wordElement);
+        });
+    }
     
     // Restore previous selections if they exist
     if (responses[currentQuestion]) {
@@ -672,11 +825,11 @@ function updateQuestion() {
 }
 
 function updateQuestionCounter() {
-    // All questions are now real questions (no examples)
-    const actualQuestionNumber = currentQuestion + 1; // +1 because arrays are 0-indexed
+    const actualQuestionNumber = currentQuestion + 1;
     const totalActualQuestions = wordSets.length;
+    const label = practiceMode ? 'Practice' : 'Question';
     document.getElementById('questionCounter').textContent = 
-        `Question ${actualQuestionNumber} of ${totalActualQuestions}`;
+        `${label} ${actualQuestionNumber} of ${totalActualQuestions}`;
 }
 
 function updateNavigationButtons() {
@@ -688,7 +841,7 @@ function updateNavigationButtons() {
     const isCurrentQuestionComplete = currentResponse && currentResponse.mostIntense && currentResponse.leastIntense;
     
     if (currentQuestion === wordSets.length - 1) {
-        nextBtn.textContent = 'Finish';
+        nextBtn.textContent = practiceMode ? 'Finish Practice' : 'Finish';
         nextBtn.disabled = !isCurrentQuestionComplete;
     } else {
         nextBtn.textContent = 'Next';
@@ -759,8 +912,24 @@ function nextQuestion() {
     const currentResponse = responses[currentQuestion];
     
     if (!currentResponse || !currentResponse.mostIntense || !currentResponse.leastIntense) {
-        alert('Please select both a MOST INTENSE and LEAST INTENSE word before continuing.');
+        alert('Please select both the STRONGEST and WEAKEST sentence before continuing.');
         return; // Don't proceed to next question
+    }
+
+    // Practice screening: any incorrect answer ends the study
+    if (practiceMode) {
+        if (!isPracticeAnswerCorrect(currentQuestion)) {
+            screenOutParticipant();
+            return;
+        }
+        if (currentQuestion < wordSets.length - 1) {
+            currentQuestion++;
+            updateQuestion();
+            updateProgress();
+        } else {
+            finishPracticeSuccessfully();
+        }
+        return;
     }
     
     if (currentQuestion < wordSets.length - 1) {
@@ -941,6 +1110,7 @@ async function saveResponseChunk(chunkResponses, chunkNumber, totalChunks) {
         },
         participant: {
             participantId: participantData.participantId,
+            prolificId: participantData.prolificId || '',
             name: participantData.name,
             age: participantData.age,
             gender: participantData.gender,
@@ -1059,6 +1229,7 @@ async function saveToGoogleSheets() {
             formId: getFormIdForSelectedSurvey(),
             participant: {
                 participantId: participantData.participantId,
+                prolificId: participantData.prolificId || '',
                 name: participantData.name,
                 age: participantData.age,
                 gender: participantData.gender,
@@ -1560,5 +1731,14 @@ function startInstructionsAnimation() {
 
 // Initialize when page loads
 document.addEventListener('DOMContentLoaded', async () => {
+    prolificPid = getProlificPidFromUrl();
+    const prolificField = document.getElementById('participantProlificId');
+    if (prolificField) {
+        prolificField.value = prolificPid || '';
+        if (!prolificPid) {
+            prolificField.readOnly = false;
+            prolificField.placeholder = 'Enter your Prolific ID';
+        }
+    }
     await initializeSurvey();
 });
