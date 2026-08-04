@@ -30,8 +30,8 @@ const ANCHOR_ITEMS = {
     '1': { low: 'could only remotely', high: 'certain beyond any doubt' },
     '2': { low: 'barely seem', high: 'irrefutably prove' },
     '3': { low: 'speculate, without basis', high: 'declare with complete confidence' },
-    '4': { low: 'under no circumstances', high: 'without a single exception' },
-    '5': { low: 'of zero', high: 'infinitely' }
+    '4': { low: 'only in the rarest of cases', high: 'without a single exception' },
+    '5': { low: 'only barely', high: 'infinitely' }
 };
 
 // Evaluate whether a block is an anchor-based attention check, and whether the

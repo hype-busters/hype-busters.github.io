@@ -21,7 +21,7 @@ To go live: copy `survey3_near_balanced.csv` → `../survey3.csv`.
 | S1 | 29 | 29 |
 | S2 | 23 | 23 |
 | S3 | 30 | 30 |
-| S4 | 18 | 18 |
+| S4 | 17 | 17 |
 | S5 | 15 | 15 |
 
 Note: adding 2 anchors shifts every survey to v ≡ 0 (mod 3), so a strict λ=1 BIBD is

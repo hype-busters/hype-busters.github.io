@@ -44,10 +44,10 @@ evidence-based, or committed a claim sounds (e.g. "this *proves*" ≫ "this *mig
 | S1 | Likelihood / Certainty  | 27 | 2 | 29 | 29 | 4 |
 | S2 | Evidential Basis        | 21 | 2 | 23 | 23 | 4 |
 | S3 | Authorial Positioning   | 28 | 2 | 30 | 30 | 4 |
-| S4 | Frequency / Generality  | 16 | 2 | 18 | 18 | 4 |
+| S4 | Frequency / Generality  | 15 | 2 | 17 | 17 | 4 |
 | S5 | Degree / Intensity      | 13 | 2 | 15 | 15 | 4 |
 
-Total distinct items across the study: **115** (105 target + 10 anchor).
+Total distinct items across the study: **114** (104 target + 10 anchor).
 
 ---
 
@@ -68,8 +68,8 @@ Total distinct items across the study: **115** (105 target + 10 anchor).
   | S1 | `could only remotely` | `certain beyond any doubt` |
   | S2 | `barely seem` | `irrefutably prove` |
   | S3 | `speculate, without basis` | `declare with complete confidence` |
-  | S4 | `under no circumstances` | `without a single exception` |
-  | S5 | `of zero` | `infinitely` |
+  | S4 | `only in the rarest of cases` | `without a single exception` |
+  | S5 | `only barely` | `infinitely` |
 
 - **Sample size is NOT fixed by a formula.** BWS scores are relational and repeated
   appearances within a participant are not independent, so a binomial/polling formula is
