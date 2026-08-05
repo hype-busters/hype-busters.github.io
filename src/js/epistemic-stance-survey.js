@@ -64,8 +64,8 @@ function evaluateAnchorCheck(words, mostIntense, leastIntense, surveyNumber) {
 
 // ── Prolific + practice screening ──────────────────────────────────────────
 const PROLIFIC_CONFIG = {
-    completeUrl: 'https://app.prolific.com/submissions/complete?cc=C1MHZ3PW',
-    screenOutUrl: 'https://app.prolific.com/submissions/complete?cc=C57I5SPW'
+    completeUrl: 'https://app.prolific.com/submissions/complete?cc=C1C8VKGM',
+    screenOutUrl: 'https://app.prolific.com/submissions/complete?cc=C181N4K6'
 };
 
 const PRACTICE_SETS = [
