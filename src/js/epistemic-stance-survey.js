@@ -65,7 +65,10 @@ function evaluateAnchorCheck(words, mostIntense, leastIntense, surveyNumber) {
 // ── Prolific + practice screening ──────────────────────────────────────────
 const PROLIFIC_CONFIG = {
     completeUrl: 'https://app.prolific.com/submissions/complete?cc=C1KSEYXZ',
-    screenOutUrl: 'https://app.prolific.com/submissions/complete?cc=CM5RS070'
+    screenOutUrl: 'https://app.prolific.com/submissions/complete?cc=CM5RS070',
+    // After screening passes, demographics + main quizzes run on the private BWScaling app.
+    // DNS for this hostname is managed at the domain registrar (not in this repo).
+    privateStudyBaseUrl: 'https://bwscaling.hype-busters.com/start'
 };
 
 const PRACTICE_SETS = [
@@ -190,7 +193,30 @@ function finishPracticeSuccessfully() {
     currentQuestion = 0;
     surveyStarted = false;
     wordSets = [];
-    showDemographicsForm();
+
+    // Hand off to the private BWScaling app for demographics + main surveys.
+    // Do NOT collect PII on this public GitHub Pages site.
+    const params = new URLSearchParams(window.location.search);
+    const out = new URLSearchParams();
+    const pid = prolificPid || params.get('PROLIFIC_PID') || params.get('prolific_pid') || '';
+    const studyId = params.get('STUDY_ID') || params.get('study_id') || '';
+    const sessionId = params.get('SESSION_ID') || params.get('session_id') || '';
+    if (pid) out.set('PROLIFIC_PID', pid);
+    if (studyId) out.set('STUDY_ID', studyId);
+    if (sessionId) out.set('SESSION_ID', sessionId);
+    out.set('screen_passed', '1');
+    out.set('source', 'hype-busters-epistemic-stance');
+
+    const base = PROLIFIC_CONFIG.privateStudyBaseUrl;
+    const sep = base.includes('?') ? '&' : '?';
+    const target = out.toString() ? `${base}${sep}${out.toString()}` : base;
+
+    hideAllContainers();
+    const link = document.getElementById('handoffLink');
+    if (link) link.href = target;
+    const handoff = document.getElementById('handoffContainer');
+    if (handoff) handoff.style.display = 'block';
+    redirectToProlific(target, 1200);
 }
 
 // This file is not committed to version control for security
@@ -584,6 +610,7 @@ function hideAllContainers() {
         'animatedExampleContainer',
         'practiceBriefingContainer',
         'screenOutContainer',
+        'handoffContainer',
         'resultsContainer',
         'intensityPanel'
     ];

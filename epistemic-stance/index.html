@@ -15,7 +15,7 @@
     <!-- Load configuration with fallback -->
     <script src="../src/config/config.js?v=3" onerror="console.log('config.js not found, will use env-config.js fallback')"></script>
     <script src="../src/config/env-config.js?v=3"></script>
-    <script src="../src/js/epistemic-stance-survey.js?v=8"></script>
+    <script src="../src/js/epistemic-stance-survey.js?v=9"></script>
     <style>
         * {
             margin: 0;
@@ -828,6 +828,25 @@
                         <p style="font-size: 0.95em; color: #888;">
                             If you are not redirected automatically,
                             <a id="screenOutLink" href="https://app.prolific.com/submissions/complete?cc=CM5RS070">click here</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Handoff to private BWScaling app after screening pass -->
+            <div id="handoffContainer" style="display: none;">
+                <div class="question-card">
+                    <div style="text-align: center; padding: 40px; max-width: 640px; margin: 0 auto;">
+                        <h2 style="margin-bottom: 20px; font-size: 2em;">Practice complete</h2>
+                        <p style="font-size: 1.1em; margin-bottom: 16px; line-height: 1.7;">
+                            You passed the screening questions.
+                        </p>
+                        <p style="font-size: 1em; margin-bottom: 28px; color: #555; line-height: 1.6;">
+                            Continuing to the main survey on the secure study server…
+                        </p>
+                        <p style="font-size: 0.95em; color: #888;">
+                            If you are not redirected automatically,
+                            <a id="handoffLink" href="https://bwscaling.hype-busters.com/start">click here</a>.
                         </p>
                     </div>
                 </div>

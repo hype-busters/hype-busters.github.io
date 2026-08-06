@@ -19,8 +19,8 @@ Related docs in this repo:
 1. This is a **Best-Worst Scaling (BWS)** linguistic annotation study on **claim-strength / epistemic stance** modifiers.
 2. Participants arrive from **Prolific**.
 3. **Current end-to-end flow is hosted on the public hype-busters site**, including demographics and main quizzes.
-4. **That is no longer acceptable for production.** After the 5 screening questions pass, **demographics + main surveys must move to a private server** so PII / response data is not collected through a public repo’s frontend or configs.
-5. Your primary task is likely: **keep screening on hype-busters (public, no PII), hand off authenticated/eligible participants to a private app**, preserve Prolific redirects and the existing response schema.
+4. **That split is now partially live on the public gate:** after the 5 screening questions pass, participants are redirected to `https://bwscaling.hype-busters.com/start` (private Next.js app). Demographics + main quizzes must be implemented there. Screen-outs still return to Prolific from the public site.
+5. Your primary task is likely: **build `/start` (and the survey) on the BWScaling server**, accept Prolific query params from the public gate, keep completion/screen-out codes correct, and never put secrets in the public repo.
 
 ---
 
@@ -348,13 +348,28 @@ Prolific
   → hype-busters /epistemic-stance/   [PUBLIC — screening only]
        Intro → Practice×5
          fail → Prolific screen-out (CM5RS070)
-         pass → redirect to PRIVATE_APP with PID + proof-of-pass
+         pass → redirect to https://bwscaling.hype-busters.com/start
+                with PROLIFIC_PID, STUDY_ID, SESSION_ID, screen_passed=1
 
-  → PRIVATE_APP   [PRIVATE SERVER / PRIVATE REPO]
-       Demographics → (random or chosen) survey → BWS quiz
+  → bwscaling.hype-busters.com   [PRIVATE APP SERVER — Next.js]
+       Demographics → survey → BWS quiz
        → secure backend / Apps Script → Google Sheet
        → Prolific complete (C1KSEYXZ)
 ```
+
+### DNS for `bwscaling.hype-busters.com` (hosting, not survey code)
+
+Browsers only open `https://bwscaling.hype-busters.com/...` if DNS maps that name to the machine running the Next.js app.
+
+- **Already configured (as of Aug 2026):** `bwscaling.hype-busters.com` → `130.158.41.206` (nginx → Next.js on port 3000).
+- `www.hype-busters.com` stays on GitHub Pages (`hype-busters.github.io`).
+- DNS is edited wherever `hype-busters.com` is managed (registrar / DNS panel). Typical record: **A** (or CNAME) for host `bwscaling` pointing at the server IP/host.
+- **Not something we invent in the survey JS.** The public gate only *links* to that hostname; if DNS breaks, handoff 404s even if the app is fine on the server IP.
+
+Public gate config key: `PROLIFIC_CONFIG.privateStudyBaseUrl` in `epistemic-stance-survey.js`  
+(current value: `https://bwscaling.hype-busters.com/start`).
+
+**Note:** `/start` must be implemented on the BWScaling Next.js app. Homepage `/`, `/setup`, `/analysis` already exist; `/start` may still be 404 until the survey routes are built there.
 
 ### What to copy vs rewrite
 **Reuse as-is (logic/content):**
