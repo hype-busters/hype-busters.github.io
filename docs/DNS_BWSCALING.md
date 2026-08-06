@@ -18,12 +18,14 @@ Typical record:
 
 So DNS for the private app **is already in place**. If it ever stops resolving, fix DNS / server — do not change Prolific codes for that.
 
-## How the public quiz uses it
-After screening passes on `https://www.hype-busters.com/epistemic-stance/`, JS redirects to:
+## How the public quiz entry works
+`https://www.hype-busters.com/epistemic-stance/` is a **redirect-only** page. It immediately sends participants to:
 
-`https://bwscaling.hype-busters.com/start?PROLIFIC_PID=...&STUDY_ID=...&SESSION_ID=...&screen_passed=1`
+`https://bwscaling.hype-busters.com/start?PROLIFIC_PID=...&STUDY_ID=...&SESSION_ID=...`
 
-Configured in `src/js/epistemic-stance-survey.js` → `PROLIFIC_CONFIG.privateStudyBaseUrl`.
+(forwarding Prolific query params when present).
 
-## What still must be built on BWScaling
-Implement `/start` (and the annotation survey). Until that route exists, handoff will 404 even though DNS is fine.
+**All survey UI** (intro, practice screening, demographics, BWS quizzes, Prolific completion/screen-out) lives on the BWScaling server — not on the public GitHub Pages site.
+
+## What must be built on BWScaling
+Implement `/start` (and the full annotation survey). Until that route exists, the redirect will 404 even though DNS is fine.

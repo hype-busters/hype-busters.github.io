@@ -4,8 +4,10 @@
 **Owner intent:** document *what exists*, *why it was built that way*, and *what must happen next* — especially moving private participant data off the public hype-busters site.
 
 **Last updated:** 6 Aug 2026  
-**Live quiz URL:** https://www.hype-busters.com/epistemic-stance/  
-**Repo:** https://github.com/hype-busters/hype-busters.github.io (public GitHub Pages)
+**Live entry URL (public redirect):** https://www.hype-busters.com/epistemic-stance/  
+**Actual survey host:** https://bwscaling.hype-busters.com/start  
+
+As of Aug 2026 the public `/epistemic-stance/` page **only redirects** to the BWScaling server. Intro, practice items, demographics, and main quizzes are **not** served from the public GitHub Pages site anymore. Reference assets (CSVs, `item_sentences.json`, Apps Script source, design report) remain in this repo for the private-app builders to copy.
 
 Related docs in this repo:
 - `docs/ANALYSIS_PIPELINE_HANDOFF.md` — R scoring / reliability pipeline (post-collection)
@@ -17,10 +19,10 @@ Related docs in this repo:
 ## 0. TL;DR for the next agent
 
 1. This is a **Best-Worst Scaling (BWS)** linguistic annotation study on **claim-strength / epistemic stance** modifiers.
-2. Participants arrive from **Prolific**.
-3. **Current end-to-end flow is hosted on the public hype-busters site**, including demographics and main quizzes.
-4. **That split is now partially live on the public gate:** after the 5 screening questions pass, participants are redirected to `https://bwscaling.hype-busters.com/start` (private Next.js app). Demographics + main quizzes must be implemented there. Screen-outs still return to Prolific from the public site.
-5. Your primary task is likely: **build `/start` (and the survey) on the BWScaling server**, accept Prolific query params from the public gate, keep completion/screen-out codes correct, and never put secrets in the public repo.
+2. Participants arrive from **Prolific** (often via `www.hype-busters.com/epistemic-stance/`, which **immediately redirects** to the private app).
+3. **All interactive survey UI runs on `bwscaling.hype-busters.com`** (Next.js). That includes intro, 5 practice/screening questions, demographics, main quizzes, and Prolific redirects.
+4. The public hype-busters page must **not** collect PII or host practice/main quizzes.
+5. Your primary task: **build `/start` (+ survey flow) on the BWScaling server**, using design data from this repo (`src/data/epistemic-stance/`), preserve the response schema, and keep Prolific complete vs screen-out codes distinct.
 
 ---
 
@@ -342,34 +344,26 @@ Prolific
               → Prolific complete
 ```
 
-### Target (required migration)
+### Target architecture (live entry = redirect)
 ```
 Prolific
-  → hype-busters /epistemic-stance/   [PUBLIC — screening only]
+  → www.hype-busters.com/epistemic-stance/     [PUBLIC — redirect only]
+       immediately → bwscaling.hype-busters.com/start
+                     (+ PROLIFIC_PID / STUDY_ID / SESSION_ID)
+
+  → bwscaling.hype-busters.com   [PRIVATE Next.js — full study]
        Intro → Practice×5
          fail → Prolific screen-out (CM5RS070)
-         pass → redirect to https://bwscaling.hype-busters.com/start
-                with PROLIFIC_PID, STUDY_ID, SESSION_ID, screen_passed=1
-
-  → bwscaling.hype-busters.com   [PRIVATE APP SERVER — Next.js]
-       Demographics → survey → BWS quiz
-       → secure backend / Apps Script → Google Sheet
-       → Prolific complete (C1KSEYXZ)
+         pass → Demographics → survey → BWS quiz
+              → Apps Script / backend → Google Sheet
+              → Prolific complete (C1KSEYXZ)
 ```
 
-### DNS for `bwscaling.hype-busters.com` (hosting, not survey code)
-
-Browsers only open `https://bwscaling.hype-busters.com/...` if DNS maps that name to the machine running the Next.js app.
-
-- **Already configured (as of Aug 2026):** `bwscaling.hype-busters.com` → `130.158.41.206` (nginx → Next.js on port 3000).
-- `www.hype-busters.com` stays on GitHub Pages (`hype-busters.github.io`).
-- DNS is edited wherever `hype-busters.com` is managed (registrar / DNS panel). Typical record: **A** (or CNAME) for host `bwscaling` pointing at the server IP/host.
-- **Not something we invent in the survey JS.** The public gate only *links* to that hostname; if DNS breaks, handoff 404s even if the app is fine on the server IP.
-
-Public gate config key: `PROLIFIC_CONFIG.privateStudyBaseUrl` in `epistemic-stance-survey.js`  
-(current value: `https://bwscaling.hype-busters.com/start`).
-
-**Note:** `/start` must be implemented on the BWScaling Next.js app. Homepage `/`, `/setup`, `/analysis` already exist; `/start` may still be 404 until the survey routes are built there.
+Reference design assets still in the public repo (for copying into BWScaling):
+- `src/data/epistemic-stance/survey{1..5}.csv`
+- `src/data/epistemic-stance/item_sentences.json`
+- `src/js/epistemic-stance-survey.js` (legacy full UI — do not rely on it being live; use as porting reference)
+- `scripts/epistemic-stance-apps-script.gs`
 
 ### What to copy vs rewrite
 **Reuse as-is (logic/content):**
@@ -447,7 +441,7 @@ Public gate config key: `PROLIFIC_CONFIG.privateStudyBaseUrl` in `epistemic-stan
 
 ## 12. Suggested first prompt for the implementing agent
 
-> Read `docs/EPISTEMIC_STANCE_ONBOARDING.md`. Implement the target architecture: keep intro + 5 practice screens on the public `/epistemic-stance/` site; on practice pass, redirect to a new private app that owns demographics, survey assignment, BWS quizzes, Apps Script submission, and Prolific completion redirect. Practice fail must still go to screen-out code `CM5RS070`. Preserve the response schema (Participant ID, Options 1–4, Most/Least, anchor checks). Do not leave production submission endpoints or PII forms on the public repo.
+> Read `docs/EPISTEMIC_STANCE_ONBOARDING.md` and `docs/DNS_BWSCALING.md`. The public `/epistemic-stance/` URL only redirects to `https://bwscaling.hype-busters.com/start`. Build the full study on BWScaling: intro, 5 practice screening questions (fail → Prolific `CM5RS070`), demographics, BWS quizzes from the CSVs in this repo, Apps Script submission, success → Prolific `C1KSEYXZ`. Preserve the response schema (Participant ID, Options 1–4, Most/Least, anchor checks). Do not put secrets or PII forms on the public GitHub Pages site.
 
 ---
 
